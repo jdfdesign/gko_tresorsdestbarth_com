@@ -1,0 +1,26 @@
+cd ~/Github/gko_tresor_de_stbarth_com
+tail -f log/development.log
+
+cd ~/Github/gko_tresor_de_stbarth_com
+bundle install
+rails s
+
+cd ~/Github/gko_tresor_de_stbarth_com
+rails s
+
+RAILS_ENV=production bundle exec rake assets:precompile 
+RAILS_ENV=development bundle exec rake assets:precompile 
+bundle exec rake assets:precompile
+
+bundle exec rake railties:install:migrations
+bundle exec rake db:bootstrap
+
+bundle exec rake db:admin:create
+bundle exec rake db:load_default 
+bundle exec rake db:load_sample
+
+
+cd ~/developer/workspace/gko_joufdesign_com
+rake jobs:work
+cd ~/developer/workspace/gko_joufdesign_com
+rake jobs:clear
