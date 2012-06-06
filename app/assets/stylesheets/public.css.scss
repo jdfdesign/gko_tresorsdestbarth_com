@@ -1,0 +1,420 @@
+$contentContainerBackgroundColor: #F3F4EE;
+
+// Typography
+$baseFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$baseFontSize: 11px;
+$baseLineHeight: 22px;
+$textColor: #525049;
+$headingFontFamily: $baseFontFamily;
+$headingTextColor: $textColor;
+$headingBaseFontSize: 26px;
+
+     
+$linkColor: #525049;
+
+
+
+
+$borderColor: #E2E2E2;
+$borderSize: 1px;
+
+@import "gko_public_all";
+@import "gko/store"; 
+@import "gko/elastislide";
+
+/*-----------------------------------------
+   SHARED STYLES 
+----------------------------------------- */ 
+.uppercase_font_style {
+	letter-spacing: 1px; 
+	text-transform: uppercase; 
+} 
+
+/*-----------------------------------------
+ TYPOGRAPHY 
+----------------------------------------- */
+h1 {
+	letter-spacing: 2px;
+	font-size: 14px;
+}
+h1,h2,h3, h4 {
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+h2, h3 {
+	font-size: $baseFontSize;
+}
+h4 {
+	letter-spacing: 1px;
+	font-size: $baseFontSize;	
+}
+
+
+/*-----------------------------------------
+ STRUCTURAL LAYOUT 
+----------------------------------------- */
+body {
+	font-weight: 300;
+	background: #fefefe;
+} 
+label { 
+	font-size: 13px; 
+}
+.grid li > .thumbnail {
+	position: relative;
+	padding: 0;
+	margin:0;
+	border: none;
+	@include border-radius(0);
+	@include box-shadow(none);
+	&:hover,  
+	&:focus {
+		transform: scale(1.4);	
+	};
+	.thumbnail-image {
+		position:relative;
+		margin: 4px 2px;
+		border: 1px solid white;
+		padding: 0;
+		@include border-radius(0);
+		@include box-shadow(1px 1px 3px 1px rgba(0,0,0,0.05));
+		//img {
+		//	@include transition(all .3s ease-out);
+		//	&:hover {
+		//		@include scale(1.2);
+		//	};
+		//}
+	}
+	.thumbnail-caption {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(255,255,255,.7);
+		@include transition(all .3s ease-out);
+		&:hover {
+			background-color: rgba(255,255,255,1);
+		};
+	}
+	.thumbnail-title {
+		font-size: $baseFontSize;
+		line-height: $baseLineHeight;
+		a {
+			font-weight: 700; 
+			span.thumbnail-product-price { font-size: .8em; font-weight: 400;}
+			span.thumbnail-product-price { float:right; font-weight: 400; display: block;}
+		}
+	}
+} 
+/*-----------------------------------------
+ GLOBAL EFFECT
+----------------------------------------- */
+a {
+   @include transition(color .5s linear, background-color .5s linear)
+}
+/*-----------------------------------------
+ HEADER
+----------------------------------------- */
+.navbar { 
+	.header-nav { 
+		.nav > li > a {
+			@extend .uppercase_font_style; 
+			font-size: 9px;  
+		}
+	}
+}
+.nav.login-bar {
+	display: none;
+}
+.navbar .brand a {
+	font-size: 10px;
+	font-weight:bold;
+}
+
+
+/*-----------------------------------------
+ FOOTER
+----------------------------------------- */
+#footer {
+	text-align: center;
+	font-size: 12px; 
+	border-top: $borderSize solid $borderColor;
+	margin-top: $baseLineHeight;
+	h3 {
+		@extend .uppercase_font_style;
+	}
+	.nav {
+		@include vertical-nav;
+	}
+}
+/*-----------------------------------------
+ STORE
+----------------------------------------- */
+
+.product-info {
+	h1.page-title {
+		border-bottom: $borderSize solid $borderColor;
+	}
+	h4 {
+		@extend .uppercase_font_style; 
+		border-bottom: 1px solid $borderColor; 
+		padding-top: $baseLineHeight; 
+	}
+}
+#product-variants {
+	label {
+		display: inline-block;
+	} 
+} 
+h2#product-variants-title {
+	border-bottom: $borderSize solid $borderColor;
+}
+.product-images-large {
+ 	//border: $borderSize solid $borderColor;
+}
+// Shared (top/bottom) styles
+#content-container {
+	margin-top: 48px;
+}
+.products-categories {
+	border-bottom: 1px solid #B7B6B6;
+	margin-bottom: $baseLineHeight;
+	@include clearfix;
+	.nav-container {
+		@include center-nav;
+		.nav-list > li > a {
+			margin: 0;
+			letter-spacing: 1px; 
+			text-transform: uppercase;
+			font-weight: normal;
+			text-shadow: 0px 1px 0 $white;
+			font-size: $baseFontSize - 2;
+		}
+		.nav-list > li.active > a {
+			color: $white;
+			text-shadow: 0px 1px 0 $black;
+		}
+	}
+}
+/*-----------------------------------------
+ HOME
+----------------------------------------- */
+#cover {
+	background: rgba(103,100,93,.96) asset-url('stbarth_treasures-GEG_0099.jpg', image);
+	@include box-shadow(0 4px 16px rgba(0,0,0,.4));
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	background-attachment:absolute;
+	@include background-size(cover, cover);
+	z-index: 10;
+	.circle {
+		background: #332727;
+		@include box-shadow(0 4px 16px rgba(0,0,0,.4));
+		@include circle(80px);
+		position: absolute;
+		bottom: -40px;
+		left: 50%;
+		margin-left: -40px;
+	}
+}
+#logo {
+	background: transparent asset-url('logo.png',image) center center no-repeat;
+	width: 100%;
+	height:500px;
+}
+.background-image {
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position: 0 center;
+	background-attachment:fixed;
+	@include background-size(cover, cover);
+
+	position:relative;
+	min-height: 620px;
+	@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+	overflow: hidden;
+	.pod {
+		position: absolute;
+		right: -320px;
+		top: 50%;
+		margin-top: -256px;
+		width: 320px;
+		height: 512px;
+		background-color: rgba(255,255,255,.6);
+		border: 1px solid rgba(255,255,255,.6);
+		color: black;
+		@include box-shadow(0 2px 16px rgba(0,0,0,.2));
+	}
+	.carousel {
+		margin-bottom: 0px;
+	}
+	.pod-header {
+		padding: 12px;	
+
+	}
+	a.view-all {
+		background-color: #525049;
+		color: #F3F4EE;
+		right: -24px;
+		top: -24px;
+		position: absolute;
+		padding: 12px;
+		width: 100px;
+		z-index: 4;
+	}
+	.pod-title {
+		a {
+			color:black;
+			text-transform: uppercase;
+			font-size: 10px;
+		}
+	}
+	.half {
+		height: 320px;
+		
+		h1 {
+			padding:0;
+			margin:0;
+			font-weight: normal;
+			line-height: $baseLineHeight;
+			display: inline-block;
+			a {
+				color: $textColor;
+				text-decoration:none;
+			}
+		}
+		p {
+			clear:both;
+			font-size: 13px;
+			color:black;
+		}
+	}
+
+}
+.container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+section.products {
+	padding: 24px;
+}
+
+#js-page-container {
+	background: #fff;	
+}
+.body.alt {
+	.grid.grid4.grid-products > li {
+
+		width: 280px;
+		height:280px;
+		
+		.thumbnail {
+			position: relative;
+			padding: 0;
+			margin:0;
+			border: 0;
+			@include border-radius(0);
+			@include box-shadow(none);
+			.thumbnail-image {
+				margin: 0;
+				border:0;
+			}
+			.thumbnail-caption {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: 10px 15px 5px;
+				background: #fff;
+				background: rgba(255, 255, 255, 0.75);
+			}
+			.thumbnail-title {
+				color:#000;
+				font-weight:normal;
+				a {
+					color:#000;
+				}
+			}
+			.thumbnail-product-price {
+				clear:both;
+				display:block;
+			}
+		}
+	}
+}
+/*
+.navbar {
+	width:400px;
+	.brand {
+		@include logo(175px, 175px,'logo.png');
+		float:left;
+
+	}
+	.nav {
+		@include vertical-nav();
+	}
+}
+.navbar-inner {
+	padding: 0;
+	float:left;
+	margin: 0;
+}
+.square {
+	background: white asset-url('sandbg.jpg',image) 0px 0px repeat;
+	.parallax {
+		max-width:980px;
+	}
+	.half {
+		margin-top: 0;
+	}
+	.parallax .half.title {
+		margin-top: 0px;
+	}
+}*/
+/*-----------------------------------------
+ RESPONSIVE
+----------------------------------------- */
+@import "gko/responsive"; 
+@media(min-width: 980px) {
+	#store-menu {
+		float:right;
+		margin: 0;
+	}
+	.navbar {
+	  position: fixed;
+	  right: 0;
+	  left: 0;
+	  top: 0;
+	  z-index: $zindexFixedNavbar;
+	  margin-bottom: 0; // remove 18px margin from static navbar
+	  
+	}
+	.navbar-inner {
+		padding-bottom: 12px;
+	}
+	.navbar .brand {
+		float: left;
+		margin: 12px 0 0 0;
+		padding: 0;
+	}
+	.navbar .nav-collapse {
+		clear: none;
+		float: left;
+		margin: 17px 0 0 0;
+		nav, .nav {
+			float: left;
+		}
+		.nav > li > a {
+			padding: 0 6px;
+			font-size: 10px;
+			font-weight:normal;	
+			text-shadow: none;
+		}
+		
+
+	}
+
+
+
+}
