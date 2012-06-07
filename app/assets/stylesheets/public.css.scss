@@ -68,9 +68,10 @@ label {
 	border: none;
 	@include border-radius(0);
 	@include box-shadow(none);
-	&:hover,  
-	&:focus {
-		transform: scale(1.4);	
+	&:hover {
+		.thumbnail-caption {
+			background-color: rgba(255,255,255,1);
+		};
 	};
 	.thumbnail-image {
 		position:relative;
@@ -79,12 +80,6 @@ label {
 		padding: 0;
 		@include border-radius(0);
 		@include box-shadow(1px 1px 3px 1px rgba(0,0,0,0.05));
-		//img {
-		//	@include transition(all .3s ease-out);
-		//	&:hover {
-		//		@include scale(1.2);
-		//	};
-		//}
 	}
 	.thumbnail-caption {
 		position: absolute;
@@ -93,9 +88,7 @@ label {
 		bottom: 0;
 		background-color: rgba(255,255,255,.7);
 		@include transition(all .3s ease-out);
-		&:hover {
-			background-color: rgba(255,255,255,1);
-		};
+
 	}
 	.thumbnail-title {
 		font-size: $baseFontSize;
@@ -177,7 +170,11 @@ h2#product-variants-title {
 #content-container {
 	margin-top: 48px;
 }
+.page-title {
+	display: none;
+}
 .products-categories {
+	display: none;
 	border-bottom: 1px solid #B7B6B6;
 	margin-bottom: $baseLineHeight;
 	@include clearfix;
@@ -236,15 +233,15 @@ h2#product-variants-title {
 	overflow: hidden;
 	.pod {
 		position: absolute;
-		right: -320px;
+		//right: 0px;
 		top: 50%;
 		margin-top: -256px;
-		width: 320px;
+		//width: 320px;
 		height: 512px;
-		background-color: rgba(255,255,255,.6);
-		border: 1px solid rgba(255,255,255,.6);
+		//background-color: rgba(255,255,255,.6);
+		//border: 1px solid rgba(255,255,255,.6);
 		color: black;
-		@include box-shadow(0 2px 16px rgba(0,0,0,.2));
+		
 	}
 	.carousel {
 		margin-bottom: 0px;
@@ -252,6 +249,19 @@ h2#product-variants-title {
 	.pod-header {
 		padding: 12px;	
 
+	}
+	.ss-left, .ss-right{
+	    float: left;
+	    width: 48%;
+	    position: relative;
+	}
+	.ss-right{
+	    padding-left: 2%;
+	}
+	.ss-left{
+	    text-align: right;
+	    float: left;
+	    padding-right: 2%;
 	}
 	a.view-all {
 		background-color: #525049;
@@ -265,29 +275,12 @@ h2#product-variants-title {
 	}
 	.pod-title {
 		a {
-			color:black;
+			color:white;
 			text-transform: uppercase;
-			font-size: 10px;
-		}
-	}
-	.half {
-		height: 320px;
-		
-		h1 {
-			padding:0;
-			margin:0;
-			font-weight: normal;
-			line-height: $baseLineHeight;
-			display: inline-block;
-			a {
-				color: $textColor;
-				text-decoration:none;
-			}
-		}
-		p {
-			clear:both;
-			font-size: 13px;
-			color:black;
+			font-size: 110px;
+			font-weight: 300;
+			color: #FFF;
+		    text-shadow: 2px 2px 20px white;
 		}
 	}
 
@@ -401,7 +394,7 @@ section.products {
 	.navbar .nav-collapse {
 		clear: none;
 		float: left;
-		margin: 17px 0 0 0;
+		margin: 17px 0 0 24px;
 		nav, .nav {
 			float: left;
 		}

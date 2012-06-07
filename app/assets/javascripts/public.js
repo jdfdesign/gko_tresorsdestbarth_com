@@ -1,10 +1,9 @@
 //= require gko_store_public_all
-//= require jquery.unveil.js
 //= require gko/jquery.elastidegallery
 //= require jquery.flyer
 //= require jquery.inview
 //= require jquery.scrollParallax
-//= require jquery.categoriesFilter.js
+//= require jquery.sidescroll.js
 
 $(document).ready(function() {
     function makePage(body) {
@@ -28,7 +27,7 @@ $(document).ready(function() {
 	}
 	f_refresh_ui = function() {
 		var viewportH = f_viewport_wh().h;
-		coverHeight = viewportH - 200;
+		coverHeight = viewportH;
 		
 		$('.parallax').css('height', viewportH);
 		$('#cover').css('height', coverHeight);
@@ -73,53 +72,10 @@ $(document).ready(function() {
 			});
         });
 	}
-	f_window_scroll_callback = function(e) {
-		if ($window.scrollTop() > $window.height()) {
-
-		} else {
-		}
-	}
 	f_init_home_page = function() {
-		$('.parallax').bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
-			var $that = $(this)
-				,$pod = $that.find('.pod:first')
-			    ,winscroll	= $window.scrollTop()// how much we scrolled so far
-				,winCenter	= windowSize.height / 2 + winscroll;// the y value for the center of the screen;
-				
-			if($pod.length) {
-				
-				var podTop = $pod.offset().top;// top value	
-				if (isInView) {
-				
-					
-					// hide the row if it is under the viewport
-				//	if( podTop > windowSize.height + winscroll ) {
-				//		$pod.css({ right : '-320px' });
-				//	}
-				//	else {
-						var podHeight = $pod.height()
-							,factor = ( ( ( podTop + podHeight / 2 ) - winCenter ) / ( windowSize.height / 2 + podHeight / 2 ) )
-							,val = Math.max( factor * 50, 0 );
-							
-								console.log('val ' + val)
-						$pod.css({ right 	: - val + '%' });
-			//		}
-					
-					// element is now visible in the viewport
-					if (visiblePartY == 'top') {
-	
-					// top part of element is visible
-					} else if (visiblePartY == 'bottom') {
-					// bottom part of element is visible
-					} else {
-					// whole part of element is visible
-					}
-				} else {
-					// element has gone out of viewport
-					$pod.css({ right : '-320px' });
-				}
-			}
-		}).scrollParallax({'speed': -0.2});
+		
+		$('.parallax').scrollParallax({'speed': -0.2});
+		$sidescroll.init();
 	}
 	f_init = function() {
 		windowSize.width = $window.width();
@@ -133,7 +89,6 @@ $(document).ready(function() {
 			windowSize.width = $window.width();
 			windowSize.height = $window.height();
             f_refresh_ui();
-			f_window_scroll_callback(e);
         });
         
 		if($('.product-images:first').length > 0) {
@@ -142,7 +97,7 @@ $(document).ready(function() {
 		if($('.images:first').length > 0) {
 			Gallery.init($('.images:first'));
 		} 
-		init_categories_filters();
+
 		f_init_ajax();
 		$('.carousel').each(function(index) {
 			var _self = $(this);

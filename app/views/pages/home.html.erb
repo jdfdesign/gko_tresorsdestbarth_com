@@ -1,8 +1,8 @@
 <%
 @store = site.stores.first
-@features ||= site.features.visibles
+@categories = @store.available_categories
 @products = @store.products.active.all
-images = site.homes.first.images
+@images = site.homes.first.images
 %>
 <% content_for :page_container do %>
 <section class='body alt'>
@@ -15,34 +15,33 @@ images = site.homes.first.images
 		</div><!--row-->
 	</section><!--section-->
 
-	<% @store.available_categories.each_with_index do |category, index| %> 
+	<% @categories.each_with_index do |category, index| %> 
 	<% 
-		image_url = images[index + 1].thumbnail().url
-		products = @store.products.active.randoms(3) 
+		image_url = @images[index].thumbnail().url
+		products = @store.products.active.randoms(1) 
 		product_images = products.map {|p| p.thumbnail if p.thumbnail }
 	%>
 	<section id="<%= category.name %>" class="parallax background-image" style="background-image: url('<%= image_url %>');">
-		<div class="pod">
-
-				<div class="pod-carousel">
-					<div class="carousel" id="<%= "carousel_#{index}" %>">
-					  <!-- Carousel items -->
-					  <div class="carousel-inner">
-					  <% product_images.each_with_index do |img, index| %> 
-					    <div class="item <%= 'active' if index == 0 %>">
-					      <%= image_fu(img, "320x320#", :rel => "external") %>
-					    </div>
-					  <% end %>
-					  </div>
-					  <!-- Carousel nav -->
-					  <a class="carousel-control left" href="#<%= "carousel_#{index}" %>" data-slide="prev">&lsaquo;</a>
-					  <a class="carousel-control right" href="#<%= "carousel_#{index}" %>" data-slide="next">&rsaquo;</a>
+		<div class="pod ss-left">
+			<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
+		</div>
+		<div class="pod ss-right">
+			<div class="pod-carousel">
+				<div class="carousel" id="<%= "carousel_#{index}" %>">
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+					<% product_images.each_with_index do |img, index| %> 
+						<div class="item <%= 'active' if index == 0 %>">
+							<%= image_fu(img, "320x320#", :rel => "external") %>
+						</div>
+					<% end %>
 				</div>
-				<div class="pod-header">
-					<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
-					<p class="desc"><%= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.".html_safe %></p>
-					<p class='parallax-title'><%= link_to("Tout voir", store_path(@store), :class => 'view-all', :'data-remote' => true) %></p>
-				</div>
+			</div>
+			<div class="pod-header">
+				
+				<p class="desc"><%= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.".html_safe %></p>
+				<p class='parallax-title'><%= link_to("Tout voir", store_path(@store), :class => 'view-all', :'data-remote' => true) %></p>
+			</div>
 		</div><!--pod-->
 	</section><!--section-->
 	<% end %>

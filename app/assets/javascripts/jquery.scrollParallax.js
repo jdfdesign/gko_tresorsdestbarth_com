@@ -85,7 +85,7 @@
 			//defined accessible $this var in standard way for use within functions
 			var $this = $(this),
 				//timestamp,last position for the interval & FPS ~= 30
-                ts,FPS = 10,lastPos = {x:0,y:0},intervalActive,            
+                ts,FPS = 32,lastPos = {x:0,y:0},intervalActive,            
             	//find current position so parallax can be relative to it
                 currentPosArray=$this.css("backgroundPosition").split(" "),
                 currentXPos=parseInt(currentPosArray[0].replace(/[^0-9\-]/g, "")),
@@ -148,6 +148,8 @@
                     }
                 }
             }
+
+
             
 			//recalculate position on scroll
 			$(window).bind('scroll.parallax',onScroll);
