@@ -1,20 +1,14 @@
 $contentContainerBackgroundColor: #F3F4EE;
-
+$altFontFamily: "tk-voluta-script-pro";
 // Typography
-$baseFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$baseFontSize: 11px;
+$baseFontFamily: "futura-pt","Helvetica Neue", Helvetica, Arial, sans-serif;
+$baseFontSize: 14px;
 $baseLineHeight: 22px;
 $textColor: #525049;
 $headingFontFamily: $baseFontFamily;
 $headingTextColor: $textColor;
 $headingBaseFontSize: 26px;
-
-     
 $linkColor: #525049;
-
-
-
-
 $borderColor: #E2E2E2;
 $borderSize: 1px;
 
@@ -91,7 +85,7 @@ label {
 
 	}
 	.thumbnail-title {
-		font-size: $baseFontSize;
+		font-size: 12px;
 		line-height: $baseLineHeight;
 		a {
 			font-weight: 700; 
@@ -100,6 +94,33 @@ label {
 		}
 	}
 } 
+.carousel-control {
+	position: absolute;
+	top: auto;
+	left: auto;
+	right: 40px;
+	bottom: 0px;
+	width: 40px;
+	height: 40px;
+	margin-top: 0;
+	border: none;
+	color: black;
+	background-color: white;
+	@include border-radius(0);
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	&:hover {
+		color: black;	
+	};
+}
+
+.carousel-control.right {
+ 	right: 0px;
+	bottom: 0px;	
+}
+#content {
+	padding: 24px 0;
+}
 /*-----------------------------------------
  GLOBAL EFFECT
 ----------------------------------------- */
@@ -132,7 +153,6 @@ a {
 #footer {
 	text-align: center;
 	font-size: 12px; 
-	border-top: $borderSize solid $borderColor;
 	margin-top: $baseLineHeight;
 	h3 {
 		@extend .uppercase_font_style;
@@ -206,13 +226,27 @@ h2#product-variants-title {
 	@include background-size(cover, cover);
 	z-index: 10;
 	.circle {
-		background: #332727;
 		@include box-shadow(0 4px 16px rgba(0,0,0,.4));
-		@include circle(80px);
 		position: absolute;
-		bottom: -40px;
 		left: 50%;
-		margin-left: -40px;
+		background: white;
+		background-color: rgba(255,255,255,.8);
+		text-align: center;
+	}
+	.circle1 {
+		bottom: 96px;
+		@include circle(10px);
+		margin-left: -5px;
+	}
+	.circle2 {
+		bottom: 70px;
+		@include circle(16px);
+		margin-left: -8px;
+	}
+	.circle3 {
+		bottom: 40px;
+		@include circle(20px);
+		margin-left: -10px;
 	}
 }
 #logo {
@@ -220,35 +254,84 @@ h2#product-variants-title {
 	width: 100%;
 	height:500px;
 }
+.parallax-inner {
+	overflow: hidden;
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+.parallax-item {
+	position: absolute;
+
+	overflow: hidden;
+	display: block;
+	height: 100%;
+	display: none;
+	top: 0;
+}
+.grid {
+	margin: 64px 0;
+}
+.parallax-item.active {
+	display: block;
+}
 .background-image {
+	zoom: 100%;
 	background-color: white;
 	background-repeat: no-repeat;
 	background-position: 0 center;
 	background-attachment:fixed;
 	@include background-size(cover, cover);
-
 	position:relative;
-	min-height: 620px;
+	
 	@include box-shadow(0 4px 16px rgba(0,0,0,.2));
 	overflow: hidden;
 	.pod {
+		//position: absolute;
+		top: 100px;
+		//margin-top: -256px;
+		//height: 512px;
+	}
+	.pod-carousel {
+		width:300px;
+		height:300px;
+		position: relative;
+		border: 1px solid rgba(255,255,255,.8);
+		@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+		@include border-radius(12px);
+		img {
+			@include border-radius(12px);
+			width:300px;
+			height:300px;
+		}
+		float:right;
+		margin-right: 80px;
+	}
+	a.view-all {
+		background: white;
+		background-color: rgba(255,255,255,.8);
+		text-align: center;
+		line-height: 80px;
 		position: absolute;
-		//right: 0px;
+		@include circle(80px);
 		top: 50%;
-		margin-top: -256px;
-		//width: 320px;
-		height: 512px;
-		//background-color: rgba(255,255,255,.6);
-		//border: 1px solid rgba(255,255,255,.6);
-		color: black;
+		top: 50%;
+		margin-top: -40px;
+		left: 50%;
+		margin-left: -40px;
 		
 	}
-	.carousel {
-		margin-bottom: 0px;
-	}
-	.pod-header {
-		padding: 12px;	
-
+	.pod-desc {
+		font-size: 16px;
+		line-height: 22px;
+		color: black;
+		text-shadow: 1px 1px 12px rgba(0,0,0,.2);
+		background-color: rgba(255,255,255,.8);
+		padding: 12px;
+		width: 236px;
+		float:right;
+		margin-right: 80px;
+		border: 1px solid rgba(255,255,255,.6);
 	}
 	.ss-left, .ss-right{
 	    float: left;
@@ -263,16 +346,7 @@ h2#product-variants-title {
 	    float: left;
 	    padding-right: 2%;
 	}
-	a.view-all {
-		background-color: #525049;
-		color: #F3F4EE;
-		right: -24px;
-		top: -24px;
-		position: absolute;
-		padding: 12px;
-		width: 100px;
-		z-index: 4;
-	}
+
 	.pod-title {
 		a {
 			color:white;
@@ -280,7 +354,7 @@ h2#product-variants-title {
 			font-size: 110px;
 			font-weight: 300;
 			color: #FFF;
-		    text-shadow: 2px 2px 20px white;
+		    text-shadow: 1px 1px 12px rgba(0,0,0,.2);
 		}
 	}
 
@@ -294,7 +368,7 @@ section.products {
 }
 
 #js-page-container {
-	background: #fff;	
+	//background: #fff;	
 }
 .body.alt {
 	.grid.grid4.grid-products > li {
@@ -336,35 +410,9 @@ section.products {
 		}
 	}
 }
-/*
-.navbar {
-	width:400px;
-	.brand {
-		@include logo(175px, 175px,'logo.png');
-		float:left;
-
-	}
-	.nav {
-		@include vertical-nav();
-	}
+.about h2 {
+	margin-bottom: 80px;
 }
-.navbar-inner {
-	padding: 0;
-	float:left;
-	margin: 0;
-}
-.square {
-	background: white asset-url('sandbg.jpg',image) 0px 0px repeat;
-	.parallax {
-		max-width:980px;
-	}
-	.half {
-		margin-top: 0;
-	}
-	.parallax .half.title {
-		margin-top: 0px;
-	}
-}*/
 /*-----------------------------------------
  RESPONSIVE
 ----------------------------------------- */

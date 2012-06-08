@@ -4,8 +4,6 @@
 			
 			// the row elements
 		var $rows = $('.parallax'),
-			// we will cache the inviewport rows and the outside viewport rows
-			$rowsViewport, $rowsOutViewport,
 			// the window element
 			$win = $(window),
 			// we will store the window sizes here
@@ -15,49 +13,22 @@
 
 			// initialize function
 			init = function() {
-				// define the inviewport selector
-				defineViewport();
 				refresh();
-				placeRows(); // set positions for each row
-				// initialize events
+				placeRows();
 				initEvents();
-				
 			},
 			// refresh function
 			refresh = function() {
 				// get the window sizes again
 				getWinSize();
-				// redefine which rows are initially visible (:inviewport)
-				setViewportRows();
 				// show inviewport rows and respective pointers
-				$rowsViewport.each( function() {
-				
+				$('.inview').each( function() {
 					$(this).find('div.ss-left')
 						   .css({ left   : '0%' })
 						   .end()
 						   .find('div.ss-right')
 						   .css({ right  : '0%' });
-				
 				});
-				
-			},
-			// defines a selector that gathers the row elems that are initially visible.
-			// the element is visible if its top is less than the window's height.
-			// these elements will not be affected when scrolling the page.
-			defineViewport	= function() {
-				$.extend( $.expr[':'], {
-					inviewport	: function ( el ) {
-						if ( $(el).offset().top < winSize.height ) {
-							return true;
-						}
-						return false;
-					}
-				});
-			},
-			// checks which rows are initially visible 
-			setViewportRows	= function() {
-				$rowsViewport 		= $rows.filter(':inviewport');
-				$rowsOutViewport	= $rows.not( $rowsViewport );
 			},
 			// get window sizes
 			getWinSize		= function() {
@@ -65,15 +36,15 @@
 				winSize.height	= $win.height();
 			},
 			// initialize some events
-			initEvents		= function() {
+			initEvents = function() {
 				$(window).on({
 					// on window resize we need to redefine which rows are initially visible (this ones we will not animate).
-					'resize.Scrolling' : function( event ) {
+		
+					'throttledresize' : function( event ) {
 						refresh();
 					},
 					// when scrolling the page change the position of each row	
 					'scroll.Scrolling' : function( event ) {
-						
 						// set a timeout to avoid that the 
 						// placeRows function gets called on every scroll trigger
 						if( anim ) return false;
@@ -97,7 +68,7 @@
 					winCenter	= winSize.height / 2 + winscroll;
 				
 				// for every row that is not inviewport
-				$rowsOutViewport.each( function(i) {
+				$('.inview').each( function(i) {
 					
 					var $row	= $(this),
 						// the left side element
@@ -115,7 +86,7 @@
 					// if not, the row should become visible (0% of left/right) as it gets closer to the center of the screen.
 					else {
 						// row's height
-						var rowH	= $row.height(),
+						var rowH	= $row.height() - 300,
 						// the value on each scrolling step will be proporcional to the distance from the center of the screen to its height
 						factor 	= ( ( ( rowT + rowH / 2 ) - winCenter ) / ( winSize.height / 2 + rowH / 2 ) ),
 						// value for the left / right of each side of the row.

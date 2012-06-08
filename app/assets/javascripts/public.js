@@ -1,10 +1,9 @@
 //= require gko_store_public_all
-//= require gko/jquery.elastidegallery
 //= require jquery.flyer
 //= require jquery.inview
 //= require jquery.scrollParallax
 //= require jquery.sidescroll.js
-
+//= require jquery.scrollTo-1.4.2.js
 $(document).ready(function() {
     function makePage(body) {
         return $("<div id='js-page-container' class='article fade'><div class='main-column-inner'><div class='page-header' style='min-height: 30px;'><a class='close' data-dismiss='flyer'>×</a></div><div class='page-body'>" + body + "</div></div></div>")
@@ -26,17 +25,19 @@ $(document).ready(function() {
 		);
 	}
 	f_refresh_ui = function() {
-		var viewportH = f_viewport_wh().h;
-		coverHeight = viewportH;
+		var viewportH = f_viewport_wh().h
+		,viewportW = f_viewport_wh().w;
+		coverHeight = viewportH - $('.navbar').height();
 		
-		$('.parallax').css('height', viewportH);
+		$('.parallax').css({'height': viewportH, 'width': viewportW});
+		$('.parallax-item').css({'height': viewportH, 'width': viewportW});
 		$('#cover').css('height', coverHeight);
     }
 	f_init_ajax = function() {
 		// Bind show product action
         $(".thumbnail a, a.next, a.previous").attr('data-remote', 'true')
 		.on('ajax:beforeSend', function(evt) {
-			//f_scrollTop();
+			f_scrollTop();
 		})
         .on('ajax:complete',
         function(evt, xhr, status) {
@@ -50,37 +51,37 @@ $(document).ready(function() {
 	        function(e) {
 	            $(this).remove();
 	        }).find('a.next, a.previous').attr('data-remote', 'true');
-			//if($('.product-images:first').length > 0) {
-				ZoomGallery.init();
-			//}
         });
 
 		// Bind index product action
         $("a.view-all")
-		.on('ajax:beforeSend', function(evt) {
-			var modal = $("<div class='container-fluid'><div class='row-fluid'><div class='span12'><div id='grid-container'></div></div></div></div>").appendTo($wrapper);
-		})
-        .on('ajax:complete',
-        function(evt, xhr, status) {
+		.on('click', function(e) {
+			e.stopPropagation();
+            e.preventDefault();
 			$body.css('overflow', 'hidden');
 			$html.css('overflow', 'hidden');
-			$container.css({'width' : windowSize.width})
-			.animate({'margin-left': windowSize.width}, 2000, function() {
-			    $(this).remove();
-				$body.css('overflow', 'auto');
-				$html.css('overflow', 'auto');
+			
+			f_refresh_ui();
+			$parallaxInner = $(this).closest(".parallax-inner");
+			$parallaxItem = $(this).closest(".parallax-item");
+			$next = $parallaxItem.next();
+			$next.css({'top': 0, 'left' : windowSize.width}).addClass('active');
+			$('html, body').animate({scrollTop: $parallaxInner.offset().top}, 200, function() {
+				$parallaxItem.animate({'left': -windowSize.width}, 900, function() {
+					$(this).removeClass('active');
+				});
+				$next.animate({'left': 0}, 900);
 			});
         });
 	}
 	f_init_home_page = function() {
-		
 		$('.parallax').scrollParallax({'speed': -0.2});
 		$sidescroll.init();
 	}
 	f_init = function() {
 		windowSize.width = $window.width();
 		windowSize.height = $window.height();
-		if($('body').attr('id') == 'home') {
+		if(bodyId == 'home') {
 			f_init_home_page();
 		}
 		f_refresh_ui();
@@ -90,14 +91,6 @@ $(document).ready(function() {
 			windowSize.height = $window.height();
             f_refresh_ui();
         });
-        
-		if($('.product-images:first').length > 0) {
-			ZoomGallery.init();
-		}
-		if($('.images:first').length > 0) {
-			Gallery.init($('.images:first'));
-		} 
-
 		f_init_ajax();
 		$('.carousel').each(function(index) {
 			var _self = $(this);
@@ -116,6 +109,8 @@ $(document).ready(function() {
 		,$window = $(window)
 		,$container = $("#content-container")
 		,$wrapper = $("#wrapper-wide-body")
+		,$parallaxInner
+		,$parallaxItem
 		,bodyId = $body.attr('id')
 		,windowSize = {}// we will store the window sizes here
 		,coverHeight;

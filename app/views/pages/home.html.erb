@@ -5,44 +5,51 @@
 @images = site.homes.first.images
 %>
 <% content_for :page_container do %>
-<section class='body alt'>
-	<section id="cover" class="background-image">
-		<div class="row-fluid">
-			<div class="span12">
-				<div id="logo"></div>
-				<div class="circle">scroll</div>
-			</div>
-		</div><!--row-->
-	</section><!--section-->
 
+	<section id="cover" class="background-image" style="background-image: url('<%= @images[0].thumbnail().url %>');">
+		<div id="logo"></div>
+		<div class="circle circle1"></div>
+		<div class="circle circle2"></div>
+		<div class="circle circle3"></div>
+	</section><!--section-->
+	<section class="parallax background-image" style="background-image: url('<%= @images[1].thumbnail().url %>');">
+				<p><%= 'The word "bead" comes from the Alglo-Saxon "bidden" (to pray) and "bede" (prayer). Beads have their origins in the spiritual realm, as "tools" for devotion, but their destiny has often been more, hum...beautiful !'. html_safe%></p>
+
+	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
 	<% 
-		image_url = @images[index].thumbnail().url
-		products = @store.products.active.randoms(1) 
-		product_images = products.map {|p| p.thumbnail if p.thumbnail }
+		image_url = @images[index + 2].thumbnail().url
+		product = @store.products.active.random 
+		products = @store.products.active.categorized(category.id)
 	%>
 	<section id="<%= category.name %>" class="parallax background-image" style="background-image: url('<%= image_url %>');">
-		<div class="pod ss-left">
-			<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
-		</div>
-		<div class="pod ss-right">
-			<div class="pod-carousel">
-				<div class="carousel" id="<%= "carousel_#{index}" %>">
-					<!-- Carousel items -->
-					<div class="carousel-inner">
-					<% product_images.each_with_index do |img, index| %> 
-						<div class="item <%= 'active' if index == 0 %>">
-							<%= image_fu(img, "320x320#", :rel => "external") %>
-						</div>
-					<% end %>
+		<div class='parallax-inner'>
+			<div class='parallax-item active'>
+				<div class="pod ss-left">
+					<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
 				</div>
+				<div class="pod ss-right">
+					<div class="pod-carousel">
+						<%= image_fu(product.thumbnail, "300x300#", :rel => "external") %>
+						<%= link_to("Tout voir", store_path(@store), :class => 'view-all', :'data-remote' => true) %>
+					</div>
+					<p class="pod-desc"><%= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.".html_safe %></p>
+				</div><!--pod-->
 			</div>
-			<div class="pod-header">
-				
-				<p class="desc"><%= "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.".html_safe %></p>
-				<p class='parallax-title'><%= link_to("Tout voir", store_path(@store), :class => 'view-all', :'data-remote' => true) %></p>
+			<div class='parallax-item'>
+				<div class="row-fluid">
+					<div class="span12">
+					<% if products.try(:any?) %>
+						<%= grid_tag(@store.preferred_column_count) do %>
+							<%= render :partial => "products/record", :collection => products, :as => :record %>
+						<% end %>
+					<% else %>
+						<%= render "no_records_found" %>
+				  	<% end %>
+					</div>
+				</div><!--row-->
 			</div>
-		</div><!--pod-->
+		</div>
 	</section><!--section-->
 	<% end %>
 	<section class="about">
@@ -50,5 +57,6 @@
 	</section><!--section-->
 	
 </section>
+
 <% end %>
 
