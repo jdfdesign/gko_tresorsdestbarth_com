@@ -13,6 +13,7 @@
 
 			// initialize function
 			init = function() {
+				
 				refresh();
 				placeRows();
 				initEvents();
@@ -38,13 +39,14 @@
 			// initialize some events
 			initEvents = function() {
 				$(window).on({
-					// on window resize we need to redefine which rows are initially visible (this ones we will not animate).
-		
 					'throttledresize' : function( event ) {
 						refresh();
-					},
+					}
+				});
+				$('#wrapper-wide-body').on({
 					// when scrolling the page change the position of each row	
 					'scroll.Scrolling' : function( event ) {
+
 						// set a timeout to avoid that the 
 						// placeRows function gets called on every scroll trigger
 						if( anim ) return false;
@@ -55,13 +57,13 @@
 						}, 10 );
 					}
 				});
-			
 			},
 			// sets the position of the rows (left and right row elements).
 			// Both of these elements will start with -50% for the left/right (not visible)
 			// and this value should be 0% (final position) when the element is on the
 			// center of the window.
 			placeRows		= function() {
+			
 					// how much we scrolled so far
 				var winscroll	= $win.scrollTop(),
 					// the y value for the center of the screen
@@ -76,7 +78,8 @@
 						// the right side element
 						$rowR	= $row.find('div.ss-right'),
 						// top value
-						rowT	= $row.offset().top;
+						rowT	= $row.offset().top,
+						$headline = $row.find('.headline:first')
 					
 					// hide the row if it is under the viewport
 					if( rowT > winSize.height + winscroll ) {
@@ -92,7 +95,6 @@
 						// value for the left / right of each side of the row.
 						// 0% is the limit
 						val		= Math.max( factor * 50, 0 );
-
 						// set calculated values
 						$rowL.css({ left 	: - val + '%' });
 						$rowR.css({ right 	: - val + '%' });
