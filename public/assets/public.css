@@ -6945,7 +6945,7 @@ a {
 }
 /* line 240, ../../app/assets/stylesheets/public.css.scss */
 #footer .nav > li > a#follow-me i {
-  background: transparent url(/assets/icon_facebook.png) center center no-repeat;
+  background: transparent url(/assets/icon-facebook.png) center center no-repeat;
   width: 30px;
   height: 32px;
   position: absolute;
@@ -7048,6 +7048,7 @@ h2#product-variants-title {
   text-shadow: 0px 0px 100px white;
   margin: 0 20px;
   background: transparent url(/assets/apos.png) 0 0 no-repeat;
+  min-height: 180px;
   overflow: visible;
   -webkit-transition: all 1s linear;
   -moz-transition: all 1s linear;
@@ -7055,18 +7056,18 @@ h2#product-variants-title {
   -o-transition: all 1s linear;
   transition: all 1s linear;
 }
-/* line 324, ../../app/assets/stylesheets/public.css.scss */
+/* line 325, ../../app/assets/stylesheets/public.css.scss */
 .headline em {
   font-family: "futura-pt", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 330, ../../app/assets/stylesheets/public.css.scss */
+/* line 331, ../../app/assets/stylesheets/public.css.scss */
 .inview .headline {
   text-shadow: 0px 0px 1px white;
 }
 
-/* line 336, ../../app/assets/stylesheets/public.css.scss */
+/* line 337, ../../app/assets/stylesheets/public.css.scss */
 #cover {
   background: rgba(103, 100, 93, 0.96) url(/assets/stbarth_treasures-GEG_0099.jpg);
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -7080,13 +7081,13 @@ h2#product-variants-title {
   -webkit-background-size: cover, cover;
   background-size: cover, cover;
 }
-/* line 343, ../../app/assets/stylesheets/public.css.scss */
+/* line 344, ../../app/assets/stylesheets/public.css.scss */
 #cover .headline {
   color: white;
   opacity: 0;
   filter: alpha(opacity=0);
 }
-/* line 348, ../../app/assets/stylesheets/public.css.scss */
+/* line 349, ../../app/assets/stylesheets/public.css.scss */
 #cover .circle {
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -7097,7 +7098,7 @@ h2#product-variants-title {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
 }
-/* line 356, ../../app/assets/stylesheets/public.css.scss */
+/* line 357, ../../app/assets/stylesheets/public.css.scss */
 #cover .circle1 {
   bottom: 96px;
   width: 10px;
@@ -7110,7 +7111,7 @@ h2#product-variants-title {
   -moz-animation: fade-circle 2s 0.3s infinite alternate;
   -ms-animation: fade-circle 2s 0.3s infinite alternate;
 }
-/* line 364, ../../app/assets/stylesheets/public.css.scss */
+/* line 365, ../../app/assets/stylesheets/public.css.scss */
 #cover .circle2 {
   bottom: 70px;
   width: 16px;
@@ -7123,7 +7124,7 @@ h2#product-variants-title {
   -moz-animation: fade-circle 2s 0.6s infinite alternate;
   -ms-animation: fade-circle 2s 0.6s infinite alternate;
 }
-/* line 372, ../../app/assets/stylesheets/public.css.scss */
+/* line 373, ../../app/assets/stylesheets/public.css.scss */
 #cover .circle3 {
   bottom: 40px;
   width: 20px;
@@ -7137,7 +7138,7 @@ h2#product-variants-title {
   -ms-animation: fade-circle 2s 0.9s infinite alternate;
 }
 
-/* line 382, ../../app/assets/stylesheets/public.css.scss */
+/* line 383, ../../app/assets/stylesheets/public.css.scss */
 #logo {
   background: transparent url(/assets/logo.png) center center no-repeat;
   width: 100%;
@@ -7146,7 +7147,7 @@ h2#product-variants-title {
   filter: alpha(opacity=0);
 }
 
-/* line 389, ../../app/assets/stylesheets/public.css.scss */
+/* line 390, ../../app/assets/stylesheets/public.css.scss */
 .parallax-inner {
   overflow: hidden;
   position: relative;
@@ -7154,7 +7155,7 @@ h2#product-variants-title {
   width: 100%;
 }
 
-/* line 395, ../../app/assets/stylesheets/public.css.scss */
+/* line 396, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item {
   position: absolute;
   overflow: hidden;
@@ -7164,31 +7165,31 @@ h2#product-variants-title {
   top: 0px;
 }
 
-/* line 403, ../../app/assets/stylesheets/public.css.scss */
-a.close {
+/* line 404, ../../app/assets/stylesheets/public.css.scss */
+.close {
   float: left;
   padding: 12px 0;
   color: white;
   width: 50px;
   height: 50px;
-  background: transparent url(/assets/left.png) center center no-repeat;
+  background: transparent url(/assets/arrows.png) 0 0 no-repeat;
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
   border: 0;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  display: block;
 }
 
-/* line 412, ../../app/assets/stylesheets/public.css.scss */
-.page-header {
-  margin: 0 60px 22px;
-}
-/* line 414, ../../app/assets/stylesheets/public.css.scss */
-.page-header a.close {
-  background-image: url(/assets/left-black.png);
+/* line 416, ../../app/assets/stylesheets/public.css.scss */
+.close:hover {
+  opacity: 1.0;
+  filter: alpha(opacity=100);
 }
 
-/* line 418, ../../app/assets/stylesheets/public.css.scss */
+/* line 420, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item .bg {
   width: 100%;
   height: 100%;
@@ -7200,12 +7201,12 @@ a.close {
   z-index: 0;
 }
 
-/* line 430, ../../app/assets/stylesheets/public.css.scss */
+/* line 432, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item.active {
   display: block;
 }
 
-/* line 433, ../../app/assets/stylesheets/public.css.scss */
+/* line 435, ../../app/assets/stylesheets/public.css.scss */
 .background-image {
   zoom: 100%;
   background-color: white;
@@ -7235,13 +7236,13 @@ a.close {
   	border: 1px solid rgba(255,255,255,.6);
   }*/
 }
-/* line 444, ../../app/assets/stylesheets/public.css.scss */
+/* line 446, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod {
   top: 50%;
   margin-top: -240px;
   height: 480px;
 }
-/* line 450, ../../app/assets/stylesheets/public.css.scss */
+/* line 452, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-carousel {
   cursor: pointer;
   width: 300px;
@@ -7257,7 +7258,7 @@ a.close {
   float: left;
   margin-right: 100px;
 }
-/* line 458, ../../app/assets/stylesheets/public.css.scss */
+/* line 460, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-carousel img {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
@@ -7265,41 +7266,48 @@ a.close {
   width: 300px;
   height: 300px;
 }
-/* line 479, ../../app/assets/stylesheets/public.css.scss */
+/* line 481, ../../app/assets/stylesheets/public.css.scss */
 .background-image a.view-all {
-  background: white;
-  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
-  line-height: 80px;
+  line-height: 50px;
   position: absolute;
-  width: 80px;
-  height: 80px;
-  -moz-border-radius: 40px;
-  -webkit-border-radius: 40px;
-  border-radius: 40px;
   top: 50%;
-  top: 50%;
-  margin-top: -40px;
+  margin-top: -25px;
   left: 50%;
-  margin-left: -40px;
+  margin-left: -25px;
+  width: 50px;
+  height: 50px;
+  background: transparent url(/assets/arrows.png) -50px 0 no-repeat;
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
-/* line 494, ../../app/assets/stylesheets/public.css.scss */
+/* line 496, ../../app/assets/stylesheets/public.css.scss */
+.background-image a.view-all:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+/* line 501, ../../app/assets/stylesheets/public.css.scss */
 .background-image .ss-left, .background-image .ss-right {
   float: left;
   width: 48%;
   position: relative;
 }
-/* line 499, ../../app/assets/stylesheets/public.css.scss */
+/* line 506, ../../app/assets/stylesheets/public.css.scss */
 .background-image .ss-right {
   padding-left: 2%;
 }
-/* line 502, ../../app/assets/stylesheets/public.css.scss */
+/* line 509, ../../app/assets/stylesheets/public.css.scss */
 .background-image .ss-left {
   text-align: right;
   float: left;
   padding-right: 2%;
 }
-/* line 509, ../../app/assets/stylesheets/public.css.scss */
+/* line 516, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-title a {
   font-family: "voluta-script-pro", "Times New Roman", "Times", serif;
   color: white;
@@ -7311,25 +7319,25 @@ a.close {
   text-shadow: 0px 0px 12px #FFFFFF;
 }
 
-/* line 522, ../../app/assets/stylesheets/public.css.scss */
+/* line 529, ../../app/assets/stylesheets/public.css.scss */
 .container-fluid {
   padding-left: 0px;
   padding-right: 0px;
 }
 
-/* line 530, ../../app/assets/stylesheets/public.css.scss */
+/* line 537, ../../app/assets/stylesheets/public.css.scss */
 #about {
   color: white;
   padding: 24px 0 100px;
 }
 
-/* line 534, ../../app/assets/stylesheets/public.css.scss */
+/* line 541, ../../app/assets/stylesheets/public.css.scss */
 #about h3 {
   color: white;
   text-transform: uppercase;
 }
 
-/* line 538, ../../app/assets/stylesheets/public.css.scss */
+/* line 545, ../../app/assets/stylesheets/public.css.scss */
 #about h2 {
   margin-bottom: 80px;
   color: white;
@@ -8549,21 +8557,21 @@ table.hide-on-tablets {
   }
 }
 @media (max-width: 768px) {
-  /* line 550, ../../app/assets/stylesheets/public.css.scss */
+  /* line 557, ../../app/assets/stylesheets/public.css.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 }
 @media (min-width: 980px) {
-  /* line 557, ../../app/assets/stylesheets/public.css.scss */
+  /* line 564, ../../app/assets/stylesheets/public.css.scss */
   #store-menu {
     float: right;
     margin: 0;
     margin-left: 200px;
   }
 
-  /* line 562, ../../app/assets/stylesheets/public.css.scss */
+  /* line 569, ../../app/assets/stylesheets/public.css.scss */
   .navbar {
     position: fixed;
     right: 0;
@@ -8573,12 +8581,12 @@ table.hide-on-tablets {
     margin-bottom: 0;
   }
 
-  /* line 572, ../../app/assets/stylesheets/public.css.scss */
+  /* line 579, ../../app/assets/stylesheets/public.css.scss */
   .navbar-inner {
     padding-bottom: 12px;
   }
 
-  /* line 575, ../../app/assets/stylesheets/public.css.scss */
+  /* line 582, ../../app/assets/stylesheets/public.css.scss */
   .navbar .brand {
     float: left;
     margin: 12px 0 0 0;
@@ -8586,17 +8594,17 @@ table.hide-on-tablets {
     text-transform: uppercase;
   }
 
-  /* line 581, ../../app/assets/stylesheets/public.css.scss */
+  /* line 588, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse {
     clear: none;
     float: left;
     margin: 17px 0 0 24px;
   }
-  /* line 585, ../../app/assets/stylesheets/public.css.scss */
+  /* line 592, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse nav, .navbar .nav-collapse .nav {
     float: left;
   }
-  /* line 588, ../../app/assets/stylesheets/public.css.scss */
+  /* line 595, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse .nav > li > a {
     padding: 0 6px;
     font-size: 10px;
@@ -8604,7 +8612,7 @@ table.hide-on-tablets {
     text-shadow: none;
   }
 
-  /* line 598, ../../app/assets/stylesheets/public.css.scss */
+  /* line 605, ../../app/assets/stylesheets/public.css.scss */
   .headline {
     margin: 0 120px;
     font-size: 98px;
