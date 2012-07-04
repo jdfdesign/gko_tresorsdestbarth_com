@@ -43,7 +43,7 @@
 						refresh();
 					}
 				});
-				$('#wrapper-wide-body').on({
+				$(window).on({
 					// when scrolling the page change the position of each row	
 					'scroll.Scrolling' : function( event ) {
 

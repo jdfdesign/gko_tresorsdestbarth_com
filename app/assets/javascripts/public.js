@@ -8,6 +8,7 @@
 //= require history/scripts/bundled/html5/jquery.history.js
 $(document).ready(function() {
 
+
 	f_init_carousel = function() {
 		$('.carousel').each(function(index) {
 			var _self = $(this);
@@ -21,11 +22,14 @@ $(document).ready(function() {
 		});
     }
 	f_showCartUpdateNotice = function(action) {
-		if($notice == undefined) {
+		
+		var o = $viewCartMenuLink.position();
+		if($notice === undefined) {
+			console.log($viewCartMenuLink)
 			$notice = $("<div class='notice'>Your selection has been updated !</div>").appendTo($body);
-		}
-		var offset = $viewCartMenuLink.offset();	
-	   $notice.css({'display': 'none','position': 'fixed', 'z-index' : 10000, 'left' : offset.left, 'top': offset.top + 50, 'background-color': 'green', 'color': 'white', 'padding': 8}).fadeIn('slow', function() {
+			$notice.css({'display': 'none','position': 'fixed', 'z-index' : 10000, 'left' : o.left, 'top': o.top + 50, 'background-color': 'green', 'color': 'white', 'padding': 8})
+		}	
+		$notice.fadeIn('slow', function() {
 			window.setTimeout(f_hideCartUpdateNotice, 2000);
 		});
 	}
@@ -33,17 +37,16 @@ $(document).ready(function() {
 		$notice.fadeOut('slow');
 	}
 	f_refresh_ui = function() {
-		var viewportH = f_viewport_wh().h
-		,viewportW = f_viewport_wh().w;
+		var viewport = f_viewport_wh();
 		
 		headerHeight = $(".navbar:first").height();
 		footerHeight = $("#footer-container").height();
 		deltaHeight = headerHeight + footerHeight;
 		
-		var h = viewportH - deltaHeight;
+		var h = viewport.h - deltaHeight;
 		//$container.css('padding-top', $('.navbar').height())
 		
-		$('section.fullscreen, .parallax-item').css({'height': h, 'width': viewportW});
+		$('section.fullscreen, .parallax-item').css({'height': h, 'width': viewport.w});
 		$.each($('.centered'), function(index, item) {
 			var that = $(this)
 				,row = that.find('.row-fluid:first');
@@ -53,10 +56,12 @@ $(document).ready(function() {
 			}
 		});
 		$.each($('.parallax .headline'), function(index, item) {
-			var that = $(this);
-			that.css('margin-top', (h - that.height())/2);
+			var that = $(this)
+				,top = (h - that.height())/2;
+				
+			top = (top < 0) ? 0 : top;
+			that.css('margin-top', top);
 		});
-		//f_setWrapperHeight();
     }
 	f_init_ajax = function() {
 		// Bind cart form
@@ -164,7 +169,7 @@ $(document).ready(function() {
 
 	}
 	f_init_home_page = function() {
-		$('.parallax').scrollParallax({'speed': -0.2});
+		$('.parallax').scrollParallax({'speed': -0.2, 'axis' : 'y'});
 		$sidescroll.init();
 		var $headline = $('.headline:first')
 			,$logo = $("#logo")
@@ -172,7 +177,7 @@ $(document).ready(function() {
 		$navbar.css('top', -50);
 		$body.fadeIn(2000, function() {
 			$logo.animate({'opacity': 1}, 1200, function() {
-				$headline.css({'opacity': 1, 'textShadow':'#fff 0 0 200'}).animate({textShadow: "#fff 0 0 0"});
+				$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
 			});
 			$navbar.animate({'top':0}, 200);
 		});
@@ -189,7 +194,8 @@ $(document).ready(function() {
 	        var State = History.getState();
 	        History.log(State.data, State.title, State.url);
 			if(State.data.state == "category") {
-				console.log(History.getHash().category)
+				//var hashOptions = $.deparam.fragment();
+			//	console.log(hashOptions)
 			}
 	    });	
 	}

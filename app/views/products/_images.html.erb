@@ -1,6 +1,5 @@
 <%
 image_geometry = local_assigns.has_key?(:image_style) ? image_style : site.preferred_image_carousel_size
 thumb_geometry = local_assigns.has_key?(:thumb_style) ? thumb_style : site.preferred_image_thumb_size
-first_image = images[0]
 %>
 <%= render 'images/shared/carousel', :images => images if images.try(:any?) %> 
