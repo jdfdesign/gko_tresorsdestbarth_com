@@ -238,7 +238,7 @@ a {
 			position:relative;
 			padding-left: 30px;
 			i {
-				background: transparent asset-url('icon_facebook.png',image) center center no-repeat;
+				background: transparent asset-url('icon-facebook.png',image) center center no-repeat;
 				width: 30px;
 				height: 32px;
 				position: absolute;
@@ -317,6 +317,7 @@ h2#product-variants-title {
 	text-shadow: 0px 0px 100px white;
 	margin: 0 20px;
 	background: transparent asset-url('apos.png', image) 0 0 no-repeat;
+	min-height: 180px;
 	overflow: visible;
 //	opacity:0;
 //	filter: alpha(opacity=0);
@@ -400,20 +401,21 @@ h2#product-variants-title {
 	display: none;
 	top: 0px;
 }
-a.close {
+.close {
 	float:left;
 	padding: 12px 0;
 	color: white;
 	width: 50px;
 	height: 50px;
-	background: transparent asset-url('left.png',image) center center no-repeat;
+	background: transparent asset-url('arrows.png',image) 0 0 no-repeat;
 	@include hide-text();
+	opacity:0.5;
+	filter: alpha(opacity=50);
+	display: block;
 }
-.page-header  {
-	margin: 0 60px 22px;
-	a.close {
-		background-image: asset-url('left-black.png',image);
-	}
+.close:hover {
+	opacity:1.0;
+	filter: alpha(opacity=100);
 }
 .parallax-item .bg {
 	width: 100%;
@@ -477,18 +479,23 @@ a.close {
 		border: 1px solid rgba(255,255,255,.6);
 	}*/
 	a.view-all {
-		background: white;
-		background-color: rgba(255,255,255,.8);
 		text-align: center;
-		line-height: 80px;
+		line-height: 50px;
 		position: absolute;
-		@include circle(80px);
 		top: 50%;
-		top: 50%;
-		margin-top: -40px;
+		margin-top: -25px;
 		left: 50%;
-		margin-left: -40px;
-		
+		margin-left: -25px;
+		width: 50px;
+		height: 50px;
+		background: transparent asset-url('arrows.png',image) -50px 0 no-repeat;
+		@include hide-text();
+		opacity:0.5;
+		filter: alpha(opacity=50);
+	}
+	a.view-all:hover {
+		opacity:1;
+		filter: alpha(opacity=100);
 	}
 
 	.ss-left, .ss-right{

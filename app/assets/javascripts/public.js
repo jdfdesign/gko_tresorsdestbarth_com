@@ -137,8 +137,8 @@ $(document).ready(function() {
             f_refresh_ui();
         });
 	
-        $("a.view-all")
-		.on('click', function(e) {
+        $(".pod")
+		.on('click', 'a', function(e) {
 			e.stopPropagation();
             e.preventDefault();
 			f_show_products($(this).closest("section"));
@@ -156,7 +156,7 @@ $(document).ready(function() {
 			f_show_category($("section#pearl"));
 		})
 
-		$('.products a.close').on('click', function(e) {
+		$('.products').on('click', ' a.close', function(e) {
 			e.stopPropagation();
             e.preventDefault();
 			f_hide_products($(this).closest("section"));
