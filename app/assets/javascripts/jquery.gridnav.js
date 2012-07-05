@@ -4,7 +4,7 @@
 	var 
 		// auxiliar functions
 		aux		= {
-			setup				: function( $wrapper, $items, opts ) {
+			setup : function( $wrapper, $items, opts ) {
 				
 				// set the wrappers position to relative
 				$wrapper.css('position', 'relative');
@@ -49,6 +49,11 @@
 					$item.addClass('tj_row_' + row);		
 				});
 				
+				if($items.length > shown) {
+					$('.tj_nav').css('display', 'block');
+				} else {
+					$('.tj_nav').css('display', 'none');
+				}
 				nav.setup( $wrapper, $items, opts );
 				
 			},
@@ -641,8 +646,8 @@
 					
 					var settings = {
 						rows	: 2,
-						navL	: '#tj_prev',
-						navR	: '#tj_next',
+						navL	: '.tj_prev',
+						navR	: '.tj_next',
 						type	: {
 							mode		: 'def', 		// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
 							speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
@@ -666,8 +671,8 @@
 							$thumbs			= $wrapper.children('li'),
 							total			= $thumbs.length,
 							// the navigation elements
-							$p_nav			= $(settings.navL),
-							$n_nav			= $(settings.navR);
+							$p_nav			= $el.find(settings.navL),
+							$n_nav			= $el.find(settings.navR);
 						
 						// save current row for later (first visible row)
 						//config.currentRow	= 1;

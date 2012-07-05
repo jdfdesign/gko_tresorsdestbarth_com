@@ -65,8 +65,8 @@ $(document).ready(function() {
 			that.css('margin-top', top);
 		});
 		
-		gridRowCount = Math.floor( h / gridItemHeight );
-		gridColCount = Math.floor( viewport.w / gridItemHeight );
+		gridRowCount = Math.floor( (h - 48) / gridItemHeight );
+		gridColCount = Math.floor( (viewport.w - 48) / gridItemHeight );
 		var gridHeight = gridRowCount * gridItemHeight + 50,
 			gridWidth = gridColCount * gridItemHeight;
 		$.each($('.tj_wrapper'), function(index, item) {
@@ -80,26 +80,7 @@ $(document).ready(function() {
 		
 		
     }
-	f_init_ajax = function() {
-		// Bind cart form
-		$('.product').on('ajax:beforeSend', 'form.cart-form',
-		function(event, xhr, settings) {
-			
-		}).on('ajax:complete',
-        function(evt, xhr, status) {
-			f_showCartUpdateNotice();
-        });
-		// Bind show product action
-        $(".tj_gallery a").attr('data-remote', 'true')
-		.on('ajax:beforeSend', function(event, xhr, settings) {
 
-		})
-		.on('ajax:complete',
-        function(evt, xhr, status) {
-			f_show_product($(this).closest(".parallax-item"), eval(xhr.responseText).html());
-        });
-
-	}
 	f_show_category = function(target) {
 		if(target.hasClass('active')) {
 			return false;
@@ -185,7 +166,23 @@ $(document).ready(function() {
             e.preventDefault();
 			f_hide_product($(this).closest(".parallax-item"));
 		})
+		// Bind cart form
+		$('.product').on('ajax:beforeSend', 'form.cart-form',
+		function(event, xhr, settings) {
+			
+		}).on('ajax:complete',
+        function(evt, xhr, status) {
+			f_showCartUpdateNotice();
+        });
+		// Bind show product action
+        $(".tj_gallery a").attr('data-remote', 'true')
+		.on('ajax:beforeSend', function(event, xhr, settings) {
 
+		})
+		.on('ajax:complete',
+        function(evt, xhr, status) {
+			f_show_product($(this).closest(".parallax-item"), eval(xhr.responseText).html());
+        });
 	}
 	f_init_grid = function() {
 		
@@ -236,7 +233,6 @@ $(document).ready(function() {
 		windowSize.width = $window.width();
 		windowSize.height = $window.height();
 		if(bodyId == 'home') {
-			f_init_ajax();
 			f_init_carousel();
 			f_refresh_ui();
 			f_init_events();
