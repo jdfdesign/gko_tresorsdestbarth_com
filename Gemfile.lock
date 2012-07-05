@@ -9,14 +9,28 @@ GIT
       i18n
       json (>= 1.5.1)
 
-GIT
-  remote: git@github.com:jdfdesign/gko_cms3.git
-  revision: 782ecbc6cb3217c939f25a4c43a5334afb125a59
+PATH
+  remote: /Users/regisbruggheman/Github/gko/gko_store
+  specs:
+    gko_store (0.0.22)
+      activemerchant (= 1.21.0)
+      state_machine (= 1.1.2)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_auth
   specs:
     gko_auth (0.3.19)
       cancan (= 1.6.8)
       devise (= 2.1.2)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_categories
+  specs:
     gko_categories (0.3.19)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_core
+  specs:
     gko_core (0.3.19)
       RedCloth (= 4.2.9)
       activesupport-slices (= 0.0.2)
@@ -49,26 +63,42 @@ GIT
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_documents
+  specs:
     gko_documents (0.3.19)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_features
+  specs:
     gko_features (0.3.19)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_images
+  specs:
     gko_images (0.3.19)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_inquiries
+  specs:
     gko_inquiries (0.3.19)
       filters_spam (~> 0.2)
       launchy
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_stickers
+  specs:
     gko_stickers (0.3.19)
+
+PATH
+  remote: /Users/regisbruggheman/Github/gko_cms3/gko_themes
+  specs:
     gko_themes (0.3.19)
       less-rails-bootstrap
       rubyzip (= 0.9.6.1)
-
-GIT
-  remote: git@github.com:jdfdesign/gko_store.git
-  revision: 399adfe208e9f14931e43ab8adc54924b74a8bd2
-  specs:
-    gko_store (0.0.22)
-      activemerchant (= 1.21.0)
-      state_machine (= 1.1.2)
 
 GEM
   remote: http://rubygems.org/
@@ -270,16 +300,16 @@ PLATFORMS
 DEPENDENCIES
   active_shipping!
   coffee-rails (~> 3.2.2)
-  gko_auth (= 0.3.19)!
-  gko_categories (= 0.3.19)!
-  gko_core (= 0.3.19)!
-  gko_documents (= 0.3.19)!
-  gko_features (= 0.3.19)!
-  gko_images (= 0.3.19)!
-  gko_inquiries (= 0.3.19)!
-  gko_stickers (= 0.3.19)!
-  gko_store (= 0.0.22)!
-  gko_themes (= 0.3.19)!
+  gko_auth!
+  gko_categories!
+  gko_core!
+  gko_documents!
+  gko_features!
+  gko_images!
+  gko_inquiries!
+  gko_stickers!
+  gko_store!
+  gko_themes!
   iconv
   sass-rails (~> 3.2.5)
   uglifier (>= 1.0.3)
