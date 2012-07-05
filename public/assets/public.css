@@ -8703,14 +8703,9 @@ table.hide-on-tablets {
   padding: 0;
 }
 
-/* line 686, ../../app/assets/stylesheets/public.css.scss */
+/* line 683, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li {
   float: left;
-}
-
-/* line 689, ../../app/assets/stylesheets/public.css.scss */
-.tj_gallery_inner {
-  position: relative;
   border: 1px solid white;
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -8723,26 +8718,72 @@ table.hide-on-tablets {
   margin: 5px;
   outline: none;
 }
-
-/* line 700, ../../app/assets/stylesheets/public.css.scss */
-.tj_wrapper ul li a {
+/* line 692, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li .tj_gallery_inner {
+  position: relative;
+}
+/* line 695, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li .tj_wrapper ul li a {
   outline: none;
   display: block;
+  text-decoration: none;
 }
-
-/* line 706, ../../app/assets/stylesheets/public.css.scss */
-.tj_wrapper ul li a img {
+/* line 699, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li .tj_wrapper ul li a:hover {
+  text-decoration: none;
+}
+/* line 703, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li img {
   display: block;
-  opacity: 0.7;
   position: relative;
   padding: 0;
   margin: 0;
-  -webkit-border-radius: 11px;
-  -moz-border-radius: 11px;
-  border-radius: 11px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease-in;
 }
-
-/* line 714, ../../app/assets/stylesheets/public.css.scss */
-.tj_wrapper ul li a img:hover {
-  opacity: 1.0;
+/* line 711, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li .content {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  right: -320px;
+  width: 100%;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  transition: all 0.4s 0.3s ease-in-out;
+}
+/* line 722, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li h2 {
+  text-transform: uppercase;
+  color: #000;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 20px 40px 0px 40px;
+}
+/* line 731, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li p {
+  font-style: italic;
+  position: relative;
+  color: #000;
+  padding: 10px 20px 20px;
+  text-align: center;
+}
+/* line 738, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li a.info {
+  display: block;
+  text-decoration: none;
+  padding: 7px 14px;
+  color: #000;
+  text-align: center;
+}
+/* line 746, ../../app/assets/stylesheets/public.css.scss */
+.tj_wrapper ul li:hover .content {
+  right: 0px;
 }
