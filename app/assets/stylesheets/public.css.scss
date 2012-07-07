@@ -689,6 +689,9 @@ h2#product-variants-title {
 	overflow:hidden;
 	margin:5px;
 	outline:none;
+	&:hover {
+		text-decoration: none;
+	}
 	.tj_gallery_inner {
 		position:relative;
 	}
@@ -717,7 +720,7 @@ h2#product-variants-title {
 		width: 100%;
 		@include border-radius(12px);
 		background: rgba(255, 255, 255, 0.7);
-		transition: all 0.4s 0.3s ease-in-out;
+		@include transition(all .6s ease-out);
 	}
 	h2 {
 		text-transform: uppercase;

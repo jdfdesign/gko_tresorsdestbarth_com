@@ -712,7 +712,7 @@
 									}
 									/*
 									adds events to the mouse
-									
+									*/
 									$el.bind('mousewheel.gridnav', function(e, delta) {
 										if(delta > 0) {
 											if( $wrapper.data( 'anim' ) ) return false;
@@ -726,7 +726,7 @@
 										}	
 										return false;
 									});
-									*/
+									
 								}
 							}).attr( 'src', $img.attr('src') );
 						});
