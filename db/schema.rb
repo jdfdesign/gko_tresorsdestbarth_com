@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531101127) do
+ActiveRecord::Schema.define(:version => 20120708182101) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -378,25 +378,15 @@ ActiveRecord::Schema.define(:version => 20120531101127) do
   add_index "image_folders", ["parent_id"], :name => "index_image_folders_on_parent_id"
   add_index "image_folders", ["site_id"], :name => "index_image_folders_on_site_id"
 
-  create_table "image_stickers", :force => true do |t|
-    t.string   "name"
-    t.integer  "site_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "image_stickers", ["name"], :name => "index_image_stickers_on_name"
-  add_index "image_stickers", ["site_id"], :name => "index_image_stickers_on_site_id"
-
-  create_table "image_stickings", :force => true do |t|
-    t.integer  "sticker_id"
+  create_table "image_folders_images", :id => false, :force => true do |t|
+    t.integer  "image_folder_id"
     t.integer  "image_id"
-    t.integer  "image_stickings_count", :default => 0
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "image_stickings", ["sticker_id", "image_id"], :name => "index_image_stickings_on_sticker_id_and_image_id"
+  add_index "image_folders_images", ["image_folder_id", "image_id"], :name => "index_image_folders_images_on_image_folder_id_and_image_id"
+  add_index "image_folders_images", ["image_id", "image_folder_id"], :name => "index_image_folders_images_on_image_id_and_image_folder_id"
 
   create_table "image_translations", :force => true do |t|
     t.integer  "image_id"
