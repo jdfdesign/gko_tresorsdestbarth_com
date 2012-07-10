@@ -4,13 +4,16 @@
 @images = site.homes.first.images
 %>
 <% content_for :page_container do %>
+
 <div id='parallaxs'>
-	<section id="cover" class="background-image fullscreen centered" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+	<section id="cover" class="background-image" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
 		<div id="logo"></div>
 		<p  class='headline'><%= 'Un trésor, hormis le fait d’être rêvé, n’existe que pour être découvert.<em> Audiberti</em>'. html_safe%></p>
-		<div class="circle circle1"></div>
-		<div class="circle circle2"></div>
-		<div class="circle circle3"></div>
+		<div class="circles">
+			<div class="circle circle1"></div>
+			<div class="circle circle2"></div>
+			<div class="circle circle3"></div>
+		</circles>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
 	<% 
@@ -38,7 +41,8 @@
 					<div class="pod ss-right">
 						<div class="pod-carousel">
 							<img src="<%= product_img_url %>",rel="external">
-							<%= link_to("Tout voir", store_path(@store), :class => 'view-all', :'data-remote' => true) %>
+			
+							<%= link_to("&#8594".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
 						</div>
 					</div><!--pod-->
 				</div>

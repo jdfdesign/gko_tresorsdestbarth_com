@@ -27,7 +27,7 @@ $(document).ready(function() {
 		
 		var o = $viewCartMenuLink.position();
 		if($notice === undefined) {
-			console.log($viewCartMenuLink)
+
 			$notice = $("<div class='notice'>Your selection has been updated !</div>").appendTo($body);
 			$notice.css({'display': 'none','position': 'fixed', 'z-index' : 10000, 'left' : o.left, 'top': o.top + 50, 'background-color': 'green', 'color': 'white', 'padding': 8})
 		}	
@@ -39,14 +39,14 @@ $(document).ready(function() {
 		$notice.fadeOut('slow');
 	}
 	f_refresh_ui = function() {
-		var viewport = f_viewport_wh();
+		var viewport = f_viewport_wh(),
+			coverHeight = $cover.height();
 		
 		headerHeight = $(".navbar:first").height();
 		footerHeight = $("#footer-container").height();
 		deltaHeight = headerHeight + footerHeight;
 		
 		var h = viewport.h - deltaHeight;
-		//$container.css('padding-top', $('.navbar').height())
 		
 		$('section.fullscreen, .parallax-item').css({'height': h, 'width': viewport.w});
 		$.each($('.centered'), function(index, item) {
@@ -64,6 +64,19 @@ $(document).ready(function() {
 			top = (top < 0) ? 0 : top;
 			that.css('margin-top', top);
 		});
+		
+	/*	if(coverHeight > h) {
+			var newLogoHeight = coverHeight - h - 80,
+				newLogoWidth = newLogoHeight * logoRatio;
+				
+				console.log(newLogoHeight + "  " + h)
+			$logo.css({'height': newLogoHeight, 'width': newLogoWidth});
+		}
+		else {
+			$logo.css({'height': originalLogoHeight, 'width': originalLogoWidth})
+		} */
+		$cover.css('height', h);
+		
 		
 		gridRowCount = Math.floor( (h - 48) / gridItemHeight );
 		gridColCount = Math.floor( (viewport.w - 48) / gridItemHeight );
@@ -198,19 +211,23 @@ $(document).ready(function() {
 			}
 		});
 	}
-	f_init_home_page = function() {
-		$('.parallax').scrollParallax({'speed': -0.2, 'axis' : 'y'});
-		$sidescroll.init();
-		var $headline = $('.headline:first')
-			,$logo = $("#logo")
-			,$navbar = $(".navbar:first");
-		$navbar.css('top', -50);
-		$body.fadeIn(2000, function() {
-			$logo.animate({'opacity': 1}, 1200, function() {
-				$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
+	f_do_animation = function() {
+		if(isHome) {
+			var $headline = $cover.find('.headline');
+			$headline.css('opacity', 0);
+			$logo.css('opacity', 0);
+			$navbar.css('top', -50);
+			$overlay.fadeOut(2000, function() {
+				$overlay.remove();
+				$logo.animate({'opacity': 1}, 1200, function() {
+					$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
+				});
+				$navbar.animate({'top':0}, 200);
 			});
-			$navbar.animate({'top':0}, 200);
-		});
+		} else {
+			$overlay.fadeOut(2000);
+		}
+		
 	}
 	f_init_history = function() {
 	    if ( !History.enabled ) {
@@ -229,17 +246,35 @@ $(document).ready(function() {
 			}
 	    });	
 	}
-	f_init = function() {
-		windowSize.width = $window.width();
-		windowSize.height = $window.height();
-		if(bodyId == 'home') {
-			f_init_carousel();
+	f_loading_done = function() {
+		if(imagesCount == 0) {
+			//console.log(imagesCount + " loaded");
 			f_refresh_ui();
 			f_init_events();
 			f_init_history();
-			f_init_home_page();
-			f_refresh_ui();
-			
+			f_init_carousel();
+			$('.parallax').scrollParallax({'speed': -0.2, 'axis' : 'y'});
+			$sidescroll.init();
+			f_do_animation();
+		}
+	}
+	f_images_loaded = function() {
+		$('section.background-image').each(function (i, el) {
+			imagesCount ++;
+			var bg = $(el).css('background-image'),
+				src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
+				$('<img>').attr('src', src).on('load', function() {
+		        imagesCount --;
+		        f_loading_done();
+			});
+		});
+	}
+	f_init = function() {
+		windowSize.width = $window.width();
+		windowSize.height = $window.height();
+		if(isHome) {
+			f_images_loaded();
+
 		}
 		else {
 			if($('.galleria').length > 0) {
@@ -333,7 +368,7 @@ $(document).ready(function() {
 					showInfo: false
 				});
 			}
-			$body.fadeIn(2000);
+			
 		}
 
 	}
@@ -341,6 +376,14 @@ $(document).ready(function() {
 	var  $body = $("body")
 		,$html = $("html")
 		,$window = $(window)
+		,$overlay = $("#overlay")
+		,$cover = $("#cover")
+		,$logo = $("#logo")
+		,$navbar = $(".navbar:first")
+		,imagesCount = 0
+		,originalLogoWidth = $logo.width()
+		,originalLogoHeight = $logo.height()
+		,logoRatio = originalLogoWidth / originalLogoHeight
 		,gridColCount = 3
 		,gridRowCount = 2
 		,gridItemHeight = 300 //including margin and padding
@@ -351,6 +394,7 @@ $(document).ready(function() {
 		,$notice
 		,$viewCartMenuLink = $('a#view-cart-menu-link')
 		,bodyId = $body.attr('id')
+		,isHome = (bodyId == "home")
 		,windowSize = {}// we will store the window sizes here
 		,isResizing = false
 		,History = window.History; // Note: We are using a capital H instead of a lower h

@@ -71,11 +71,20 @@ body {
 	background: #fefefe;
 	padding: 0;
 	margin: 0;
-	display: none;
 	overflow: auto;
 } 
+#overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #fefefe;
+	z-index: 10000;
+}
 #wrapper-wide-body {
 	margin: 50px 0;
+	
 }
 
 
@@ -319,7 +328,6 @@ h2#product-variants-title {
 	margin: 0 20px;
 	background: transparent asset-url('apos.png', image) 0 0 no-repeat;
 	min-height: 180px;
-	@include transition(all 1s linear);
 	em {
 		font-family: $baseFontFamily;
 		font-size: $baseFontSize;
@@ -339,49 +347,61 @@ h2#product-variants-title {
 	@include background-size(cover, cover);
 	.headline {
 		color: white;
-		opacity:0;
-		filter: alpha(opacity=0);
+		font-size: 58px;
+		line-height: 48px;
+		margin-top: 388px;
 	}
-	.circle {
-		@include box-shadow(0 4px 16px rgba(0,0,0,.4));
+	.circles {
 		position: absolute;
 		left: 50%;
-		background: white;
-		background-color: rgba(255,255,255,.8);
-		text-align: center;
-	}
-	.circle1 {
-		bottom: 96px;
-		@include circle(10px);
-		margin-left: -5px;
-		-webkit-animation: fade-circle 2s 0.3s infinite alternate;
-	    -moz-animation:    fade-circle 2s 0.3s infinite alternate;
-	    -ms-animation:     fade-circle 2s 0.3s infinite alternate;
-	}
-	.circle2 {
-		bottom: 70px;
-		@include circle(16px);
-		margin-left: -8px;
-		-webkit-animation: fade-circle 2s 0.6s infinite alternate;
-	    -moz-animation:    fade-circle 2s 0.6s infinite alternate;
-	    -ms-animation:     fade-circle 2s 0.6s infinite alternate;
-	}
-	.circle3 {
-		bottom: 40px;
-		@include circle(20px);
+		width: 20px;
 		margin-left: -10px;
-		-webkit-animation: fade-circle 2s 0.9s infinite alternate;
-	    -moz-animation:    fade-circle 2s 0.9s infinite alternate;
-	    -ms-animation:     fade-circle 2s 0.9s infinite alternate;
+		bottom: 8px;
+		height: 80px;
+		.circle {
+			position: absolute;
+			left: 50%;
+			@include box-shadow(0 4px 16px rgba(0,0,0,.4));
+			background: white;
+			background-color: rgba(255,255,255,.8);
+			text-align: center;
+		}
+		.circle1 {
+			bottom: 32px;
+			@include circle(6px);
+			margin-left: -3px;
+			-webkit-animation: fade-circle 2s 0.3s infinite alternate;
+		    -moz-animation:    fade-circle 2s 0.3s infinite alternate;
+		    -ms-animation:     fade-circle 2s 0.3s infinite alternate;
+		}
+		.circle2 {
+			bottom: 18px;
+			@include circle(10px);
+			margin-left: -5px;
+			-webkit-animation: fade-circle 2s 0.6s infinite alternate;
+		    -moz-animation:    fade-circle 2s 0.6s infinite alternate;
+		    -ms-animation:     fade-circle 2s 0.6s infinite alternate;
+		}
+		.circle3 {
+			bottom: 0px;
+			@include circle(14px);
+			margin-left: -7px;
+			-webkit-animation: fade-circle 2s 0.9s infinite alternate;
+		    -moz-animation:    fade-circle 2s 0.9s infinite alternate;
+		    -ms-animation:     fade-circle 2s 0.9s infinite alternate;
+		}
 	}
+
 
 }
 #logo {
 	background: transparent asset-url('logo.png',image) center center no-repeat;
-	width: 100%;
-	height:420px;
-	opacity:0;
-	filter: alpha(opacity=0);
+	width: 400px;
+	height:338px;
+	margin-left: -200px;
+	position: absolute;
+	left: 50%;
+	top: 10px;
 }
 .parallax-inner {
 	
@@ -493,24 +513,25 @@ h2#product-variants-title {
 		padding: 32px 12px 12px;
 		border: 1px solid rgba(255,255,255,.6);
 	}*/
-	a.view-all {
-		text-align: center;
-		line-height: 50px;
-		position: absolute;
+	a.view-all{
+		position:absolute;
+		right:0;
 		top: 50%;
-		margin-top: -25px;
-		left: 50%;
-		margin-left: -25px;
-		width: 50px;
-		height: 50px;
-		background: transparent asset-url('arrows.png',image) -50px 0 no-repeat;
-		@include hide-text();
-		opacity:0.5;
-		filter: alpha(opacity=50);
+		margin-top: -20px;
+		height:40px;
+		width:40px;
+		z-index: 1000;
+		line-height: 40px;
+		background-color: #E6E6E6;
+		text-align: center;
+		color: #383838;
+		text-decoration: none;
+		border: 0;
+		cursor: pointer;
 	}
 	a.view-all:hover {
-		opacity:1;
-		filter: alpha(opacity=100);
+		color: black;
+		background-color: white;
 	}
 
 	.ss-left, .ss-right{
@@ -528,6 +549,8 @@ h2#product-variants-title {
 	}
 
 	.pod-title {
+		background: transparent asset-url('apos2.png', image) center bottom no-repeat;
+		line-height: 300px;
 		a {
 			font-family: $altFontFamily;
 			color:white;
@@ -536,7 +559,13 @@ h2#product-variants-title {
 			font-weight: 300;
 			line-height: 150px;
 			color: #FFF;
-			text-shadow:0px 0px 12px #FFFFFF;
+			//text-shadow:0px 0px 12px #FFFFFF;
+			text-shadow: 0px 0px 100px black;
+			@include transition('text-shadow' .5s linear);
+			&:hover {
+				text-decoration: none;
+				text-shadow: 0px 0px 10px white;
+			};
 		}
 	}
 
@@ -673,7 +702,6 @@ h2#product-variants-title {
 	height:100%;
 	top: 50%;
 	left: 50%;
-	//background-color: rgba(0,0,0,.5);
 }
 .tj_wrapper ul{
 	list-style: none;
