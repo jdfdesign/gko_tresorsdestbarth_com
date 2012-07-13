@@ -182,7 +182,8 @@ label {
 
 .carousel-control.right {
  	right: 0px;
-	bottom: 0px;	
+	bottom: 0px;
+	@include border-radius(0 0 12px 0);	
 }
 #content {
 	padding: 24px 0;
@@ -559,12 +560,9 @@ h2#product-variants-title {
 			font-weight: 300;
 			line-height: 150px;
 			color: #FFF;
-			//text-shadow:0px 0px 12px #FFFFFF;
-			text-shadow: 0px 0px 100px black;
-			@include transition('text-shadow' .5s linear);
+			text-shadow:0px 0px 24px #FFFFFF;
 			&:hover {
 				text-decoration: none;
-				text-shadow: 0px 0px 10px white;
 			};
 		}
 	}
@@ -669,6 +667,7 @@ h2#product-variants-title {
 	height:40px;
 	width:80px;
 	z-index: 1000;
+	display: none;
 }
 .tj_nav span{
 	display: block;
@@ -710,13 +709,14 @@ h2#product-variants-title {
 }
 .tj_wrapper ul li{
 	float:left;
-	border: 1px solid white;
-	@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+	//border: 1px solid white;
+	//@include box-shadow(4px 4px 16px rgba(0,0,0,.2));
 	@include border-radius(12px);
 	cursor: pointer;
 	overflow:hidden;
-	margin:5px;
+	//margin:5px;
 	outline:none;
+	position: relative;
 	&:hover {
 		text-decoration: none;
 	}
@@ -739,7 +739,7 @@ h2#product-variants-title {
 		@include border-radius(12px);
 	    transition: all 0.2s ease-in;
 	}
-	.content { 
+	.tj_content { 
 		position: absolute;
 		overflow: hidden;
 		top: 0;
@@ -780,7 +780,7 @@ h2#product-variants-title {
 		text-align: center;
 	}
 	&:hover {
-		.content { 
+		.tj_content { 
 			right: 0px;
 		}                           
 	}

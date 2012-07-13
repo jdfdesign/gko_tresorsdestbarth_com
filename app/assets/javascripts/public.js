@@ -45,10 +45,10 @@ $(document).ready(function() {
 		headerHeight = $(".navbar:first").height();
 		footerHeight = $("#footer-container").height();
 		deltaHeight = headerHeight + footerHeight;
+		availableHeight = viewport.h - deltaHeight;
+
 		
-		var h = viewport.h - deltaHeight;
-		
-		$('section.fullscreen, .parallax-item').css({'height': h, 'width': viewport.w});
+		$('section.fullscreen, .parallax-item').css({'height': availableHeight, 'width': viewport.w});
 		$.each($('.centered'), function(index, item) {
 			var that = $(this)
 				,row = that.find('.row-fluid:first');
@@ -59,7 +59,7 @@ $(document).ready(function() {
 		});
 		$.each($('.parallax .headline'), function(index, item) {
 			var that = $(this)
-				,top = (h - that.height())/2;
+				,top = (availableHeight - that.height())/2;
 				
 			top = (top < 0) ? 0 : top;
 			that.css('margin-top', top);
@@ -75,13 +75,20 @@ $(document).ready(function() {
 		else {
 			$logo.css({'height': originalLogoHeight, 'width': originalLogoWidth})
 		} */
-		$cover.css('height', h);
+		$cover.css('height', availableHeight);
 		
-		
-		gridRowCount = Math.floor( (h - 48) / gridItemHeight );
+	
+		gridRowCount = Math.floor( (availableHeight - 48) / gridItemHeight );
+		if(gridRowCount < 2) {
+			gridItemHeight = ((availableHeight - 48) / 2)
+			gridRowCount = Math.floor( (availableHeight - 48) / gridItemHeight );
+		}
+	
 		gridColCount = Math.floor( (viewport.w - 48) / gridItemHeight );
 		var gridHeight = gridRowCount * gridItemHeight + 50,
 			gridWidth = gridColCount * gridItemHeight;
+			
+
 		$.each($('.tj_wrapper'), function(index, item) {
 			$(this).css({
 				marginTop: - (gridHeight / 2),
@@ -89,6 +96,12 @@ $(document).ready(function() {
 				marginLeft: - (gridWidth / 2),
 				width: gridWidth,
 			})
+			$(this).find('li').each(function(){
+				$(this).css({
+					height: gridItemHeight,
+					width: gridItemHeight,
+				})
+			}) 
 		});
 		
 		
@@ -112,6 +125,9 @@ $(document).ready(function() {
 		$body.scrollTo( item.offset().top - headerHeight, { duration:500, axis:'y', onAfter:function() {
 			item.animate({'left': -windowSize.width}, 900);
 			$next.css('left', windowSize.width).addClass('active').animate({'left': 0}, 900, function(){
+				var that = $(this),
+					carousel = that.find('.carousel:first');
+				carousel.css('max-height', availableHeight);
 				f_init_carousel();
 				$('form.cart-form').attr('data-remote', 'true');
 			});
@@ -124,18 +140,18 @@ $(document).ready(function() {
 			item.animate({'left': windowSize.width}, 900);
 	}
 	f_show_products = function(section) {
-		f_refresh_ui();
+	//	f_refresh_ui();
 		var $current = section.find(".parallax-item:first")
 			,$next = $current.next();
 		$body.scrollTo( section.offset().top - headerHeight, { duration:500, axis:'y', onAfter:function() {
 			$next.css('left', windowSize.width).addClass('active');
-			f_init_grid();
+			f_init_grid($next);
 			$current.animate({'left': -windowSize.width}, 900);
 			$next.animate({'left': 0}, 900);
 		}});
 	}
 	f_hide_products = function(section) {
-		f_refresh_ui();
+		//f_refresh_ui();
 		var $parallaxInner = section.find(".parallax-inner:first")
 			,$parallaxItem = section.find(".parallax-item:first");
 		$current = $parallaxItem.next();
@@ -197,19 +213,22 @@ $(document).ready(function() {
 			f_show_product($(this).closest(".parallax-item"), eval(xhr.responseText).html());
         });
 	}
-	f_init_grid = function() {
-		
-		$('.tj_container').gridnav({
-			rows: gridRowCount,
-			type : {
-				
-				mode		: 'seqfade', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
-				speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
-				easing		: '',			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows	
-				factor		: 100,			// for seqfade, sequpdown, rows
-				reverse		: ''			// for sequpdown
-			}
-		});
+	f_init_grid = function(target) {
+		var grid = target.find('.tj_container:first');
+		if(grid.hasClass('grid')) {
+			return false;
+		} else {
+			grid.addClass('grid').gridnav({
+				rows: gridRowCount,
+				type : {
+					mode		: 'seqfade', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
+					speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
+					easing		: '',			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows	
+					factor		: 100,			// for seqfade, sequpdown, rows
+					reverse		: ''			// for sequpdown
+				}
+			});	
+		}
 	}
 	f_do_animation = function() {
 		if(isHome) {
@@ -380,22 +399,24 @@ $(document).ready(function() {
 		,$cover = $("#cover")
 		,$logo = $("#logo")
 		,$navbar = $(".navbar:first")
+		,windowSize = {}// we will store the window sizes here
 		,imagesCount = 0
 		,originalLogoWidth = $logo.width()
 		,originalLogoHeight = $logo.height()
 		,logoRatio = originalLogoWidth / originalLogoHeight
 		,gridColCount = 3
-		,gridRowCount = 2
+		,gridRowCount = 2 
 		,gridItemHeight = 300 //including margin and padding
 		,headerHeight = $(".navbar:first").height()
 		,footerHeight = $("#footer-container").height()
 		,deltaHeight = headerHeight + footerHeight
+		,availableHeight = f_viewport_wh().h - deltaHeight
 		,$current
 		,$notice
 		,$viewCartMenuLink = $('a#view-cart-menu-link')
 		,bodyId = $body.attr('id')
 		,isHome = (bodyId == "home")
-		,windowSize = {}// we will store the window sizes here
+
 		,isResizing = false
 		,History = window.History; // Note: We are using a capital H instead of a lower h
 

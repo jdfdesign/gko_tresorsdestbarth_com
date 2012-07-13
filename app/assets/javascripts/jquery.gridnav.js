@@ -1,10 +1,10 @@
 (function($) {
 	jQuery.fn.reverse = Array.prototype.reverse;
 	
-	var 
+	var config	= {},
 		// auxiliar functions
 		aux		= {
-			setup : function( $wrapper, $items, opts ) {
+			setup				: function( $wrapper, $items, opts ) {
 				
 				// set the wrappers position to relative
 				$wrapper.css('position', 'relative');
@@ -15,7 +15,7 @@
 				// set the items to absolute and assign top & left
 				$items.each(function(i) {
 					var $item 	= $(this);
-
+					
 					$item.css({
 						position	: 'absolute',
 						left		: $item.data('left'),
@@ -31,13 +31,14 @@
 					totalRows	= Math.ceil( $items.length / rowCount );
 				
 				// save this values for later
-				var config			= {};
-				config.currentRow	= 1;
 				config.totalRows	= totalRows;
 				config.rowCount 	= rowCount;
 				config.shownItems	= shown;
-				$wrapper.data('config', config);
 				
+				if(shown < $items.length) {
+					$(opts.nav).css('display', 'block');
+				}
+				console.log("totalRows " + totalRows + " rowCount " + rowCount + " shown " + shown)
 				// show n rowns
 				$wrapper.children(':gt(' + (shown - 1) + ')').hide();
 				
@@ -49,11 +50,6 @@
 					$item.addClass('tj_row_' + row);		
 				});
 				
-				if($items.length > shown) {
-					$('.tj_nav').css('display', 'block');
-				} else {
-					$('.tj_nav').css('display', 'none');
-				}
 				nav.setup( $wrapper, $items, opts );
 				
 			},
@@ -75,8 +71,6 @@
 			},
 			def				: {
 				setup		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
 					$items.each(function(i) {
 						var $item 	= $(this),
 							row		= Math.ceil( (i + 1) / config.rowCount ),
@@ -95,8 +89,6 @@
 					});	
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
@@ -120,8 +112,6 @@
 					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
 					
 					$wrapper.data( 'anim', false );
-
-					$wrapper.data('config', config);
 				}
 			},
 			fade			: {
@@ -130,8 +120,6 @@
 					nav['def'].setup( $wrapper, $items, opts );
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) ||
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
@@ -164,8 +152,6 @@
 					});
 					
 					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
 				}
 			},
 			seqfade			: {
@@ -174,8 +160,7 @@
 					nav['def'].setup( $wrapper, $items, opts );
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
+					console.log("dir " + dir + " currentRow " + config.currentRow + " rows " + opts.rows + " totalRows " + config.totalRows)
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
@@ -227,14 +212,10 @@
 					});
 					
 					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
 				}
 			},
 			updown			: {
 				setup		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
 					$wrapper.children(':gt(' + (config.shownItems - 1) + ')').css('opacity', 0);
 					
 					$items.each(function(i) {
@@ -251,8 +232,6 @@
 					});
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - 1 <= 0 )
 					) {
@@ -322,8 +301,6 @@
 					});
 					
 					(dir === 1) ? config.currentRow += 1 : config.currentRow -= 1;
-
-					$wrapper.data('config', config);
 				}
 			},
 			sequpdown		: {
@@ -332,8 +309,6 @@
 					nav['updown'].setup( $wrapper, $items, opts );
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - 1 <= 0 )	
 					) {
@@ -408,14 +383,10 @@
 					});
 					
 					(dir === 1) ? config.currentRow += 1 : config.currentRow -= 1;
-
-					$wrapper.data('config', config);
 				}
 			},
 			showhide		: {
 				setup 		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
 					$items.each(function(i) {
 						var $item 	= $(this),
 							row		= Math.ceil( (i + 1) / config.rowCount ),
@@ -434,8 +405,6 @@
 					});		
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
@@ -467,14 +436,10 @@
 					});
 					
 					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
 				}
 			},
 			disperse		: {
 				setup 		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
 					$items.each(function(i) {
 						var $item 	= $(this),
 							row		= Math.ceil( (i + 1) / config.rowCount ),
@@ -493,8 +458,6 @@
 					});
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
@@ -551,8 +514,6 @@
 					});
 					
 					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
 				}
 			},
 			rows			: {
@@ -561,8 +522,6 @@
 					nav['def'].setup( $wrapper, $items, opts );
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
@@ -634,8 +593,6 @@
 					});
 					
 					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
 				}
 			}
 		},
@@ -646,8 +603,9 @@
 					
 					var settings = {
 						rows	: 2,
-						navL	: '.tj_prev',
-						navR	: '.tj_next',
+						nav		: '.tj_nav:first',
+						navL	: '.tj_prev:first',
+						navR	: '.tj_next:first',
 						type	: {
 							mode		: 'def', 		// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
 							speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
@@ -671,23 +629,25 @@
 							$thumbs			= $wrapper.children('li'),
 							total			= $thumbs.length,
 							// the navigation elements
-							$p_nav			= $el.find(settings.navL),
-							$n_nav			= $el.find(settings.navR);
+							$p_nav			= $(settings.navL),
+							$n_nav			= $(settings.navR);
 						
 						// save current row for later (first visible row)
-						//config.currentRow	= 1;
+						config.currentRow	= 1;
 						
 						// flag to control animation progress
 						$wrapper.data( 'anim', false );
 						
 						// preload thumbs
 						var loaded = 0;
+					
+			
 						$thumbs.find('img').each( function(i) {
 							var $img 	= $(this);
 							$('<img/>').load( function() {
 								++loaded;
 								if( loaded === total ) {
-									
+
 									// setup
 									aux.setup( $wrapper, $thumbs, settings );
 
@@ -695,7 +655,9 @@
 									
 									// navigation events
 									if( $p_nav.length ) {
+										
 										$p_nav.bind('click.gridnav', function( e ) {
+											
 											if( $wrapper.data( 'anim' ) ) return false;
 											$wrapper.data( 'anim', true );
 											nav[settings.type.mode].pagination( $wrapper, -1, settings );
