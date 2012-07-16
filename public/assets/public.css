@@ -7346,37 +7346,167 @@ h4.product-section-title {
   background-repeat: no-repeat;
 }
 
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+/* line 9, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+/* line 15, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspPane {
+  position: absolute;
+}
+
+/* line 20, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspVerticalBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 100%;
+  background: transparent;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+/* line 31, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspHorizontalBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: transparent;
+}
+
+/* line 42, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspVerticalBar *,
+.jspHorizontalBar * {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 48, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspCap {
+  display: none;
+}
+
+/* line 53, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspHorizontalBar .jspCap {
+  float: left;
+}
+
+/* line 58, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspTrack {
+  background: rgba(255, 255, 255, 0.7);
+  position: relative;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+/* line 65, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspDrag {
+  background: white;
+  position: relative;
+  top: 0;
+  left: 4px;
+  width: 8px;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 77, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag {
+  float: left;
+  height: 100%;
+}
+
+/* line 83, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspArrow {
+  background: #50506d;
+  text-indent: -20000px;
+  display: block;
+  cursor: pointer;
+}
+
+/* line 91, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspArrow.jspDisabled {
+  cursor: default;
+  background: #80808d;
+}
+
+/* line 97, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspVerticalBar .jspArrow {
+  height: 16px;
+}
+
+/* line 102, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspHorizontalBar .jspArrow {
+  width: 16px;
+  float: left;
+  height: 100%;
+}
+
+/* line 109, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspVerticalBar .jspArrow:focus {
+  outline: none;
+}
+
+/* line 114, ../../app/assets/stylesheets/_jscrollpane.scss */
+.jspCorner {
+  background: #eeeef4;
+  float: left;
+  height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+/* line 122, ../../app/assets/stylesheets/_jscrollpane.scss */
+* html .jspCorner {
+  margin: 0 -3px 0 0;
+}
+
 @-webkit-keyframes fade-circle {
-  /* line 20, ../../app/assets/stylesheets/public.css.scss */
+  /* line 21, ../../app/assets/stylesheets/public.css.scss */
   0% {
     opacity: 0;
   }
 
-  /* line 21, ../../app/assets/stylesheets/public.css.scss */
+  /* line 22, ../../app/assets/stylesheets/public.css.scss */
   100% {
     opacity: 1;
   }
 }
 
 @-moz-keyframes fade-circle {
-  /* line 24, ../../app/assets/stylesheets/public.css.scss */
+  /* line 25, ../../app/assets/stylesheets/public.css.scss */
   0% {
     opacity: 0;
   }
 
-  /* line 25, ../../app/assets/stylesheets/public.css.scss */
+  /* line 26, ../../app/assets/stylesheets/public.css.scss */
   100% {
     opacity: 1;
   }
 }
 
 @-ms-keyframes fade-circle {
-  /* line 28, ../../app/assets/stylesheets/public.css.scss */
+  /* line 29, ../../app/assets/stylesheets/public.css.scss */
   0% {
     opacity: 0;
   }
 
-  /* line 29, ../../app/assets/stylesheets/public.css.scss */
+  /* line 30, ../../app/assets/stylesheets/public.css.scss */
   100% {
     opacity: 1;
   }
@@ -7385,7 +7515,7 @@ h4.product-section-title {
 /*-----------------------------------------
    SHARED STYLES 
 ----------------------------------------- */
-/* line 36, ../../app/assets/stylesheets/public.css.scss */
+/* line 37, ../../app/assets/stylesheets/public.css.scss */
 .uppercase_font_style, h4 small, .navbar .header-nav .nav > li > a, .product-info h4 {
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -7394,25 +7524,25 @@ h4.product-section-title {
 /*-----------------------------------------
  TYPOGRAPHY 
 ----------------------------------------- */
-/* line 44, ../../app/assets/stylesheets/public.css.scss */
+/* line 45, ../../app/assets/stylesheets/public.css.scss */
 h1 {
   letter-spacing: 2px;
   font-size: 14px;
   text-transform: uppercase;
 }
 
-/* line 49, ../../app/assets/stylesheets/public.css.scss */
+/* line 50, ../../app/assets/stylesheets/public.css.scss */
 h1, h2, h3, h4 {
   font-weight: normal;
   letter-spacing: 1px;
 }
 
-/* line 53, ../../app/assets/stylesheets/public.css.scss */
+/* line 54, ../../app/assets/stylesheets/public.css.scss */
 h2, h3 {
   font-size: 14px;
 }
 
-/* line 56, ../../app/assets/stylesheets/public.css.scss */
+/* line 57, ../../app/assets/stylesheets/public.css.scss */
 h4 {
   letter-spacing: 1px;
   font-size: 14px;
@@ -7421,13 +7551,13 @@ h4 {
 /*-----------------------------------------
  STRUCTURAL LAYOUT 
 ----------------------------------------- */
-/* line 65, ../../app/assets/stylesheets/public.css.scss */
+/* line 66, ../../app/assets/stylesheets/public.css.scss */
 html {
   margin: 0;
   padding: 0;
 }
 
-/* line 70, ../../app/assets/stylesheets/public.css.scss */
+/* line 71, ../../app/assets/stylesheets/public.css.scss */
 body {
   font-weight: 300;
   background: #fefefe;
@@ -7436,7 +7566,7 @@ body {
   overflow: auto;
 }
 
-/* line 77, ../../app/assets/stylesheets/public.css.scss */
+/* line 78, ../../app/assets/stylesheets/public.css.scss */
 #overlay {
   position: fixed;
   top: 0;
@@ -7447,17 +7577,17 @@ body {
   z-index: 10000;
 }
 
-/* line 86, ../../app/assets/stylesheets/public.css.scss */
+/* line 87, ../../app/assets/stylesheets/public.css.scss */
 #wrapper-wide-body {
   margin: 50px 0;
 }
 
-/* line 92, ../../app/assets/stylesheets/public.css.scss */
+/* line 93, ../../app/assets/stylesheets/public.css.scss */
 label {
   font-size: 13px;
 }
 
-/* line 95, ../../app/assets/stylesheets/public.css.scss */
+/* line 96, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail {
   position: relative;
   padding: 0;
@@ -7471,7 +7601,7 @@ label {
   box-shadow: none;
   cursor: pointer;
 }
-/* line 103, ../../app/assets/stylesheets/public.css.scss */
+/* line 104, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-image {
   position: relative;
   margin: 0;
@@ -7486,17 +7616,17 @@ label {
   border-radius: 12px;
   overflow: hidden;
 }
-/* line 113, ../../app/assets/stylesheets/public.css.scss */
+/* line 114, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-image img {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
-/* line 117, ../../app/assets/stylesheets/public.css.scss */
+/* line 118, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-caption-inner {
   padding: 0;
 }
-/* line 120, ../../app/assets/stylesheets/public.css.scss */
+/* line 121, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-caption {
   top: 235px;
   left: 0;
@@ -7510,30 +7640,30 @@ label {
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-/* line 133, ../../app/assets/stylesheets/public.css.scss */
+/* line 134, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-title {
   font-size: 11px;
   line-height: 22px;
   text-align: center;
   text-transform: uppercase;
 }
-/* line 138, ../../app/assets/stylesheets/public.css.scss */
+/* line 139, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-title a {
   color: white;
   font-weight: 700;
 }
-/* line 142, ../../app/assets/stylesheets/public.css.scss */
+/* line 143, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-title a:hover {
   color: white;
   text-decoration: none;
 }
-/* line 149, ../../app/assets/stylesheets/public.css.scss */
+/* line 150, ../../app/assets/stylesheets/public.css.scss */
 .grid li > .thumbnail .thumbnail-product-price {
   font-size: 10px;
   text-align: center;
 }
 
-/* line 154, ../../app/assets/stylesheets/public.css.scss */
+/* line 155, ../../app/assets/stylesheets/public.css.scss */
 .carousel {
   background-color: white;
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -7545,14 +7675,14 @@ label {
   border-radius: 12px;
   overflow: hidden;
 }
-/* line 160, ../../app/assets/stylesheets/public.css.scss */
+/* line 161, ../../app/assets/stylesheets/public.css.scss */
 .carousel img {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
 
-/* line 164, ../../app/assets/stylesheets/public.css.scss */
+/* line 165, ../../app/assets/stylesheets/public.css.scss */
 .carousel-control {
   position: absolute;
   top: auto;
@@ -7571,12 +7701,12 @@ label {
   opacity: 0.7;
   filter: alpha(opacity=70);
 }
-/* line 179, ../../app/assets/stylesheets/public.css.scss */
+/* line 180, ../../app/assets/stylesheets/public.css.scss */
 .carousel-control:hover {
   color: black;
 }
 
-/* line 184, ../../app/assets/stylesheets/public.css.scss */
+/* line 185, ../../app/assets/stylesheets/public.css.scss */
 .carousel-control.right {
   right: 0px;
   bottom: 0px;
@@ -7585,7 +7715,7 @@ label {
   border-radius: 0 0 12px 0;
 }
 
-/* line 189, ../../app/assets/stylesheets/public.css.scss */
+/* line 190, ../../app/assets/stylesheets/public.css.scss */
 #content {
   padding: 24px 0;
 }
@@ -7593,7 +7723,7 @@ label {
 /*-----------------------------------------
  GLOBAL EFFECT
 ----------------------------------------- */
-/* line 195, ../../app/assets/stylesheets/public.css.scss */
+/* line 196, ../../app/assets/stylesheets/public.css.scss */
 a {
   -webkit-transition: color 0.5s linear, background-color 0.5s linear;
   -moz-transition: color 0.5s linear, background-color 0.5s linear;
@@ -7605,30 +7735,30 @@ a {
 /*-----------------------------------------
  HEADER
 ----------------------------------------- */
-/* line 203, ../../app/assets/stylesheets/public.css.scss */
+/* line 204, ../../app/assets/stylesheets/public.css.scss */
 .navbar .header-nav .nav > li > a {
   font-size: 10px;
 }
 
-/* line 209, ../../app/assets/stylesheets/public.css.scss */
+/* line 210, ../../app/assets/stylesheets/public.css.scss */
 .nav.login-bar {
   display: none;
 }
 
-/* line 212, ../../app/assets/stylesheets/public.css.scss */
+/* line 213, ../../app/assets/stylesheets/public.css.scss */
 .navbar .brand a {
   font-size: 10px;
   font-weight: bold;
 }
 
-/* line 216, ../../app/assets/stylesheets/public.css.scss */
+/* line 217, ../../app/assets/stylesheets/public.css.scss */
 .header-top {
   position: absolute;
   right: 12px;
   top: 14px;
 }
 
-/* line 221, ../../app/assets/stylesheets/public.css.scss */
+/* line 222, ../../app/assets/stylesheets/public.css.scss */
 #locales a {
   padding: 0;
   width: 24px;
@@ -7641,7 +7771,7 @@ a {
   border: 0;
 }
 
-/* line 228, ../../app/assets/stylesheets/public.css.scss */
+/* line 229, ../../app/assets/stylesheets/public.css.scss */
 #locales a.fr {
   background-image: url(/assets/fr.png);
 }
@@ -7649,7 +7779,7 @@ a {
 /*-----------------------------------------
  FOOTER
 ----------------------------------------- */
-/* line 234, ../../app/assets/stylesheets/public.css.scss */
+/* line 235, ../../app/assets/stylesheets/public.css.scss */
 #footer-container {
   position: fixed;
   z-index: 1030;
@@ -7658,7 +7788,7 @@ a {
   background-color: white;
 }
 
-/* line 241, ../../app/assets/stylesheets/public.css.scss */
+/* line 242, ../../app/assets/stylesheets/public.css.scss */
 #footer {
   margin-top: 0px;
   padding-bottom: 0px;
@@ -7666,16 +7796,16 @@ a {
   text-align: center;
   font-size: 12px;
 }
-/* line 247, ../../app/assets/stylesheets/public.css.scss */
+/* line 248, ../../app/assets/stylesheets/public.css.scss */
 #footer .nav > li > a {
   line-height: 32px;
 }
-/* line 249, ../../app/assets/stylesheets/public.css.scss */
+/* line 250, ../../app/assets/stylesheets/public.css.scss */
 #footer .nav > li > a#follow-me {
   position: relative;
   padding-left: 30px;
 }
-/* line 252, ../../app/assets/stylesheets/public.css.scss */
+/* line 253, ../../app/assets/stylesheets/public.css.scss */
 #footer .nav > li > a#follow-me i {
   background: transparent url(/assets/icon-facebook.png) center center no-repeat;
   width: 30px;
@@ -7690,38 +7820,38 @@ a {
 /*-----------------------------------------
  STORE
 ----------------------------------------- */
-/* line 271, ../../app/assets/stylesheets/public.css.scss */
+/* line 272, ../../app/assets/stylesheets/public.css.scss */
 .product-info {
   color: white;
 }
-/* line 273, ../../app/assets/stylesheets/public.css.scss */
+/* line 274, ../../app/assets/stylesheets/public.css.scss */
 .product-info h1.page-title {
   border-bottom: 1px solid #e2e2e2;
   color: white;
 }
-/* line 277, ../../app/assets/stylesheets/public.css.scss */
+/* line 278, ../../app/assets/stylesheets/public.css.scss */
 .product-info h4 {
   border-bottom: 1px solid #e2e2e2;
   padding-top: 22px;
   color: white;
 }
-/* line 283, ../../app/assets/stylesheets/public.css.scss */
+/* line 284, ../../app/assets/stylesheets/public.css.scss */
 .product-info input {
   color: black;
 }
 
-/* line 288, ../../app/assets/stylesheets/public.css.scss */
+/* line 289, ../../app/assets/stylesheets/public.css.scss */
 #product-variants label {
   display: inline-block;
 }
 
-/* line 292, ../../app/assets/stylesheets/public.css.scss */
+/* line 293, ../../app/assets/stylesheets/public.css.scss */
 h2#product-variants-title {
   border-bottom: 1px solid #e2e2e2;
   color: white;
 }
 
-/* line 298, ../../app/assets/stylesheets/public.css.scss */
+/* line 299, ../../app/assets/stylesheets/public.css.scss */
 .products-categories {
   display: none;
   border-bottom: 1px solid #B7B6B6;
@@ -7751,7 +7881,7 @@ h2#product-variants-title {
   right: 50%;
   display: block;
 }
-/* line 305, ../../app/assets/stylesheets/public.css.scss */
+/* line 306, ../../app/assets/stylesheets/public.css.scss */
 .products-categories .nav-container .nav-list > li > a {
   margin: 0;
   letter-spacing: 1px;
@@ -7760,7 +7890,7 @@ h2#product-variants-title {
   text-shadow: 0px 1px 0 white;
   font-size: 12px;
 }
-/* line 313, ../../app/assets/stylesheets/public.css.scss */
+/* line 314, ../../app/assets/stylesheets/public.css.scss */
 .products-categories .nav-container .nav-list > li.active > a {
   color: white;
   text-shadow: 0px 1px 0 black;
@@ -7769,7 +7899,7 @@ h2#product-variants-title {
 /*-----------------------------------------
  HOME
 ----------------------------------------- */
-/* line 322, ../../app/assets/stylesheets/public.css.scss */
+/* line 323, ../../app/assets/stylesheets/public.css.scss */
 .headline {
   font-family: "voluta-script-pro", "Times New Roman", "Times", serif;
   color: white;
@@ -7782,18 +7912,18 @@ h2#product-variants-title {
   background: transparent url(/assets/apos.png) 0 0 no-repeat;
   min-height: 180px;
 }
-/* line 333, ../../app/assets/stylesheets/public.css.scss */
+/* line 334, ../../app/assets/stylesheets/public.css.scss */
 .headline em {
   font-family: "futura-pt", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 
-/* line 339, ../../app/assets/stylesheets/public.css.scss */
+/* line 340, ../../app/assets/stylesheets/public.css.scss */
 .inview .headline {
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* line 343, ../../app/assets/stylesheets/public.css.scss */
+/* line 344, ../../app/assets/stylesheets/public.css.scss */
 #cover {
   background: rgba(103, 100, 93, 0.96) url(/assets/stbarth_treasures-GEG_0099.jpg);
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -7807,14 +7937,14 @@ h2#product-variants-title {
   -webkit-background-size: cover, cover;
   background-size: cover, cover;
 }
-/* line 350, ../../app/assets/stylesheets/public.css.scss */
+/* line 351, ../../app/assets/stylesheets/public.css.scss */
 #cover .headline {
   color: white;
   font-size: 58px;
   line-height: 48px;
   margin-top: 388px;
 }
-/* line 356, ../../app/assets/stylesheets/public.css.scss */
+/* line 357, ../../app/assets/stylesheets/public.css.scss */
 #cover .circles {
   position: absolute;
   left: 50%;
@@ -7823,7 +7953,7 @@ h2#product-variants-title {
   bottom: 8px;
   height: 80px;
 }
-/* line 363, ../../app/assets/stylesheets/public.css.scss */
+/* line 364, ../../app/assets/stylesheets/public.css.scss */
 #cover .circles .circle {
   position: absolute;
   left: 50%;
@@ -7834,7 +7964,7 @@ h2#product-variants-title {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
 }
-/* line 371, ../../app/assets/stylesheets/public.css.scss */
+/* line 372, ../../app/assets/stylesheets/public.css.scss */
 #cover .circles .circle1 {
   bottom: 32px;
   width: 6px;
@@ -7847,7 +7977,7 @@ h2#product-variants-title {
   -moz-animation: fade-circle 2s 0.3s infinite alternate;
   -ms-animation: fade-circle 2s 0.3s infinite alternate;
 }
-/* line 379, ../../app/assets/stylesheets/public.css.scss */
+/* line 380, ../../app/assets/stylesheets/public.css.scss */
 #cover .circles .circle2 {
   bottom: 18px;
   width: 10px;
@@ -7860,7 +7990,7 @@ h2#product-variants-title {
   -moz-animation: fade-circle 2s 0.6s infinite alternate;
   -ms-animation: fade-circle 2s 0.6s infinite alternate;
 }
-/* line 387, ../../app/assets/stylesheets/public.css.scss */
+/* line 388, ../../app/assets/stylesheets/public.css.scss */
 #cover .circles .circle3 {
   bottom: 0px;
   width: 14px;
@@ -7874,7 +8004,7 @@ h2#product-variants-title {
   -ms-animation: fade-circle 2s 0.9s infinite alternate;
 }
 
-/* line 399, ../../app/assets/stylesheets/public.css.scss */
+/* line 400, ../../app/assets/stylesheets/public.css.scss */
 #logo {
   background: transparent url(/assets/logo.png) center center no-repeat;
   width: 400px;
@@ -7885,14 +8015,14 @@ h2#product-variants-title {
   top: 10px;
 }
 
-/* line 408, ../../app/assets/stylesheets/public.css.scss */
+/* line 409, ../../app/assets/stylesheets/public.css.scss */
 .parallax-inner {
   position: relative;
   height: 100%;
   width: 100%;
 }
 
-/* line 414, ../../app/assets/stylesheets/public.css.scss */
+/* line 415, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item {
   position: absolute;
   overflow: hidden;
@@ -7902,7 +8032,7 @@ h2#product-variants-title {
   top: 0px;
 }
 
-/* line 422, ../../app/assets/stylesheets/public.css.scss */
+/* line 423, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item.products {
   overflow: visible;
 }
@@ -7918,7 +8048,7 @@ h2#product-variants-title {
 
 	display: block;
 }*/
-/* line 436, ../../app/assets/stylesheets/public.css.scss */
+/* line 437, ../../app/assets/stylesheets/public.css.scss */
 .back {
   position: absolute;
   top: 50%;
@@ -7937,13 +8067,13 @@ h2#product-variants-title {
   cursor: pointer;
 }
 
-/* line 453, ../../app/assets/stylesheets/public.css.scss */
+/* line 454, ../../app/assets/stylesheets/public.css.scss */
 .back:hover {
   color: black;
   background-color: white;
 }
 
-/* line 457, ../../app/assets/stylesheets/public.css.scss */
+/* line 458, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item .bg {
   width: 100%;
   height: 100%;
@@ -7955,12 +8085,12 @@ h2#product-variants-title {
   z-index: 0;
 }
 
-/* line 469, ../../app/assets/stylesheets/public.css.scss */
+/* line 470, ../../app/assets/stylesheets/public.css.scss */
 .parallax-item.active {
   display: block;
 }
 
-/* line 472, ../../app/assets/stylesheets/public.css.scss */
+/* line 473, ../../app/assets/stylesheets/public.css.scss */
 .background-image {
   zoom: 100%;
   background-color: white;
@@ -7990,13 +8120,13 @@ h2#product-variants-title {
   	border: 1px solid rgba(255,255,255,.6);
   }*/
 }
-/* line 483, ../../app/assets/stylesheets/public.css.scss */
+/* line 484, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod {
   top: 50%;
   margin-top: -240px;
   height: 480px;
 }
-/* line 489, ../../app/assets/stylesheets/public.css.scss */
+/* line 490, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-carousel {
   cursor: pointer;
   width: 300px;
@@ -8012,7 +8142,7 @@ h2#product-variants-title {
   float: left;
   margin-right: 100px;
 }
-/* line 497, ../../app/assets/stylesheets/public.css.scss */
+/* line 498, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-carousel img {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
@@ -8020,7 +8150,7 @@ h2#product-variants-title {
   width: 300px;
   height: 300px;
 }
-/* line 518, ../../app/assets/stylesheets/public.css.scss */
+/* line 519, ../../app/assets/stylesheets/public.css.scss */
 .background-image a.view-all {
   position: absolute;
   right: 0;
@@ -8037,33 +8167,33 @@ h2#product-variants-title {
   border: 0;
   cursor: pointer;
 }
-/* line 534, ../../app/assets/stylesheets/public.css.scss */
+/* line 535, ../../app/assets/stylesheets/public.css.scss */
 .background-image a.view-all:hover {
   color: black;
   background-color: white;
 }
-/* line 539, ../../app/assets/stylesheets/public.css.scss */
+/* line 540, ../../app/assets/stylesheets/public.css.scss */
 .background-image .ss-left, .background-image .ss-right {
   float: left;
   width: 48%;
   position: relative;
 }
-/* line 544, ../../app/assets/stylesheets/public.css.scss */
+/* line 545, ../../app/assets/stylesheets/public.css.scss */
 .background-image .ss-right {
   padding-left: 2%;
 }
-/* line 547, ../../app/assets/stylesheets/public.css.scss */
+/* line 548, ../../app/assets/stylesheets/public.css.scss */
 .background-image .ss-left {
   text-align: right;
   float: left;
   padding-right: 2%;
 }
-/* line 553, ../../app/assets/stylesheets/public.css.scss */
+/* line 554, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-title {
   background: transparent url(/assets/apos2.png) center bottom no-repeat;
   line-height: 300px;
 }
-/* line 556, ../../app/assets/stylesheets/public.css.scss */
+/* line 557, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-title a {
   font-family: "voluta-script-pro", "Times New Roman", "Times", serif;
   color: white;
@@ -8074,30 +8204,30 @@ h2#product-variants-title {
   color: #FFF;
   text-shadow: 0px 0px 24px #FFFFFF;
 }
-/* line 565, ../../app/assets/stylesheets/public.css.scss */
+/* line 566, ../../app/assets/stylesheets/public.css.scss */
 .background-image .pod-title a:hover {
   text-decoration: none;
 }
 
-/* line 572, ../../app/assets/stylesheets/public.css.scss */
+/* line 573, ../../app/assets/stylesheets/public.css.scss */
 .container-fluid {
   padding-left: 0px;
   padding-right: 0px;
 }
 
-/* line 580, ../../app/assets/stylesheets/public.css.scss */
+/* line 581, ../../app/assets/stylesheets/public.css.scss */
 #about {
   color: white;
   padding: 24px 0 100px;
 }
 
-/* line 584, ../../app/assets/stylesheets/public.css.scss */
+/* line 585, ../../app/assets/stylesheets/public.css.scss */
 #about h3 {
   color: white;
   text-transform: uppercase;
 }
 
-/* line 588, ../../app/assets/stylesheets/public.css.scss */
+/* line 589, ../../app/assets/stylesheets/public.css.scss */
 #about h2 {
   margin-bottom: 80px;
   color: white;
@@ -9402,21 +9532,21 @@ table.hide-on-tablets {
   }
 }
 @media (max-width: 768px) {
-  /* line 600, ../../app/assets/stylesheets/public.css.scss */
+  /* line 601, ../../app/assets/stylesheets/public.css.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 }
 @media (min-width: 980px) {
-  /* line 607, ../../app/assets/stylesheets/public.css.scss */
+  /* line 608, ../../app/assets/stylesheets/public.css.scss */
   #store-menu {
     float: right;
     margin: 0;
     margin-left: 200px;
   }
 
-  /* line 612, ../../app/assets/stylesheets/public.css.scss */
+  /* line 613, ../../app/assets/stylesheets/public.css.scss */
   .navbar {
     position: fixed;
     right: 0;
@@ -9426,12 +9556,12 @@ table.hide-on-tablets {
     margin-bottom: 0;
   }
 
-  /* line 622, ../../app/assets/stylesheets/public.css.scss */
+  /* line 623, ../../app/assets/stylesheets/public.css.scss */
   .navbar-inner {
     padding-bottom: 12px;
   }
 
-  /* line 625, ../../app/assets/stylesheets/public.css.scss */
+  /* line 626, ../../app/assets/stylesheets/public.css.scss */
   .navbar .brand {
     float: left;
     margin: 12px 0 0 0;
@@ -9439,17 +9569,17 @@ table.hide-on-tablets {
     text-transform: uppercase;
   }
 
-  /* line 631, ../../app/assets/stylesheets/public.css.scss */
+  /* line 632, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse {
     clear: none;
     float: left;
     margin: 17px 0 0 24px;
   }
-  /* line 635, ../../app/assets/stylesheets/public.css.scss */
+  /* line 636, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse nav, .navbar .nav-collapse .nav {
     float: left;
   }
-  /* line 638, ../../app/assets/stylesheets/public.css.scss */
+  /* line 639, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse .nav > li > a {
     padding: 0 6px;
     font-size: 10px;
@@ -9457,7 +9587,7 @@ table.hide-on-tablets {
     text-shadow: none;
   }
 
-  /* line 648, ../../app/assets/stylesheets/public.css.scss */
+  /* line 649, ../../app/assets/stylesheets/public.css.scss */
   .headline {
     margin: 0 120px;
     font-size: 98px;
@@ -9465,14 +9595,14 @@ table.hide-on-tablets {
   }
 }
 /* Thumbnail Effects Style */
-/* line 657, ../../app/assets/stylesheets/public.css.scss */
+/* line 658, ../../app/assets/stylesheets/public.css.scss */
 .tj_container {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-/* line 663, ../../app/assets/stylesheets/public.css.scss */
+/* line 664, ../../app/assets/stylesheets/public.css.scss */
 .tj_nav {
   position: absolute;
   left: 50%;
@@ -9484,7 +9614,7 @@ table.hide-on-tablets {
   display: none;
 }
 
-/* line 673, ../../app/assets/stylesheets/public.css.scss */
+/* line 674, ../../app/assets/stylesheets/public.css.scss */
 .tj_nav span {
   display: block;
   height: 40px;
@@ -9501,24 +9631,24 @@ table.hide-on-tablets {
   cursor: pointer;
 }
 
-/* line 688, ../../app/assets/stylesheets/public.css.scss */
+/* line 689, ../../app/assets/stylesheets/public.css.scss */
 .tj_nav span:hover {
   color: black;
   background-color: white;
 }
 
-/* line 692, ../../app/assets/stylesheets/public.css.scss */
+/* line 693, ../../app/assets/stylesheets/public.css.scss */
 .tj_nav span.tj_next {
   left: auto;
   right: 0;
 }
 
-/* line 696, ../../app/assets/stylesheets/public.css.scss */
+/* line 697, ../../app/assets/stylesheets/public.css.scss */
 .tj_nav span:hover {
   opacity: 1.0;
 }
 
-/* line 699, ../../app/assets/stylesheets/public.css.scss */
+/* line 700, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper {
   position: absolute;
   width: 100%;
@@ -9527,14 +9657,14 @@ table.hide-on-tablets {
   left: 50%;
 }
 
-/* line 706, ../../app/assets/stylesheets/public.css.scss */
+/* line 707, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* line 711, ../../app/assets/stylesheets/public.css.scss */
+/* line 712, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li {
   float: left;
   -webkit-border-radius: 12px;
@@ -9545,11 +9675,11 @@ table.hide-on-tablets {
   outline: none;
   position: relative;
 }
-/* line 721, ../../app/assets/stylesheets/public.css.scss */
+/* line 722, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li:hover {
   text-decoration: none;
 }
-/* line 724, ../../app/assets/stylesheets/public.css.scss */
+/* line 725, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li .tj_gallery_inner {
   position: relative;
   cursor: pointer;
@@ -9557,7 +9687,7 @@ table.hide-on-tablets {
   height: 100%;
   display: block;
 }
-/* line 732, ../../app/assets/stylesheets/public.css.scss */
+/* line 733, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li img {
   display: block;
   position: relative;
@@ -9572,7 +9702,7 @@ table.hide-on-tablets {
   border-radius: 12px;
   transition: all 0.2s ease-in;
 }
-/* line 742, ../../app/assets/stylesheets/public.css.scss */
+/* line 743, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li h2 {
   text-transform: uppercase;
   color: #000;
@@ -9582,11 +9712,11 @@ table.hide-on-tablets {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   margin: 20px 40px 0px 40px;
 }
-/* line 750, ../../app/assets/stylesheets/public.css.scss */
+/* line 751, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li h2:hover {
   text-decoration: none;
 }
-/* line 754, ../../app/assets/stylesheets/public.css.scss */
+/* line 755, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li p {
   font-style: italic;
   position: relative;
@@ -9594,11 +9724,11 @@ table.hide-on-tablets {
   padding: 10px 20px 20px;
   text-align: center;
 }
-/* line 760, ../../app/assets/stylesheets/public.css.scss */
+/* line 761, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li p:hover {
   text-decoration: none;
 }
-/* line 764, ../../app/assets/stylesheets/public.css.scss */
+/* line 765, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li a.info {
   display: block;
   text-decoration: none;
@@ -9606,7 +9736,7 @@ table.hide-on-tablets {
   color: #000;
   text-align: center;
 }
-/* line 771, ../../app/assets/stylesheets/public.css.scss */
+/* line 772, ../../app/assets/stylesheets/public.css.scss */
 .tj_wrapper ul li .tj_content {
   position: absolute;
   overflow: hidden;
