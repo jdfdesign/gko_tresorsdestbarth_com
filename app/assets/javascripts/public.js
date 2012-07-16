@@ -8,6 +8,7 @@
 //= require jquery.gridnav
 //= require gko/gko.galleria
 //= require history/scripts/bundled/html5/jquery.history.js
+//= require jquery.jscrollpane
 $(document).ready(function() {
 
 
@@ -118,18 +119,25 @@ $(document).ready(function() {
 		}
 	}
 	f_show_product = function(item, response) {
-		var $next = item.next();
+		var $next = item.next(),
+			content = $next.find(".content:first");
 		
-		$next.find(".content:first").html(response);
-
+		content.css({'height': availableHeight, 'width': availableWidth})
+		content.data('jsp').getContentPane().html(response)
+		$next.addClass('active');
+		content.data('jsp').reinitialise();
+		$next.removeClass('active');
 		$body.scrollTo( item.offset().top - headerHeight, { duration:500, axis:'y', onAfter:function() {
 			item.animate({'left': -windowSize.width}, 900);
 			$next.css('left', windowSize.width).addClass('active').animate({'left': 0}, 900, function(){
 				var that = $(this),
 					carousel = that.find('.carousel:first');
+					
 				carousel.css('max-height', availableHeight);
 				f_init_carousel();
 				$('form.cart-form').attr('data-remote', 'true');
+				
+	
 			});
 		}});
 	}
@@ -218,6 +226,30 @@ $(document).ready(function() {
         function(evt, xhr, status) {
 			f_show_product($(this).closest(".parallax-item"), eval(xhr.responseText).html());
         });
+		// Bind lookbook action
+		$("a#lookbook").attr('data-remote', 'true')
+		.on('ajax:beforeSend',
+		function(event, xhr, settings) {
+
+		}).on('ajax:complete',
+	    function(evt, xhr, status) {
+
+			var modal = $("#modal-gallery"),
+				gallery = modal.find('.galleria:first');
+
+			gallery.galleria({
+	            autoplay: true,
+	            responsive: true,
+	            height: 0.55,
+				carousel: false,
+				thumbnails: "numbers",
+	            imageCrop: 'landscape',
+	            transition: 'flash',
+	            showCounter: false,
+	            showInfo: false
+	        })
+	    });
+
 	}
 	f_init_grid = function(target) {
 		var grid = target.find('.tj_container:first');
@@ -281,6 +313,7 @@ $(document).ready(function() {
 			$('.parallax').scrollParallax({'speed': -0.2, 'axis' : 'y'});
 			$sidescroll.init();
 			f_do_animation();
+			$('.product .content').jScrollPane();
 		}
 	}
 	f_images_loaded = function() {
@@ -294,107 +327,92 @@ $(document).ready(function() {
 			});
 		});
 	}
+	f_init_galleria = function() {
+
+		 Galleria.addTheme({
+		        name:'classic',
+		        author:'Galleria',
+		        css:'galleria.classic.css',
+		        defaults:{
+		            transition:'slide',
+		            thumbCrop:'height',
+
+		            // set this to false if you want to show the caption all the time:
+		            _toggleInfo:false
+		        },
+		        init:function (options) {
+
+		            // add some elements
+		            this.addElement('info-link', 'info-close');
+		            this.append({
+		                'info':['info-link', 'info-close']
+		            });
+
+		            // cache some stuff
+		            var info = this.$('info-link,info-close,info-text'),
+		                touch = Galleria.TOUCH,
+		                click = touch ? 'touchstart' : 'click';
+
+		            // show loader & counter with opacity
+		            this.$('loader,counter').show().css('opacity', 0.4);
+
+		            // some stuff for non-touch browsers
+		            if (!touch) {
+		                this.addIdleState(this.get('image-nav-left'), { left:-50 });
+		                this.addIdleState(this.get('image-nav-right'), { right:-50 });
+		                this.addIdleState(this.get('counter'), { opacity:0 });
+		            }
+
+		            // toggle info
+		            if (options._toggleInfo === true) {
+		                info.bind(click, function () {
+		                    info.toggle();
+		                });
+		            } else {
+		                info.show();
+		                this.$('info-link, info-close').hide();
+		            }
+
+		            // bind some stuff
+		            this.bind('thumbnail', function (e) {
+
+		                if (!touch) {
+		                    // fade thumbnails
+		                    $(e.thumbTarget).css('opacity', 0.6).parent().hover(function () {
+		                        $(this).not('.active').children().stop().fadeTo(100, 1);
+		                    }, function () {
+		                        $(this).not('.active').children().stop().fadeTo(400, 0.6);
+		                    });
+
+		                    if (e.index === this.getIndex()) {
+		                        $(e.thumbTarget).css('opacity', 1);
+		                    }
+		                } else {
+		                    $(e.thumbTarget).css('opacity', this.getIndex() ? 1 : 0.6);
+		                }
+		            });
+
+		            this.bind('loadstart', function (e) {
+		                if (!e.cached) {
+		                    this.$('loader').show().fadeTo(200, 0.4);
+		                }
+
+		                this.$('info').toggle(this.hasInfo());
+
+		                $(e.thumbTarget).css('opacity', 1).parent().siblings().children().css('opacity', 0.6);
+		            });
+
+		            this.bind('loadfinish', function (e) {
+		                this.$('loader').fadeOut(200);
+		            });
+		        }
+		    });
+	}
 	f_init = function() {
 		windowSize.width = $window.width();
 		windowSize.height = $window.height();
-		if(isHome) {
-			f_images_loaded();
-
-		}
-		else {
-			if($('.galleria').length > 0) {
-			 Galleria.addTheme({
-			        name:'classic',
-			        author:'Galleria',
-			        css:'galleria.classic.css',
-			        defaults:{
-			            transition:'slide',
-			            thumbCrop:'height',
-
-			            // set this to false if you want to show the caption all the time:
-			            _toggleInfo:false
-			        },
-			        init:function (options) {
-
-			            // add some elements
-			            this.addElement('info-link', 'info-close');
-			            this.append({
-			                'info':['info-link', 'info-close']
-			            });
-
-			            // cache some stuff
-			            var info = this.$('info-link,info-close,info-text'),
-			                touch = Galleria.TOUCH,
-			                click = touch ? 'touchstart' : 'click';
-
-			            // show loader & counter with opacity
-			            this.$('loader,counter').show().css('opacity', 0.4);
-
-			            // some stuff for non-touch browsers
-			            if (!touch) {
-			                this.addIdleState(this.get('image-nav-left'), { left:-50 });
-			                this.addIdleState(this.get('image-nav-right'), { right:-50 });
-			                this.addIdleState(this.get('counter'), { opacity:0 });
-			            }
-
-			            // toggle info
-			            if (options._toggleInfo === true) {
-			                info.bind(click, function () {
-			                    info.toggle();
-			                });
-			            } else {
-			                info.show();
-			                this.$('info-link, info-close').hide();
-			            }
-
-			            // bind some stuff
-			            this.bind('thumbnail', function (e) {
-
-			                if (!touch) {
-			                    // fade thumbnails
-			                    $(e.thumbTarget).css('opacity', 0.6).parent().hover(function () {
-			                        $(this).not('.active').children().stop().fadeTo(100, 1);
-			                    }, function () {
-			                        $(this).not('.active').children().stop().fadeTo(400, 0.6);
-			                    });
-
-			                    if (e.index === this.getIndex()) {
-			                        $(e.thumbTarget).css('opacity', 1);
-			                    }
-			                } else {
-			                    $(e.thumbTarget).css('opacity', this.getIndex() ? 1 : 0.6);
-			                }
-			            });
-
-			            this.bind('loadstart', function (e) {
-			                if (!e.cached) {
-			                    this.$('loader').show().fadeTo(200, 0.4);
-			                }
-
-			                this.$('info').toggle(this.hasInfo());
-
-			                $(e.thumbTarget).css('opacity', 1).parent().siblings().children().css('opacity', 0.6);
-			            });
-
-			            this.bind('loadfinish', function (e) {
-			                this.$('loader').fadeOut(200);
-			            });
-			        }
-			    });
-
-			    Galleria.run('.galleria', {
-					autoplay: true,
-					responsive: true,
-					height: 0.75,
-					imageCrop: 'landscape',
-					transition: 'flash',
-					thumbMargin: 10,
-					showCounter: false,
-					showInfo: false
-				});
-			}
-			
-		}
+		f_images_loaded();
+		f_init_galleria();
 
 	}
 	
@@ -417,6 +435,7 @@ $(document).ready(function() {
 		,footerHeight = $("#footer-container").height()
 		,deltaHeight = headerHeight + footerHeight
 		,availableHeight = f_viewport_wh().h - deltaHeight
+		,availableWidth = f_viewport_wh().w
 		,$current
 		,$notice
 		,$viewCartMenuLink = $('a#view-cart-menu-link')
