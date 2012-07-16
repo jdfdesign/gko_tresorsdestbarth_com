@@ -31,9 +31,12 @@
 					totalRows	= Math.ceil( $items.length / rowCount );
 				
 				// save this values for later
-				config.totalRows	= totalRows;
-				config.rowCount 	= rowCount;
-				config.shownItems	= shown;
+				//config.totalRows	= totalRows;
+				//config.rowCount 	= rowCount;
+				//config.shownItems	= shown;
+				$wrapper.data('totalRows',totalRows);
+				$wrapper.data('rowCount',rowCount);
+				$wrapper.data('shownItems',shown);
 				
 				if(shown < $items.length) {
 					$(opts.nav).css('display', 'block');
@@ -160,9 +163,14 @@
 					nav['def'].setup( $wrapper, $items, opts );
 				},
 				pagination	: function( $wrapper, dir, opts ) {
-					console.log("dir " + dir + " currentRow " + config.currentRow + " rows " + opts.rows + " totalRows " + config.totalRows)
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
-						( dir === -1 && config.currentRow - opts.rows <= 0 )
+					currentRow = $wrapper.data('currentRow');
+					totalRows = $wrapper.data('totalRows');
+					rowCount = $wrapper.data('rowCount');
+					shownItems = $wrapper.data('shownItems');	
+					
+					console.log("dir " + dir + " currentRow " + currentRow + " rows " + opts.rows + " totalRows " + totalRows)
+					if( ( dir === 1 && currentRow + opts.rows > totalRows ) || 
+						( dir === -1 && currentRow - opts.rows <= 0 )
 					) {
 						$wrapper.data( 'anim', false );
 						return false;
@@ -170,11 +178,11 @@
 					
 					var currentRows	= '', nextRows = '';
 					for( var i = 0; i < opts.rows; ++i ) {
-						currentRows += '.tj_row_' + (config.currentRow + i) + ',';
+						currentRows += '.tj_row_' + (currentRow + i) + ',';
 						
 						(dir === 1)
-						? nextRows	+= '.tj_row_' + (config.currentRow + opts.rows + i) + ','
-						: nextRows	+= '.tj_row_' + (config.currentRow - 1 - i) + ',';
+						? nextRows	+= '.tj_row_' + (currentRow + opts.rows + i) + ','
+						: nextRows	+= '.tj_row_' + (currentRow - 1 - i) + ',';
 					}
 					
 					var seq_t	= opts.type.factor;
@@ -211,7 +219,8 @@
 						}, (seq_t * 2) + i * seq_t);
 					});
 					
-					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
+					(dir === 1) ? currentRow += opts.rows : currentRow -= opts.rows;
+					$wrapper.data('currentRow', currentRow);
 				}
 			},
 			updown			: {
@@ -633,7 +642,7 @@
 							$n_nav			= $(settings.navR);
 						
 						// save current row for later (first visible row)
-						config.currentRow	= 1;
+						$wrapper.data( 'currentRow', 1 );
 						
 						// flag to control animation progress
 						$wrapper.data( 'anim', false );
@@ -675,7 +684,7 @@
 									/*
 									adds events to the mouse
 									*/
-									$el.bind('mousewheel.gridnav', function(e, delta) {
+								/*	$el.bind('mousewheel.gridnav', function(e, delta) {
 										if(delta > 0) {
 											if( $wrapper.data( 'anim' ) ) return false;
 											$wrapper.data( 'anim', true );
@@ -687,7 +696,7 @@
 											nav[settings.type.mode].pagination( $wrapper, 1, settings );
 										}	
 										return false;
-									});
+									});*/
 									
 								}
 							}).attr( 'src', $img.attr('src') );

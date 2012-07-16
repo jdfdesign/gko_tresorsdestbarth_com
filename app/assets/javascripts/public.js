@@ -204,7 +204,13 @@ $(document).ready(function() {
 			f_showCartUpdateNotice();
         });
 		// Bind show product action
-        $(".tj_gallery a").attr('data-remote', 'true')
+        $(".tj_gallery_inner").hover(function(e) {
+			var t = $(this).find(".tj_content:first");
+			t.css('right', '13px');
+		}, function(e) {
+			var t = $(this).find(".tj_content:first");
+			t.css('right', -t.width());
+		})
 		.on('ajax:beforeSend', function(event, xhr, settings) {
 
 		})

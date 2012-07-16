@@ -54,13 +54,13 @@
 							<ul class="tj_gallery">
 								<% products.each do |p| %>
 								<li>
-									<a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>">
+									<a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>" data-remote="true">
 										<%= image_fu(p.thumbnail, "286x286#") %>
 										<div class="tj_mask"></div>
 										<div class="tj_content">
 											<h2><%= p.title %></h2>
 											<p><%= indivisible_number_to_currency(p.price, :unit => site.preferred_currency) %></p>
-											<%= link_to("&#8594;".html_safe, url_for([p.section, p]), :class => 'info') %>
+											<p><%= "&#8594;".html_safe %></p>
 									    </div>
 									</a>
 								</li>				
