@@ -75,9 +75,9 @@ $(document).ready(function() {
 		}
     }
 	f_show_category = function(target) {
-		if(target.hasClass('active')) {
-			return false;
-		} else {
+	//	if(target.hasClass('active')) {
+	//		return false;
+	//	} else {
 			var id = target.attr('id');
 	
 			if(History.getState().data.state == "product") {
@@ -91,7 +91,7 @@ $(document).ready(function() {
 			$activeSection = target;
 			History.pushState({state: "category"}, id, '?category="' + id + '"');
 			f_scroll_to_section(target);
-		}
+	//	}
 	}
 	f_show_product = function(item, response) {
 		var $next = item.next()
@@ -155,6 +155,7 @@ $(document).ready(function() {
 		.on('click', 'a', function(e) {
 			e.stopPropagation();
             e.preventDefault();
+
 			f_show_grid($(this).closest("section"));
         });
 
@@ -241,9 +242,7 @@ $(document).ready(function() {
 		if(grid.hasClass('grid')) {
 			return false;
 		} else {
-			console.log(gridRowCount)
 			grid.addClass('grid').gridnav({
-				//rows: gridRowCount,
 				type : {
 					mode		: 'seqfade', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
 					speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
@@ -282,7 +281,7 @@ $(document).ready(function() {
 	    // Bind to StateChange Event
 	    History.Adapter.bind(window,'statechange',function(){
 	        var State = History.getState();
-	        History.log(State.data, State.title, State.url);
+	       // History.log(State.data, State.title, State.url);
 			if(State.data.state == "category") {
 				//var hashOptions = $.deparam.fragment();
 			//	console.log(hashOptions)

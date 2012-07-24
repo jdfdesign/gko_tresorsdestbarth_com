@@ -234,6 +234,17 @@ a {
 #locales a.fr {
 	background-image: asset-url('fr.png',image);
 }
+#facebook {
+ 	background: white;
+	position: absolute;	
+	top: 48px;
+	right: 0;
+	display: block;
+	overflow: hidden;
+	width: 100px;
+	height: 24px;
+	@include border-radius(0 0 6px 6px)
+}
 /*-----------------------------------------
  FOOTER
 ----------------------------------------- */
@@ -679,7 +690,7 @@ h2#product-variants-title {
 	z-index: 1000;
 //	display: none;
 }
-.tj_nav span{
+.tj_nav a{
 	display: block;
 	height: 40px;
 	width: 40px;
@@ -694,17 +705,16 @@ h2#product-variants-title {
 	border: 0;
 	cursor: pointer;
 }
-.tj_nav span:hover {
+.tj_nav a:hover {
 	color: black;
 	background-color: white;
+	opacity:1.0;
 }
-.tj_nav span.tj_next{
+.tj_nav a.tj_next{
 	left:auto;
 	right:0;
 }
-.tj_nav span:hover{
-	opacity:1.0;
-}
+
 .tj_wrapper{
 	width: 100%;
 	height: 100%;

@@ -1,10 +1,10 @@
 # This migration comes from gko_store (originally 20120716000000)
 class GlobalizeProductProperties < ActiveRecord::Migration
   def up
-   ProductProperty.create_translation_table!({ 
-     :value => :string
-     }, {:migrate_data => true})
-
+    rename_column :product_properties, :value, :presentation
+    ProductProperty.create_translation_table!({ 
+      :presentation => :string
+      }, {:migrate_data => true})
   end
 
   def down

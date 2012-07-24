@@ -11,13 +11,13 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3.git
-  revision: 06e748cafa0b49b70b7f4dc6bc78f85ad2525b03
+  revision: 1ea889bcb7526da630dbfb220db37046ca28d5da
   specs:
-    gko_auth (0.3.33)
+    gko_auth (0.3.34)
       cancan (= 1.6.8)
       devise (= 2.1.2)
-    gko_categories (0.3.33)
-    gko_core (0.3.33)
+    gko_categories (0.3.34)
+    gko_core (0.3.34)
       RedCloth (= 4.2.9)
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
@@ -50,24 +50,24 @@ GIT
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.3.33)
+    gko_documents (0.3.34)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.3.33)
-    gko_images (0.3.33)
-    gko_inquiries (0.3.33)
+    gko_features (0.3.34)
+    gko_images (0.3.34)
+    gko_inquiries (0.3.34)
       filters_spam (~> 0.2)
       launchy
-    gko_stickers (0.3.33)
-    gko_themes (0.3.33)
+    gko_stickers (0.3.34)
+    gko_themes (0.3.34)
       less-rails-bootstrap
       rubyzip (= 0.9.6.1)
 
 GIT
   remote: git@github.com:jdfdesign/gko_store.git
-  revision: 7a999efe97c78ea0239d32edd92afec1db98ac4c
+  revision: feac99c29b73b7feb53772318787e0d09123e3b1
   specs:
-    gko_store (0.0.28)
+    gko_store (0.0.29)
       activemerchant (= 1.21.0)
       state_machine (= 1.1.2)
 
@@ -277,16 +277,16 @@ PLATFORMS
 DEPENDENCIES
   active_shipping!
   coffee-rails (~> 3.2.2)
-  gko_auth (= 0.3.33)!
-  gko_categories (= 0.3.33)!
-  gko_core (= 0.3.33)!
-  gko_documents (= 0.3.33)!
-  gko_features (= 0.3.33)!
-  gko_images (= 0.3.33)!
-  gko_inquiries (= 0.3.33)!
-  gko_stickers (= 0.3.33)!
-  gko_store (= 0.0.28)!
-  gko_themes (= 0.3.33)!
+  gko_auth (= 0.3.34)!
+  gko_categories (= 0.3.34)!
+  gko_core (= 0.3.34)!
+  gko_documents (= 0.3.34)!
+  gko_features (= 0.3.34)!
+  gko_images (= 0.3.34)!
+  gko_inquiries (= 0.3.34)!
+  gko_stickers (= 0.3.34)!
+  gko_store (= 0.0.29)!
+  gko_themes (= 0.3.34)!
   iconv
   sass-rails (~> 3.2.5)
   uglifier (>= 1.0.3)

@@ -8,14 +8,13 @@
 				
 				// set the wrappers position to relative
 				$wrapper.css('position', 'relative');
-				
+			
 				var $parent = $wrapper.parent(),
 					parentHeight = $parent.height(),
 					parentWidth = $parent.width(),
 					w = Math.floor( (parentWidth / 4) - (3 * opts.itemPadding)),
 					itemWidth = Math.max(opts.minItemWidth, Math.min(opts.itemWidth, w));
 
-				console.log('parentHeight ' + parentHeight + " parentWidth " + parentWidth + " w " + w + " itemWidth " + itemWidth);
 				
 				$items.each(function(i) {
 					var $item 	= $(this);
@@ -50,7 +49,8 @@
 					// total number of rows
 					totalRows	= Math.ceil( $items.length / rowCount );
 				
-				console.log("rowCount " + rowCount + " totalRows " + totalRows)
+	
+
 				// save this values for later
 				var config			= {};
 				config.currentRow	= 1;
@@ -105,7 +105,10 @@
 			def				: {
 				setup		: function( $wrapper, $items, opts ) {
 					var config = $wrapper.data('config');
-
+					if(config.shownItems > $items.length) {
+						$(opts.navL).hide();
+						$(opts.navR).hide();
+					}
 					$items.each(function(i) {
 						var $item 	= $(this),
 							row		= Math.ceil( (i + 1) / config.rowCount ),
@@ -122,6 +125,8 @@
 						
 						$item.css({ top	: t });
 					});	
+					
+				
 				},
 				pagination	: function( $wrapper, dir, opts ) {
 					var config = $wrapper.data('config');
@@ -204,7 +209,7 @@
 				},
 				pagination	: function( $wrapper, dir, opts ) {
 					var config = $wrapper.data('config');
-
+console.log("config.currentRow " + config.currentRow + " opts.rows " + opts.rows)
 					
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
@@ -289,6 +294,7 @@
 						$wrapper.data( 'anim', false );
 						return false;
 					}
+					
 					
 					var movingRows	= '';
 					
@@ -723,7 +729,7 @@
 							$('<img/>').load( function() {
 								++loaded;
 								if( loaded === total ) {
-									
+									console.log("XXXXXXXXXXXX")
 									// setup
 									aux.setup( $wrapper, $thumbs, settings );
 
@@ -731,7 +737,9 @@
 									
 									// navigation events
 									if( $p_nav.length ) {
-										$p_nav.bind('click.gridnav', function( e ) {
+										$p_nav.on('click', function( e ) {
+											e.stopPropagation();
+								            e.preventDefault();
 											if( $wrapper.data( 'anim' ) ) return false;
 											$wrapper.data( 'anim', true );
 											nav[settings.type.mode].pagination( $wrapper, -1, settings );
@@ -739,7 +747,10 @@
 										});
 									}
 									if( $n_nav.length ) {
-										$n_nav.bind('click.gridnav', function( e ) {
+										$n_nav.on('click', function( e ) {
+											e.stopPropagation();
+								            e.preventDefault();
+											console.log("CLIKC " + $wrapper.data( 'anim' ))
 											if( $wrapper.data( 'anim' ) ) return false;
 											$wrapper.data( 'anim', true );
 											nav[settings.type.mode].pagination( $wrapper, 1, settings );
@@ -749,7 +760,7 @@
 									/*
 									adds events to the mouse
 									*/
-									$el.bind('mousewheel.gridnav', function(e, delta) {
+								/*	$el.bind('mousewheel.gridnav', function(e, delta) {
 										if(delta > 0) {
 											if( $wrapper.data( 'anim' ) ) return false;
 											$wrapper.data( 'anim', true );
@@ -761,7 +772,7 @@
 											nav[settings.type.mode].pagination( $wrapper, 1, settings );
 										}	
 										return false;
-									});
+									}); */
 									
 								}
 							}).attr( 'src', $img.attr('src') );

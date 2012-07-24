@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720125651) do
+ActiveRecord::Schema.define(:version => 20120724185443) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -208,21 +208,6 @@ ActiveRecord::Schema.define(:version => 20120720125651) do
     t.integer  "address_id"
     t.string   "gateway_customer_profile_id"
     t.string   "gateway_payment_profile_id"
-  end
-
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "site_id"
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
   end
 
   create_table "document_assignments", :force => true do |t|
@@ -667,10 +652,9 @@ ActiveRecord::Schema.define(:version => 20120720125651) do
   create_table "product_properties", :force => true do |t|
     t.integer  "product_id"
     t.integer  "property_id"
-    t.string   "value"
+    t.string   "presentation"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "globalized",  :default => 0
   end
 
   add_index "product_properties", ["product_id"], :name => "index_product_properties_on_product_id"
@@ -678,7 +662,7 @@ ActiveRecord::Schema.define(:version => 20120720125651) do
   create_table "product_property_translations", :force => true do |t|
     t.integer  "product_property_id"
     t.string   "locale"
-    t.string   "value"
+    t.string   "presentation"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
@@ -888,22 +872,6 @@ ActiveRecord::Schema.define(:version => 20120720125651) do
   add_index "sections", ["link_id", "link_type"], :name => "index_sections_on_link_id_and_link_type"
   add_index "sections", ["parent_id"], :name => "index_sections_on_parent_id"
   add_index "sections", ["site_id"], :name => "index_sections_on_site_id"
-
-  create_table "settings", :force => true do |t|
-    t.integer  "site_id"
-    t.string   "name"
-    t.text     "value"
-    t.boolean  "destroyable",             :default => true
-    t.string   "scoping"
-    t.boolean  "restricted",              :default => false
-    t.string   "callback_proc_as_string"
-    t.string   "form_value_type",         :default => "text_area", :null => false
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
-  end
-
-  add_index "settings", ["name"], :name => "index_settings_on_name"
-  add_index "settings", ["site_id"], :name => "index_settings_on_site_id"
 
   create_table "shipments", :force => true do |t|
     t.integer  "order_id"
