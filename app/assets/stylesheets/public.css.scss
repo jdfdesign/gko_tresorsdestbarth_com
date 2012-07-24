@@ -73,7 +73,7 @@ body {
 	background: #fefefe;
 	padding: 0;
 	margin: 0;
-	overflow: auto;
+	overflow: hidden;
 } 
 #overlay {
 	position: fixed;
@@ -188,7 +188,12 @@ label {
 	@include border-radius(0 0 12px 0);	
 }
 #content {
-	padding: 24px 0;
+	padding: 0;
+	position: absolute;
+	top: 48px;
+	left: 0;
+	right: 0;
+	bottom: 40px;
 }
 /*-----------------------------------------
  GLOBAL EFFECT
@@ -246,7 +251,7 @@ a {
 	text-align: center;
 	font-size: 12px; 
 	.nav > li > a {
-		line-height: 32px;
+		//line-height: 32px;
 		&#follow-me {
 			position:relative;
 			padding-left: 30px;
@@ -263,7 +268,12 @@ a {
 		}
 	}
 }
-
+.product-content-wrapper {
+	padding: 24px;
+	width: 100%;
+	height: 100%;
+	@include box-sizing(border-box);
+}
 
 /*-----------------------------------------
  STORE
@@ -570,10 +580,7 @@ h2#product-variants-title {
 	}
 
 }
-.container-fluid {
-	padding-left: 0px;
-	padding-right: 0px;
-}
+
 #js-page-container {
 
 }
@@ -659,7 +666,8 @@ h2#product-variants-title {
 	width:100%;
 	height:100%;
 	position:relative;
-
+	padding: 60px;
+	@include box-sizing(border-box);
 }
 .tj_nav{
 	position:absolute;
@@ -669,7 +677,7 @@ h2#product-variants-title {
 	height:40px;
 	width:80px;
 	z-index: 1000;
-	display: none;
+//	display: none;
 }
 .tj_nav span{
 	display: block;
@@ -698,36 +706,39 @@ h2#product-variants-title {
 	opacity:1.0;
 }
 .tj_wrapper{
-	position:absolute;
-	width:100%;
-	height:100%;
-	top: 50%;
-	left: 50%;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	margin: 0px auto;
+	overflow: hidden;
 }
 .tj_wrapper ul{
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	position: relative;
 }
 .tj_wrapper ul li{
 	float:left;
-	//border: 1px solid white;
-	//@include box-shadow(4px 4px 16px rgba(0,0,0,.2));
-	@include border-radius(12px);
+	
 	cursor: pointer;
-	overflow:hidden;
-	//margin:5px;
+	
 	outline:none;
 	position: relative;
+	max-width: 286px;
+	max-height: 286px;
 	&:hover {
 		text-decoration: none;
 	}
 	.tj_gallery_inner {
 		position:relative;
 		cursor: pointer;
-		width: 100%;
-		height: 100%;
 		display: block;
+		margin: 4px;
+		overflow:hidden;
+		border: 1px solid white;
+		@include box-shadow(4px 4px 16px rgba(0,0,0,.2));
+		@include border-radius(12px);
 	}
 
 	img {  
@@ -782,4 +793,10 @@ h2#product-variants-title {
 		@include transition(all .6s ease-out);
 	}
 
+}
+.row-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+	//width: 100%;
+	//max-width: none;
 }

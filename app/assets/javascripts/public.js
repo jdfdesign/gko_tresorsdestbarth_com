@@ -11,7 +11,11 @@
 //= require jquery.jscrollpane
 $(document).ready(function() {
 
-
+	f_scroll_to_section = function(section) {
+		var index = section.index('section');
+			
+		contentApi.data('jsp').scrollToY( availableHeight * index );
+    }
 	f_init_carousel = function() {
 		$('.carousel').each(function(index) {
 			var _self = $(this);
@@ -40,15 +44,15 @@ $(document).ready(function() {
 		$notice.fadeOut('slow');
 	}
 	f_refresh_ui = function() {
-		var viewport = f_viewport_wh(),
-			coverHeight = $cover.height();
+		var viewport = f_viewport_wh()
+			,coverHeight = $cover.height();
 		
 		headerHeight = $(".navbar:first").height();
 		footerHeight = $("#footer-container").height();
 		deltaHeight = headerHeight + footerHeight;
 		availableHeight = viewport.h - deltaHeight;
 
-		
+		//$('section').css({'height': availableHeight, 'width': viewport.w});
 		$('section.fullscreen, .parallax-item').css({'height': availableHeight, 'width': viewport.w});
 		$.each($('.centered'), function(index, item) {
 			var that = $(this)
@@ -66,80 +70,45 @@ $(document).ready(function() {
 			that.css('margin-top', top);
 		});
 		
-	/*	if(coverHeight > h) {
-			var newLogoHeight = coverHeight - h - 80,
-				newLogoWidth = newLogoHeight * logoRatio;
-				
-				console.log(newLogoHeight + "  " + h)
-			$logo.css({'height': newLogoHeight, 'width': newLogoWidth});
+		if(contentApi != undefined) {
+			contentApi.data('jsp').reinitialise();
 		}
-		else {
-			$logo.css({'height': originalLogoHeight, 'width': originalLogoWidth})
-		} */
-		$cover.css('height', availableHeight);
-		
-	
-		gridRowCount = Math.floor( (availableHeight - 48) / gridItemHeight );
-		if(gridRowCount < 2) {
-			gridItemHeight = ((availableHeight - 48) / 2)
-			gridRowCount = Math.floor( (availableHeight - 48) / gridItemHeight );
-		}
-	
-		gridColCount = Math.floor( (viewport.w - 48) / gridItemHeight );
-		var gridHeight = gridRowCount * gridItemHeight + 50,
-			gridWidth = gridColCount * gridItemHeight;
-			
-
-		$.each($('.tj_wrapper'), function(index, item) {
-			$(this).css({
-				marginTop: - (gridHeight / 2),
-				height: gridHeight,
-				marginLeft: - (gridWidth / 2),
-				width: gridWidth,
-			})
-			$(this).find('li').each(function(){
-				$(this).css({
-					height: gridItemHeight,
-					width: gridItemHeight,
-				})
-			}) 
-		});
-		
-		
     }
-
 	f_show_category = function(target) {
 		if(target.hasClass('active')) {
 			return false;
 		} else {
 			var id = target.attr('id');
-			$("section").removeClass('active').show();
+	
+			if(History.getState().data.state == "product") {
+				f_hide_product();
+				f_hide_grid($activeSection);
+			}
+			else if(History.getState().data.state == "products") {
+				f_hide_grid($activeSection);
+			}
+		//	$("section").removeClass('active').show();
+			$activeSection = target;
 			History.pushState({state: "category"}, id, '?category="' + id + '"');
-			$body.scrollTo(target.offset().top - headerHeight, { duration:500, axis:'y'});
+			f_scroll_to_section(target);
 		}
 	}
 	f_show_product = function(item, response) {
-		var $next = item.next(),
-			content = $next.find(".content:first");
-		
-		content.css({'height': availableHeight, 'width': availableWidth})
-		content.data('jsp').getContentPane().html(response)
-		$next.addClass('active');
-		content.data('jsp').reinitialise();
-		$next.removeClass('active');
-		$body.scrollTo( item.offset().top - headerHeight, { duration:500, axis:'y', onAfter:function() {
-			item.animate({'left': -windowSize.width}, 900);
-			$next.css('left', windowSize.width).addClass('active').animate({'left': 0}, 900, function(){
-				var that = $(this),
-					carousel = that.find('.carousel:first');
+		var $next = item.next()
+			,content = $next.find(".content:first");
+
+		content.html(response);
+		item.removeClass('active').animate({'left': -availableWidth}, 900);
+		$next.css('left', availableWidth).addClass('active').animate({'left': 0}, 900, function(){
+			var that = $(this),
+			carousel = that.find('.carousel:first'),
+			info = that.find('.product-info:first');
 					
-				carousel.css('max-height', availableHeight);
-				f_init_carousel();
-				$('form.cart-form').attr('data-remote', 'true');
-				
-	
-			});
-		}});
+			carousel.css('max-height', availableHeight);
+			f_init_carousel();
+			$('form.cart-form').attr('data-remote', 'true');
+			info.css('height', availableHeight).jScrollPane();
+		});
 	}
 	f_hide_product = function(item) {
 		f_refresh_ui();
@@ -147,24 +116,32 @@ $(document).ready(function() {
 			$next.addClass('active').animate({'left':0}, 900);
 			item.animate({'left': windowSize.width}, 900);
 	}
-	f_show_products = function(section) {
-	//	f_refresh_ui();
+	f_show_grid = function(section) {
+		$activeSection = section;
 		var $current = section.find(".parallax-item:first")
 			,$next = $current.next();
-		$body.scrollTo( section.offset().top - headerHeight, { duration:500, axis:'y', onAfter:function() {
-			$next.css('left', windowSize.width).addClass('active');
-			f_init_grid($next);
-			$current.animate({'left': -windowSize.width}, 900);
-			$next.animate({'left': 0}, 900);
-		}});
+			
+		f_scroll_to_section(section);
+		$next.css('left', windowSize.width).addClass('active');
+		f_init_grid($next);
+		$current.animate({'left': -windowSize.width}, 900);
+		$next.animate({'left': 0}, 900);
+		
+		History.pushState({state: "products"});
+		// Disable the main scroll
+		$container.find(".jspVerticalBar").hide();
+		contentApi.data('jsp').enable(false);
 	}
-	f_hide_products = function(section) {
-		//f_refresh_ui();
+	f_hide_grid = function(section) {
 		var $parallaxInner = section.find(".parallax-inner:first")
 			,$parallaxItem = section.find(".parallax-item:first");
 		$current = $parallaxItem.next();
 		$parallaxItem.animate({'left':0}, 900);
 		$current.animate({'left': windowSize.width}, 900);
+		
+		// Enable the main scroll
+		contentApi.data('jsp').enable(true);
+		$container.find(".jspVerticalBar").show();
 	}
 	f_init_events = function() {	
         $(window).on("throttledresize",
@@ -178,7 +155,7 @@ $(document).ready(function() {
 		.on('click', 'a', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_show_products($(this).closest("section"));
+			f_show_grid($(this).closest("section"));
         });
 
 		$('#tresors-au-fil-du-rivage').on('click', function(e) {
@@ -196,7 +173,7 @@ $(document).ready(function() {
 		$('.products').on('click', ' a.back', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_hide_products($(this).closest("section"));
+			f_hide_grid($(this).closest("section"));
 		})
 		$('.product').on('click', ' a.back', function(e) {
 			e.stopPropagation();
@@ -214,7 +191,7 @@ $(document).ready(function() {
 		// Bind show product action
         $(".tj_gallery_inner").hover(function(e) {
 			var t = $(this).find(".tj_content:first");
-			t.css('right', '13px');
+			t.css('right', 0);
 		}, function(e) {
 			var t = $(this).find(".tj_content:first");
 			t.css('right', -t.width());
@@ -235,14 +212,22 @@ $(document).ready(function() {
 	    function(evt, xhr, status) {
 
 			var modal = $("#modal-gallery"),
-				gallery = modal.find('.galleria:first');
-
+				header = modal.find('.modal-header:first'),
+				body = modal.find('.modal-body:first'),
+				gallery = modal.find('.galleria:first'),
+				headerHeight = header.height(),
+				bodyMaxHeight = availableHeight - headerHeight  - 30,
+				modalHeight = availableHeight + headerHeight,
+				modalWidth = modalHeight * 1.35;
+			
+			body.css({'max-height': bodyMaxHeight });
+			modal.css({'margin-top': -modalHeight/2, 'margin-left': -modalWidth/2, 'width': modalWidth, 'height': modalHeight});
 			gallery.galleria({
 	            autoplay: true,
 	            responsive: true,
-	            height: 0.55,
+	            height: .65,
 				carousel: false,
-				thumbnails: "numbers",
+			//	thumbnails: "numbers",
 	            imageCrop: 'landscape',
 	            transition: 'flash',
 	            showCounter: false,
@@ -256,8 +241,9 @@ $(document).ready(function() {
 		if(grid.hasClass('grid')) {
 			return false;
 		} else {
+			console.log(gridRowCount)
 			grid.addClass('grid').gridnav({
-				rows: gridRowCount,
+				//rows: gridRowCount,
 				type : {
 					mode		: 'seqfade', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
 					speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
@@ -313,7 +299,14 @@ $(document).ready(function() {
 			$('.parallax').scrollParallax({'speed': -0.2, 'axis' : 'y'});
 			$sidescroll.init();
 			f_do_animation();
-			$('.product .content').jScrollPane();
+			
+			// Temporarily make the container tiny so it doesn't influence the
+			// calculation of the size of the document
+			$container.css({'width': 1,'height': 1});
+			// Now make it the size of the window...
+			$container.css({'width': availableWidth,'height': availableHeight});
+							
+			contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
 		}
 	}
 	f_images_loaded = function() {
@@ -420,9 +413,12 @@ $(document).ready(function() {
 		,$html = $("html")
 		,$window = $(window)
 		,$overlay = $("#overlay")
+		,$container = $("#content") 
 		,$cover = $("#cover")
 		,$logo = $("#logo")
 		,$navbar = $(".navbar:first")
+		,$activeSection
+		,contentApi
 		,windowSize = {}// we will store the window sizes here
 		,imagesCount = 0
 		,originalLogoWidth = $logo.width()

@@ -3,10 +3,8 @@
 @categories = @store.available_categories
 @images = site.homes.first.images
 %>
-<% content_for :page_container do %>
 
-
-	<section id="cover" class="background-image" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+	<section id="cover" class="background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
 		<div id="logo"></div>
 		<p  class='headline'><%= t(:"home.citation").html_safe %></p>
 		<div class="circles">
@@ -25,11 +23,7 @@
 	%>
 		<% if category.body.present? %>
 		<section class="parallax background-image fullscreen" style="background-image: url('<%= bg_url %>');">
-			<div class="row-fluid">
-				<div class="span12">
-					<h3 class='headline'><%= category.body.html_safe %></h3>
-				</div>
-			</div>
+			<h3 class='headline'><%= category.body.html_safe %></h3>
 		</section><!--section-->
 		<% end %>
 		<section id="<%= category.name %>" class="parallax background-image fullscreen" style="background-image: url('<%= bg2_url %>');">
@@ -79,24 +73,19 @@
 				</div>
 				<div class='parallax-item product'>
 					<div class='bg'></div>
-					<div class="row-fluid" style="z-index: 1;">
-						<div class="span12">
-							<a class='back' href="#">&crarr;</a>
-						</div><!--row-->
-					</div>
-					<div class="row-fluid" style="position:relative; z-index: 1;">
-						<div class="span12">
-							<div class='content'></div>
-						</div>
-					</div><!--row-->
+					<a class='back' href="#">&crarr;</a>
+					<div class='content'></div>
 				</div>
 			</div>
 		</section><!--section-->
 
 	<% end %>
-	<section id="about" class="background-image " style="background-image: url('<%= @images.shift.thumbnail().url %>');">
-		<%= render_html_text( resource.body) if resource.body.present? %>
+	<section id="about" class="background-image" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+		<div class="row-fluid">
+			<div class="span12">
+				<%= render_html_text( resource.body) if resource.body.present? %>
+			</div>
+		</div><!--row-->
 	</section><!--section-->
 
-<% end %>
 

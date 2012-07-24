@@ -1,62 +1,13 @@
 <!doctype html>
-<%= render '/shared/html_tag' %>
-<head>
-  <meta charset="utf-8"/>
-  <title><%= @meta_title || site.title %></title>
-  <!-- Set the viewport width to device width for mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="<%= @meta_description %>"/>
-  <meta name="keywords" content="<%= @meta_keywords %>"/>
-  <%= render 'shared/head' %>
-  <%= yield :head %>
-</head>
-
-
-<body id='<%= @body_id %>' class='mobile'>
+<%= render 'shared/head' %>
+<body id='<%= @body_id %>'>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 <div id='overlay'></div>
-<div id="wrapper-wide-body">
-	
-  <%= render 'shared/header' %>
-  <div id='content-container' class='container-fluid'>
-    <% if content_for?(:page_container) %>
-        <%= render "shared/flash" %>
-        <%= yield :page_container %>
-    <% else %>
-        <div id="content" class='row-fluid'>
-          <% if content_for?(:page_content) %>
-              <div id="main-column" class='span12 <%= @body_id %>'>
-                <div class="main-column-inner"><%= yield :page_content %></div>
-              </div>
-          <% else %>
-              <%
-                 has_left_sidebar = content_for?(:left_sidebar)
-                 has_sidebar = content_for?(:sidebar_header) || content_for?(:sidebar)
-                 main_span = 12
-                 main_span -= 3 if has_sidebar
-                 main_span -= 3 if has_left_sidebar
-              %>
-              <% if has_left_sidebar %>
-                  <aside id='left_sidebar' class="span3"><%= yield :left_sidebar %></aside>
-              <% end %>
-              <div id="main-column" class='span<%= main_span %> <%= @body_id %> '>
-                <div class="main-column-inner">
-                  <%= render "shared/flash" %>
-                  <%= yield %>
-                </div>
-              </div>
-              <% if has_sidebar %>
-                  <aside id='sidebar' class="span3">
-                    <div id='sidebar-header'><%= yield :sidebar_header %></div>
-                    <div id='sidebar-content'><%= yield :sidebar %></div>
-                  </aside>
-              <% end %>
-          <% end %>
-        </div>
-        <% end %><%# end page_container %>
-  </div>
-  <%= render 'shared/footer' %>
+<%= render 'shared/header' %>
+<div id="content">
+	<%= yield %>
 </div>
+ <%= render 'shared/footer' %>
 <%= render 'shared/javascripts' %>
 <%= yield :after_javascript_libraries %>
 <body>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708182101) do
+ActiveRecord::Schema.define(:version => 20120720125651) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -670,9 +670,21 @@ ActiveRecord::Schema.define(:version => 20120708182101) do
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "globalized",  :default => 0
   end
 
   add_index "product_properties", ["product_id"], :name => "index_product_properties_on_product_id"
+
+  create_table "product_property_translations", :force => true do |t|
+    t.integer  "product_property_id"
+    t.string   "locale"
+    t.string   "value"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "product_property_translations", ["locale"], :name => "index_product_property_translations_on_locale"
+  add_index "product_property_translations", ["product_property_id"], :name => "index_827806ffd4778407c35215189d8230bca632b9b7"
 
   create_table "product_scopes", :force => true do |t|
     t.integer "product_group_id"
