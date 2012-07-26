@@ -682,32 +682,33 @@ h2#product-variants-title {
 }
 .tj_nav{
 	position:absolute;
-	left:50%;
-	margin-left:-40px;
 	bottom:0;
 	height:40px;
-	width:80px;
 	z-index: 1000;
+	width: 320px;
+	left: 50%;
+	margin-left: -160px;
 //	display: none;
 }
+
 .tj_nav a{
 	display: block;
 	height: 40px;
 	width: 40px;
 	line-height: 40px;
-	background-color: #E6E6E6;
-	position: absolute;
+	background-color: none;
+	float: left;
 	top: 0;
 	left:0;
 	text-align: center;
-	color: #383838;
+	color: #ccc;
 	text-decoration: none;
 	border: 0;
 	cursor: pointer;
+	font-size: 24px;
 }
 .tj_nav a:hover {
-	color: black;
-	background-color: white;
+	color: white;
 	opacity:1.0;
 }
 .tj_nav a.tj_next{

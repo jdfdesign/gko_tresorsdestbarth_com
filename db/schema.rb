@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724185443) do
+ActiveRecord::Schema.define(:version => 20120726193029) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -402,12 +402,10 @@ ActiveRecord::Schema.define(:version => 20120724185443) do
     t.string   "image_uid"
     t.string   "image_ext"
     t.integer  "globalized",                             :default => 0
-    t.integer  "image_folder_id"
   end
 
   add_index "images", ["account_id"], :name => "index_images_on_account_id"
   add_index "images", ["author_id"], :name => "index_images_on_author_id"
-  add_index "images", ["image_folder_id"], :name => "index_images_on_image_folder_id"
   add_index "images", ["site_id"], :name => "index_images_on_site_id"
 
   create_table "inquiries", :force => true do |t|

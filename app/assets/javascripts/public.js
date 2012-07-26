@@ -11,10 +11,14 @@
 //= require jquery.jscrollpane
 $(document).ready(function() {
 
-	f_scroll_to_section = function(section) {
+	f_scroll_to_section = function(section, callback) {
 		var index = section.index('section');
-			
-		contentApi.data('jsp').scrollToY( availableHeight * index );
+		contentApi.bind(
+			'complete',
+			function(event) {
+				callback();
+			}
+		).data('jsp').scrollToY( availableHeight * index );
     }
 	f_init_carousel = function() {
 		$('.carousel').each(function(index) {
@@ -121,16 +125,19 @@ $(document).ready(function() {
 		var $current = section.find(".parallax-item:first")
 			,$next = $current.next();
 			
-		f_scroll_to_section(section);
-		$next.css('left', windowSize.width).addClass('active');
-		f_init_grid($next);
-		$current.animate({'left': -windowSize.width}, 900);
-		$next.animate({'left': 0}, 900);
-		
-		History.pushState({state: "products"});
-		// Disable the main scroll
-		$container.find(".jspVerticalBar").hide();
-		contentApi.data('jsp').enable(false);
+		f_scroll_to_section(section, function() {
+
+			$next.css('left', windowSize.width).addClass('active');
+			f_init_grid($next);
+			$current.animate({'left': -windowSize.width}, 900);
+			$next.animate({'left': 0}, 900);
+
+			History.pushState({state: "products"});
+			// Disable the main scroll
+			$container.find(".jspVerticalBar").hide();
+			contentApi.data('jsp').enable(false);
+		});
+
 	}
 	f_hide_grid = function(section) {
 		var $parallaxInner = section.find(".parallax-inner:first")

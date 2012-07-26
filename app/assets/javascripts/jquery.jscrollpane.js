@@ -1310,7 +1310,8 @@
 								'duration'	: settings.animateDuration,
 								'easing'	: settings.animateEase,
 								'queue'		: false,
-								'step'		: stepCallback
+								'step'		: stepCallback,
+								'complete'	: function() {elem.trigger('complete');}
 							}
 						);
 					},

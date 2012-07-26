@@ -12,6 +12,8 @@
 				var $parent = $wrapper.parent(),
 					parentHeight = $parent.height(),
 					parentWidth = $parent.width(),
+					ulWidth = $wrapper.width(),
+					liWidth = $items.width(),
 					w = Math.floor( (parentWidth / 4) - (3 * opts.itemPadding)),
 					itemWidth = Math.max(opts.minItemWidth, Math.min(opts.itemWidth, w));
 
@@ -39,17 +41,13 @@
 						top			: $item.data('top')
 					});
 				});
-				
-					// check how many items we have per row
-				var $parent = $wrapper.parent(),
-					
-					rowCount 	= Math.floor( $wrapper.width() / $items.width() ),
-					// number of items to show is rowCount * n rows
-					shown		= rowCount * opts.rows,
-					// total number of rows
-					totalRows	= Math.ceil( $items.length / rowCount );
-				
-	
+				opts.rows = Math.floor( parentHeight / itemWidth );
+				// check how many items we have per row
+				var rowCount 	= Math.floor( ulWidth / itemWidth ),
+				// number of items to show is rowCount * n rows
+				shown		= rowCount * opts.rows,
+				// total number of rows
+				totalRows	= Math.ceil( $items.length / rowCount );
 
 				// save this values for later
 				var config			= {};
@@ -69,19 +67,21 @@
 					
 					$item.addClass('tj_row_' + row);		
 				});
-				
-				var wrapperHeight = $parent.height(),
-					wrapperWidth = $parent.height();
-				opts.rows = Math.floor( wrapperHeight / $items.height() );
-				var freeWidth = wrapperWidth - ((286 * rowCount) + ((rowCount - 1) * 6)),
-					freeHeight = wrapperHeight - ((286 * opts.rows) + ((opts.rows - 1) * 6));
-				$parent.css({
-					'padding-top': freeHeight / 2,
-					'padding-bottom': freeHeight / 2,
-					'padding-left': freeWidth / 2,
-					'padding-right': freeWidth / 2
-				})
 
+				var freeWidth = parentWidth - (itemWidth * rowCount),
+					freeHeight = parentHeight - (itemWidth * opts.rows);
+
+				$parent.css({
+					'paddingTop': Math.floor(freeHeight / 2),
+					'paddingBottom': Math.floor(freeHeight / 2),
+					'paddingLeft': Math.floor(freeWidth / 2),
+					'paddingRight': Math.floor(freeWidth / 2)
+				})
+				for (i=0; i<(totalRows / opts.rows); i++) {
+				  $parent.parent().find('.tj_nav_container:first').append("<a class='tj_page_nav' href='#'>&#8857</a>");
+				}
+				
+				
 				$wrapper.data('config', config);
 				nav.setup( $wrapper, $items, opts );
 				
@@ -126,7 +126,7 @@
 						$item.css({ top	: t });
 					});	
 					
-				
+					
 				},
 				pagination	: function( $wrapper, dir, opts ) {
 					var config = $wrapper.data('config');
@@ -209,7 +209,6 @@
 				},
 				pagination	: function( $wrapper, dir, opts ) {
 					var config = $wrapper.data('config');
-console.log("config.currentRow " + config.currentRow + " opts.rows " + opts.rows)
 					
 					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
@@ -265,414 +264,6 @@ console.log("config.currentRow " + config.currentRow + " opts.rows " + opts.rows
 
 					$wrapper.data('config', config);
 				}
-			},
-			updown			: {
-				setup		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
-					$wrapper.children(':gt(' + (config.shownItems - 1) + ')').css('opacity', 0);
-					
-					$items.each(function(i) {
-						var $item 	= $(this),
-							row		= Math.ceil( (i + 1) / config.rowCount ),
-							t		= $item.position().top,
-							f = row % opts.rows;
-						
-						if( row > opts.rows ) {
-							t = (opts.rows * $items.height());		
-						}
-						
-						$item.css({ top	: t + 'px'});
-					});
-				},
-				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
-						( dir === -1 && config.currentRow - 1 <= 0 )
-					) {
-						$wrapper.data( 'anim', false );
-						return false;
-					}
-					
-					
-					var movingRows	= '';
-					
-					for( var i = 0; i <= opts.rows; ++i ) {
-						( dir === 1 )
-							? movingRows += '.tj_row_' + (config.currentRow + i) + ','
-							: movingRows += '.tj_row_' + (config.currentRow + (i - 1)) + ',';
-					}
-					
-					var $elements;
-					
-					( dir === 1 )
-						? $elements = $wrapper.children(movingRows)
-						: $elements = $wrapper.children(movingRows).reverse();
-					
-					var total_elems	= $elements.length,
-						cnt			= 0;
-					
-					$elements.each(function(i) {
-						var $el 		= $(this),
-							row			= $el.attr('class'),
-							animParam	= {},
-							
-							currentRow	= config.currentRow;
-						
-						// if first row fade out
-						// if last row fade in
-						// for all the rows move them up / down
-						if( dir === 1 ) {
-							if(  row === 'tj_row_' + (currentRow) ) {
-								animParam.opacity	= 0;
-							}
-							else if( row === 'tj_row_' + (currentRow + opts.rows) ) {
-								animParam.opacity	= 1;
-							}
-						}
-						else {
-							if(  row === 'tj_row_' + (currentRow - 1) ) {
-								animParam.opacity	= 1;
-							}
-							else if( row === 'tj_row_' + (currentRow + opts.rows - 1) ) {
-								animParam.opacity	= 0;
-							}
-						}
-						
-						$el.show();
-						
-						(dir === 1)
-							? animParam.top = $el.position().top - $el.height() + 'px'
-							: animParam.top = $el.position().top + $el.height() + 'px'
-						
-						$el.stop().animate(animParam, opts.type.speed, opts.type.easing, function() {
-							if( parseInt( animParam.top ) < 0 || parseInt( animParam.top ) > $el.height() * (opts.rows - 1) )
-								$el.hide();
-							
-							++cnt;
-							if( cnt === total_elems ) {
-								$wrapper.data( 'anim', false );
-							}	
-						});
-					});
-					
-					(dir === 1) ? config.currentRow += 1 : config.currentRow -= 1;
-
-					$wrapper.data('config', config);
-				}
-			},
-			sequpdown		: {
-				setup 		: function( $wrapper, $items, opts ) {
-					// same like updown mode
-					nav['updown'].setup( $wrapper, $items, opts );
-				},
-				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
-						( dir === -1 && config.currentRow - 1 <= 0 )	
-					) {
-						$wrapper.data( 'anim', false );
-						return false;
-					}
-					
-					var movingRows	= '';
-					
-					for( var i = 0; i <= opts.rows; ++i ) {
-						( dir === 1 )
-							? movingRows += '.tj_row_' + (config.currentRow + i) + ','
-							: movingRows += '.tj_row_' + (config.currentRow + (i - 1)) + ',';
-					}
-					
-					var seq_t	= opts.type.factor,
-						$elements;
-					
-					var dircond	= 1;
-					if( opts.type.reverse ) dircond = -1;
-					( dir === dircond )
-						? $elements = $wrapper.children(movingRows)
-						: $elements = $wrapper.children(movingRows).reverse();
-					
-					var total_elems	= $elements.length,
-						cnt			= 0;
-					
-					$elements.each(function(i) {
-						var $el 		= $(this),
-							row			= $el.attr('class'),
-							animParam	= {},
-							
-							currentRow	= config.currentRow;
-							
-						setTimeout(function() {
-							// if first row fade out
-							// if last row fade in
-							// for all the rows move them up / down
-							if( dir === 1 ) {
-								if(  row === 'tj_row_' + (currentRow) ) {
-									animParam.opacity	= 0;
-								}
-								else if( row === 'tj_row_' + (currentRow + opts.rows) ) {
-									animParam.opacity	= 1;
-								}
-							}
-							else {
-								if(  row === 'tj_row_' + (currentRow - 1) ) {
-									animParam.opacity	= 1;
-								}
-								else if( row === 'tj_row_' + (currentRow + opts.rows - 1) ) {
-									animParam.opacity	= 0;
-								}
-							}
-							
-							$el.show();
-							
-							(dir === 1)
-								? animParam.top = $el.position().top - $el.height() + 'px'
-								: animParam.top = $el.position().top + $el.height() + 'px'
-							
-							$el.stop().animate(animParam, opts.type.speed, opts.type.easing, function() {
-								if( parseInt( animParam.top ) < 0 || parseInt( animParam.top ) > $el.height() * (opts.rows - 1) )
-									$el.hide();
-									
-								++cnt;
-								if( cnt === total_elems ) { 
-									$wrapper.data( 'anim', false );
-								}	
-							});	
-						}, seq_t + i * seq_t);
-					});
-					
-					(dir === 1) ? config.currentRow += 1 : config.currentRow -= 1;
-
-					$wrapper.data('config', config);
-				}
-			},
-			showhide		: {
-				setup 		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
-					$items.each(function(i) {
-						var $item 	= $(this),
-							row		= Math.ceil( (i + 1) / config.rowCount ),
-							t,
-							f = row % opts.rows;
-						
-						if( f === 1 ) {
-							t = '0px';		
-						} else if( f === 0 ) {
-							t = (opts.rows - 1) * $items.height()  + 'px'; 
-						} else {
-							t = (f - 1) * $items.height() + 'px';
-						}
-						
-						$item.css({ top	: t });
-					});		
-				},
-				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
-						( dir === -1 && config.currentRow - opts.rows <= 0 )
-					) {
-						$wrapper.data( 'anim', false );
-						return false;
-					}
-					
-					var currentRows	= '', nextRows = '';
-					
-					for( var i = 0; i < opts.rows; ++i ) {
-						currentRows += '.tj_row_' + (config.currentRow + i) + ',';
-						
-						(dir === 1)
-							? nextRows	+= '.tj_row_' + (config.currentRow + opts.rows + i) + ','
-							: nextRows	+= '.tj_row_' + (config.currentRow - 1 - i) + ',';
-					}
-					
-					$wrapper.children(currentRows).hide( opts.type.speed, opts.type.easing );
-					
-					var $nextRowElements= $wrapper.children(nextRows),
-						totalNextRows	= $nextRowElements.length,
-						cnt				= 0;
-						
-					$nextRowElements.show( opts.type.speed, opts.type.easing, function() {
-						++cnt;
-						if( cnt === totalNextRows ) {
-							$wrapper.data( 'anim', false );
-						}	
-					});
-					
-					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
-				}
-			},
-			disperse		: {
-				setup 		: function( $wrapper, $items, opts ) {
-					var config = $wrapper.data('config');
-
-					$items.each(function(i) {
-						var $item 	= $(this),
-							row		= Math.ceil( (i + 1) / config.rowCount ),
-							t,
-							f = row % opts.rows;
-					
-						if( f === 1 ) {
-							t = '0px';		
-						} else if( f === 0 ) {
-							t = (opts.rows - 1) * $items.height()  + 'px'; 
-						} else {
-							t = (f - 1) * $items.height() + 'px';
-						}
-						
-						$item.css({ top	: t }).data('top', t);
-					});
-				},
-				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
-						( dir === -1 && config.currentRow - opts.rows <= 0 )
-					) {
-						$wrapper.data( 'anim', false );
-						return false;
-					}
-					
-					var currentRows	= '', nextRows = '';
-					for( var i = 0; i < opts.rows; ++i ) {
-						currentRows += '.tj_row_' + (config.currentRow + i) + ',';
-						
-						(dir === 1)
-							? nextRows	+= '.tj_row_' + (config.currentRow + opts.rows + i) + ','
-							: nextRows	+= '.tj_row_' + (config.currentRow - 1 - i) + ',';
-					}
-					
-					$wrapper.children(currentRows).each(function(i) {
-						var $el = $(this);
-						$el.stop().animate({
-							left	: $el.position().left + Math.floor( Math.random() * 101 ) - 50 + 'px',
-							top		: $el.position().top + Math.floor( Math.random() * 101 ) - 50 + 'px',
-							opacity	: 0
-						}, opts.type.speed, opts.type.easing, function() {
-							$el.css({
-								left	: $el.data('left'),
-								top		: $el.data('top')
-							}).hide();
-						});
-					});
-					
-					var $nextRowElements	= $wrapper.children(nextRows);
-						total_elems			= $nextRowElements.length,
-						cnt					= 0;
-					
-					$nextRowElements.each(function(i) {
-						var $el = $(this);
-						
-						$el.css({
-							left	: parseInt($el.data('left')) + Math.floor( Math.random() * 301 ) - 150 + 'px',	
-							top		: parseInt($el.data('top')) + Math.floor( Math.random() * 301 ) - 150 + 'px',
-							opacity	: 0
-						})
-						.show()
-						.animate({
-							left	: $el.data('left'),
-							top		: $el.data('top'),
-							opacity	: 1
-						}, opts.type.speed, opts.type.easing, function() {
-							++cnt;
-							if( cnt === total_elems ) { 
-								$wrapper.data( 'anim', false );
-							}
-						});
-					});
-					
-					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
-				}
-			},
-			rows			: {
-				setup 		: function( $wrapper, $items, opts ) {
-					// same like def mode
-					nav['def'].setup( $wrapper, $items, opts );
-				},
-				pagination	: function( $wrapper, dir, opts ) {
-					var config = $wrapper.data('config');
-
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
-						( dir === -1 && config.currentRow - opts.rows <= 0 )
-					) {
-						$wrapper.data( 'anim', false );
-						return false;
-					}
-					
-					var currentRows	= '', nextRows = '';
-					for( var i = 0; i < opts.rows; ++i ) {
-						currentRows += '.tj_row_' + (config.currentRow + i) + ',';
-						
-						(dir === 1)
-							? nextRows	+= '.tj_row_' + (config.currentRow + opts.rows + i) + ','
-							: nextRows	+= '.tj_row_' + (config.currentRow - 1 - i) + ',';
-					}
-					
-					$wrapper.children(currentRows).each(function(i) {
-						var $el 	= $(this),
-							rownmb	= $el.attr('class').match(/tj_row_(\d+)/)[1],
-							diff;
-							
-						if( rownmb%2 === 0 ) {
-							diff = opts.type.factor;
-						}
-						else {
-							diff = -opts.type.factor;
-						}
-						
-						$el.stop().animate({
-							left	: $el.position().left + diff + 'px',
-							opacity	: 0
-						}, opts.type.speed, opts.type.easing, function() {
-							$el.css({
-								left	: $el.data('left')
-							}).hide();
-						});
-					});
-					
-					var $nextRowElements	= $wrapper.children(nextRows);
-						total_elems			= $nextRowElements.length,
-						cnt					= 0;
-					
-					$nextRowElements.each(function(i) {
-						var $el = $(this),
-							rownmb	= $el.attr('class').match(/tj_row_(\d+)/)[1],
-							diff;
-						
-						if( rownmb%2 === 0 ) {
-							diff = opts.type.factor;
-						}
-						else {
-							diff = -opts.type.factor;
-						}
-						
-						$el.css({
-							left	: parseInt($el.data('left')) + diff + 'px',
-							opacity	: 0
-						})
-						.show()
-						.animate({
-							left	: $el.data('left'),
-							opacity	: 1
-						}, opts.type.speed, opts.type.easing, function() {
-							++cnt;
-							if( cnt === total_elems ) { 
-								$wrapper.data( 'anim', false );
-							}
-						});
-					});
-					
-					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
-
-					$wrapper.data('config', config);
-				}
 			}
 		},
 		methods = {
@@ -713,8 +304,8 @@ console.log("config.currentRow " + config.currentRow + " opts.rows " + opts.rows
 							$thumbs			= $wrapper.children('li'),
 							total			= $thumbs.length,
 							// the navigation elements
-							$p_nav			= $(settings.navL),
-							$n_nav			= $(settings.navR);
+							$p_nav			= $el.find(settings.navL),
+							$n_nav			= $el.find(settings.navR);
 						
 						// save current row for later (first visible row)
 						//config.currentRow	= 1;
@@ -729,7 +320,6 @@ console.log("config.currentRow " + config.currentRow + " opts.rows " + opts.rows
 							$('<img/>').load( function() {
 								++loaded;
 								if( loaded === total ) {
-									console.log("XXXXXXXXXXXX")
 									// setup
 									aux.setup( $wrapper, $thumbs, settings );
 
@@ -750,29 +340,12 @@ console.log("config.currentRow " + config.currentRow + " opts.rows " + opts.rows
 										$n_nav.on('click', function( e ) {
 											e.stopPropagation();
 								            e.preventDefault();
-											console.log("CLIKC " + $wrapper.data( 'anim' ))
 											if( $wrapper.data( 'anim' ) ) return false;
 											$wrapper.data( 'anim', true );
 											nav[settings.type.mode].pagination( $wrapper, 1, settings );
 											return false;
 										});
 									}
-									/*
-									adds events to the mouse
-									*/
-								/*	$el.bind('mousewheel.gridnav', function(e, delta) {
-										if(delta > 0) {
-											if( $wrapper.data( 'anim' ) ) return false;
-											$wrapper.data( 'anim', true );
-											nav[settings.type.mode].pagination( $wrapper, -1, settings );
-										}	
-										else {
-											if( $wrapper.data( 'anim' ) ) return false;
-											$wrapper.data( 'anim', true );
-											nav[settings.type.mode].pagination( $wrapper, 1, settings );
-										}	
-										return false;
-									}); */
 									
 								}
 							}).attr( 'src', $img.attr('src') );

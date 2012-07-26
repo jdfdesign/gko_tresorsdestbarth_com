@@ -35,13 +35,13 @@
 					<div class="pod ss-right">
 						<div class="pod-carousel">
 							<img src="<%= product_img_url %>" rel="external">
-							<%= link_to("&#8594".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
+							<%= link_to("&#10217;".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
 						</div>
 					</div><!--pod-->
 				</div>
 				<div class='parallax-item products'>
 					<div class='bg'></div>
-					<a class='back' href="#">&crarr;</a>
+					<a class='back' href="#">&#10216</a>
 					<div class="tj_container">
 						<div class="tj_wrapper">
 						<% if products.try(:any?) %>
@@ -67,6 +67,7 @@
 						
 						<div class="tj_nav">
 							<a class="tj_prev" href="#">&#8592</a>
+							<div class="tj_nav_container"></div>
 							<a class="tj_next" href="#">&#8594</a>
 						</div>
 					</div>
