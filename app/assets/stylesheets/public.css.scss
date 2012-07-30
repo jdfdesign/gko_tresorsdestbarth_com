@@ -235,14 +235,16 @@ a {
 	background-image: asset-url('fr.png',image);
 }
 #facebook {
- 	background: white;
+	background: white asset-url('icon-facebook.png',image) left center no-repeat;
 	position: absolute;	
 	top: 48px;
-	right: 0;
+	right: 24px;
 	display: block;
 	overflow: hidden;
 	width: 100px;
 	height: 24px;
+	z-index: 1000;
+	padding-left: 32px;
 	@include border-radius(0 0 6px 6px)
 }
 /*-----------------------------------------
@@ -458,23 +460,24 @@ h2#product-variants-title {
 .back{
 	position:absolute;
 	top:50%;
-	margin-top:-40px;
+	margin-top:-50px;
 	left:0;
 	z-index: 1000;
 	display: block;
-	height: 40px;
-	width: 40px;
-	line-height: 40px;
-	background-color: #E6E6E6;
 	text-align: center;
-	color: #383838;
 	text-decoration: none;
 	border: 0;
 	cursor: pointer;
+	color: #ccc;
+	font-size: 80px;
+	font-weight: 300;
+	height: 100px;
+	width: 40px;
+	line-height: 40px;
 }
 .back:hover {
-	color: black;
-	background-color: white;
+	color: white;
+	text-decoration: none;
 }
 .parallax-item .bg {
 	width: 100%;
@@ -487,7 +490,9 @@ h2#product-variants-title {
 	z-index: 0;
 }
 
-
+.content {
+	padding: 40px;
+}
 .parallax-item.active {
 	display: block;
 }
@@ -524,38 +529,28 @@ h2#product-variants-title {
 		float:left;
 		margin-right: 100px;
 	}
-	/*.pod-desc {
-		font-size: 16px;
-		line-height: 22px;
-		color: black;
-		text-shadow: 1px 1px 12px rgba(0,0,0,.2);
-		background-color: rgba(255,255,255,.8);
-		width: 276px;
-		float:right;
-		margin-top: -20px;
-		margin-right: 100px;
-		padding: 32px 12px 12px;
-		border: 1px solid rgba(255,255,255,.6);
-	}*/
 	a.view-all{
 		position:absolute;
-		right:0;
-		top: 50%;
-		margin-top: -20px;
-		height:40px;
-		width:40px;
+		top:50%;
+		margin-top:-150px;
+		left:50%;
+		margin-left:-150px;
 		z-index: 1000;
-		line-height: 40px;
-		background-color: #E6E6E6;
+		display: block;
 		text-align: center;
-		color: #383838;
 		text-decoration: none;
 		border: 0;
 		cursor: pointer;
-	}
-	a.view-all:hover {
-		color: black;
-		background-color: white;
+		color: #ccc;
+		font-size: 160px;
+		font-weight: 300;
+		width:300px;
+		height:300px;
+		line-height: 300px;
+		&:hover {
+			color: white;
+			text-decoration: none;
+		}
 	}
 
 	.ss-left, .ss-right{
@@ -567,13 +562,31 @@ h2#product-variants-title {
 	    padding-left: 2%;
 	}
 	.ss-left{
-	    text-align: right;
+		position: relative;
+		text-align: right;
 	    float: left;
 	    padding-right: 2%;
+	
+		img.decoration {
+			position: absolute;
+			top: 50%;
+			margin-top: -145px;
+			left: 50%;
+			margin-left: -215px;
+			
+			&.blur {
+				@include transition("all 0.7s ease-in-out");
+				@include opacity(0);
+			}
+		}
+		&:hover {
+			img.decoration.blur {
+				@include opacity(50);
+			}	
+		}
 	}
 
 	.pod-title {
-		background: transparent asset-url('apos2.png', image) center bottom no-repeat;
 		line-height: 300px;
 		a {
 			font-family: $altFontFamily;
@@ -584,11 +597,14 @@ h2#product-variants-title {
 			line-height: 150px;
 			color: #FFF;
 			text-shadow:0px 0px 24px #FFFFFF;
+			padding-right: 40px;
 			&:hover {
 				text-decoration: none;
 			};
 		}
 	}
+	
+	
 
 }
 

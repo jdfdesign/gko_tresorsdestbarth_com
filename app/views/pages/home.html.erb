@@ -31,6 +31,8 @@
 				<div class='parallax-item active'>
 					<div class="pod ss-left">
 						<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
+						<img src='/assets/apos2.png' class='decoration'>
+						<img src='/assets/apos2blur.png' class='decoration blur'>
 					</div>
 					<div class="pod ss-right">
 						<div class="pod-carousel">
@@ -53,8 +55,8 @@
 										<div class="tj_mask"></div>
 										<div class="tj_content">
 											<h2><%= p.title %></h2>
-											<p><%= indivisible_number_to_currency(p.price, :unit => site.preferred_currency) %></p>
-											<p><%= "&#8594;".html_safe %></p>
+											<p><%= indivisible_number_to_currency(p.price, :unit => site.preferred_currency).html_safe %></p>
+											<%= render_record_description(p, 80, " &#8594;") %>
 									    </div>
 									</a>
 								</li>				
@@ -74,7 +76,7 @@
 				</div>
 				<div class='parallax-item product'>
 					<div class='bg'></div>
-					<a class='back' href="#">&crarr;</a>
+					<a class='back' href="#">&#10216</a>
 					<div class='content'></div>
 				</div>
 			</div>
