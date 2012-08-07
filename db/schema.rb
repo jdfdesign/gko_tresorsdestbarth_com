@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726193029) do
+ActiveRecord::Schema.define(:version => 20120807153222) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -97,8 +97,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.text    "body"
     t.string  "meta_title"
     t.text    "meta_description"
-    t.text    "meta_keywords"
-    t.integer "globalized",       :default => 0
   end
 
   add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
@@ -122,7 +120,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "title"
     t.string   "slug"
     t.text     "meta_description"
-    t.text     "meta_keywords"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -148,7 +145,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "title"
     t.string   "slug"
     t.text     "meta_description"
-    t.text     "meta_keywords"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -169,15 +165,15 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "layout",           :limit => 40
     t.string   "meta_title"
     t.text     "meta_description"
-    t.text     "meta_keywords"
     t.text     "options"
     t.string   "author_name",      :limit => 120
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
-    t.integer  "globalized",                      :default => 0
     t.integer  "position",                        :default => 1
+    t.integer  "access_count",                    :default => 0
   end
 
+  add_index "contents", ["access_count"], :name => "index_contents_on_access_count"
   add_index "contents", ["position", "section_id"], :name => "index_contents_on_position_and_section_id"
   add_index "contents", ["section_id"], :name => "index_contents_on_section_id"
   add_index "contents", ["site_id"], :name => "index_contents_on_site_id"
@@ -276,7 +272,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.integer  "document_size"
     t.string   "document_uid"
     t.string   "document_ext"
-    t.integer  "globalized",                                :default => 0
     t.integer  "author_id"
   end
 
@@ -315,7 +310,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "image_ext"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-    t.integer  "globalized",      :default => 0
     t.date     "start_at"
     t.date     "end_at"
   end
@@ -401,7 +395,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.integer  "image_height"
     t.string   "image_uid"
     t.string   "image_ext"
-    t.integer  "globalized",                             :default => 0
   end
 
   add_index "images", ["account_id"], :name => "index_images_on_account_id"
@@ -568,7 +561,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "image_ext"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-    t.integer  "globalized",      :default => 0
     t.integer  "position",        :default => 1
   end
 
@@ -681,7 +673,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.integer  "product_id"
     t.string   "locale"
     t.string   "meta_description"
-    t.string   "meta_keywords"
     t.string   "title"
     t.string   "meta_title"
     t.string   "slug"
@@ -706,10 +697,8 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.datetime "deleted_at"
     t.string   "meta_title"
     t.string   "meta_description"
-    t.string   "meta_keywords"
     t.boolean  "variants_listed",      :default => false
     t.integer  "count_on_hand",        :default => 0,     :null => false
-    t.integer  "globalized",           :default => 0
   end
 
   add_index "products", ["available_on"], :name => "index_products_on_available_on"
@@ -760,11 +749,10 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
 
   create_table "properties", :force => true do |t|
     t.string   "name"
-    t.string   "presentation",                :null => false
+    t.string   "presentation", :null => false
     t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "globalized",   :default => 0
   end
 
   add_index "properties", ["site_id"], :name => "index_properties_on_site_id"
@@ -826,7 +814,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "title"
     t.string   "slug"
     t.text     "meta_description"
-    t.text     "meta_keywords"
     t.string   "title_addon"
     t.string   "redirect_url"
     t.datetime "created_at",       :null => false
@@ -853,7 +840,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.text     "body"
     t.string   "meta_title"
     t.text     "meta_description"
-    t.text     "meta_keywords"
     t.string   "redirect_url"
     t.string   "title_addon"
     t.datetime "published_at"
@@ -861,7 +847,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.string   "menu_title"
-    t.integer  "globalized",        :default => 0
     t.integer  "level"
     t.boolean  "shallow_permalink", :default => true
     t.boolean  "no_follow"
@@ -942,7 +927,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.text     "options"
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
-    t.integer  "globalized",                             :default => 0
     t.text     "plugins"
     t.integer  "site_registrations_count",               :default => 0
     t.integer  "theme_id"
@@ -1005,9 +989,8 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.string   "name"
     t.integer  "site_id"
     t.integer  "section_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "globalized", :default => 0
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "stickers", ["name"], :name => "index_stickers_on_name"
@@ -1159,7 +1142,6 @@ ActiveRecord::Schema.define(:version => 20120726193029) do
     t.decimal  "cost_price",    :precision => 8, :scale => 2
     t.integer  "position"
     t.string   "alt_title"
-    t.integer  "globalized",                                  :default => 0
   end
 
   add_index "variants", ["product_id"], :name => "index_variants_on_product_id"
