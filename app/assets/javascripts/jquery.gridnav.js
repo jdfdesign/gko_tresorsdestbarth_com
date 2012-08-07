@@ -25,6 +25,11 @@
 						'height' :itemWidth,
 						'width': itemWidth
 					});
+					
+					$item.find('.tj_content:first').css({
+						'height' :itemWidth,
+						'width': itemWidth
+					});
 				});
 				
 
@@ -78,7 +83,7 @@
 					'paddingRight': Math.floor(freeWidth / 2)
 				})
 				for (i=0; i<(totalRows / opts.rows); i++) {
-				  $parent.parent().find('.tj_nav_container:first').append("<a class='tj_page_nav' href='#'>&#8857</a>");
+				  $parent.parent().find('.tj_nav_container:first').append("<a class='tj_page_nav' href='#'>&#8226;</a>");
 				}
 				
 				

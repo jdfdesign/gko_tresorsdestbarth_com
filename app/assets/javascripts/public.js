@@ -16,7 +16,10 @@ $(document).ready(function() {
 		contentApi.bind(
 			'complete',
 			function(event) {
-				callback();
+				if(callback != undefined) {
+					callback();	
+				}
+				
 			}
 		).data('jsp').scrollToY( availableHeight * index );
     }
@@ -108,11 +111,12 @@ $(document).ready(function() {
 			carousel = that.find('.carousel:first'),
 			info = that.find('.product-info:first');
 					
-			carousel.css('max-height', availableHeight);
+			carousel.css('max-height', availableHeight - 120);
 			f_init_carousel();
 			$('form.cart-form').attr('data-remote', 'true');
-			info.css('height', availableHeight).jScrollPane();
+			info.css('height', availableHeight - 120).jScrollPane();
 		});
+		contentApi.data('jsp').enable(false);
 	}
 	f_hide_product = function(item) {
 		f_refresh_ui();

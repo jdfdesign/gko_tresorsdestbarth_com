@@ -1,15 +1,15 @@
 <!doctype html>
-<%= render 'shared/head' %>
+<%= render 'head' %>
 <body id='<%= @body_id %>'>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 <div id='overlay'></div>
-<%= render 'shared/header' %>
+<%= render 'header' %>
 <a href="#" id="facebook">Follow me</a>
 <div id="content">
 	<%= yield %>
 </div>
- <%= render 'shared/footer' %>
-<%= render 'shared/javascripts' %>
+ <%= render 'footer' %>
+<%= render 'javascripts' %>
 <%= yield :after_javascript_libraries %>
 </body>
 </html>
