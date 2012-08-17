@@ -66,9 +66,9 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_store.git
-  revision: 6b87ffb50bcc8fbfd0c18b702b530624a6515dbc
+  revision: a40aab3d4215ed257605921d6613114604b5566b
   specs:
-    gko_store (0.0.38)
+    gko_store (0.0.39)
       activemerchant (= 1.21.0)
       state_machine (= 1.1.2)
 
@@ -287,7 +287,7 @@ DEPENDENCIES
   gko_images (= 0.3.58)!
   gko_inquiries (= 0.3.58)!
   gko_stickers (= 0.3.58)!
-  gko_store (= 0.0.38)!
+  gko_store (= 0.0.39)!
   gko_themes (= 0.3.58)!
   iconv
   sass-rails (~> 3.2.5)
