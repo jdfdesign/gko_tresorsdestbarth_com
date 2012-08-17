@@ -9,16 +9,16 @@ group :assets do
 end
 
 group :production do
-	gem "gko_core", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_auth", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-  gem "gko_images", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_documents", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_inquiries", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_themes", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_features", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_categories", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_stickers", "= 0.3.47", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem 'gko_store', '= 0.0.36',  :git => 'git@github.com:jdfdesign/gko_store.git'
+	gem "gko_core", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_auth", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_images", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_documents", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_inquiries", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_themes", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_features", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_categories", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem "gko_stickers", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+	gem 'gko_store', '= 0.0.38',  :git => 'git@github.com:jdfdesign/gko_store.git'
 	 #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
 	gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
 end

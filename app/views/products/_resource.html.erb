@@ -1,0 +1,25 @@
+<%
+if @selected_variant
+  #TODO : check if selected_variant is available (@selected_variant.available?)
+  images = @selected_variant.images.any? ? @selected_variant.images : @product.images
+  if @selected_variant.alt_title.blank?
+    title = @product.title
+  else 
+    title = "#{@selected_variant.alt_title}<span> (#{@product.title})</span>"
+  end
+  price = @selected_variant.price
+else
+  images = @product.images
+  title = @product.title 
+  price = @product.price
+end
+%>
+<div>
+  <%= render 'products/images', :images => images %> 
+  <div class='product-info'>
+    <%= render_page_title(title) %>  
+    <%= render_html_text(@product.body) %>
+    <%= render 'products/properties' %>
+    <%= render 'products/cart_form', :product => @product %>
+  </div>  
+</div>

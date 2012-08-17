@@ -16,10 +16,9 @@ $(document).ready(function() {
 		contentApi.bind(
 			'complete',
 			function(event) {
-				if(callback != undefined) {
-					callback();	
+				if( typeof callback == "function") {
+					$(callback)
 				}
-				
 			}
 		).data('jsp').scrollToY( availableHeight * index );
     }
@@ -35,6 +34,16 @@ $(document).ready(function() {
 			}
 		});
     }
+	f_enable_main_scroll = function(trueOrFalse) {
+		if(trueOrFalse) {
+			contentApi.data('jsp').enable(true);
+			$container.find(".jspVerticalBar").show();
+		} else {
+			// Disable the main scroll
+			$container.find(".jspVerticalBar").hide();
+			contentApi.data('jsp').enable(false);
+		}
+	}
 	f_showCartUpdateNotice = function(action) {
 		
 		var o = $viewCartMenuLink.position();
@@ -81,78 +90,110 @@ $(document).ready(function() {
 			contentApi.data('jsp').reinitialise();
 		}
     }
-	f_show_category = function(target) {
-	//	if(target.hasClass('active')) {
-	//		return false;
-	//	} else {
-			var id = target.attr('id');
-	
-			if(History.getState().data.state == "product") {
-				f_hide_product();
-				f_hide_grid($activeSection);
-			}
-			else if(History.getState().data.state == "products") {
-				f_hide_grid($activeSection);
-			}
-		//	$("section").removeClass('active').show();
-			$activeSection = target;
-			History.pushState({state: "category"}, id, '?category="' + id + '"');
-			f_scroll_to_section(target);
-	//	}
-	}
-	f_show_product = function(item, response) {
-		var $next = item.next()
-			,content = $next.find(".content:first");
-
-		content.html(response);
-		item.removeClass('active').animate({'left': -availableWidth}, 900);
-		$next.css('left', availableWidth).addClass('active').animate({'left': 0}, 900, function(){
-			var that = $(this),
-			carousel = that.find('.carousel:first'),
-			info = that.find('.product-info:first');
-					
-			carousel.css('max-height', availableHeight - 120);
-			f_init_carousel();
-			$('form.cart-form').attr('data-remote', 'true');
-			info.css('height', availableHeight - 120).jScrollPane();
-		});
-		contentApi.data('jsp').enable(false);
-	}
-	f_hide_product = function(item) {
-		f_refresh_ui();
-		var $next = item.prev();
-			$next.addClass('active').animate({'left':0}, 900);
-			item.animate({'left': windowSize.width}, 900);
-	}
-	f_show_grid = function(section) {
-		$activeSection = section;
-		var $current = section.find(".parallax-item:first")
-			,$next = $current.next();
+	f_show_category = function(section) {
+		console.log("// f_show_category " + $activeSection);
+		if($activeSection == undefined) {
+			f_scroll_to_section(section);
+		}
+		else {
+			var activeSectionId = $activeSection.attr('id'),
+				sectionId = section.attr('id'),
+				activeSectionState = $activeSection.attr('data-state');
+			console.log("// activeSection state: " + activeSectionState);
 			
-		f_scroll_to_section(section, function() {
+			if(sectionId == activeSectionId || activeSectionState == 'category') {
+				f_scroll_to_section(section);
+			}
+			else if(activeSectionState == "product") {
+				f_hide_product($activeSection, f_hide_grid($activeSection, function() {
+					f_scroll_to_section(section);
+				}));
+			}
+			else if(activeSectionState == "grid") {
+				f_hide_grid($activeSection, f_scroll_to_section(section));
+			}
+		}
 
-			$next.css('left', windowSize.width).addClass('active');
-			f_init_grid($next);
-			$current.animate({'left': -windowSize.width}, 900);
-			$next.animate({'left': 0}, 900);
+		$activeSection = section;
+		$activeSection.attr('data-state', 'category');
+	}
+	f_show_product = function(section, response) {
+		var $grid = section.find('.products:first'),
+			$product = section.find('.product:first'),
+			$content = $product.find(".content:first");
 
-			History.pushState({state: "products"});
-			// Disable the main scroll
-			$container.find(".jspVerticalBar").hide();
-			contentApi.data('jsp').enable(false);
+		$content.html(response);
+		var carousel = $content.find('.carousel:first'),
+			infoWidth = 300,
+			inforMargin = 30,
+			maxCarouselWidth = availableHeight - 120,
+			maxCarouselHeight = availableWidth - 80 - infoWidth - inforMargin,
+			maxCarousel = Math.min(maxCarouselWidth, maxCarouselHeight)
+			$info = $content.find('.product-info:first');
+				
+		carousel.css({
+			'max-height': maxCarousel,
+			'max-width': maxCarousel,
+			'float': 'left' });
+		
+		$info.css({'height': maxCarousel, 'width': infoWidth - inforMargin, 'paddingLeft': inforMargin});
+		
+		$('form.cart-form').attr('data-remote', 'true');
+		section.attr('data-state', 'product');
+		$grid.animate({'left': -availableWidth}, 900, function(){
+			$(this).removeClass('active')
 		});
-
+		$product.css('left', availableWidth).addClass('active').animate({'left': 0}, 900, function(){
+			f_init_carousel();
+			$info.jScrollPane();
+		});
+		
+	}
+	f_hide_product = function(section, callback) {
+	//	f_refresh_ui();
+		var $grid = section.find('.products:first'),
+			$product = section.find('.product:first');
+			$grid.addClass('active').animate({'left':0}, 900);
+			$product.animate({'left': windowSize.width}, 900, function() {
+				$(this).removeClass('active');
+				if( typeof callback == "function") {
+					$(callback)
+				}
+			});
+			section.attr('data-state', 'grid');
+	}
+	f_show_grid = function(section, callback) {
+		console.log("// f_show_grid");
+		$activeSection = section;
+		var $category = section.find(".category:first"),
+			$products = section.find(".products:first");
+		
+		if(section.attr('data-state') == 'grid') {
+			f_enable_main_scroll(false);
+		}	
+		else {
+			f_scroll_to_section(section, function() {
+				console.log("f_show_grid" + $category);
+				section.attr('data-state', 'grid');
+				f_enable_main_scroll(false);
+				$products.css('left', windowSize.width).addClass('active');
+				f_init_grid($products);
+			
+				$category.animate({'left': -windowSize.width}, 900, function() {
+					$(this).removeClass('active');
+				});
+				$products.animate({'left': 0}, 900);
+			});
+		}
 	}
 	f_hide_grid = function(section) {
-		var $parallaxInner = section.find(".parallax-inner:first")
-			,$parallaxItem = section.find(".parallax-item:first");
-		$current = $parallaxItem.next();
-		$parallaxItem.animate({'left':0}, 900);
-		$current.animate({'left': windowSize.width}, 900);
+		var $category = section.find(".category:first"),
+			$products = section.find(".products:first");
+		section.attr('data-state', 'category');
+		$category.addClass('active').animate({'left':0}, 900);
+		$products.animate({'left': windowSize.width}, 900);
+		f_enable_main_scroll(true);
 		
-		// Enable the main scroll
-		contentApi.data('jsp').enable(true);
-		$container.find(".jspVerticalBar").show();
 	}
 	f_init_events = function() {	
         $(window).on("throttledresize",
@@ -166,8 +207,7 @@ $(document).ready(function() {
 		.on('click', 'a', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-
-			f_show_grid($(this).closest("section"));
+			f_show_grid($(this).parents("section:first"));
         });
 
 		$('#tresors-au-fil-du-rivage').on('click', function(e) {
@@ -185,12 +225,12 @@ $(document).ready(function() {
 		$('.products').on('click', ' a.back', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_hide_grid($(this).closest("section"));
+			f_hide_grid($(this).parents("section:first"));
 		})
 		$('.product').on('click', ' a.back', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_hide_product($(this).closest(".parallax-item"));
+			f_hide_product($(this).parents("section:first"));
 		})
 		// Bind cart form
 		$('.product').on('ajax:beforeSend', 'form.cart-form',
@@ -213,7 +253,7 @@ $(document).ready(function() {
 		})
 		.on('ajax:complete',
         function(evt, xhr, status) {
-			f_show_product($(this).closest(".parallax-item"), eval(xhr.responseText).html());
+			f_show_product($(this).parents("section:first"), eval(xhr.responseText).html());
         });
 		// Bind lookbook action
 		$("a#lookbook").attr('data-remote', 'true')

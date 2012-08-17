@@ -26,9 +26,9 @@
 			<h3 class='headline'><%= category.body.html_safe %></h3>
 		</section><!--section-->
 		<% end %>
-		<section id="<%= category.name %>" class="parallax background-image fullscreen" style="background-image: url('<%= bg2_url %>');">
+		<section id="<%= category.name %>" data-state="category" class="parallax background-image fullscreen" style="background-image: url('<%= bg2_url %>');">
 			<div class='parallax-inner'>
-				<div class='parallax-item active'>
+				<div class='parallax-item category active'>
 					<div class="pod ss-left">
 						<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
 						<img src='/assets/apos2.png' class='decoration'>

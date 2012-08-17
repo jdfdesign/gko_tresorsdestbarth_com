@@ -317,7 +317,16 @@ h2#product-variants-title {
 	border-bottom: $borderSize solid $borderColor;
 	color: white;
 }
-
+#product-properties {
+	
+	line-height: 18px;
+	tbody {
+		vertical-align: top;
+		tr>td{
+			min-width: 80px;
+		}
+	}
+}
 
 .products-categories {
 	display: none;
@@ -634,7 +643,7 @@ h2#product-variants-title {
  RESPONSIVE
 ----------------------------------------- */
 
-@import "gko/responsive"; 
+//@import "gko/responsive"; 
 @media(max-width: 768px) {
 	body {
 		padding-left: 0;
@@ -703,13 +712,11 @@ h2#product-variants-title {
 .tj_nav{
 	position:absolute;
 	bottom:0;
-	height:40px;
+	height:44px;
 	z-index: 1000;
 	width: 100%;
-//	left: 50%;
-//	margin-left: -160px;
+	line-height: 44px;
 	text-align: center;
-//	display: none;
 	margin-left: -100px;
 }
 
@@ -719,19 +726,23 @@ h2#product-variants-title {
 	width: 40px;
 	line-height: 40px;
 	background-color: none;
-	//float: left;
 	top: 0;
-	//left:0;
 	text-align: center;
 	color: #ccc;
 	text-decoration: none;
 	border: 0;
 	cursor: pointer;
 	font-size: 24px;
+	@include transition(all 0.3s ease-in-out);
 }
+.tj_nav a.active,
+.tj_nav a:active,
 .tj_nav a:hover {
 	color: white;
 	opacity:1.0;
+	text-shadow: 0px 0px 8px white;
+	font-size: 28px;
+	line-height: 44px;
 }
 .tj_nav a.tj_next,
 .tj_nav a.tj_prev {
@@ -793,6 +804,7 @@ h2#product-variants-title {
 		text-transform: uppercase;
 	    color: #000;
 	    text-align: center;
+		line-height: 22px;
 	    position: relative;
 	    padding: 10px;
 	    border-bottom: 1px solid rgba(0, 0, 0, 0.3);

@@ -82,8 +82,20 @@
 					'paddingLeft': Math.floor(freeWidth / 2),
 					'paddingRight': Math.floor(freeWidth / 2)
 				})
+				
+				var nav_container = $parent.parent().find('.tj_nav_container:first');
 				for (i=0; i<(totalRows / opts.rows); i++) {
-				  $parent.parent().find('.tj_nav_container:first').append("<a class='tj_page_nav' href='#'>&#8226;</a>");
+				  $("<a id='row_" + ((i*opts.rows)+1) + "' class='tj_page_nav' href='#'>&#8226;</a>").appendTo(nav_container).on('click', function( e ) {
+						e.stopPropagation();
+			            e.preventDefault();
+						$(this).parent().find('.active').removeClass('active');
+						$(this).addClass('active');
+						if( $wrapper.data( 'anim' ) ) return false;
+						$wrapper.data( 'anim', true );
+						num = $(this).attr('id').replace(/[^\d]+/g, '');
+						nav[opts.type.mode].pagination( $wrapper, 0, opts, num );
+						return false;
+					});;
 				}
 				
 				
@@ -212,10 +224,15 @@
 					// same like def mode
 					nav['def'].setup( $wrapper, $items, opts );
 				},
-				pagination	: function( $wrapper, dir, opts ) {
+				pagination	: function( $wrapper, dir, opts, page ) {
 					var config = $wrapper.data('config');
 					
-					if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
+					if(page != undefined && config.currentRow == page) {
+						console.log('stop ' + page)
+						$wrapper.data( 'anim', false );
+						return false;
+					}
+					else if( ( dir === 1 && config.currentRow + opts.rows > config.totalRows ) || 
 						( dir === -1 && config.currentRow - opts.rows <= 0 )
 					) {
 						$wrapper.data( 'anim', false );
@@ -225,10 +242,21 @@
 					var currentRows	= '', nextRows = '';
 					for( var i = 0; i < opts.rows; ++i ) {
 						currentRows += '.tj_row_' + (config.currentRow + i) + ',';
-						
-						(dir === 1)
-						? nextRows	+= '.tj_row_' + (config.currentRow + opts.rows + i) + ','
-						: nextRows	+= '.tj_row_' + (config.currentRow - 1 - i) + ',';
+						if(page != undefined) {
+							if(page > config.currentRow) {
+								dir = 1;
+							}
+							else {
+								dir = -1;
+							}
+							nextRows	+= '.tj_row_' + (Number(page) + i) + ',';
+						}
+						else if(dir === 1) {
+							nextRows	+= '.tj_row_' + (config.currentRow + opts.rows + i) + ','
+						}
+						else {
+							nextRows	+= '.tj_row_' + (config.currentRow - 1 - i) + ',';
+						}
 					}
 					
 					var seq_t	= opts.type.factor;
@@ -265,8 +293,22 @@
 						}, (seq_t * 2) + i * seq_t);
 					});
 					
-					(dir === 1) ? config.currentRow += opts.rows : config.currentRow -= opts.rows;
 
+					if(page != undefined) {
+						if(dir === 1) {
+							config.currentRow = Number(page);
+						}
+						else {
+							config.currentRow = Number(page);
+						}
+					}
+					else if(dir === 1) {
+						config.currentRow += opts.rows;
+					}
+					else {
+						config.currentRow -= opts.rows;
+					}
+					
 					$wrapper.data('config', config);
 				}
 			}
