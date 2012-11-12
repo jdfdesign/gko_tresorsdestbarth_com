@@ -18,7 +18,7 @@
   };
 
   function getViewportSize() {
-    var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+    var mode, domObject, size = { height: w.innerHeight(), width: w.innerWidth() };
 
     // if this is correct then return it. iPad has compat Mode, so will
     // go into check clientHeight/clientWidth (which has the wrong value).

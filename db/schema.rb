@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817150909) do
+ActiveRecord::Schema.define(:version => 20121107142736) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -71,6 +71,20 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
   end
 
   add_index "adjustments", ["adjustable_id"], :name => "index_adjustments_on_order_id"
+
+  create_table "assets", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "content_type"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "size"
+    t.string   "source"
+    t.string   "source_filename"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "assets", ["site_id"], :name => "index_assets_on_site_id"
 
   create_table "calculators", :force => true do |t|
     t.string   "type"
@@ -275,6 +289,22 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
   add_index "documents", ["account_id"], :name => "index_documents_on_account_id"
   add_index "documents", ["site_id"], :name => "index_documents_on_site_id"
 
+  create_table "element_images", :id => false, :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "section_id"
+    t.integer  "image_id"
+    t.string   "title"
+    t.string   "caption"
+    t.string   "link"
+    t.string   "link_target"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "element_images", ["image_id"], :name => "index_element_images_on_image_id"
+  add_index "element_images", ["section_id"], :name => "index_element_images_on_section_id"
+  add_index "element_images", ["site_id"], :name => "index_element_images_on_site_id"
+
   create_table "feature_translations", :force => true do |t|
     t.integer  "feature_id"
     t.string   "locale"
@@ -437,6 +467,21 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
   add_index "inventory_units", ["shipment_id"], :name => "index_inventory_units_on_shipment_id"
   add_index "inventory_units", ["variant_id"], :name => "index_inventory_units_on_variant_id"
 
+  create_table "languages", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "name"
+    t.string   "code"
+    t.string   "presentation"
+    t.boolean  "public",       :default => false
+    t.boolean  "default",      :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "position",     :default => 1
+  end
+
+  add_index "languages", ["site_id", "position"], :name => "index_languages_on_site_id_and_position"
+  add_index "languages", ["site_id"], :name => "index_languages_on_site_id"
+
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
     t.integer  "variant_id"
@@ -468,16 +513,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "mail_methods", :force => true do |t|
-    t.integer  "site_id"
-    t.string   "environment"
-    t.boolean  "active",      :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "mail_methods", ["site_id"], :name => "index_mail_methods_on_site_id"
 
   create_table "option_types", :force => true do |t|
     t.string   "name",         :limit => 100
@@ -521,7 +556,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.datetime "updated_at"
     t.string   "state"
     t.decimal  "adjustment_total",                   :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "credit_total",                       :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.datetime "completed_at"
     t.integer  "bill_address_id"
     t.integer  "ship_address_id"
@@ -617,22 +651,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
 
   add_index "preferences", ["key"], :name => "index_preferences_on_key", :unique => true
 
-  create_table "product_groups", :force => true do |t|
-    t.string  "name"
-    t.string  "permalink"
-    t.string  "order"
-    t.integer "site_id"
-  end
-
-  add_index "product_groups", ["name"], :name => "index_product_groups_on_name"
-  add_index "product_groups", ["permalink"], :name => "index_product_groups_on_permalink"
-  add_index "product_groups", ["site_id"], :name => "index_product_groups_on_site_id"
-
-  create_table "product_groups_products", :id => false, :force => true do |t|
-    t.integer "product_id"
-    t.integer "product_group_id"
-  end
-
   create_table "product_option_types", :force => true do |t|
     t.integer  "product_id"
     t.integer  "option_type_id"
@@ -661,15 +679,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
 
   add_index "product_property_translations", ["locale"], :name => "index_product_property_translations_on_locale"
   add_index "product_property_translations", ["product_property_id"], :name => "index_827806ffd4778407c35215189d8230bca632b9b7"
-
-  create_table "product_scopes", :force => true do |t|
-    t.integer "product_group_id"
-    t.string  "name"
-    t.text    "arguments"
-  end
-
-  add_index "product_scopes", ["name"], :name => "index_product_scopes_on_name"
-  add_index "product_scopes", ["product_group_id"], :name => "index_product_scopes_on_product_group_id"
 
   create_table "product_translations", :force => true do |t|
     t.integer  "product_id"
@@ -710,46 +719,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
   add_index "products", ["site_id"], :name => "index_products_on_site_id"
   add_index "products", ["slug"], :name => "index_products_on_slug"
   add_index "products", ["title"], :name => "index_products_on_title"
-
-  create_table "products_promotion_rules", :id => false, :force => true do |t|
-    t.integer "product_id"
-    t.integer "promotion_rule_id"
-  end
-
-  add_index "products_promotion_rules", ["product_id"], :name => "index_products_promotion_rules_on_product_id"
-  add_index "products_promotion_rules", ["promotion_rule_id"], :name => "index_products_promotion_rules_on_promotion_rule_id"
-
-  create_table "promotion_action_line_items", :force => true do |t|
-    t.integer "promotion_action_id"
-    t.integer "variant_id"
-    t.integer "quantity",            :default => 1
-  end
-
-  create_table "promotion_actions", :force => true do |t|
-    t.integer "activator_id"
-    t.integer "position"
-    t.string  "type"
-  end
-
-  create_table "promotion_rules", :force => true do |t|
-    t.integer  "activator_id"
-    t.integer  "user_id"
-    t.integer  "product_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "type"
-  end
-
-  add_index "promotion_rules", ["product_group_id"], :name => "index_promotion_rules_on_product_group_id"
-  add_index "promotion_rules", ["user_id"], :name => "index_promotion_rules_on_user_id"
-
-  create_table "promotion_rules_users", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "promotion_rule_id"
-  end
-
-  add_index "promotion_rules_users", ["promotion_rule_id"], :name => "index_promotion_rules_users_on_promotion_rule_id"
-  add_index "promotion_rules_users", ["user_id"], :name => "index_promotion_rules_users_on_user_id"
 
   create_table "properties", :force => true do |t|
     t.string   "name"
@@ -818,7 +787,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.string   "title"
     t.string   "slug"
     t.text     "meta_description"
-    t.string   "title_addon"
     t.string   "redirect_url"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
@@ -845,18 +813,19 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.string   "meta_title"
     t.text     "meta_description"
     t.string   "redirect_url"
-    t.string   "title_addon"
     t.datetime "published_at"
     t.boolean  "hidden",            :default => false
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.string   "menu_title"
-    t.integer  "level"
     t.boolean  "shallow_permalink", :default => true
-    t.boolean  "no_follow"
+    t.boolean  "robot_index",       :default => true
+    t.boolean  "robot_follow",      :default => true
+    t.boolean  "restricted",        :default => false
   end
 
   add_index "sections", ["link_id", "link_type"], :name => "index_sections_on_link_id_and_link_type"
+  add_index "sections", ["parent_id", "lft"], :name => "index_sections_on_parent_id_and_lft"
   add_index "sections", ["parent_id"], :name => "index_sections_on_parent_id"
   add_index "sections", ["site_id"], :name => "index_sections_on_site_id"
 
@@ -895,6 +864,7 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.boolean  "match_none"
     t.boolean  "match_all"
     t.boolean  "match_one"
+    t.datetime "deleted_at"
   end
 
   add_index "shipping_methods", ["site_id"], :name => "index_shipping_methods_on_site_id"
@@ -926,13 +896,12 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.string   "meta_title"
     t.string   "subtitle"
     t.string   "timezone"
-    t.string   "locales",                  :limit => 17
-    t.boolean  "public",                                 :default => true
+    t.boolean  "public",                   :default => true
     t.text     "options"
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.text     "plugins"
-    t.integer  "site_registrations_count",               :default => 0
+    t.integer  "site_registrations_count", :default => 0
     t.integer  "theme_id"
     t.string   "logo_mime_type"
     t.string   "logo_name"
@@ -942,6 +911,8 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.string   "logo_uid"
     t.string   "logo_ext"
     t.string   "default_image_uid"
+    t.datetime "liquid_models_updated_at"
+    t.text     "page_types"
   end
 
   add_index "sites", ["account_id"], :name => "index_sites_on_account_id"
@@ -949,17 +920,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
   add_index "sites", ["theme_id"], :name => "index_sites_on_theme_id"
 
   create_table "state_changes", :force => true do |t|
-    t.integer  "stateful_id"
-    t.integer  "user_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "previous_state"
-    t.string   "stateful_type"
-    t.string   "next_state"
-  end
-
-  create_table "state_events", :force => true do |t|
     t.integer  "stateful_id"
     t.integer  "user_id"
     t.string   "name"
@@ -1042,6 +1002,23 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
 
   add_index "tax_rates", ["site_id"], :name => "index_tax_rates_on_site_id"
 
+  create_table "theme_assets", :force => true do |t|
+    t.integer  "theme_id"
+    t.string   "content_type"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "size"
+    t.string   "source"
+    t.string   "local_path"
+    t.string   "folder"
+    t.boolean  "compile",      :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "theme_assets", ["local_path"], :name => "index_theme_assets_on_local_path"
+  add_index "theme_assets", ["theme_id"], :name => "index_theme_assets_on_theme_id"
+
   create_table "themes", :force => true do |t|
     t.integer  "site_id"
     t.string   "name"
@@ -1070,17 +1047,6 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
   end
 
   add_index "tokenized_permissions", ["permissable_id", "permissable_type"], :name => "index_tokenized_name_and_type"
-
-  create_table "trackers", :force => true do |t|
-    t.string   "environment"
-    t.string   "analytics_id"
-    t.boolean  "active",       :default => true
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "trackers", ["site_id"], :name => "index_trackers_on_site_id"
 
   create_table "users", :force => true do |t|
     t.integer  "account_id"
@@ -1164,7 +1130,8 @@ ActiveRecord::Schema.define(:version => 20120817150909) do
     t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "default_tax", :default => false
+    t.boolean  "default_tax",        :default => false
+    t.integer  "zone_members_count", :default => 0
   end
 
   add_index "zones", ["site_id"], :name => "index_zones_on_site_id"

@@ -1,12 +1,17 @@
 <!doctype html>
 <%= render 'head' %>
-<body id='<%= @body_id %>'>
+<body id='<%= @body_id %>' data-spy="scroll" data-target=".navbar">
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 <div id='overlay'></div>
 <%= render 'header' %>
-<a href="#" id="facebook">Follow me</a>
-<div id="content">
-	<%= yield %>
+<a href="http://www.facebook.com/tresorsdestbarth" id="facebook" target="_blank">Follow me !!!</a>
+<div id="content" class="container-fluid">
+	<%= render "flash" %>
+	<% if content_for?(:page_container) %>
+        <%= yield :page_container %>
+    <% else %>
+		<%= yield %>
+	<% end %>
 </div>
  <%= render 'footer' %>
 <%= render 'javascripts' %>

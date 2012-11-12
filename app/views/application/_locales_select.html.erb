@@ -1,9 +1,9 @@
-<% if site.multilanguage? %>
+<% if site.frontend_translated? %>
     <nav id="locales-menu" class="locales-menu-container pull-right">
       <ul id='locales' class="nav">
-        <% site_locales.each do |locale| %>
-			<li><%= link_to(t("locales.long.#{locale.to_s}"), root_url(:locale => locale), :class => locale.to_s) %></li>
+        <% site.available_locales.each do |language| %>
+                <li><%= link_to(language.presentation, root_url(:locale => language.code), :class => [language.code.to_s, 'navbar-link']) %></li>
         <% end %>
       </ul>
     </nav>
-<% end %> 
+<% end %>

@@ -8,19 +8,21 @@ group :assets do
  gem 'uglifier', '>= 1.0.3'
 end
 
+prod_location = 'git@github.com:jdfdesign/gko_cms3.git'
+prod_version = "= 0.4.36"
 group :production do
-	gem "gko_core", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_auth", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_images", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_documents", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_inquiries", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_themes", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_features", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_categories", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_stickers", "= 0.3.58", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem 'gko_store', '= 0.0.39',  :git => 'git@github.com:jdfdesign/gko_store.git'
+	gem 'gko_core', prod_version, :git => prod_location
+  gem "gko_auth", prod_version, :git => prod_location
+  gem "gko_images", prod_version, :git => prod_location
+  gem "gko_documents", prod_version, :git => prod_location
+  gem "gko_inquiries", prod_version, :git => prod_location
+  gem "gko_themes", prod_version, :git => prod_location
+  gem "gko_features", prod_version, :git => prod_location
+  gem "gko_categories", prod_version, :git => prod_location
+  gem "gko_stickers", prod_version, :git => prod_location
+  gem 'gko_store', '= 0.0.46',  :git => 'git@github.com:jdfdesign/gko_store.git'
 	 #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
-	gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
+  gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
 end
 #group :development do
 #	gem "gko_core", :path => File.expand_path('~/Github/gko_cms3/gko_core', __FILE__)

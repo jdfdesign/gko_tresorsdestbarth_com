@@ -39,13 +39,13 @@
 			// initialize some events
 			initEvents = function() {
 				$(window).on({
-					'throttledresize' : function( event ) {
+					"throttledresize" : function( event ) {
 						refresh();
 					}
 				});
 				$(window).on({
 					// when scrolling the page change the position of each row	
-					'scroll.Scrolling' : function( event ) {
+					"scroll.Scrolling" : function( event ) {
 
 						// set a timeout to avoid that the 
 						// placeRows function gets called on every scroll trigger

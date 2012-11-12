@@ -1,12 +1,17 @@
-<%
-@store = site.stores.first
-@categories = @store.available_categories
-@images = site.homes.first.images
-%>
 
-	<section id="cover" class="background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+<% content_for :after_javascript_libraries  do %>
+	<%= javascript_include_tag "home" %>
+<% end %>
+<%
+@store = site.store
+@categories = @store.categories.translated
+@images = site.home.images
+%>
+<% content_for :page_container do %>
+<% cache([site, @store]) do %>
+	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
 		<div id="logo"></div>
-		<p  class='headline'><%= t(:"home.citation").html_safe %></p>
+	<!--	<p  class='headline'><%#= t(:"home.citation").html_safe %></p>  -->
 		<div class="circles">
 			<div class="circle circle1"></div>
 			<div class="circle circle2"></div>
@@ -22,15 +27,15 @@
 		products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
 	%>
 		<% if category.body.present? %>
-		<section class="parallax background-image fullscreen" style="background-image: url('<%= bg_url %>');">
+		<section class="row-fluid parallax background-image fullscreen" style="background-image: url('<%= bg_url %>');">
 			<h3 class='headline'><%= category.body.html_safe %></h3>
 		</section><!--section-->
 		<% end %>
-		<section id="<%= category.name %>" data-state="category" class="parallax background-image fullscreen" style="background-image: url('<%= bg2_url %>');">
-			<div class='parallax-inner'>
-				<div class='parallax-item category active'>
+		<section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen" style="background-image: url('<%= bg2_url %>');">
+			<div class='parallax-inner fullscreen'>
+				<div class='parallax-item category active fullscreen'>
 					<div class="pod ss-left">
-						<h1 class='pod-title'><%= link_to(category.title, store_path(@store))%></h1>
+						<h1 class='pod-title'><%= link_to(category.title.html_safe, store_path(@store))%></h1>
 						<img src='/assets/apos2.png' class='decoration'>
 						<img src='/assets/apos2blur.png' class='decoration blur'>
 					</div>
@@ -41,13 +46,13 @@
 						</div>
 					</div><!--pod-->
 				</div>
-				<div class='parallax-item products'>
+				<div class='parallax-item products fullscreen'>
 					<div class='bg'></div>
 					<a class='back' href="#">&#10216</a>
 					<div class="tj_container">
 						<div class="tj_wrapper">
 						<% if products.try(:any?) %>
-							<ul class="tj_gallery">
+							<ul class="tj_gallery grid.grid4">
 								<% products.each do |p| %>
 								<li>
 									<a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>" data-remote="true">
@@ -68,27 +73,30 @@
 						</div>
 						
 						<div class="tj_nav">
+							
 							<a class="tj_prev" href="#">&#8249;</a>
 							<span class="tj_nav_container"></span>
 							<a class="tj_next" href="#">&#8250;</a>
 						</div>
 					</div>
 				</div>
-				<div class='parallax-item product'>
+				<div class='parallax-item product fullscreen'>
 					<div class='bg'></div>
 					<a class='back' href="#">&#10216</a>
 					<div class='content'></div>
 				</div>
+
 			</div>
 		</section><!--section-->
 
 	<% end %>
-	<section id="about" class="background-image" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+	<section id="about" class="row-fluid background-image" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
 		<div class="row-fluid">
 			<div class="span12">
 				<%= render_html_text( resource.body) if resource.body.present? %>
 			</div>
 		</div><!--row-->
 	</section><!--section-->
-
+<% end %> 
+<% end %>
 
