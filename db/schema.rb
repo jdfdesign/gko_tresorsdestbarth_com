@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107142736) do
+ActiveRecord::Schema.define(:version => 20121115125707) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -898,8 +898,8 @@ ActiveRecord::Schema.define(:version => 20121107142736) do
     t.string   "timezone"
     t.boolean  "public",                   :default => true
     t.text     "options"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.text     "plugins"
     t.integer  "site_registrations_count", :default => 0
     t.integer  "theme_id"
@@ -913,6 +913,8 @@ ActiveRecord::Schema.define(:version => 20121107142736) do
     t.string   "default_image_uid"
     t.datetime "liquid_models_updated_at"
     t.text     "page_types"
+    t.integer  "languages_count",          :default => 0
+    t.boolean  "front_page_cached",        :default => false
   end
 
   add_index "sites", ["account_id"], :name => "index_sites_on_account_id"
