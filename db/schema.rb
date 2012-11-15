@@ -471,12 +471,12 @@ ActiveRecord::Schema.define(:version => 20121115125707) do
     t.integer  "site_id"
     t.string   "name"
     t.string   "code"
+    t.integer  "position",     :default => 1
     t.string   "presentation"
     t.boolean  "public",       :default => false
     t.boolean  "default",      :default => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
-    t.integer  "position",     :default => 1
   end
 
   add_index "languages", ["site_id", "position"], :name => "index_languages_on_site_id_and_position"
@@ -911,9 +911,9 @@ ActiveRecord::Schema.define(:version => 20121115125707) do
     t.string   "logo_uid"
     t.string   "logo_ext"
     t.string   "default_image_uid"
+    t.integer  "languages_count",          :default => 0
     t.datetime "liquid_models_updated_at"
     t.text     "page_types"
-    t.integer  "languages_count",          :default => 0
     t.boolean  "front_page_cached",        :default => false
   end
 

@@ -91,20 +91,6 @@ a {
    @include transition("color .5s linear, background-color .5s linear")
 }
 
-@-webkit-keyframes fade-circle {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
-}
-@-moz-keyframes fade-circle {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
-}
-@-ms-keyframes fade-circle {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
-}
-
-
 /*-----------------------------------------
    SHARED STYLES 
 ----------------------------------------- */ 
@@ -133,7 +119,9 @@ h4 {
 	letter-spacing: 1px;
 	font-size: $baseFontSize;	
 }
-
+.navbar-inner {
+	@include reset-filter;
+}
 
 /*-----------------------------------------
  STRUCTURAL LAYOUT 
@@ -238,7 +226,7 @@ body {
 		border: 0;
 		cursor: pointer;
 		color: #ccc;
-		font-size: 100px;
+		font-size: 80px;
 		font-weight: 300;
 		@include square(300px);
 		line-height: 300px;
@@ -490,49 +478,6 @@ article.product {
 		font-size: 58px;
 		line-height: 48px;
 		margin-top: 388px;
-	}
-	.circles {
-		position: absolute;
-		left: 50%;
-		width: 20px;
-		margin-left: -10px;
-		bottom: 8px;
-		height: 80px;
-		.circle {
-			position: absolute;
-			left: 50%;
-			@include box-shadow(0 4px 16px rgba(0,0,0,.4));
-			background: white;
-			background-color: rgba(255,255,255,.8);
-			text-align: center;
-		}
-		.circle1 {
-			bottom: 32px;
-			@include square(8px);
-			@include border-radius(4px);
-			margin-left: -4px;
-			-webkit-animation: fade-circle 2s 0.3s infinite alternate;
-		    -moz-animation:    fade-circle 2s 0.3s infinite alternate;
-		    -ms-animation:     fade-circle 2s 0.3s infinite alternate;
-		}
-		.circle2 {
-			bottom: 18px;
-			@include square(12px);
-			@include border-radius(6px);
-			margin-left: -6px;
-			-webkit-animation: fade-circle 2s 0.6s infinite alternate;
-		    -moz-animation:    fade-circle 2s 0.6s infinite alternate;
-		    -ms-animation:     fade-circle 2s 0.6s infinite alternate;
-		}
-		.circle3 {
-			bottom: 0px;
-			@include square(18px);
-			@include border-radius(9px);
-			margin-left: -9px;
-			-webkit-animation: fade-circle 2s 0.9s infinite alternate;
-		    -moz-animation:    fade-circle 2s 0.9s infinite alternate;
-		    -ms-animation:     fade-circle 2s 0.9s infinite alternate;
-		}
 	}
 }
 #logo {
