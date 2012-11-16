@@ -183,14 +183,15 @@ $(document).ready(function() {
 	//	f_refresh_ui();
 		var $grid = section.find('.products:first'),
 			$product = section.find('.product:first');
-			$grid.addClass('active').animate({'left':0}, 900);
-			$product.animate({'left': availableWidth}, 900, function() {
-				$(this).removeClass('active');
+			
+		$grid.addClass('active').animate({'left':0}, 900);
+		$product.animate({'left': availableWidth}, 900, function() {
+			$(this).removeClass('active');
 				if( typeof callback == "function") {
 					$(callback)
 				}
 			});
-			section.attr('data-state', 'grid');
+		section.attr('data-state', 'grid');
 	}
 	f_show_grid = function(section, callback) {
 		//console.log("// f_show_grid");

@@ -2,6 +2,7 @@
 <% content_for :after_javascript_libraries  do %>
 	<%= javascript_include_tag "home" %>
 <% end %>
+
 <%
 @store = site.store
 @categories = @store.categories.translated

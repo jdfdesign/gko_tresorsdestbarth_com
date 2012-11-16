@@ -1,0 +1,265 @@
+@import "grid_product";
+@import "jscrollpane";
+body#home {
+
+	/*-----------------------------------------
+	 STRUCTURAL LAYOUT 
+	----------------------------------------- */
+	html {
+		margin: 0;
+		padding: 0;
+		height:100%
+	}
+
+	body {
+		font-weight: 300;
+		background: #fefefe;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		height:100%;
+	} 
+	.fullscreen {
+		height:100%;
+		overflow:hidden;
+		min-height:100%;
+		width: 100%;
+		zoom: 100%;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 0 center;
+		background-attachment:fixed;
+		@include background-size(cover);
+		position:relative;
+		//@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+		overflow: hidden;
+	}
+	#overlay {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: #fefefe;
+		z-index: 10000;
+	}
+	#wrapper-wide-body {
+		margin: 50px 0;
+
+	}
+	#content {
+		padding: 0;
+		position: absolute;
+		top: 48px;
+		left: 0;
+		right: 0;
+		bottom: 40px;
+	}
+	.parallax-inner .parallax-item {
+		//display: none;
+		position: absolute;
+		&.active  { 
+			display: block; 
+		}
+		&.product,	
+		&.products {
+			left: 100%;
+		}
+		.bg {
+			width: 100%;
+			height:100%;
+			display: block;
+			position: absolute;
+			background: #000;
+			@include opacity(70);
+			z-index: 0;
+		}
+		.pod {
+			top: 50%;
+			margin-top: -240px;
+			height: 480px;
+			cursor: pointer;
+		}
+		.pod-carousel {
+			position: relative;
+			border: 1px solid rgba(255,255,255,.8);
+			@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+			@include border-radius(12px);
+			@include square(300px);
+			img {
+				@include border-radius(12px);
+				@include square(300px);
+			}
+			float:left;
+			margin-right: 100px;
+		}
+		a.view-all{
+			position:absolute;
+			top:50%;
+			margin-top:-150px;
+			right:-36px;
+			z-index: 1000;
+			display: block;
+			text-align: right;
+			text-decoration: none;
+			border: 0;
+			cursor: pointer;
+			color: #ccc;
+			font-size: 80px;
+			font-weight: 300;
+			@include square(300px);
+			line-height: 300px;
+			&:hover {
+				color: white;
+				text-decoration: none;
+			}
+		}
+
+		.ss-left, .ss-right{
+		    float: left;
+		    width: 48%;
+		    position: relative;
+		}
+		.ss-right{
+		    padding-left: 2%;
+		}
+		.ss-left{
+			position: relative;
+			text-align: right;
+		    float: left;
+		    padding-right: 2%;
+
+			img.decoration {
+				position: absolute;
+				top: 50%;
+				margin-top: -145px;
+				left: 50%;
+				margin-left: -215px;
+
+				&.blur {
+					@include transition("all 0.7s ease-in-out");
+					@include opacity(0);
+				}
+			}
+			&:hover {
+				img.decoration.blur {
+					@include opacity(50);
+				}	
+			}
+		}
+
+		.pod-title {
+			position: absolute;
+			z-index: 100;
+			right: 0;
+			line-height: 300px;
+			a {
+				font-family: $altFontFamily;
+				color:white;
+				text-transform: lowercase;
+				font-size: 300px;
+				font-weight: 300;
+				line-height: 150px;
+				color: #FFF;
+				text-shadow:0px 0px 24px $white;
+				padding-right: 40px;
+				&:hover {
+					text-decoration: none;
+				};
+			}
+		}
+
+	}
+
+	.headline {
+		font-family: $altFontFamily;
+		color: white;
+		height: auto;
+		font-size: 68px;
+		line-height: 58px;
+		text-align: center;
+		text-shadow: 0px 0px 100px black;
+		margin: 0 20px;
+		background: transparent asset-url('apos.png', image) 0 0 no-repeat;
+		min-height: 180px;
+		em {
+			font-family: $baseFontFamily;
+			font-size: $baseFontSize;
+		}
+	}
+	.inview {
+		.headline {
+			text-shadow: 0px 0px 6px rgba(0,0,0,.4);
+		}
+	}
+	#cover {
+		background: rgba(103,100,93,.96) asset-url('stbarth_treasures-GEG_0099.jpg', image);
+		@include box-shadow(0 4px 16px rgba(0,0,0,.4));
+		background-repeat: no-repeat;
+		background-position: 0px 0px;
+		background-attachment:absolute;
+		@include background-size(cover);
+		.headline {
+			color: white;
+			font-size: 58px;
+			line-height: 48px;
+			margin-top: 388px;
+		}
+	}
+	#logo {
+		background: transparent asset-url('logo.png',image) center center no-repeat;
+		margin-top: -238px;
+		top: 50%;
+		margin-left: -257px;
+		left: 50%;
+		position: absolute;
+		max-width: 476px;
+		max-height: 515px;
+		width: 476px;
+		height: 515px;
+	}
+	.back{
+		position:absolute;
+		top:50%;
+		margin-top:-50px;
+		left:0;
+		z-index: 1000;
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		border: 0;
+		cursor: pointer;
+		color: #ccc;
+		font-size: 80px;
+		font-weight: 300;
+		height: 100px;
+		width: 40px;
+		line-height: 40px;
+		&:hover {
+			color: white;
+			text-decoration: none;
+		}
+	}
+
+
+
+	.content {
+		padding: $itemPadding;
+	}
+
+	#about {
+		color: white;
+		padding: 24px 24px 100px;
+		@include box-sizing(border-box);
+		h3 {
+			color: $white;
+			text-transform: uppercase; 
+		}
+		h2 {
+			margin-bottom: 80px;
+			color: $white;
+			text-transform: uppercase; 
+		}
+	}
+	
+}
