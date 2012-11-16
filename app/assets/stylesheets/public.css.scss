@@ -60,6 +60,15 @@ $itemPadding: 40px;
 @import "gko/public/base";
 @import "gko/store"; 
 @import "galleria";
+
+
+#content {
+	padding-top: 48px;
+	padding-bottom: 40px;
+	max-width: 980px;
+	@include center-block;
+}
+
 @import "home";
 
 /*-----------------------------------------

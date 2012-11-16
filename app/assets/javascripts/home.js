@@ -8,232 +8,102 @@
 //= require jquery.debouncedresize.js
 //= require jquery.gridnav
 //= require gko/gko.galleria
-
 //= require jquery.jscrollpane
-$(document).ready(function() {
 
-	f_scroll_to_section = function(section, callback) {
-		var index = section.index('section');
-		contentApi.data('jsp').scrollToY( availableHeight * index );
-    }
-	f_init_carousel = function() {
-		$('.carousel').each(function(index) {
-			var _self = $(this);
-			if(_self.find('.item').length > 1) {
-				_self.carousel('pause');
-			} else {
-				_self.find('.carousel-control').each(function(index) {
-					  $(this).css({display: 'none'})
-				 });
-			}
-		});
-    }
-	f_enable_main_scroll = function(trueOrFalse) {
-		if(trueOrFalse) {
-			contentApi.data('jsp').enable(true);
-			$container.find(".jspVerticalBar").show();
-		} else {
-			// Disable the main scroll
-			$container.find(".jspVerticalBar").hide();
-			contentApi.data('jsp').enable(false);
-		}
-	}
-	f_showCartUpdateNotice = function(action) {
-		
-		var o = $viewCartMenuLink.position();
-		if($notice === undefined) {
-
-			$notice = $("<div class='notice'>Your selection has been updated !</div>").appendTo($body);
-			$notice.css({'display': 'none','position': 'fixed', 'z-index' : 10000, 'left' : o.left, 'top': o.top + 50, 'background-color': 'green', 'color': 'white', 'padding': 8})
-		}	
-		$notice.fadeIn('slow', function() {
-			window.setTimeout(f_hideCartUpdateNotice, 2000);
-		});
-	}
-	f_hideCartUpdateNotice = function () {
-		$notice.fadeOut('slow');
-	}
-	f_getViewportSize = function () {
-		var mode, domObject, size = { height: $window.innerHeight(), width: $window.innerWidth() };
-		// if this is correct then return it. iPad has compat Mode, so will
-		// go into check clientHeight/clientWidth (which has the wrong value).
-		if (!size.height) {
-			mode = document.compatMode;
-			if (mode || !$.support.boxModel) { // IE, Gecko
-				domObject = mode === 'CSS1Compat' ?
-				document.documentElement : // Standards
-				document.body; // Quirks
-				size = {
-					height: domObject.clientHeight,
-					width:  domObject.clientWidth
-				};
-      		}
-    	}
-		return size;
-	}
-	f_getAvailableSpace = function () {
-		var viewportSize = f_getViewportSize(),
-			deltaHeight = headerHeight + footerHeight;
-		availableHeight = viewportSize.height - (headerHeight + footerHeight)
-		availableWidth = viewportSize.width;
-	}
-	f_refresh_ui = function() {
-		
-
-		$('.fullscreen').css({'height': availableHeight});
-		$.each($('.parallax .headline'), function(index, item) {
-			var that = $(this)
-				,top = (availableHeight - that.height())/2;
-				
-			top = (top < 0) ? 0 : top;
-			that.css('margin-top', top);
-		});
-		
-		if(contentApi != undefined) {
-		//	console.log("f_refresh_ui contentApi");
-			$container.css('height', availableHeight);
-			contentApi.data('jsp').reinitialise();
-		}
-		
-		$('.grid').each(function (i, el) {
-			$(el).gridnav('init');
-		});
-    }
-	f_show_category = function(section) {
-		
-		if($activeSection == undefined) {
-			f_scroll_to_section(section);
-		}
-		else {
-		//	console.log("// f_show_category " + section.attr("id"));
-			var activeSectionId = $activeSection.attr('id'),
-				sectionId = section.attr('id'),
-				activeSectionState = $activeSection.attr('data-state');
-		//	console.log("// activeSection state: " + activeSectionState);
-			
-			$activeSection.attr('data-state', 'category');	
-				
-			if(activeSectionState == 'category') {
-				//console.log("// category: ");
-				f_scroll_to_section(section, null);
-			}
-			else if(activeSectionState == "product") {
-				//console.log("// product: ");
-				var $category = $activeSection.find(".category:first"),
-					$grid = $activeSection.find('.products:first'),
-					$product = $activeSection.find('.product:first');
-					$product.animate({'left': availableWidth}, 900, function() {
-						$(this).removeClass('active');
-					});
-					$grid.addClass('active').animate({'left':availableWidth}, 1800, function() {
-						$(this).removeClass('active');
-					});
-					$category.addClass('active').animate({'left':0}, 2700, function() {
-						f_enable_main_scroll(true);
-						f_scroll_to_section(section, false);
-					});
-			}
-			else if(activeSectionState == "grid") {
-				//console.log("// grid: ");
-				var $category = section.find(".category:first"),
-					$grid = section.find('.products:first');
-					$grid.addClass('active').animate({'left':availableWidth}, 900, function() {
-						$(this).removeClass('active');
-					});
-					$category.addClass('active').animate({'left':0}, 1800, function() {
-						f_enable_main_scroll(true);
-						//console.log("// gridccccccc: ");
-						f_scroll_to_section(section, false);
-					});
-			}
-		}
-		$activeSection = section;
-	}
-	f_show_product = function(section, response) {
-		var $grid = section.find('.products:first'),
-			$product = section.find('.product:first'),
-			$content = $product.find(".content:first");
-
-		$content.html(response);
-		var $carousel = $content.find('.carousel:first'),
-			$info = $content.find('.product-info:first'),
-			infoWidth = 300,
-			inforMargin = 30,
-			maxCarouselHeight = availableHeight - 120,
-			maxCarouselWidth = availableWidth - 240 - infoWidth - inforMargin,
-			maxCarousel = Math.min(maxCarouselWidth, maxCarouselHeight);
-			
-			//console.log("availableWidth " + availableWidth)
-
-		$carousel.css({'max-height': maxCarousel, 'max-width': maxCarousel});
-		$info.css({'height': maxCarouselHeight});
-		
-		$('form.cart-form').attr('data-remote', 'true');
-		section.attr('data-state', 'product');
-		$grid.animate({'left': -availableWidth}, 900, function(){
-			$(this).removeClass('active')
-		});
-		$product.css('left', availableWidth).addClass('active').animate({'left': 0}, 900, function(){
-			f_init_carousel();
-			$info.jScrollPane();
-		});
-		
-	}
-	f_hide_product = function(section, callback) {
-	//	f_refresh_ui();
-		var $grid = section.find('.products:first'),
-			$product = section.find('.product:first');
-			
-		$grid.addClass('active').animate({'left':0}, 900);
-		$product.animate({'left': availableWidth}, 900, function() {
-			$(this).removeClass('active');
-				if( typeof callback == "function") {
-					$(callback)
-				}
-			});
-		section.attr('data-state', 'grid');
-	}
-	f_show_grid = function(section, callback) {
-		//console.log("// f_show_grid");
-		$activeSection = section;
-		//f_scroll_to_section(section, f_show_grid_after);
-		f_scroll_to_section(section);
-		//console.log("// f_show_grid_after");
-		var $category = $activeSection.find(".category:first"),
-			$products = $activeSection.find(".products:first");
-			
-			//console.log("XXXXXXX f_show_grid" + $category);
-			
-		$activeSection.attr('data-state', 'grid');
-		
-		$products.css('left', availableWidth).addClass('active');
-		f_init_grid($products);
+var  $body
+	,$html
+	,$window
+	,$overlay
+	,$container
+	,$cover
+	,$logo
+	,$navbar
+	,$activeSection
+	,contentApi
+	,imagesCount = 0
+	,gridColCount = 3
+	,gridRowCount = 2 
+	,gridItemHeight = 300 //including margin and padding
+	,headerHeight
+	,footerHeight
+	,deltaHeight
+	,availableHeight
+	,availableWidth
+	,$notice
+	,$viewCartMenuLink
+	,bodyId
+	,isHome
+	,History = window.History; // Note: We are using a capital H instead of a lower h
 	
-		$category.animate({'left': -availableWidth}, 900, function() {
-			$(this).removeClass('active');
-			f_enable_main_scroll(false);
+var Site = {
+	
+	init: function() {
+		$body = $("body");
+		$html = $("html");
+		$window = $(window);
+		$overlay = $("#overlay");
+		$container = $("#content");
+		$cover = $("#cover");
+		$logo = $("#logo");
+		$navbar = $(".navbar:first");
+		headerHeight = $(".navbar:first").height();
+		footerHeight = $("#footer-container").height();
+		deltaHeight = headerHeight + footerHeight;
+		$viewCartMenuLink = $('a#view-cart-menu-link');
+		bodyId = $body.attr('id');
+		isHome = (bodyId == "home");
+		
+		$('section.background-image').each(function (i, el) {
+			imagesCount ++;
+			var bg = $(el).css('background-image'),
+				src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
+				$('<img>').attr('src', src).on('load', function() {
+		        imagesCount --;
+		        Site.onImageLoaded();
+			});
 		});
-		$products.animate({'left': 0}, 900);
-	}
+		f_init_galleria();
 
-	f_hide_grid = function(section) {
-		//console.log("// f_hide_grid " + section.attr("id"));
-		var $category = section.find(".category:first"),
-			$products = section.find(".products:first");
-		section.attr('data-state', 'category');
-		$category.addClass('active').animate({'left':0}, 900);
-		$products.animate({'left': availableWidth}, 900, function() {
-			//console.log("// f_hide_grid " + availableWidth);
-			f_enable_main_scroll(true);
-		});
-	}
-	f_init_events = function() {	
+	},
+	onImageLoaded: function() {
+		if(imagesCount == 0) {
+			Util.availableSpace(); // update space infos before all
+			Site.resize();
+			Site.attachEvents();
+			$sidescroll.init();
+
+			if(isHome) {
+				var $headline = $cover.find('.headline');
+				$headline.css('opacity', 0);
+				$logo.css('opacity', 0);
+				$navbar.css('top', -50);
+				$overlay.fadeOut(2000, function() {
+					$overlay.remove();
+					$logo.animate({'opacity': 1}, 1200, function() {
+						$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
+					});
+					$navbar.animate({'top':0}, 200);
+				});
+			} else {
+				$overlay.fadeOut(2000);
+			}
+			
+			// Temporarily make the container tiny so it doesn't influence the
+			// calculation of the size of the document
+			$container.css({'width': 1,'height': 1});
+			// Now make it the size of the window...
+			$container.css({'width': availableWidth,'height': availableHeight});
+			// Enable jscrollpane				
+			contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
+		}
+	},
+	attachEvents: function() {
         $(window).on("debouncedresize",
         function(e) {
-			f_getAvailableSpace(); // update space infos before all
-            f_refresh_ui();
+			Util.availableSpace(); // update space infos before all
+            Site.resize();
 			if($activeSection) {
-				f_scroll_to_section($activeSection);
+				Site.scrollToSection($activeSection);
 			}
 			
         });
@@ -242,38 +112,36 @@ $(document).ready(function() {
 		.on('click', 'a', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_show_grid($(this).parents("section:first"));
+			Grid.show($(this).parents("section:first"));
         });
 
 		$('#tresors-au-fil-du-rivage').on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_show_category($("section#treasure"));
+			Category.show($("section#treasure"));
 		})
 
 		$('#perles-noires-de-tahiti').on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_show_category($("section#pearl"));
+			Category.show($("section#pearl"));
 		})
 
 		$('.products').on('click', ' a.back', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_hide_grid($(this).parents("section:first"));
+			Grid.hide($(this).parents("section:first"));
 		})
 		$('.product').on('click', ' a.back', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			f_hide_product($(this).parents("section:first"));
-		})
-		// Bind cart form
-		$('.product').on('ajax:beforeSend', 'form.cart-form',
+			Product.hide($(this).parents("section:first"));
+		}).on('ajax:beforeSend', 'form.cart-form',
 		function(event, xhr, settings) {
 			
 		}).on('ajax:complete',
         function(evt, xhr, status) {
-			f_showCartUpdateNotice();
+			Site.showCartUpdateNotice();
         });
 		// Bind show product action
         $(".tj_gallery_inner").hover(function(e) {
@@ -288,7 +156,7 @@ $(document).ready(function() {
 		})
 		.on('ajax:complete',
         function(evt, xhr, status) {
-			f_show_product($(this).parents("section:first"), eval(xhr.responseText).html());
+			Product.show($(this).parents("section:first"), eval(xhr.responseText).html());
         });
 		// Bind lookbook action
 		$("a#lookbook").attr('data-remote', 'true')
@@ -322,8 +190,133 @@ $(document).ready(function() {
 	        })
 	    });
 
+	},
+	resize: function() {
+		$('.fullscreen').css({'height': availableHeight});
+		$.each($('.parallax .headline'), function(index, item) {
+			var that = $(this)
+				,top = (availableHeight - that.height())/2;
+				
+			top = (top < 0) ? 0 : top;
+			that.css('margin-top', top);
+		});
+		
+		if(contentApi != undefined) {
+		//	console.log("Site.resize contentApi");
+			$container.css('height', availableHeight);
+			contentApi.data('jsp').reinitialise();
+		}
+		
+		$('.grid').each(function (i, el) {
+			Grid.resize($(el));
+		});
+		
+		$('article').each(function (i, el) {
+			Product.resize($(el));
+		});
+	},
+	scrollToSection: function(section) {
+		var index = section.index('section');
+		contentApi.data('jsp').scrollToY( availableHeight * index );
+	},
+	enableMainScroll: function(trueOrFalse) {
+		if(trueOrFalse) {
+			contentApi.data('jsp').enable(true);
+			$container.find(".jspVerticalBar").show();
+		} else {
+			// Disable the main scroll
+			$container.find(".jspVerticalBar").hide();
+			contentApi.data('jsp').enable(false);
+		}
+	},
+	showCartUpdateNotice: function() {
+		
+		var o = $viewCartMenuLink.position();
+		if($notice === undefined) {
+
+			$notice = $("<div class='notice'>Your selection has been updated !</div>").appendTo($body);
+			$notice.css({'display': 'none','position': 'fixed', 'z-index' : 10000, 'left' : o.left, 'top': o.top + 50, 'background-color': 'green', 'color': 'white', 'padding': 8})
+		}	
+		$notice.fadeIn('slow', function() {
+			window.setTimeout(Site.hideCartUpdateNotice, 2000);
+		});
+	},
+	hideCartUpdateNotice: function() {
+		$notice.fadeOut('slow');
+	},
+	onHashChange: function() {
+		var hash = location.hash;
+ 		// Set the page title based on the hash.
+		// document.title = 'The hash is ' + ( hash.replace( /^#/, '' ) || 'blank' ) + '.';
 	}
-	f_init_grid = function(target) {
+}
+var Product = {
+	
+	show: function(section, response) {
+		var $grid = section.find('.products:first'),
+			$product = section.find('.product:first'),
+			$content = $product.find(".content:first");
+
+		$content.html(response);
+		var $article = $content.find("article:first"),
+			$info = $article.find('.product-info:first'),
+			$carousel = $article.find('.carousel:first');
+		
+		Product.resize($article);
+		
+		$('form.cart-form').attr('data-remote', 'true');
+		section.attr('data-state', 'product');
+		
+		$grid.animate({'left': -availableWidth}, 900, function(){
+			$(this).removeClass('active')
+		});
+		$product.css('left', availableWidth).addClass('active').animate({'left': 0}, 900, function(){
+			Product.initCarousel($carousel);
+			$info.jScrollPane();
+		});
+	},
+	hide: function(section) {
+
+		var $grid = section.find('.products:first'),
+			$product = section.find('.product:first');
+
+		$grid.addClass('active').animate({'left':0}, 900);
+		$product.animate({'left': availableWidth}, 900, function() {
+			$(this).removeClass('active');
+				if( typeof callback == "function") {
+					$(callback)
+				}
+			});
+		section.attr('data-state', 'grid');
+	},
+	resize: function(article) {
+		var $carousel = article.find('.carousel:first'),
+			$info = article.find('.product-info:first'),
+			minInfoWidth = 300,
+			infoMargin = 30,
+			maxWidth = article.width(),
+			maxCarouselHeight = availableHeight - 120,
+			maxCarouselWidth = maxWidth - minInfoWidth - infoMargin,
+			maxCarousel = Math.min(maxCarouselWidth, maxCarouselHeight);
+			maxInfoWidth = maxWidth - maxCarousel - infoMargin;
+
+		$carousel.css({'max-height': maxCarousel, 'max-width': maxCarousel});
+		$info.css({'height': maxCarouselHeight, 'width': maxInfoWidth});
+	},
+	initCarousel: function(carousel) {
+		if(typeof carousel != 'undefined') {
+			if(carousel.find('.item').length > 1) {
+				carousel.carousel('pause');
+			} else {
+				carousel.find('.carousel-control').each(function(index) {
+					$(this).css({display: 'none'})
+				});
+			}
+		}
+	}
+}
+var Grid = {
+	init: function(target) {
 		var grid = target.find('.tj_container:first');
 		if(grid.hasClass('grid')) {
 			return false;
@@ -338,77 +331,135 @@ $(document).ready(function() {
 				}
 			});	
 		}
-	}
-	f_do_animation = function() {
-		if(isHome) {
-			var $headline = $cover.find('.headline');
-			$headline.css('opacity', 0);
-			$logo.css('opacity', 0);
-			$navbar.css('top', -50);
-			$overlay.fadeOut(2000, function() {
-				$overlay.remove();
-				$logo.animate({'opacity': 1}, 1200, function() {
-					$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
-				});
-				$navbar.animate({'top':0}, 200);
-			});
-		} else {
-			$overlay.fadeOut(2000);
-		}
+	},
+	show: function(section) {
+		//console.log("// Grid.show");
+		$activeSection = section;
+		//Site.scrollToSection(section, Grid.show_after);
+		Site.scrollToSection(section);
+		//console.log("// Grid.show_after");
+		var $category = $activeSection.find(".category:first"),
+			$products = $activeSection.find(".products:first");
+			
+			//console.log("XXXXXXX Grid.show" + $category);
+			
+		$activeSection.attr('data-state', 'grid');
 		
-	}
-	f_init_history = function() {
-	    if ( !History.enabled ) {
-	         // History.js is disabled for this browser.
-	         // This is because we can optionally choose to support HTML4 browsers or not.
-	        return false;
-	    }
-
-	    // Bind to StateChange Event
-	    History.Adapter.bind(window,'statechange',function(){
-	        var State = History.getState();
-	       // History.log(State.data, State.title, State.url);
-			if(State.data.state == "category") {
-				//var hashOptions = $.deparam.fragment();
-			//	console.log(hashOptions)
-			}
-	    });	
-	}
-	f_loading_done = function() {
-		if(imagesCount == 0) {
-			f_getAvailableSpace(); // update space infos before all
-			f_refresh_ui();
-			f_init_events();
-			f_init_carousel();
-			$sidescroll.init();
-			f_do_animation();
-			// Temporarily make the container tiny so it doesn't influence the
-			// calculation of the size of the document
-			$container.css({'width': 1,'height': 1});
-			// Now make it the size of the window...
-			$container.css({'width': availableWidth,'height': availableHeight});
-			// Enable jscrollpane				
-			contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
-			/*contentApi.on(
-				'complete', function(event) {
-					if( typeof callback == "function") {
-						callback();
-					}
-				}
-			)*/
-		}
-	}
-	f_images_loaded = function() {
-		$('section.background-image').each(function (i, el) {
-			imagesCount ++;
-			var bg = $(el).css('background-image'),
-				src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
-				$('<img>').attr('src', src).on('load', function() {
-		        imagesCount --;
-		        f_loading_done();
-			});
+		$products.css('left', availableWidth).addClass('active');
+		Grid.init($products);
+	
+		$category.animate({'left': -availableWidth}, 900, function() {
+			$(this).removeClass('active');
+			Site.enableMainScroll(false);
 		});
+		$products.animate({'left': 0}, 900);
+	},
+	hide: function(section) {
+		//console.log("// Grid.hide " + section.attr("id"));
+		var $category = section.find(".category:first"),
+			$products = section.find(".products:first");
+		section.attr('data-state', 'category');
+		$category.addClass('active').animate({'left':0}, 900);
+		$products.animate({'left': availableWidth}, 900, function() {
+			//console.log("// Grid.hide " + availableWidth);
+			Site.enableMainScroll(true);
+		});
+	},
+	resize: function(target) {
+		target.gridnav('init');
 	}
+}
+var Category = {
+	init: function(target) {
+
+	},
+	show: function(section) {
+		
+		if($activeSection == undefined) {
+			Site.scrollToSection(section);
+		}
+		else {
+		//	console.log("// Category.show " + section.attr("id"));
+			var activeSectionId = $activeSection.attr('id'),
+				sectionId = section.attr('id'),
+				activeSectionState = $activeSection.attr('data-state');
+		//	console.log("// activeSection state: " + activeSectionState);
+			
+			$activeSection.attr('data-state', 'category');	
+				
+			if(activeSectionState == 'category') {
+				//console.log("// category: ");
+				Site.scrollToSection(section, null);
+			}
+			else if(activeSectionState == "product") {
+				//console.log("// product: ");
+				var $category = $activeSection.find(".category:first"),
+					$grid = $activeSection.find('.products:first'),
+					$product = $activeSection.find('.product:first');
+					$product.animate({'left': availableWidth}, 900, function() {
+						$(this).removeClass('active');
+					});
+					$grid.addClass('active').animate({'left':availableWidth}, 1800, function() {
+						$(this).removeClass('active');
+					});
+					$category.addClass('active').animate({'left':0}, 2700, function() {
+						Site.enableMainScroll(true);
+						Site.scrollToSection(section, false);
+					});
+			}
+			else if(activeSectionState == "grid") {
+				//console.log("// grid: ");
+				var $category = section.find(".category:first"),
+					$grid = section.find('.products:first');
+					$grid.addClass('active').animate({'left':availableWidth}, 900, function() {
+						$(this).removeClass('active');
+					});
+					$category.addClass('active').animate({'left':0}, 1800, function() {
+						Site.enableMainScroll(true);
+						//console.log("// gridccccccc: ");
+						Site.scrollToSection(section, false);
+					});
+			}
+		}
+		$activeSection = section;
+	},
+	hide: function(section) {
+
+	},
+	resize: function(target) {
+
+	}
+}
+var Util = {
+	
+	availableSpace: function() {
+		var viewportSize = Util.viewportSize(),
+			deltaHeight = headerHeight + footerHeight;
+		availableHeight = viewportSize.height - (headerHeight + footerHeight)
+		availableWidth = viewportSize.width;
+	},
+	viewportSize: function () {
+		var mode, domObject, size = { height: $window.innerHeight(), width: $window.innerWidth() };
+		// if this is correct then return it. iPad has compat Mode, so will
+		// go into check clientHeight/clientWidth (which has the wrong value).
+		if (!size.height) {
+			mode = document.compatMode;
+			if (mode || !$.support.boxModel) { // IE, Gecko
+				domObject = mode === 'CSS1Compat' ?
+				document.documentElement : // Standards
+				document.body; // Quirks
+				size = {
+					height: domObject.clientHeight,
+					width:  domObject.clientWidth
+				};
+      		}
+    	}
+		return size;
+	}
+}
+
+$(document).ready(function() {
+
 	f_init_galleria = function() {
 
 		 Galleria.addTheme({
@@ -490,37 +541,6 @@ $(document).ready(function() {
 		        }
 		    });
 	}
-	f_init = function() {
-		
-		f_images_loaded();
-		f_init_galleria();
-	}
 	
-	var  $body = $("body")
-		,$html = $("html")
-		,$window = $(window)
-		,$overlay = $("#overlay")
-		,$container = $("#content") 
-		,$cover = $("#cover")
-		,$logo = $("#logo")
-		,$navbar = $(".navbar:first")
-		,$activeSection
-		,contentApi
-		,imagesCount = 0
-		,gridColCount = 3
-		,gridRowCount = 2 
-		,gridItemHeight = 300 //including margin and padding
-		,headerHeight = $(".navbar:first").height()
-		,footerHeight = $("#footer-container").height()
-		,deltaHeight = headerHeight + footerHeight
-		,availableHeight
-		,availableWidth
-		,$notice
-		,$viewCartMenuLink = $('a#view-cart-menu-link')
-		,bodyId = $body.attr('id')
-		,isHome = (bodyId == "home")
-		,History = window.History; // Note: We are using a capital H instead of a lower h
-
-		
-	f_init(); 
+	Site.init(); 
 });

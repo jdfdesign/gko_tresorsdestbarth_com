@@ -4,19 +4,22 @@
 	var
 	// auxiliar functions
 	aux = {
+
 		setup: function($wrapper, $items, opts) {
 
 			// set the wrappers position to relative
 			$wrapper.css('position', 'relative');
+			$items.css({position: 'relative', left: 'auto', top: 'auto'});
+
 
 			var $parent = $wrapper.parent(),
-				parentHeight = $parent.innerHeight(),
-				parentWidth = $parent.innerWidth(),
+				parentHeight = $parent.parent().innerHeight() - 60,
+				parentWidth = $parent.parent().innerWidth(),
 				ulWidth = $wrapper.innerWidth(),
 				liWidth = $items.innerWidth(),
 				w = Math.floor((parentWidth / 4) - (3 * opts.itemPadding)),
 				itemWidth = Math.max(opts.minItemWidth, Math.min(opts.itemWidth, w));
-
+				console.log(itemWidth);
 
 			$items.each(function(i) {
 				var $item = $(this);
@@ -28,7 +31,8 @@
 
 				$item.find('.tj_content:first').css({
 					'height': itemWidth,
-					'width': itemWidth
+					'width': itemWidth,
+					'right': itemWidth
 				});
 			});
 
@@ -107,7 +111,7 @@
 		saveInitialPosition: function($items) {
 			$items.each(function(i) {
 				var $item = $(this);
-
+				
 				$item.data({
 					left: $item.position().left + 'px',
 					top: ($item.position().top + 5) + 'px'
