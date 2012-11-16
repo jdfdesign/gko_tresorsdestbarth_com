@@ -5809,7 +5809,7 @@ footer .nav > li > a:hover {
 *Cusor fix from IE by Chris Pearson ( http://www.upland.co.uk )
 *
 */
-/* line 21, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy.css.scss */
+/* line 21, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy.css.scss */
 .parent-zoom img {
   -webkit-transition-property: opacity;
   -webkit-transition-duration: 200ms;
@@ -5820,7 +5820,7 @@ footer .nav > li > a:hover {
   border: 0;
 }
 
-/* line 32, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy.css.scss */
+/* line 32, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy.css.scss */
 .zoomy {
   position: absolute;
   visibility: hidden;
@@ -5840,7 +5840,7 @@ footer .nav > li > a:hover {
   border: 3px solid #fff;
 }
 
-/* line 52, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy.css.scss */
+/* line 52, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy.css.scss */
 .zoomy span {
   display: block;
   margin: 5px auto;
@@ -5852,20 +5852,20 @@ footer .nav > li > a:hover {
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#55FFFFFF, endColorstr=#00ffffff);
 }
 
-/* line 62, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy.css.scss */
+/* line 62, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy.css.scss */
 .zoomy a {
   color: #333;
   text-decoration: none;
   outline: 0;
 }
 
-/* line 68, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy.css.scss */
+/* line 68, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy.css.scss */
 .inactive img {
   opacity: 0.85!important;
   filter: alpha(opacity=85) !important;
 }
 
-/* line 73, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy.css.scss */
+/* line 73, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy.css.scss */
 .zoomy #tmp {
   max-width: none !important;
   max-height: none !important;
@@ -5876,7 +5876,7 @@ footer .nav > li > a:hover {
 }
 
 /* Elastislide Style */
-/* line 2, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 2, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .products-thumbnails-container {
   padding: 10px 37px;
   -moz-border-radius: 10px;
@@ -5885,7 +5885,7 @@ footer .nav > li > a:hover {
   position: relative;
 }
 
-/* line 9, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 9, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .products-thumbnails {
   *zoom: 1;
   overflow: hidden;
@@ -5899,29 +5899,29 @@ footer .nav > li > a:hover {
 .products-thumbnails:after {
   clear: both;
 }
-/* line 12, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 12, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .products-thumbnails ul {
   display: none;
 }
-/* line 14, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 14, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .products-thumbnails ul li {
   height: 100%;
   float: left;
   display: block;
 }
-/* line 18, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 18, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .products-thumbnails ul li a {
   display: block;
   border-style: solid;
   border-color: white;
 }
-/* line 22, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 22, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .products-thumbnails ul li a img {
   display: block;
   border: none;
 }
 
-/* line 34, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 34, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .es-nav span {
   position: absolute;
   top: 50%;
@@ -5934,18 +5934,18 @@ footer .nav > li > a:hover {
   cursor: pointer;
   opacity: 0.8;
 }
-/* line 45, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 45, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .es-nav span:hover {
   opacity: 1.0;
 }
-/* line 49, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
+/* line 49, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/zoomy_thumbs.css.scss */
 .es-nav span.es-nav-next {
   right: 12px;
   left: auto;
   background-position: top right;
 }
 
-/* line 4, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 4, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 h1.page-title span {
   float: right;
   font-size: .6em;
@@ -5961,23 +5961,23 @@ h1.page-title span:after {
   clear: both;
 }
 
-/* line 9, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 9, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 .variants_grid_wrapper {
   padding-top: 24px;
 }
 
 /** -- Product show ------------------------*/
-/* line 14, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 14, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 #product-variants label {
   display: inline-block;
 }
 
-/* line 18, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 18, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 h2#product-variants-title {
   margin-top: 12px;
 }
 
-/* line 21, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 21, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 .product-images-large-loader {
   display: none;
   width: 46px;
@@ -5994,27 +5994,27 @@ h2#product-variants-title {
   opacity: 0.7;
 }
 
-/* line 34, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 34, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 h4.product-section-title {
   padding-top: 24px;
 }
 
-/* line 37, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 37, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 #cart-subtotal {
   float: right;
 }
 
-/* line 40, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 40, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 .product_properties {
   margin-bottom: 24px;
 }
 
-/* line 43, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 43, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 .form-horizontal.order .control-group > label {
   width: 100px;
 }
 
-/* line 46, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-3d59a3504e52/app/assets/stylesheets/gko/store.css.scss */
+/* line 46, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_store-5904c5512ccb/app/assets/stylesheets/gko/store.css.scss */
 .form-horizontal.order .controls {
   margin-left: 112px;
 }
@@ -6299,10 +6299,15 @@ h4.product-section-title {
   background-repeat: no-repeat;
 }
 
-/* line 65, ../../app/assets/stylesheets/public.css.scss */
+/* line 64, ../../app/assets/stylesheets/public.css.scss */
+body {
+  background-color: #F5F5ED;
+}
+
+/* line 67, ../../app/assets/stylesheets/public.css.scss */
 #content {
-  padding-top: 48px;
-  padding-bottom: 40px;
+  padding-top: 60px;
+  padding-bottom: 60px;
   max-width: 980px;
   display: block;
   margin-left: auto;
@@ -6936,7 +6941,7 @@ body#home #about h2 {
 /*-----------------------------------------
  GLOBAL EFFECT
 ----------------------------------------- */
-/* line 99, ../../app/assets/stylesheets/public.css.scss */
+/* line 102, ../../app/assets/stylesheets/public.css.scss */
 a {
   -webkit-transition: "color .5s linear, background-color .5s linear";
   -moz-transition: "color .5s linear, background-color .5s linear";
@@ -6948,7 +6953,7 @@ a {
 /*-----------------------------------------
    SHARED STYLES 
 ----------------------------------------- */
-/* line 106, ../../app/assets/stylesheets/public.css.scss */
+/* line 109, ../../app/assets/stylesheets/public.css.scss */
 .uppercase_font_style, .navbar .header-nav .nav > li > a, .product-info h4 {
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -6957,7 +6962,7 @@ a {
 /*-----------------------------------------
  TYPOGRAPHY 
 ----------------------------------------- */
-/* line 114, ../../app/assets/stylesheets/public.css.scss */
+/* line 117, ../../app/assets/stylesheets/public.css.scss */
 h1 {
   letter-spacing: 2px;
   font-size: 14px;
@@ -6965,29 +6970,29 @@ h1 {
   line-height: 24px;
 }
 
-/* line 120, ../../app/assets/stylesheets/public.css.scss */
+/* line 123, ../../app/assets/stylesheets/public.css.scss */
 h1, h2, h3, h4 {
   font-weight: normal;
   letter-spacing: 1px;
 }
 
-/* line 124, ../../app/assets/stylesheets/public.css.scss */
+/* line 127, ../../app/assets/stylesheets/public.css.scss */
 h2, h3 {
   font-size: 16px;
 }
 
-/* line 127, ../../app/assets/stylesheets/public.css.scss */
+/* line 130, ../../app/assets/stylesheets/public.css.scss */
 h4 {
   letter-spacing: 1px;
   font-size: 16px;
 }
 
-/* line 131, ../../app/assets/stylesheets/public.css.scss */
+/* line 134, ../../app/assets/stylesheets/public.css.scss */
 .navbar-inner {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 
-/* line 134, ../../app/assets/stylesheets/public.css.scss */
+/* line 137, ../../app/assets/stylesheets/public.css.scss */
 label {
   font-size: 13px;
 }
@@ -6995,30 +7000,30 @@ label {
 /*-----------------------------------------
  HEADER
 ----------------------------------------- */
-/* line 143, ../../app/assets/stylesheets/public.css.scss */
+/* line 146, ../../app/assets/stylesheets/public.css.scss */
 .navbar .header-nav .nav > li > a {
   font-size: 10px;
 }
 
-/* line 149, ../../app/assets/stylesheets/public.css.scss */
+/* line 152, ../../app/assets/stylesheets/public.css.scss */
 .nav.login-bar {
   display: none;
 }
 
-/* line 152, ../../app/assets/stylesheets/public.css.scss */
+/* line 155, ../../app/assets/stylesheets/public.css.scss */
 .navbar .brand a {
   font-size: 10px;
   font-weight: bold;
 }
 
-/* line 156, ../../app/assets/stylesheets/public.css.scss */
+/* line 159, ../../app/assets/stylesheets/public.css.scss */
 .header-top {
   position: absolute;
   right: 12px;
   top: 14px;
 }
 
-/* line 161, ../../app/assets/stylesheets/public.css.scss */
+/* line 164, ../../app/assets/stylesheets/public.css.scss */
 #locales a {
   padding: 0;
   width: 24px;
@@ -7031,12 +7036,12 @@ label {
   border: 0;
 }
 
-/* line 168, ../../app/assets/stylesheets/public.css.scss */
+/* line 171, ../../app/assets/stylesheets/public.css.scss */
 #locales a.fr {
   background-image: url(/assets/fr-756758e1789058b2b8577c0a9fd896ea.png);
 }
 
-/* line 171, ../../app/assets/stylesheets/public.css.scss */
+/* line 174, ../../app/assets/stylesheets/public.css.scss */
 #facebook {
   background: white url(/assets/icon-facebook-655ffe584b4badf34e7ccc7b019822e5.png) left center no-repeat;
   position: absolute;
@@ -7056,7 +7061,7 @@ label {
 /*-----------------------------------------
  FOOTER
 ----------------------------------------- */
-/* line 187, ../../app/assets/stylesheets/public.css.scss */
+/* line 190, ../../app/assets/stylesheets/public.css.scss */
 #footer-container {
   position: fixed;
   z-index: 1030;
@@ -7065,7 +7070,7 @@ label {
   background-color: white;
 }
 
-/* line 194, ../../app/assets/stylesheets/public.css.scss */
+/* line 197, ../../app/assets/stylesheets/public.css.scss */
 #footer {
   margin-top: 0px;
   padding-bottom: 0px;
@@ -7077,58 +7082,58 @@ label {
 /*-----------------------------------------
  STORE
 ----------------------------------------- */
-/* line 206, ../../app/assets/stylesheets/public.css.scss */
+/* line 209, ../../app/assets/stylesheets/public.css.scss */
 .product-info {
   float: left;
   color: white;
 }
-/* line 209, ../../app/assets/stylesheets/public.css.scss */
+/* line 212, ../../app/assets/stylesheets/public.css.scss */
 .product-info h1.page-title {
   border-bottom: 1px solid #e2e2e2;
   color: white;
 }
-/* line 213, ../../app/assets/stylesheets/public.css.scss */
+/* line 216, ../../app/assets/stylesheets/public.css.scss */
 .product-info h4 {
   border-bottom: 1px solid #e2e2e2;
   padding-top: 24px;
   color: white;
 }
-/* line 219, ../../app/assets/stylesheets/public.css.scss */
+/* line 222, ../../app/assets/stylesheets/public.css.scss */
 .product-info input {
   color: black;
 }
 
-/* line 224, ../../app/assets/stylesheets/public.css.scss */
+/* line 227, ../../app/assets/stylesheets/public.css.scss */
 #product-variants label {
   display: inline-block;
 }
 
-/* line 228, ../../app/assets/stylesheets/public.css.scss */
+/* line 231, ../../app/assets/stylesheets/public.css.scss */
 h2#product-variants-title {
   border-bottom: 1px solid #e2e2e2;
   color: white;
 }
 
-/* line 232, ../../app/assets/stylesheets/public.css.scss */
+/* line 235, ../../app/assets/stylesheets/public.css.scss */
 #product-properties {
   line-height: 18px;
 }
-/* line 235, ../../app/assets/stylesheets/public.css.scss */
+/* line 238, ../../app/assets/stylesheets/public.css.scss */
 #product-properties tbody {
   vertical-align: top;
 }
-/* line 237, ../../app/assets/stylesheets/public.css.scss */
+/* line 240, ../../app/assets/stylesheets/public.css.scss */
 #product-properties tbody tr > td {
   min-width: 80px;
 }
 
-/* line 243, ../../app/assets/stylesheets/public.css.scss */
+/* line 246, ../../app/assets/stylesheets/public.css.scss */
 article.product {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 245, ../../app/assets/stylesheets/public.css.scss */
+/* line 248, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel {
   float: left;
   background-color: white;
@@ -7141,13 +7146,13 @@ article.product .carousel {
   border-radius: 12px;
   overflow: hidden;
 }
-/* line 252, ../../app/assets/stylesheets/public.css.scss */
+/* line 255, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel img {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
-/* line 256, ../../app/assets/stylesheets/public.css.scss */
+/* line 259, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel-control {
   position: absolute;
   top: auto;
@@ -7166,11 +7171,11 @@ article.product .carousel-control {
   opacity: 0.7;
   filter: alpha(opacity=70);
 }
-/* line 270, ../../app/assets/stylesheets/public.css.scss */
+/* line 273, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel-control:hover {
   color: black;
 }
-/* line 275, ../../app/assets/stylesheets/public.css.scss */
+/* line 278, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel-control.right {
   left: auto;
   right: 50%;
@@ -7182,56 +7187,56 @@ article.product .carousel-control.right {
  RESPONSIVE
 ----------------------------------------- */
 @media (min-width: 767px) {
-  /* line 79, ../../app/assets/stylesheets/public.css.scss */
+  /* line 82, ../../app/assets/stylesheets/public.css.scss */
   article.product {
     width: 689px;
   }
-  /* line 81, ../../app/assets/stylesheets/public.css.scss */
+  /* line 84, ../../app/assets/stylesheets/public.css.scss */
   article.product .carousel {
     max-width: 650px;
     max-height: 650px;
     width: 359px;
     height: 359px;
   }
-  /* line 87, ../../app/assets/stylesheets/public.css.scss */
+  /* line 90, ../../app/assets/stylesheets/public.css.scss */
   article.product .product-info {
     padding-left: 24px;
     width: 300px;
   }
 }
 @media (max-width: 768px) {
-  /* line 297, ../../app/assets/stylesheets/public.css.scss */
+  /* line 300, ../../app/assets/stylesheets/public.css.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 }
 @media (min-width: 980px) {
-  /* line 79, ../../app/assets/stylesheets/public.css.scss */
+  /* line 82, ../../app/assets/stylesheets/public.css.scss */
   article.product {
     width: 900px;
   }
-  /* line 81, ../../app/assets/stylesheets/public.css.scss */
+  /* line 84, ../../app/assets/stylesheets/public.css.scss */
   article.product .carousel {
     max-width: 650px;
     max-height: 650px;
     width: 570px;
     height: 570px;
   }
-  /* line 87, ../../app/assets/stylesheets/public.css.scss */
+  /* line 90, ../../app/assets/stylesheets/public.css.scss */
   article.product .product-info {
     padding-left: 24px;
     width: 300px;
   }
 
-  /* line 307, ../../app/assets/stylesheets/public.css.scss */
+  /* line 310, ../../app/assets/stylesheets/public.css.scss */
   #store-menu {
     float: right;
     margin: 0;
     margin-left: 200px;
   }
 
-  /* line 312, ../../app/assets/stylesheets/public.css.scss */
+  /* line 315, ../../app/assets/stylesheets/public.css.scss */
   .navbar {
     position: fixed;
     right: 0;
@@ -7241,12 +7246,12 @@ article.product .carousel-control.right {
     margin-bottom: 0;
   }
 
-  /* line 322, ../../app/assets/stylesheets/public.css.scss */
+  /* line 325, ../../app/assets/stylesheets/public.css.scss */
   .navbar-inner {
     padding-bottom: 12px;
   }
 
-  /* line 325, ../../app/assets/stylesheets/public.css.scss */
+  /* line 328, ../../app/assets/stylesheets/public.css.scss */
   .navbar .brand {
     float: left;
     margin: 12px 0 0 0;
@@ -7254,17 +7259,17 @@ article.product .carousel-control.right {
     text-transform: uppercase;
   }
 
-  /* line 331, ../../app/assets/stylesheets/public.css.scss */
+  /* line 334, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse {
     clear: none;
     float: left;
     margin: 17px 0 0 24px;
   }
-  /* line 335, ../../app/assets/stylesheets/public.css.scss */
+  /* line 338, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse nav, .navbar .nav-collapse .nav {
     float: left;
   }
-  /* line 338, ../../app/assets/stylesheets/public.css.scss */
+  /* line 341, ../../app/assets/stylesheets/public.css.scss */
   .navbar .nav-collapse .nav > li > a {
     padding: 0 6px;
     font-size: 10px;
@@ -7272,7 +7277,7 @@ article.product .carousel-control.right {
     text-shadow: none;
   }
 
-  /* line 348, ../../app/assets/stylesheets/public.css.scss */
+  /* line 351, ../../app/assets/stylesheets/public.css.scss */
   .headline {
     margin: 0 120px;
     font-size: 98px;

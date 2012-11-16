@@ -1,4 +1,3 @@
-//= require gko_store_public_all
 //= jquery.easing.1.3
 //= require jquery.scrollTo.1.4.2
 //= require jquery.inview
@@ -20,6 +19,7 @@ var  $body
 	,$navbar
 	,$activeSection
 	,contentApi
+	,contentApiEnabled = false
 	,imagesCount = 0
 	,gridColCount = 3
 	,gridRowCount = 2 
@@ -95,6 +95,7 @@ var Site = {
 			$container.css({'width': availableWidth,'height': availableHeight});
 			// Enable jscrollpane				
 			contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
+			contentApiEnabled = true;
 		}
 	},
 	attachEvents: function() {
@@ -205,6 +206,12 @@ var Site = {
 		//	console.log("Site.resize contentApi");
 			$container.css('height', availableHeight);
 			contentApi.data('jsp').reinitialise();
+			console.log(contentApiEnabled)
+			if(!contentApiEnabled) {
+				console.log(contentApiEnabled)
+				Site.enableMainScroll(contentApiEnabled);
+			}
+			
 		}
 		
 		$('.grid').each(function (i, el) {
@@ -228,6 +235,7 @@ var Site = {
 			$container.find(".jspVerticalBar").hide();
 			contentApi.data('jsp').enable(false);
 		}
+		contentApiEnabled = trueOrFalse;
 	},
 	showCartUpdateNotice: function() {
 		
@@ -262,7 +270,7 @@ var Product = {
 			$info = $article.find('.product-info:first'),
 			$carousel = $article.find('.carousel:first');
 		
-		Product.resize($article);
+		Product.size($article);
 		
 		$('form.cart-form').attr('data-remote', 'true');
 		section.attr('data-state', 'product');
@@ -289,7 +297,7 @@ var Product = {
 			});
 		section.attr('data-state', 'grid');
 	},
-	resize: function(article) {
+	size: function(article) {
 		var $carousel = article.find('.carousel:first'),
 			$info = article.find('.product-info:first'),
 			minInfoWidth = 300,
@@ -302,6 +310,11 @@ var Product = {
 
 		$carousel.css({'max-height': maxCarousel, 'max-width': maxCarousel});
 		$info.css({'height': maxCarouselHeight, 'width': maxInfoWidth});
+	},
+	resize: function(article) {
+		var $info = article.find('.product-info:first');
+		Product.size(article);
+		$info.data('jsp').reinitialise();
 	},
 	initCarousel: function(carousel) {
 		if(typeof carousel != 'undefined') {
