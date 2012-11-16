@@ -19,7 +19,6 @@
 				liWidth = $items.innerWidth(),
 				w = Math.floor((parentWidth / 4) - (3 * opts.itemPadding)),
 				itemWidth = Math.max(opts.minItemWidth, Math.min(opts.itemWidth, w));
-				console.log(itemWidth);
 
 			$items.each(function(i) {
 				var $item = $(this);
