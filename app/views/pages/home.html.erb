@@ -12,12 +12,6 @@
 <% cache([site, @store]) do %>
 	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
 		<div id="logo"></div>
-	<!--	<p  class='headline'><%#= t(:"home.citation").html_safe %></p>  -->
-		<div class="circles">
-			<div class="circle circle1"></div>
-			<div class="circle circle2"></div>
-			<div class="circle circle3"></div>
-		</div>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
 	<% 

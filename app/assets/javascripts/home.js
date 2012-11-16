@@ -109,8 +109,8 @@ var Site = {
 			
         });
 	
-        $(".pod")
-		.on('click', 'a', function(e) {
+        $(".category")
+		.on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
 			Grid.show($(this).parents("section:first"));
