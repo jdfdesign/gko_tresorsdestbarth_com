@@ -9,15 +9,15 @@
 @images = site.home.images
 %>
 <% content_for :page_container do %>
-<% cache([site, @store]) do %>
-	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+<% cache([site, I18n.locale, @store]) do %>
+	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail("1024x800#").url %>');">
 		<div id="logo"></div>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
 	<% 
-		bg_url = @images.shift.thumbnail().url
+		bg_url = @images.shift.thumbnail("1024x800#").url
 		 
-		bg2_url = @images.shift.thumbnail().url
+		bg2_url = @images.shift.thumbnail("1024x800#").url
 		product_img_url = @images.shift.thumbnail("300x300#").url
 		products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
 	%>
@@ -26,7 +26,7 @@
 			<h3 class='headline'><%= category.body.html_safe %></h3>
 		</section><!--section-->
 		<% end %>
-		<section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen" style="background-image: url('<%= bg2_url %>');">
+		<section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen <%= category.name %>" style="background-image: url('<%= bg2_url %>');">
 			<div class='parallax-inner fullscreen'>
 				<div class='parallax-item category active fullscreen'>
 					<div class="pod ss-left">
@@ -85,7 +85,7 @@
 		</section><!--section-->
 
 	<% end %>
-	<section id="about" class="row-fluid background-image" style="background-image: url('<%= @images.shift.thumbnail().url %>');">
+	<section id="about" class="row-fluid background-image" style="background-image: url('<%= @images.shift.thumbnail("1024x800#").url %>');">
 		<div class="row-fluid">
 			<div class="span12">
 				<%= render_html_text( resource.body) if resource.body.present? %>

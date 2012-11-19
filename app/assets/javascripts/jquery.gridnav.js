@@ -94,9 +94,11 @@
 					e.preventDefault();
 					$(this).parent().find('.active').removeClass('active');
 					$(this).addClass('active');
+					
 					if ($wrapper.data('anim')) return false;
 					$wrapper.data('anim', true);
 					num = $(this).attr('id').replace(/[^\d]+/g, '');
+				
 					nav[opts.type.mode].pagination($wrapper, 0, opts, num);
 					return false;
 				});;
@@ -164,7 +166,11 @@
 					for (var i = 0; i < opts.rows; ++i) {
 						currentRows += '.tj_row_' + (config.currentRow + i) + ',';
 
-						(dir === 1) ? nextRows += '.tj_row_' + (config.currentRow + opts.rows + i) + ',' : nextRows += '.tj_row_' + (config.currentRow - 1 - i) + ',';
+						if (dir === 1) {
+							nextRows += '.tj_row_' + (config.currentRow + opts.rows + i) + ',';
+						} else if (dir === -1) {
+							nextRows += '.tj_row_' + (config.currentRow - 1 - i) + ',';	
+						} 
 					}
 
 					$wrapper.children(currentRows).hide();
@@ -193,14 +199,18 @@
 						$wrapper.data('anim', false);
 						return false;
 					}
-					var activePageNav = $(".tj_page_nav.active:first").removeClass('active');
-					if(activePageNav.length > 0) {
-						if(dir === 1) {
-							activePageNav.next().addClass('active');
-						} else {
-							activePageNav.prev().addClass('active');
+					
+					if(dir === -1 || dir === 1) {
+						var activePageNav = $(".tj_page_nav.active:first").removeClass('active');
+						if(activePageNav.length > 0) {
+							if(dir === 1) {
+								activePageNav.next().addClass('active');
+							} else {
+								activePageNav.prev().addClass('active');
+							}
 						}
 					}
+
 					
 
 					var currentRows = '',

@@ -14,7 +14,13 @@
 	<% end %>
 </div>
  <%= render 'footer' %>
-<%= render 'javascripts' %>
+<%#= render 'javascripts' %>
+
+<%= javascript_include_tag "jquery" %>
+<%= javascript_include_tag "jquery_ujs" %>
+<%= javascript_include_tag "public" %>
+<%= javascript_include_tag "twitter/bootstrap/carousel" %>
+<%= javascript_include_tag "twitter/bootstrap/modal" %>
 <%= yield :after_javascript_libraries %>
 </body>
 </html>

@@ -1,7 +1,6 @@
 //= jquery.easing.1.3
 //= require jquery.scrollTo.1.4.2
 //= require jquery.inview
-//= require jquery.scrollParallax
 //= require jquery.sidescroll.js
 //= require jquery.mousewheel.3.0.6
 //= require jquery.debouncedresize.js
@@ -93,9 +92,12 @@ var Site = {
 			$container.css({'width': 1,'height': 1});
 			// Now make it the size of the window...
 			$container.css({'width': availableWidth,'height': availableHeight});
-			// Enable jscrollpane				
-			contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
-			contentApiEnabled = true;
+			// Enable jscrollpane
+			if(!isApple) {
+				contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
+				contentApiEnabled = true;
+			}		
+			
 		}
 	},
 	attachEvents: function() {
@@ -116,16 +118,16 @@ var Site = {
 			Grid.show($(this).parents("section:first"));
         });
 
-		$('#tresors-au-fil-du-rivage').on('click', function(e) {
+		$('a[href$="#treasures"]').attr("id", "").on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			Category.show($("section#treasure"));
+			Category.show($("section#treasures"));
 		})
 
-		$('#perles-noires-de-tahiti').on('click', function(e) {
+		$('a[href$="#pearls"]').attr("id", "").on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
-			Category.show($("section#pearl"));
+			Category.show($("section#pearls"));
 		})
 
 		$('.products').on('click', ' a.back', function(e) {
@@ -144,13 +146,14 @@ var Site = {
         function(evt, xhr, status) {
 			Site.showCartUpdateNotice();
         });
+
+		
 		// Bind show product action
         $(".tj_gallery_inner").hover(function(e) {
-			var t = $(this).find(".tj_content:first");
-			t.css('right', 0);
+			$(".tj_content", this).animate({right: "0"},{queue:false, duration:300});  
 		}, function(e) {
-			var t = $(this).find(".tj_content:first");
-			t.css('right', -t.width());
+			var t = $(".tj_content");
+			t.animate({right: -t.width()},{queue:false, duration:300});  
 		})
 		.on('ajax:beforeSend', function(event, xhr, settings) {
 
@@ -193,7 +196,7 @@ var Site = {
 
 	},
 	resize: function() {
-		$('.fullscreen').css({'height': availableHeight});
+		$('.fullscreen').css({'height': availableHeight, 'width': availableWidth});
 		$.each($('.parallax .headline'), function(index, item) {
 			var that = $(this)
 				,top = (availableHeight - that.height())/2;
@@ -201,18 +204,7 @@ var Site = {
 			top = (top < 0) ? 0 : top;
 			that.css('margin-top', top);
 		});
-		
-		if(contentApi != undefined) {
-		//	console.log("Site.resize contentApi");
-			$container.css('height', availableHeight);
-			contentApi.data('jsp').reinitialise();
-			console.log(contentApiEnabled)
-			if(!contentApiEnabled) {
-				console.log(contentApiEnabled)
-				Site.enableMainScroll(contentApiEnabled);
-			}
-			
-		}
+
 		
 		$('.grid').each(function (i, el) {
 			Grid.resize($(el));
@@ -221,21 +213,44 @@ var Site = {
 		$('article').each(function (i, el) {
 			Product.resize($(el));
 		});
+
+		if(contentApi != undefined) {
+			$container.css('height', availableHeight);
+			contentApi.data('jsp').reinitialise();
+
+			if(!contentApiEnabled) {
+				Site.enableMainScroll(contentApiEnabled);
+			}
+			
+		}
+		if($activeSection) {
+			Site.scrollToSection( $activeSection );
+		}
 	},
 	scrollToSection: function(section) {
 		var index = section.index('section');
-		contentApi.data('jsp').scrollToY( availableHeight * index );
+		if(contentApi != undefined) {
+			contentApi.data('jsp').scrollToY( availableHeight * index );
+		} else {
+	
+			$('html, body').animate({scrollTop: availableHeight * index}, 500);
+		}
+		
+		
 	},
 	enableMainScroll: function(trueOrFalse) {
-		if(trueOrFalse) {
-			contentApi.data('jsp').enable(true);
-			$container.find(".jspVerticalBar").show();
-		} else {
-			// Disable the main scroll
-			$container.find(".jspVerticalBar").hide();
-			contentApi.data('jsp').enable(false);
+		if(!isApple) {
+			if(trueOrFalse) {
+				contentApi.data('jsp').enable(true);
+				$container.find(".jspVerticalBar").show();
+			} else {
+				// Disable the main scroll
+				$container.find(".jspVerticalBar").hide();
+				contentApi.data('jsp').enable(false);
+			}
+			contentApiEnabled = trueOrFalse;
 		}
-		contentApiEnabled = trueOrFalse;
+
 	},
 	showCartUpdateNotice: function() {
 		

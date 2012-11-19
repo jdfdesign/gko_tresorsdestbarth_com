@@ -3,7 +3,7 @@
 	var $sidescroll	= (function() {
 			
 			// the row elements
-		var $rows = $('.parallax'),
+		var $rows = $('.parallax-item'),
 			// the window element
 			$win = $(window),
 			// we will store the window sizes here
@@ -38,8 +38,16 @@
 			},
 			// initialize some events
 			initEvents = function() {
+				$rows.bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+					var elem = $(this);
+					if (isInView) {
+				    	elem.addClass("inview");
+				  	} else {
+				    	elem.removeClass("inview");
+				  	}
+				});
 				$(window).on({
-					"throttledresize" : function( event ) {
+					"debouncedresize" : function( event ) {
 						refresh();
 					}
 				});

@@ -1,7 +1,13 @@
 //= require gko_store_public_all
 
-$(document).ready(function() {
+var isMac, deviceAgent, isApple;
 
+$(document).ready(function() {
+    
+	isMac = navigator.platform.toUpperCase().indexOf('MAC')!==-1; 
+	deviceAgent = navigator.userAgent.toLowerCase();
+	isApple = deviceAgent.match(/(iphone|ipod|ipad)/);
+	
 	f_init = function() {
 		$overlay.fadeOut();
 	}
