@@ -1,3 +1,7 @@
+//= require jquery
+//= require jquery_ujs
+//= require twitter/bootstrap/carousel
+//= require twitter/bootstrap/modal
 //= require gko_store_public_all
 
 var isMac, deviceAgent, isApple;
