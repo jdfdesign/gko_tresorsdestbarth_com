@@ -4,23 +4,33 @@
 //= require twitter/bootstrap/modal
 //= require gko_store_public_all
 
-var isMac, deviceAgent, isApple;
+var  $body
+	,$html
+	,$window
+	,$overlay
+	,bodyId
+	,isHome
 
-$(document).ready(function() {
-    
-	isMac = navigator.platform.toUpperCase().indexOf('MAC')!==-1; 
-	deviceAgent = navigator.userAgent.toLowerCase();
-	isApple = deviceAgent.match(/(iphone|ipod|ipad)/);
-	
-	f_init = function() {
-		$overlay.fadeOut();
-	}
-	
-	var  $body = $("body")
-		,$html = $("html")
-		,$window = $(window)
-		,$overlay = $("#overlay");
+var Site = {
 
+	init: function() {
+		$body = $("body");
+		$html = $("html");
+		$window = $(window);
+		$overlay = $("#body-overlay");
+		bodyId = $body.attr('id');
+		isHome = (bodyId == "home");
 		
-	f_init(); 
+		if(isHome) {
+			Home.init();
+		} else {
+			$('a[href$="#treasures"]').attr("href", "/#treasures");
+			$('a[href$="#pearls"]').attr("href", "/#pearls");
+			$overlay.fadeOut();
+		}
+	}
+}
+				
+$(document).ready(function() {
+	Site.init(); 
 });

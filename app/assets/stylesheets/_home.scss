@@ -1,24 +1,25 @@
 @import "grid_product";
 @import "jscrollpane";
+
+/*-----------------------------------------
+ STRUCTURAL LAYOUT 
+----------------------------------------- */
+html {
+	margin: 0;
+	padding: 0;
+	height:100%
+}
+
+body {
+	background: #fefefe;
+	padding: 0;
+	margin: 0;
+	height:100%;
+}
+
 body#home {
 
-	/*-----------------------------------------
-	 STRUCTURAL LAYOUT 
-	----------------------------------------- */
-	html {
-		margin: 0;
-		padding: 0;
-		height:100%
-	}
 
-	body {
-		font-weight: 300;
-		background: #fefefe;
-		padding: 0;
-		margin: 0;
-		overflow: hidden;
-		height:100%;
-	} 
 	.background-image {
 		zoom: 100%;
 		background-color: transparent;
@@ -26,7 +27,7 @@ body#home {
 		background-position: 0 center;
 		background-attachment: fixed;
 		@include background-size(cover);
-
+		
 	}
 	.fullscreen {
 		height:100%;
@@ -38,15 +39,7 @@ body#home {
 		//@include box-shadow(0 4px 16px rgba(0,0,0,.2));
 		overflow: hidden;
 	}
-	#overlay {
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: #fefefe;
-		z-index: 10000;
-	}
+
 	#wrapper-wide-body {
 		margin: 50px 0;
 
@@ -60,8 +53,8 @@ body#home {
 		bottom: 40px;
 		max-width: none;
 	}
-	.parallax-inner .parallax-item {
-		//display: none;
+	.parallax-item {
+		display: none;
 		position: absolute;
 		&.active  { 
 			display: block; 
@@ -93,7 +86,6 @@ body#home {
 			@include square(300px);
 			img {
 				@include border-radius(12px);
-				@include square(300px);
 			}
 			float:left;
 			margin-right: 100px;
@@ -112,7 +104,6 @@ body#home {
 			color: #ccc;
 			font-size: 80px;
 			font-weight: 300;
-			@include square(300px);
 			line-height: 300px;
 			&:hover {
 				color: white;
@@ -157,14 +148,14 @@ body#home {
 			position: absolute;
 			z-index: 100;
 			right: 0;
-			line-height: 300px;
+			font-size: 300px;
+			font-weight: 300;
+			line-height: 150px;
 			a {
 				font-family: $altFontFamily;
 				color:white;
 				text-transform: lowercase;
-				font-size: 300px;
-				font-weight: 300;
-				line-height: 150px;
+
 				color: #FFF;
 				text-shadow:0px 0px 24px $white;
 				padding-right: 40px;
@@ -180,8 +171,8 @@ body#home {
 		font-family: $altFontFamily;
 		color: white;
 		height: auto;
-		font-size: 68px;
-		line-height: 58px;
+		font-size: 88px;
+		line-height: 68px;
 		text-align: center;
 		text-shadow: 0px 0px 100px black;
 		margin: 0 20px;
@@ -198,30 +189,15 @@ body#home {
 		}
 	}
 	#cover {
-		background: rgba(103,100,93,.96) asset-url('stbarth_treasures-GEG_0099.jpg', image);
 		@include box-shadow(0 4px 16px rgba(0,0,0,.4));
 		background-repeat: no-repeat;
 		background-position: 0px 0px;
 		background-attachment:absolute;
 		@include background-size(cover);
-		.headline {
-			color: white;
-			font-size: 58px;
-			line-height: 48px;
-			margin-top: 388px;
-		}
 	}
 	#logo {
-		background: transparent asset-url('logo.png',image) center center no-repeat;
-		margin-top: -238px;
-		top: 50%;
-		margin-left: -257px;
-		left: 50%;
-		position: absolute;
-		max-width: 476px;
-		max-height: 515px;
 		width: 476px;
-		height: 515px;
+		@include center-block;
 	}
 	.back{
 		position:absolute;
@@ -245,9 +221,6 @@ body#home {
 			text-decoration: none;
 		}
 	}
-
-
-
 	.content {
 		padding: $itemPadding;
 	}
@@ -269,62 +242,60 @@ body#home {
 	}
 	
 }
-
-@media (max-width: 767px) {
-	.parallax-inner .parallax-item {
-		.pod-title {
-			a {
-				font-size: 100px;
-			}
-		}
-
-	}
-	.fullscreen {
-		max-width: 767px;
-	}
-}
-@media (max-width: 980px) {
-
-	.fullscreen {
-		max-width: 980px;
-	}
-}
 @media (min-width: 980px) {
 	.navbar-inner {
 		padding-bottom: 0;
 	}
 }
+@media (max-width: 767px) {
 
+	.fullscreen {
+		max-width: 767px;
+	}
+	body#home {
+		.parallax-item {
+			.pod-title {
+				font-size: 200px;
+				line-height: 100px; 
+			}
+			.pod-carousel {
+				@include square(200px);
+			}
 
-/*
-This next definition doesn't allow the background to get any smaller
-than a predefined size (640x426px in this case). Change the values
-here to match your background image size. The configuration in the
-flexi-background javascript file should also match these values.
-*/
- 
-@media only all and (max-width: 640px) and (max-height: 426px) {
-.fullscreen {
-background-size: 640px 426px;
--moz-background-size: 640px 426px;
--webkit-background-size: 640px 426px;
+		}
+		.headline {
+			font-size: 68px;
+			line-height: 58px;
+			text-shadow: 0px 0px 80px black;
+			min-height: 180px;
+			em {
+				font-size: $baseFontSize;
+			}
+		}
+		#logo {
+			width: 390px;
+		}
+	}
 }
-}
- 
-/*
-The next 2 definitions are for support in iOS devices.
-Since they don't recoginze the 'cover' keyword for background-size
-we need to simulate it with percentages and orientation
-*/
- 
-@media only screen and (orientation: portrait) and (device-width: 320px), (device-width: 768px) {
-.fullscreen {
--webkit-background-size: auto 100%;
-}
-}
- 
-@media only screen and (orientation: landscape) and (device-width: 320px), (device-width: 768px) {
-.fullscreen {
--webkit-background-size: 100% auto;
-}
+@media (max-width: 480px) {
+	body#home {
+		.parallax-item {
+			.pod-title {
+				font-size: 100px;
+				line-height: 50px; 
+			}
+			.pod-carousel {
+				@include square(120px);
+			}
+		}
+		#logo {
+			width: 300px;
+		}
+		.background-image {
+			background-attachment:absolute;
+			-webkit-background-size: 320px 480px;
+			background-position: 0px 0px;
+			background-attachment: fixed;
+		}
+	}
 }

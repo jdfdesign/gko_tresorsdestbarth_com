@@ -7,17 +7,18 @@
 @store = site.store
 @categories = @store.categories.translated
 @images = site.home.images
+@image_size = is_mobile_device? ? "480x320#" : "1024x800#"
 %>
 <% content_for :page_container do %>
-<% cache([site, I18n.locale, @store]) do %>
-	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail("1024x800#").url %>');">
-		<div id="logo"></div>
+<% cache(["ss", site, I18n.locale, @store]) do %>
+	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail(@image_size).url %>');">
+		<%= image_tag('logo.png', :id => 'logo') %>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
 	<% 
-		bg_url = @images.shift.thumbnail("1024x800#").url
+		bg_url = @images.shift.thumbnail(@image_size).url
 		 
-		bg2_url = @images.shift.thumbnail("1024x800#").url
+		bg2_url = @images.shift.thumbnail(@image_size).url
 		product_img_url = @images.shift.thumbnail("300x300#").url
 		products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
 	%>
@@ -37,13 +38,13 @@
 					<div class="pod ss-right">
 						<div class="pod-carousel">
 							<img src="<%= product_img_url %>" rel="external">
-							<%= link_to("&#10217;".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
+							<%= link_to("&#8250;".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
 						</div>
 					</div><!--pod-->
 				</div>
 				<div class='parallax-item products fullscreen'>
 					<div class='bg'></div>
-					<a class='back' href="#">&#10216</a>
+					<a class='back' href="#">&#8249;</a>
 					<div class="tj_container">
 						<div class="tj_wrapper">
 						<% if products.try(:any?) %>

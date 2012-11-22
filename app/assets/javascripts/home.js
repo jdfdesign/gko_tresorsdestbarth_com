@@ -8,17 +8,11 @@
 //= require gko/gko.galleria
 //= require jquery.jscrollpane
 
-var  $body
-	,$html
-	,$window
-	,$overlay
-	,$container
+var  $container
 	,$cover
 	,$logo
 	,$navbar
 	,$activeSection
-	,contentApi
-	,contentApiEnabled = false
 	,imagesCount = 0
 	,gridColCount = 3
 	,gridRowCount = 2 
@@ -28,19 +22,14 @@ var  $body
 	,deltaHeight
 	,availableHeight
 	,availableWidth
+	,isAppleDevice
 	,$notice
 	,$viewCartMenuLink
-	,bodyId
-	,isHome
 	,History = window.History; // Note: We are using a capital H instead of a lower h
 	
-var Site = {
+var Home = {
 	
 	init: function() {
-		$body = $("body");
-		$html = $("html");
-		$window = $(window);
-		$overlay = $("#overlay");
 		$container = $("#content");
 		$cover = $("#cover");
 		$logo = $("#logo");
@@ -49,8 +38,12 @@ var Site = {
 		footerHeight = $("#footer-container").height();
 		deltaHeight = headerHeight + footerHeight;
 		$viewCartMenuLink = $('a#view-cart-menu-link');
-		bodyId = $body.attr('id');
-		isHome = (bodyId == "home");
+		var agent = navigator.userAgent.toLowerCase()
+		isAppleDevice = agent.match(/(iphone|ipod|ipad)/);
+		
+		if(isAppleDevice) {
+			$('section.background-image').css('background-attachment', 'absolute');
+		}
 		
 		$('section.background-image').each(function (i, el) {
 			imagesCount ++;
@@ -58,57 +51,42 @@ var Site = {
 				src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
 				$('<img>').attr('src', src).on('load', function() {
 		        imagesCount --;
-		        Site.onImageLoaded();
+		        Home.onImageLoaded();
 			});
 		});
-		f_init_galleria();
-
 	},
 	onImageLoaded: function() {
 		if(imagesCount == 0) {
 			Util.availableSpace(); // update space infos before all
-			Site.resize();
-			Site.attachEvents();
+			Home.resize();
+			Home.attachEvents();
 			$sidescroll.init();
 
-			if(isHome) {
-				var $headline = $cover.find('.headline');
-				$headline.css('opacity', 0);
-				$logo.css('opacity', 0);
-				$navbar.css('top', -50);
-				$overlay.fadeOut(2000, function() {
-					$overlay.remove();
-					$logo.animate({'opacity': 1}, 1200, function() {
-						$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
-					});
-					$navbar.animate({'top':0}, 200);
-				});
-			} else {
-				$overlay.fadeOut(2000);
-			}
-			
 			// Temporarily make the container tiny so it doesn't influence the
 			// calculation of the size of the document
-			$container.css({'width': 1,'height': 1});
+		//	$container.css({'width': 1,'height': 1});
 			// Now make it the size of the window...
-			$container.css({'width': availableWidth,'height': availableHeight});
-			// Enable jscrollpane
-			if(!isApple) {
-				contentApi = $container.jScrollPane({animateScroll: true, animateDuration: 700});
-				contentApiEnabled = true;
-			}		
+			$container.css({'width': "100%",'height': availableHeight});
 			
+			
+			var $headline = $cover.find('.headline');
+			$headline.css('opacity', 0);
+			$logo.css('opacity', 0);
+			$navbar.css('top', -50);
+			$overlay.fadeOut(3000, function() {
+				$overlay.remove();
+				$logo.animate({'opacity': 1}, 1200, function() {
+					$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
+				});
+				$navbar.animate({'top':0}, 200);
+			});
+
 		}
 	},
 	attachEvents: function() {
         $(window).on("debouncedresize",
         function(e) {
-			Util.availableSpace(); // update space infos before all
-            Site.resize();
-			if($activeSection) {
-				Site.scrollToSection($activeSection);
-			}
-			
+			Home.resize();
         });
 	
         $(".category")
@@ -144,7 +122,7 @@ var Site = {
 			
 		}).on('ajax:complete',
         function(evt, xhr, status) {
-			Site.showCartUpdateNotice();
+			Home.showCartUpdateNotice();
         });
 
 		
@@ -196,6 +174,8 @@ var Site = {
 
 	},
 	resize: function() {
+
+		Util.availableSpace(); // update space infos before all
 		$('.fullscreen').css({'height': availableHeight, 'width': availableWidth});
 		$.each($('.parallax .headline'), function(index, item) {
 			var that = $(this)
@@ -204,53 +184,23 @@ var Site = {
 			top = (top < 0) ? 0 : top;
 			that.css('margin-top', top);
 		});
-
+		// center vercally the logo
+		$logo.css('margin-top', (availableHeight - $logo.height()) / 2)
 		
-		$('.grid').each(function (i, el) {
+		$('.products').each(function (i, el) {
 			Grid.resize($(el));
 		});
 		
-		$('article').each(function (i, el) {
+		$('article.product').each(function (i, el) {
 			Product.resize($(el));
 		});
 
-		if(contentApi != undefined) {
-			$container.css('height', availableHeight);
-			contentApi.data('jsp').reinitialise();
-
-			if(!contentApiEnabled) {
-				Site.enableMainScroll(contentApiEnabled);
-			}
-			
-		}
 		if($activeSection) {
-			Site.scrollToSection( $activeSection );
+			Home.scrollToSection( $activeSection );
 		}
 	},
 	scrollToSection: function(section) {
-		var index = section.index('section');
-		if(contentApi != undefined) {
-			contentApi.data('jsp').scrollToY( availableHeight * index );
-		} else {
-	
-			$('html, body').animate({scrollTop: availableHeight * index}, 500);
-		}
-		
-		
-	},
-	enableMainScroll: function(trueOrFalse) {
-		if(!isApple) {
-			if(trueOrFalse) {
-				contentApi.data('jsp').enable(true);
-				$container.find(".jspVerticalBar").show();
-			} else {
-				// Disable the main scroll
-				$container.find(".jspVerticalBar").hide();
-				contentApi.data('jsp').enable(false);
-			}
-			contentApiEnabled = trueOrFalse;
-		}
-
+		$('html, body').animate({scrollTop: section.position().top}, 500);
 	},
 	showCartUpdateNotice: function() {
 		
@@ -261,7 +211,7 @@ var Site = {
 			$notice.css({'display': 'none','position': 'fixed', 'z-index' : 10000, 'left' : o.left, 'top': o.top + 50, 'background-color': 'green', 'color': 'white', 'padding': 8})
 		}	
 		$notice.fadeIn('slow', function() {
-			window.setTimeout(Site.hideCartUpdateNotice, 2000);
+			window.setTimeout(Home.hideCartUpdateNotice, 2000);
 		});
 	},
 	hideCartUpdateNotice: function() {
@@ -345,26 +295,142 @@ var Product = {
 }
 var Grid = {
 	init: function(target) {
-		var grid = target.find('.tj_container:first');
-		if(grid.hasClass('grid')) {
-			return false;
-		} else {
-			grid.addClass('grid').gridnav({
-				type : {
-					mode		: 'seqfade', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
-					speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
-					easing		: '',			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows	
-					factor		: 100,			// for seqfade, sequpdown, rows
-					reverse		: ''			// for sequpdown
-				}
-			});	
+		var $container = target.find('.tj_container'),
+			$grid = $container.find('.tj_gallery'),
+			$nav = $container.find('.tj_nav'),
+			$navLeft = $nav.find('.tj_prev'),
+			$navRight = $nav.find('.tj_next');
+		
+		// flag to control animation progress
+		$grid.data('anim', false);
+			
+		Grid.scale(target);
+		// navigation events
+		if ($navLeft.length) {
+			$navLeft.on('click', function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				if ($grid.data('anim')) return false;
+				$grid.data('anim', true);
+				Grid.paginate($grid, -1);
+				return false;
+			});
+		}
+		if ($navRight.length) {
+			$navRight.on('click', function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				if ($grid.data('anim')) return false;
+				$grid.data('anim', true);
+				Grid.paginate($grid, 1);
+				return false;
+			});
 		}
 	},
+	
+	scale: function(target) {
+		var $container = target.find('.tj_container'),
+			$grid = $container.find('.tj_gallery'),
+			$nav = $container.find('.tj_nav'),
+			$pageNav = $nav.find('.tj_nav_container'),
+			$items = $grid.children('li');
+			numItems = $items.length,
+			itemPadding = 8,
+			h = availableHeight - 60
+			w = Math.min(320, Math.floor((availableWidth / 4) - (3 * itemPadding))),
+			itemWidth = Math.max(160, w),
+			
+			numVisibleRows = Math.floor(h / itemWidth),
+			// check how many items we have per row
+			numCols = Math.floor(availableWidth / itemWidth),
+			// number of items to show is rowCount * n rows
+			numVisibleItems = numCols * numVisibleRows,
+			// total number of rows
+			numRows = Math.ceil(numItems / numCols);
+			// total pages
+			numPages = Math.ceil(numRows / numVisibleRows)
+
+	
+		// save this values for later
+		var config = {};
+		config.currentRow = 1;
+		config.numVisibleRows = numVisibleRows;
+		config.numRows = numRows;
+		config.numCols = numCols;
+		config.numVisibleItems = numVisibleItems;
+		
+		$grid.data('config', config);	
+		
+		$items.each(function(i) {
+			var $item = $(this),
+				row = Math.ceil((i + 1) / numCols),
+				t, f = row % numVisibleRows;
+			
+			if (f === 1) {
+				t = '0px';
+			} else if (f === 0) {
+				t = (numVisibleRows - 1) * itemWidth + 'px';
+			} else {
+				t = (f - 1) * itemWidth + 'px';
+			}
+
+			$item.css({
+				'height': itemWidth,
+				'width': itemWidth,
+				'position': 'absolute',
+				'left': itemWidth * Math.floor(i % numCols),
+				'top': t,
+				'display': (i > numVisibleItems - 1 ? 'none' : 'block')
+			})
+			.attr('class',
+				function(i, c){
+					if(c) {
+						return c.replace(/\btj_row_\S+/g, '');
+					}
+					
+			})
+			.addClass('tj_row_' + Math.ceil((i + 1) / numCols))
+			.find('.tj_content').css({
+				'height': itemWidth,
+				'width': itemWidth,
+				'right': itemWidth
+			});
+		});
+		
+		
+		var spaceH = h - $grid.height();
+		
+		$parent.css({
+			'paddingTop': Math.floor(spaceH / 2),
+			'paddingBottom': Math.floor(spaceH / 2),
+			'paddingLeft': Math.floor(freeWidth / 2),
+			'paddingRight': Math.floor(freeWidth / 2)
+		})
+		
+		// set up page navigation
+		$pageNav.html("");
+
+		for (i = 0; i < numPages; i++) {
+			$("<a id='row_" + ((i * numVisibleRows) + 1) + "' class='tj_page_nav' href='#'>&#8226;</a>").appendTo($pageNav).on('click', function(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				if ($grid.data('anim')) return false;
+				$grid.data('anim', true);
+				$(this).parent().find('.active').removeClass('active');
+				$(this).addClass('active');
+				var page = $(this).attr('id').replace(/[^\d]+/g, '');
+				Grid.paginate($grid, $grid.data("config").currentRow > page ? -1 : 1, page);
+				return false;
+			});
+		}
+		$("a#row_1").addClass('active');
+	},
+	
 	show: function(section) {
 		//console.log("// Grid.show");
 		$activeSection = section;
-		//Site.scrollToSection(section, Grid.show_after);
-		Site.scrollToSection(section);
+		//Home.scrollToSection(section, Grid.show_after);
+		Home.scrollToSection(section);
 		//console.log("// Grid.show_after");
 		var $category = $activeSection.find(".category:first"),
 			$products = $activeSection.find(".products:first");
@@ -375,12 +441,15 @@ var Grid = {
 		
 		$products.css('left', availableWidth).addClass('active');
 		Grid.init($products);
+		
+		$body.addClass("noscroll");
 	
 		$category.animate({'left': -availableWidth}, 900, function() {
 			$(this).removeClass('active');
-			Site.enableMainScroll(false);
 		});
 		$products.animate({'left': 0}, 900);
+		
+		$products.data()
 	},
 	hide: function(section) {
 		//console.log("// Grid.hide " + section.attr("id"));
@@ -389,12 +458,108 @@ var Grid = {
 		section.attr('data-state', 'category');
 		$category.addClass('active').animate({'left':0}, 900);
 		$products.animate({'left': availableWidth}, 900, function() {
-			//console.log("// Grid.hide " + availableWidth);
-			Site.enableMainScroll(true);
+			$body.removeClass("noscroll");
 		});
 	},
 	resize: function(target) {
-		target.gridnav('init');
+		Grid.scale(target);
+	},
+	paginate: function(target, dir, page) {
+		var config = target.data('config');
+			
+		
+		if (page != undefined && config.currentRow == page) {
+
+			target.data('anim', false);
+			return false;
+		} else if ((dir === 1 && config.currentRow + config.numVisibleRows > config.numRows) || (dir === -1 && config.currentRow - config.numVisibleRows <= 0)) {
+			target.data('anim', false);
+			return false;
+		}
+
+		
+		if (page != undefined) {
+			
+		} else {
+			var activePageNav = target.parent().parent().find(".tj_page_nav.active");
+			if(activePageNav.length > 0) {
+				activePageNav.removeClass('active');
+				if(dir === 1) {
+					activePageNav.next().addClass('active');
+				} else {
+					activePageNav.prev().addClass('active');
+				}
+			}
+		}	
+
+		var currentRows = '',
+			nextRows = '';
+		for (var i = 0; i < config.numVisibleRows; ++i) {
+			currentRows += '.tj_row_' + (config.currentRow + i) + ',';
+			if (page != undefined) {
+				if (page > config.currentRow) {
+					dir = 1;
+				} else {
+					dir = -1;
+				}
+				nextRows += '.tj_row_' + (Number(page) + i) + ',';
+			} else if (dir === 1) {
+				nextRows += '.tj_row_' + (config.currentRow + config.numVisibleRows + i) + ','
+			} else {
+				nextRows += '.tj_row_' + (config.currentRow - 1 - i) + ',';
+			}
+		}
+
+		var seq_t = 50;
+
+		var $currentRowElements;
+		(dir === 1) ? $currentRowElements = target.children(currentRows) : $currentRowElements = target.children(currentRows).reverse();
+
+		$currentRowElements.each(function(i) {
+			var $el = $(this);
+			setTimeout(function() {
+				$el.fadeOut(500, 'jswing')
+			}, seq_t + i * seq_t);
+		});
+
+		var $nextRowElements;
+		if (dir === 1) {
+			$nextRowElements = target.children(nextRows);
+		} else {
+			$nextRowElements = target.children(nextRows).reverse();
+		}
+
+		var total_elems = $nextRowElements.length,
+			cnt = 0;
+
+		$nextRowElements.each(function(i) {
+			var $el = $(this);
+			setTimeout(function() {
+				$el.fadeIn(500, 'jswing', function() {
+					++cnt;
+					if (cnt === total_elems) {
+						target.data('anim', false);
+					}
+				})
+			}, (seq_t * 2) + i * seq_t);
+		});
+
+
+		if (page != undefined) {
+			if (dir === 1) {
+				config.currentRow = Number(page);
+			} else {
+				config.currentRow = Number(page);
+			}
+		} else if (dir === 1) {
+			config.currentRow += config.numVisibleRows;
+		} else {
+			config.currentRow -= config.numVisibleRows;
+		}
+		
+
+		target.data('config', config);
+
 	}
 }
 var Category = {
@@ -404,7 +569,7 @@ var Category = {
 	show: function(section) {
 		
 		if($activeSection == undefined) {
-			Site.scrollToSection(section);
+			Home.scrollToSection(section);
 		}
 		else {
 		//	console.log("// Category.show " + section.attr("id"));
@@ -417,7 +582,7 @@ var Category = {
 				
 			if(activeSectionState == 'category') {
 				//console.log("// category: ");
-				Site.scrollToSection(section, null);
+				Home.scrollToSection(section, null);
 			}
 			else if(activeSectionState == "product") {
 				//console.log("// product: ");
@@ -431,8 +596,7 @@ var Category = {
 						$(this).removeClass('active');
 					});
 					$category.addClass('active').animate({'left':0}, 2700, function() {
-						Site.enableMainScroll(true);
-						Site.scrollToSection(section, false);
+						Home.scrollToSection(section, false);
 					});
 			}
 			else if(activeSectionState == "grid") {
@@ -443,9 +607,7 @@ var Category = {
 						$(this).removeClass('active');
 					});
 					$category.addClass('active').animate({'left':0}, 1800, function() {
-						Site.enableMainScroll(true);
-						//console.log("// gridccccccc: ");
-						Site.scrollToSection(section, false);
+						Home.scrollToSection(section, false);
 					});
 			}
 		}
@@ -458,9 +620,96 @@ var Category = {
 
 	}
 }
+
+var SlideShow = {
+
+		init : function() {
+
+			 Galleria.addTheme({
+			        name:'classic',
+			        author:'Galleria',
+			        css:'galleria.classic.css',
+			        defaults:{
+			            transition:'slide',
+			            thumbCrop:'height',
+
+			            // set this to false if you want to show the caption all the time:
+			            _toggleInfo:false
+			        },
+			        init:function (options) {
+
+			            // add some elements
+			            this.addElement('info-link', 'info-close');
+			            this.append({
+			                'info':['info-link', 'info-close']
+			            });
+
+			            // cache some stuff
+			            var info = this.$('info-link,info-close,info-text'),
+			                touch = Galleria.TOUCH,
+			                click = touch ? 'touchstart' : 'click';
+
+			            // show loader & counter with opacity
+			            this.$('loader,counter').show().css('opacity', 0.4);
+
+			            // some stuff for non-touch browsers
+			            if (!touch) {
+			                this.addIdleState(this.get('image-nav-left'), { left:-50 });
+			                this.addIdleState(this.get('image-nav-right'), { right:-50 });
+			                this.addIdleState(this.get('counter'), { opacity:0 });
+			            }
+
+			            // toggle info
+			            if (options._toggleInfo === true) {
+			                info.bind(click, function () {
+			                    info.toggle();
+			                });
+			            } else {
+			                info.show();
+			                this.$('info-link, info-close').hide();
+			            }
+
+			            // bind some stuff
+			            this.bind('thumbnail', function (e) {
+
+			                if (!touch) {
+			                    // fade thumbnails
+			                    $(e.thumbTarget).css('opacity', 0.6).parent().hover(function () {
+			                        $(this).not('.active').children().stop().fadeTo(100, 1);
+			                    }, function () {
+			                        $(this).not('.active').children().stop().fadeTo(400, 0.6);
+			                    });
+
+			                    if (e.index === this.getIndex()) {
+			                        $(e.thumbTarget).css('opacity', 1);
+			                    }
+			                } else {
+			                    $(e.thumbTarget).css('opacity', this.getIndex() ? 1 : 0.6);
+			                }
+			            });
+
+			            this.bind('loadstart', function (e) {
+			                if (!e.cached) {
+			                    this.$('loader').show().fadeTo(200, 0.4);
+			                }
+
+			                this.$('info').toggle(this.hasInfo());
+
+			                $(e.thumbTarget).css('opacity', 1).parent().siblings().children().css('opacity', 0.6);
+			            });
+
+			            this.bind('loadfinish', function (e) {
+			                this.$('loader').fadeOut(200);
+			            });
+			        }
+			    });
+		}
+}
 var Util = {
 	
 	availableSpace: function() {
+		headerHeight = $(".navbar:first").height();
+		footerHeight = $("#footer-container").height();
 		var viewportSize = Util.viewportSize(),
 			deltaHeight = headerHeight + footerHeight;
 		availableHeight = viewportSize.height - (headerHeight + footerHeight)
@@ -485,90 +734,3 @@ var Util = {
 		return size;
 	}
 }
-
-$(document).ready(function() {
-
-	f_init_galleria = function() {
-
-		 Galleria.addTheme({
-		        name:'classic',
-		        author:'Galleria',
-		        css:'galleria.classic.css',
-		        defaults:{
-		            transition:'slide',
-		            thumbCrop:'height',
-
-		            // set this to false if you want to show the caption all the time:
-		            _toggleInfo:false
-		        },
-		        init:function (options) {
-
-		            // add some elements
-		            this.addElement('info-link', 'info-close');
-		            this.append({
-		                'info':['info-link', 'info-close']
-		            });
-
-		            // cache some stuff
-		            var info = this.$('info-link,info-close,info-text'),
-		                touch = Galleria.TOUCH,
-		                click = touch ? 'touchstart' : 'click';
-
-		            // show loader & counter with opacity
-		            this.$('loader,counter').show().css('opacity', 0.4);
-
-		            // some stuff for non-touch browsers
-		            if (!touch) {
-		                this.addIdleState(this.get('image-nav-left'), { left:-50 });
-		                this.addIdleState(this.get('image-nav-right'), { right:-50 });
-		                this.addIdleState(this.get('counter'), { opacity:0 });
-		            }
-
-		            // toggle info
-		            if (options._toggleInfo === true) {
-		                info.bind(click, function () {
-		                    info.toggle();
-		                });
-		            } else {
-		                info.show();
-		                this.$('info-link, info-close').hide();
-		            }
-
-		            // bind some stuff
-		            this.bind('thumbnail', function (e) {
-
-		                if (!touch) {
-		                    // fade thumbnails
-		                    $(e.thumbTarget).css('opacity', 0.6).parent().hover(function () {
-		                        $(this).not('.active').children().stop().fadeTo(100, 1);
-		                    }, function () {
-		                        $(this).not('.active').children().stop().fadeTo(400, 0.6);
-		                    });
-
-		                    if (e.index === this.getIndex()) {
-		                        $(e.thumbTarget).css('opacity', 1);
-		                    }
-		                } else {
-		                    $(e.thumbTarget).css('opacity', this.getIndex() ? 1 : 0.6);
-		                }
-		            });
-
-		            this.bind('loadstart', function (e) {
-		                if (!e.cached) {
-		                    this.$('loader').show().fadeTo(200, 0.4);
-		                }
-
-		                this.$('info').toggle(this.hasInfo());
-
-		                $(e.thumbTarget).css('opacity', 1).parent().siblings().children().css('opacity', 0.6);
-		            });
-
-		            this.bind('loadfinish', function (e) {
-		                this.$('loader').fadeOut(200);
-		            });
-		        }
-		    });
-	}
-	
-	Site.init(); 
-});

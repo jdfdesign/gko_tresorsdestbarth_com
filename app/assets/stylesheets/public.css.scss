@@ -82,9 +82,8 @@ $itemPadding: 40px;
 @import "gko/public/base";
 @import "gko/store"; 
 @import "galleria";
-* {
-@include box-sizing(border-box);
-}
+
+
 #continue-shopping-btn {
 	display: none;
 }
@@ -92,6 +91,10 @@ $itemPadding: 40px;
 body {
 	background-color: #F5F5ED;
 	font-weight: 300;
+	&.noscroll {
+		overflow: hidden;
+	}
+	
 }
 #content {
 	padding-top: 60px;
@@ -100,7 +103,15 @@ body {
 	@include center-block;
 	
 }
-
+#body-overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #fefefe;
+	z-index: 10000;
+}
 
 
 /*-----------------------------------------
@@ -205,8 +216,8 @@ label {
 }
 #facebook {
 	background: white asset-url('icon-facebook.png',image) left center no-repeat;
-	position: absolute;	
-	top: 48px;
+	position: fixed;	
+	top: 54px;
 	right: 24px;
 	display: block;
 	overflow: hidden;

@@ -100,9 +100,9 @@
 		    text-align: center;
 			line-height: 22px;
 		    position: relative;
-		    padding: 10px;
+		    padding: 0;
 		    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-		    margin: 20px 40px 0px 40px;
+		    margin: 12px;
 			&:hover {
 				text-decoration: none;
 			}
@@ -132,6 +132,7 @@
 			right: -286px;
 			width: 286px;
 			height: 286px;
+			@include box-sizing(border-box);
 			@include border-radius(12px);
 			background: rgba(255, 255, 255, 0.7);
 			@include transition("all .6s ease-out");

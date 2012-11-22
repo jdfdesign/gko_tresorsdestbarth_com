@@ -118,6 +118,10 @@
 					top: ($item.position().top + 5) + 'px'
 				});
 			});
+		},
+		
+		rescale: function() {
+			
 		}
 	},
 		// navigation types
@@ -374,6 +378,7 @@
 					});
 				}
 			}
+			
 		};
 
 	$.fn.gridnav = function(method) {
