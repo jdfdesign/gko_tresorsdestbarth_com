@@ -28,9 +28,157 @@ var Site = {
 			$('a[href$="#pearls"]').attr("href", "/#pearls");
 			$overlay.fadeOut();
 		}
+
+		// Bind lookbook action
+		$("a#lookbook").attr('data-remote', 'true')
+		.on('ajax:beforeSend',
+		function(event, xhr, settings) {
+
+		}).on('ajax:complete',
+	    function(evt, xhr, status) {
+
+			var modal = $("#modal-gallery"),
+				header = modal.find('.modal-header:first'),
+				body = modal.find('.modal-body:first'),
+				gallery = modal.find('.galleria:first'),
+				headerHeight = header.height(),
+				bodyMaxHeight = availableHeight - headerHeight  - 30,
+				modalHeight = availableHeight + headerHeight,
+				modalWidth = modalHeight * 1.35;
+			
+			body.css({'max-height': bodyMaxHeight });
+			modal.css({'margin-top': -modalHeight/2, 'margin-left': -modalWidth/2, 'width': modalWidth, 'height': modalHeight});
+			gallery.galleria({
+	            autoplay: true,
+	            responsive: true,
+	            height: .65,
+				carousel: false,
+			//	thumbnails: "numbers",
+	            imageCrop: 'landscape',
+	            transition: 'flash',
+	            showCounter: false,
+	            showInfo: false
+	        })
+	    });
 	}
 }
-				
+
+var SlideShow = {
+
+		init : function() {
+
+			 Galleria.addTheme({
+			        name:'classic',
+			        author:'Galleria',
+			        css:'galleria.classic.css',
+			        defaults:{
+			            transition:'slide',
+			            thumbCrop:'height',
+
+			            // set this to false if you want to show the caption all the time:
+			            _toggleInfo:false
+			        },
+			        init:function (options) {
+
+			            // add some elements
+			            this.addElement('info-link', 'info-close');
+			            this.append({
+			                'info':['info-link', 'info-close']
+			            });
+
+			            // cache some stuff
+			            var info = this.$('info-link,info-close,info-text'),
+			                touch = Galleria.TOUCH,
+			                click = touch ? 'touchstart' : 'click';
+
+			            // show loader & counter with opacity
+			            this.$('loader,counter').show().css('opacity', 0.4);
+
+			            // some stuff for non-touch browsers
+			            if (!touch) {
+			                this.addIdleState(this.get('image-nav-left'), { left:-50 });
+			                this.addIdleState(this.get('image-nav-right'), { right:-50 });
+			                this.addIdleState(this.get('counter'), { opacity:0 });
+			            }
+
+			            // toggle info
+			            if (options._toggleInfo === true) {
+			                info.bind(click, function () {
+			                    info.toggle();
+			                });
+			            } else {
+			                info.show();
+			                this.$('info-link, info-close').hide();
+			            }
+
+			            // bind some stuff
+			            this.bind('thumbnail', function (e) {
+
+			                if (!touch) {
+			                    // fade thumbnails
+			                    $(e.thumbTarget).css('opacity', 0.6).parent().hover(function () {
+			                        $(this).not('.active').children().stop().fadeTo(100, 1);
+			                    }, function () {
+			                        $(this).not('.active').children().stop().fadeTo(400, 0.6);
+			                    });
+
+			                    if (e.index === this.getIndex()) {
+			                        $(e.thumbTarget).css('opacity', 1);
+			                    }
+			                } else {
+			                    $(e.thumbTarget).css('opacity', this.getIndex() ? 1 : 0.6);
+			                }
+			            });
+
+			            this.bind('loadstart', function (e) {
+			                if (!e.cached) {
+			                    this.$('loader').show().fadeTo(200, 0.4);
+			                }
+
+			                this.$('info').toggle(this.hasInfo());
+
+			                $(e.thumbTarget).css('opacity', 1).parent().siblings().children().css('opacity', 0.6);
+			            });
+
+			            this.bind('loadfinish', function (e) {
+			                this.$('loader').fadeOut(200);
+			            });
+			        }
+			    });
+		}
+}
+
+
+var Util = {
+	
+	availableSpace: function() {
+		headerHeight = $(".navbar:first").height();
+		footerHeight = $("#footer-container").height();
+		var viewportSize = Util.viewportSize(),
+			deltaHeight = headerHeight + footerHeight;
+		availableHeight = viewportSize.height - (headerHeight + footerHeight)
+		availableWidth = viewportSize.width;
+	},
+	viewportSize: function () {
+		var mode, domObject, size = { height: $window.innerHeight(), width: $window.innerWidth() };
+		// if this is correct then return it. iPad has compat Mode, so will
+		// go into check clientHeight/clientWidth (which has the wrong value).
+		if (!size.height) {
+			mode = document.compatMode;
+			if (mode || !$.support.boxModel) { // IE, Gecko
+				domObject = mode === 'CSS1Compat' ?
+				document.documentElement : // Standards
+				document.body; // Quirks
+				size = {
+					height: domObject.clientHeight,
+					width:  domObject.clientWidth
+				};
+      		}
+    	}
+		return size;
+	}
+}
+		
 $(document).ready(function() {
 	Site.init(); 
 });

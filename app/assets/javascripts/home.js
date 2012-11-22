@@ -1,12 +1,12 @@
 //= jquery.easing.1.3
-//= require jquery.scrollTo.1.4.2
 //= require jquery.inview
 //= require jquery.sidescroll.js
 //= require jquery.mousewheel.3.0.6
 //= require jquery.debouncedresize.js
-//= require jquery.gridnav
 //= require gko/gko.galleria
 //= require jquery.jscrollpane
+
+jQuery.fn.reverse = Array.prototype.reverse;
 
 var  $container
 	,$cover
@@ -24,6 +24,7 @@ var  $container
 	,availableWidth
 	,isAppleDevice
 	,$notice
+	,$facebook
 	,$viewCartMenuLink
 	,History = window.History; // Note: We are using a capital H instead of a lower h
 	
@@ -34,6 +35,7 @@ var Home = {
 		$cover = $("#cover");
 		$logo = $("#logo");
 		$navbar = $(".navbar:first");
+		$facebook = $("a#facebook");
 		headerHeight = $(".navbar:first").height();
 		footerHeight = $("#footer-container").height();
 		deltaHeight = headerHeight + footerHeight;
@@ -57,7 +59,6 @@ var Home = {
 	},
 	onImageLoaded: function() {
 		if(imagesCount == 0) {
-			Util.availableSpace(); // update space infos before all
 			Home.resize();
 			Home.attachEvents();
 			$sidescroll.init();
@@ -72,13 +73,16 @@ var Home = {
 			var $headline = $cover.find('.headline');
 			$headline.css('opacity', 0);
 			$logo.css('opacity', 0);
+			$facebook.css('top', -50);
 			$navbar.css('top', -50);
 			$overlay.fadeOut(3000, function() {
 				$overlay.remove();
 				$logo.animate({'opacity': 1}, 1200, function() {
 					$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
 				});
-				$navbar.animate({'top':0}, 200);
+				$navbar.animate({'top':0}, 200, function() {
+					$facebook.animate({'top': headerHeight}, 200)
+				});
 			});
 
 		}
@@ -126,7 +130,7 @@ var Home = {
         });
 
 		
-		// Bind show product action
+		// Bind sitem grid
         $(".tj_gallery_inner").hover(function(e) {
 			$(".tj_content", this).animate({right: "0"},{queue:false, duration:300});  
 		}, function(e) {
@@ -140,37 +144,7 @@ var Home = {
         function(evt, xhr, status) {
 			Product.show($(this).parents("section:first"), eval(xhr.responseText).html());
         });
-		// Bind lookbook action
-		$("a#lookbook").attr('data-remote', 'true')
-		.on('ajax:beforeSend',
-		function(event, xhr, settings) {
 
-		}).on('ajax:complete',
-	    function(evt, xhr, status) {
-
-			var modal = $("#modal-gallery"),
-				header = modal.find('.modal-header:first'),
-				body = modal.find('.modal-body:first'),
-				gallery = modal.find('.galleria:first'),
-				headerHeight = header.height(),
-				bodyMaxHeight = availableHeight - headerHeight  - 30,
-				modalHeight = availableHeight + headerHeight,
-				modalWidth = modalHeight * 1.35;
-			
-			body.css({'max-height': bodyMaxHeight });
-			modal.css({'margin-top': -modalHeight/2, 'margin-left': -modalWidth/2, 'width': modalWidth, 'height': modalHeight});
-			gallery.galleria({
-	            autoplay: true,
-	            responsive: true,
-	            height: .65,
-				carousel: false,
-			//	thumbnails: "numbers",
-	            imageCrop: 'landscape',
-	            transition: 'flash',
-	            showCounter: false,
-	            showInfo: false
-	        })
-	    });
 
 	},
 	resize: function() {
@@ -186,6 +160,7 @@ var Home = {
 		});
 		// center vercally the logo
 		$logo.css('margin-top', (availableHeight - $logo.height()) / 2)
+		$facebook.css({'top': headerHeight});
 		
 		$('.products').each(function (i, el) {
 			Grid.resize($(el));
@@ -326,9 +301,13 @@ var Grid = {
 				return false;
 			});
 		}
+
+
+		target.data('initialized', true);
 	},
 	
 	scale: function(target) {
+
 		var $container = target.find('.tj_container'),
 			$grid = $container.find('.tj_gallery'),
 			$nav = $container.find('.tj_nav'),
@@ -336,9 +315,10 @@ var Grid = {
 			$items = $grid.children('li');
 			numItems = $items.length,
 			itemPadding = 8,
-			h = availableHeight - 60
-			w = Math.min(320, Math.floor((availableWidth / 4) - (3 * itemPadding))),
-			itemWidth = Math.max(160, w),
+			h = availableHeight - 60,
+			w = availableWidth - 80,
+			itemWidth = Math.min(286, Math.floor((w / 4) - (3 * itemPadding))),
+			itemWidth = Math.max(160, itemWidth),
 			
 			numVisibleRows = Math.floor(h / itemWidth),
 			// check how many items we have per row
@@ -346,11 +326,13 @@ var Grid = {
 			// number of items to show is rowCount * n rows
 			numVisibleItems = numCols * numVisibleRows,
 			// total number of rows
-			numRows = Math.ceil(numItems / numCols);
+			numRows = Math.ceil(numItems / numCols),
 			// total pages
-			numPages = Math.ceil(numRows / numVisibleRows)
+			numPages = Math.ceil(numRows / numVisibleRows);
 
-	
+		
+		$container.hide();
+		
 		// save this values for later
 		var config = {};
 		config.currentRow = 1;
@@ -360,6 +342,8 @@ var Grid = {
 		config.numVisibleItems = numVisibleItems;
 		
 		$grid.data('config', config);	
+		
+		var descriptionVisibility = (itemWidth > 200) ? 'block' : 'none';
 		
 		$items.each(function(i) {
 			var $item = $(this),
@@ -390,21 +374,19 @@ var Grid = {
 					
 			})
 			.addClass('tj_row_' + Math.ceil((i + 1) / numCols))
-			.find('.tj_content').css({
-				'height': itemWidth,
-				'width': itemWidth,
-				'right': itemWidth
-			});
+			.find('.tj_content').css('right',itemWidth)
+			.find('.description').css('display', descriptionVisibility)
 		});
 		
 		
-		var spaceH = h - $grid.height();
+		var spaceH = h - (itemWidth * numVisibleRows),
+			spaceW = w - (itemWidth * numCols);
 		
-		$parent.css({
+		$grid.parent().css({
 			'paddingTop': Math.floor(spaceH / 2),
 			'paddingBottom': Math.floor(spaceH / 2),
-			'paddingLeft': Math.floor(freeWidth / 2),
-			'paddingRight': Math.floor(freeWidth / 2)
+			'paddingLeft': Math.floor(spaceW / 2),
+			'paddingRight': Math.floor(spaceW / 2)
 		})
 		
 		// set up page navigation
@@ -424,32 +406,34 @@ var Grid = {
 			});
 		}
 		$("a#row_1").addClass('active');
+		
+		
+		$container.show();
 	},
 	
 	show: function(section) {
 		//console.log("// Grid.show");
 		$activeSection = section;
-		//Home.scrollToSection(section, Grid.show_after);
+
 		Home.scrollToSection(section);
-		//console.log("// Grid.show_after");
+
 		var $category = $activeSection.find(".category:first"),
 			$products = $activeSection.find(".products:first");
-			
-			//console.log("XXXXXXX Grid.show" + $category);
 			
 		$activeSection.attr('data-state', 'grid');
 		
 		$products.css('left', availableWidth).addClass('active');
-		Grid.init($products);
 		
+		if(!$products.data('initialized')) {
+			Grid.init($products);
+		}
+
 		$body.addClass("noscroll");
 	
 		$category.animate({'left': -availableWidth}, 900, function() {
 			$(this).removeClass('active');
 		});
 		$products.animate({'left': 0}, 900);
-		
-		$products.data()
 	},
 	hide: function(section) {
 		//console.log("// Grid.hide " + section.attr("id"));
@@ -466,7 +450,6 @@ var Grid = {
 	},
 	paginate: function(target, dir, page) {
 		var config = target.data('config');
-			
 		
 		if (page != undefined && config.currentRow == page) {
 
@@ -518,7 +501,7 @@ var Grid = {
 		$currentRowElements.each(function(i) {
 			var $el = $(this);
 			setTimeout(function() {
-				$el.fadeOut(500, 'jswing')
+				$el.fadeOut(500, 'swing')
 			}, seq_t + i * seq_t);
 		});
 
@@ -535,7 +518,7 @@ var Grid = {
 		$nextRowElements.each(function(i) {
 			var $el = $(this);
 			setTimeout(function() {
-				$el.fadeIn(500, 'jswing', function() {
+				$el.fadeIn(500, 'swing', function() {
 					++cnt;
 					if (cnt === total_elems) {
 						target.data('anim', false);
@@ -556,10 +539,8 @@ var Grid = {
 		} else {
 			config.currentRow -= config.numVisibleRows;
 		}
-		
 
 		target.data('config', config);
-
 	}
 }
 var Category = {
@@ -618,119 +599,5 @@ var Category = {
 	},
 	resize: function(target) {
 
-	}
-}
-
-var SlideShow = {
-
-		init : function() {
-
-			 Galleria.addTheme({
-			        name:'classic',
-			        author:'Galleria',
-			        css:'galleria.classic.css',
-			        defaults:{
-			            transition:'slide',
-			            thumbCrop:'height',
-
-			            // set this to false if you want to show the caption all the time:
-			            _toggleInfo:false
-			        },
-			        init:function (options) {
-
-			            // add some elements
-			            this.addElement('info-link', 'info-close');
-			            this.append({
-			                'info':['info-link', 'info-close']
-			            });
-
-			            // cache some stuff
-			            var info = this.$('info-link,info-close,info-text'),
-			                touch = Galleria.TOUCH,
-			                click = touch ? 'touchstart' : 'click';
-
-			            // show loader & counter with opacity
-			            this.$('loader,counter').show().css('opacity', 0.4);
-
-			            // some stuff for non-touch browsers
-			            if (!touch) {
-			                this.addIdleState(this.get('image-nav-left'), { left:-50 });
-			                this.addIdleState(this.get('image-nav-right'), { right:-50 });
-			                this.addIdleState(this.get('counter'), { opacity:0 });
-			            }
-
-			            // toggle info
-			            if (options._toggleInfo === true) {
-			                info.bind(click, function () {
-			                    info.toggle();
-			                });
-			            } else {
-			                info.show();
-			                this.$('info-link, info-close').hide();
-			            }
-
-			            // bind some stuff
-			            this.bind('thumbnail', function (e) {
-
-			                if (!touch) {
-			                    // fade thumbnails
-			                    $(e.thumbTarget).css('opacity', 0.6).parent().hover(function () {
-			                        $(this).not('.active').children().stop().fadeTo(100, 1);
-			                    }, function () {
-			                        $(this).not('.active').children().stop().fadeTo(400, 0.6);
-			                    });
-
-			                    if (e.index === this.getIndex()) {
-			                        $(e.thumbTarget).css('opacity', 1);
-			                    }
-			                } else {
-			                    $(e.thumbTarget).css('opacity', this.getIndex() ? 1 : 0.6);
-			                }
-			            });
-
-			            this.bind('loadstart', function (e) {
-			                if (!e.cached) {
-			                    this.$('loader').show().fadeTo(200, 0.4);
-			                }
-
-			                this.$('info').toggle(this.hasInfo());
-
-			                $(e.thumbTarget).css('opacity', 1).parent().siblings().children().css('opacity', 0.6);
-			            });
-
-			            this.bind('loadfinish', function (e) {
-			                this.$('loader').fadeOut(200);
-			            });
-			        }
-			    });
-		}
-}
-var Util = {
-	
-	availableSpace: function() {
-		headerHeight = $(".navbar:first").height();
-		footerHeight = $("#footer-container").height();
-		var viewportSize = Util.viewportSize(),
-			deltaHeight = headerHeight + footerHeight;
-		availableHeight = viewportSize.height - (headerHeight + footerHeight)
-		availableWidth = viewportSize.width;
-	},
-	viewportSize: function () {
-		var mode, domObject, size = { height: $window.innerHeight(), width: $window.innerWidth() };
-		// if this is correct then return it. iPad has compat Mode, so will
-		// go into check clientHeight/clientWidth (which has the wrong value).
-		if (!size.height) {
-			mode = document.compatMode;
-			if (mode || !$.support.boxModel) { // IE, Gecko
-				domObject = mode === 'CSS1Compat' ?
-				document.documentElement : // Standards
-				document.body; // Quirks
-				size = {
-					height: domObject.clientHeight,
-					width:  domObject.clientWidth
-				};
-      		}
-    	}
-		return size;
 	}
 }

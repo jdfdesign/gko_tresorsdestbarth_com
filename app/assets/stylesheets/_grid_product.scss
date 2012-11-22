@@ -129,9 +129,7 @@
 			overflow: hidden;
 			top: 0;
 			bottom: 0;
-			right: -286px;
-			width: 286px;
-			height: 286px;
+			width: 100%;
 			@include box-sizing(border-box);
 			@include border-radius(12px);
 			background: rgba(255, 255, 255, 0.7);

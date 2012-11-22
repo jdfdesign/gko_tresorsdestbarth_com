@@ -3,7 +3,7 @@
 	var $sidescroll	= (function() {
 			
 			// the row elements
-		var $rows = $('.parallax-item'),
+		var $rows = $('.parallax-item.category'),
 			// the window element
 			$win = $(window),
 			// we will store the window sizes here

@@ -10,7 +10,7 @@
 @image_size = is_mobile_device? ? "480x320#" : "1024x800#"
 %>
 <% content_for :page_container do %>
-<% cache(["ss", site, I18n.locale, @store]) do %>
+<% cache([site, I18n.locale, @store]) do %>
 	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail(@image_size).url %>');">
 		<%= image_tag('logo.png', :id => 'logo') %>
 	</section><!--section-->
@@ -53,7 +53,6 @@
 								<li>
 									<a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>" data-remote="true">
 										<%= image_fu(p.thumbnail, "286x286#") %>
-										<div class="tj_mask"></div>
 										<div class="tj_content">
 											<h2><%= p.title %></h2>
 											
@@ -78,7 +77,7 @@
 				</div>
 				<div class='parallax-item product fullscreen'>
 					<div class='bg'></div>
-					<a class='back' href="#">&#10216</a>
+					<a class='back' href="#">&#8249;</a>
 					<div class='content'></div>
 				</div>
 
