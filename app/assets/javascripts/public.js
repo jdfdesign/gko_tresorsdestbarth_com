@@ -42,6 +42,14 @@ var Site = {
 
 		// Bind lookbook action
 		$("a#lookbook").attr('data-remote', 'true')
+		.on('click', function(e){
+			var gallery = $("#gallery");
+			if(gallery.length === 1) {
+				e.stopPropagation();
+	            e.preventDefault();
+				$('#gallery a:first').click();
+			}
+		})
 		.on('ajax:beforeSend',
 		function(event, xhr, settings) {
 
