@@ -9452,6 +9452,10 @@ article.product .carousel-control.right {
   text-decoration: none;
 }
 /* line 110, ../../app/assets/stylesheets/_grid_product.scss */
+.tj_wrapper li .product-price {
+  text-align: center;
+}
+/* line 113, ../../app/assets/stylesheets/_grid_product.scss */
 .tj_wrapper li p {
   font-style: italic;
   position: relative;
@@ -9459,11 +9463,11 @@ article.product .carousel-control.right {
   padding: 10px 20px 20px;
   text-align: center;
 }
-/* line 116, ../../app/assets/stylesheets/_grid_product.scss */
+/* line 119, ../../app/assets/stylesheets/_grid_product.scss */
 .tj_wrapper li p:hover {
   text-decoration: none;
 }
-/* line 120, ../../app/assets/stylesheets/_grid_product.scss */
+/* line 123, ../../app/assets/stylesheets/_grid_product.scss */
 .tj_wrapper li a.info {
   display: block;
   text-decoration: none;
@@ -9471,7 +9475,7 @@ article.product .carousel-control.right {
   color: #000;
   text-align: center;
 }
-/* line 127, ../../app/assets/stylesheets/_grid_product.scss */
+/* line 130, ../../app/assets/stylesheets/_grid_product.scss */
 .tj_wrapper li .tj_content {
   position: absolute;
   overflow: hidden;
@@ -9491,7 +9495,7 @@ article.product .carousel-control.right {
   transition: "all .6s ease-out";
 }
 
-/* line 141, ../../app/assets/stylesheets/_grid_product.scss */
+/* line 144, ../../app/assets/stylesheets/_grid_product.scss */
 .product-loader {
   background: #000;
   width: 20px;
