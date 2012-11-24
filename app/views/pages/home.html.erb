@@ -55,7 +55,9 @@
 										<%= image_fu(p.thumbnail, "286x286#") %>
 										<div class="tj_content">
 											<h2><%= p.title %></h2>
-											
+											<div class="product-price">
+												<%= indivisible_number_to_currency(p.price, :unit => site.preferred_currency) %>
+											</div>
 											<%= render_record_description(p, 80, " &#8594;") %>
 									    </div>
 									</a>

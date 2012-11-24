@@ -47,6 +47,7 @@ var Home = {
 			$('section.background-image').css('background-attachment', 'absolute');
 		}
 		
+		// Preload background image before starting animations
 		$('section.background-image').each(function (i, el) {
 			imagesCount ++;
 			var bg = $(el).css('background-image'),
@@ -100,13 +101,13 @@ var Home = {
 			Grid.show($(this).parents("section:first"));
         });
 
-		$('a[href$="#treasures"]').attr("id", "").on('click', function(e) {
+		$('a#treasures').on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
 			Category.show($("section#treasures"));
 		})
 
-		$('a[href$="#pearls"]').attr("id", "").on('click', function(e) {
+		$('a#pearls').on('click', function(e) {
 			e.stopPropagation();
             e.preventDefault();
 			Category.show($("section#pearls"));
@@ -132,13 +133,15 @@ var Home = {
 		
 		// Bind sitem grid
         $(".tj_gallery_inner").hover(function(e) {
-			$(".tj_content", this).animate({right: "0"},{queue:false, duration:300});  
+			$(".tj_content", this).slideToggle();
+			//$(".tj_content", this).animate({right: "0"},{queue:false, duration:300});  
 		}, function(e) {
 			var t = $(".tj_content");
-			t.animate({right: -t.width()},{queue:false, duration:300});  
+			$(".tj_content", this).slideToggle();
+			//t.animate({right: -t.width()},{queue:false, duration:300});  
 		})
 		.on('ajax:beforeSend', function(event, xhr, settings) {
-
+			//Util.attachLoading($(this));
 		})
 		.on('ajax:complete',
         function(evt, xhr, status) {
@@ -315,22 +318,29 @@ var Grid = {
 			$items = $grid.children('li');
 			numItems = $items.length,
 			itemPadding = 8,
+			maxItemWidth = 286,
+			minItemWidth = 180,
 			h = availableHeight - 60,
 			w = availableWidth - 80,
-			itemWidth = Math.min(286, Math.floor((w / 4) - (3 * itemPadding))),
-			itemWidth = Math.max(160, itemWidth),
-			
-			numVisibleRows = Math.floor(h / itemWidth),
-			// check how many items we have per row
-			numCols = Math.floor(availableWidth / itemWidth),
-			// number of items to show is rowCount * n rows
-			numVisibleItems = numCols * numVisibleRows,
-			// total number of rows
-			numRows = Math.ceil(numItems / numCols),
-			// total pages
-			numPages = Math.ceil(numRows / numVisibleRows);
+			itemWidth = Math.min(maxItemWidth, Math.floor((w / 4) - (3 * itemPadding))),
+			itemWidth = Math.max(minItemWidth, itemWidth),
+			numVisibleRows = Math.floor(h / itemWidth);
 
+		// we want at least 2 rows if possible
+		if(numVisibleRows === 1) {
+			itemWidth = Math.max(Math.min(h / 2, maxItemWidth), minItemWidth);
+			numVisibleRows = Math.floor(h / itemWidth);
+		}
 		
+		// check how many items we have per row
+		numCols = Math.floor(availableWidth / itemWidth),
+		// number of items to show is rowCount * n rows
+		numVisibleItems = numCols * numVisibleRows,
+		// total number of rows
+		numRows = Math.ceil(numItems / numCols),
+		// total pages
+		numPages = Math.ceil(numRows / numVisibleRows);
+
 		$container.hide();
 		
 		// save this values for later
@@ -374,7 +384,7 @@ var Grid = {
 					
 			})
 			.addClass('tj_row_' + Math.ceil((i + 1) / numCols))
-			.find('.tj_content').css('right',itemWidth)
+			.find('.tj_content').css('display','none')
 			.find('.description').css('display', descriptionVisibility)
 		});
 		

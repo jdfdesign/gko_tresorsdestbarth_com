@@ -1,0 +1,5 @@
+var image_folder_form = $("<div id='modal-gallery' class='modal fade'><div class='modal-header'><a class='close' data-dismiss='modal'>&times;</a><h3 class='modal-title'><%= escape_javascript( resource.title.html_safe) %></h3></div><div class='modal-body'><%= escape_javascript(render_slideshow_for(resource)) %></div></div>");
+image_folder_form.appendTo('body').modal({backdrop:'static', show:true}).bind('hidden', function (e) {
+    $(this).remove();
+});
+SlideShow.init();

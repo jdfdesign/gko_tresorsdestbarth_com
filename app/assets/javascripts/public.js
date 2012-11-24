@@ -1,7 +1,14 @@
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap/carousel
-//= require twitter/bootstrap/modal
+//= require twitter/bootstrap/transition.js
+//= require twitter/bootstrap/alert.js
+//= require twitter/bootstrap/button.js
+//= require twitter/bootstrap/carousel.js
+//= require twitter/bootstrap/collapse.js
+//= require twitter/bootstrap/dropdown.js
+//= require load-image.js
+//= require twitter/bootstrap/modal.js
+//= require bootstrap-image-gallery.js
 //= require gko_store_public_all
 
 var  $body
@@ -21,11 +28,15 @@ var Site = {
 		bodyId = $body.attr('id');
 		isHome = (bodyId == "home");
 		
-		if(isHome) {
+		if(!$body.hasClass('mobile-device')) {
+			// Change categories links to redirect to homePage
+			$('a#treasures').attr("href", "/#category_treasures");
+			$('a#pearls').attr("href", "/#category_pearls");
+		}
+		
+		if(isHome && !$body.hasClass('mobile-device')) {
 			Home.init();
 		} else {
-			$('a[href$="#treasures"]').attr("href", "/#treasures");
-			$('a[href$="#pearls"]').attr("href", "/#pearls");
 			$overlay.fadeOut();
 		}
 
@@ -37,28 +48,6 @@ var Site = {
 		}).on('ajax:complete',
 	    function(evt, xhr, status) {
 
-			var modal = $("#modal-gallery"),
-				header = modal.find('.modal-header:first'),
-				body = modal.find('.modal-body:first'),
-				gallery = modal.find('.galleria:first'),
-				headerHeight = header.height(),
-				bodyMaxHeight = availableHeight - headerHeight  - 30,
-				modalHeight = availableHeight + headerHeight,
-				modalWidth = modalHeight * 1.35;
-			
-			body.css({'max-height': bodyMaxHeight });
-			modal.css({'margin-top': -modalHeight/2, 'margin-left': -modalWidth/2, 'width': modalWidth, 'height': modalHeight});
-			gallery.galleria({
-	            autoplay: true,
-	            responsive: true,
-	            height: .65,
-				carousel: false,
-			//	thumbnails: "numbers",
-	            imageCrop: 'landscape',
-	            transition: 'flash',
-	            showCounter: false,
-	            showInfo: false
-	        })
 	    });
 	}
 }
@@ -150,7 +139,7 @@ var SlideShow = {
 
 
 var Util = {
-	
+
 	availableSpace: function() {
 		headerHeight = $(".navbar:first").height();
 		footerHeight = $("#footer-container").height();

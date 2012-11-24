@@ -138,3 +138,14 @@
 	}
 } 
 
+.product-loader {
+    background: #000;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    display: none;
+    background: asset-url("classic-loader.gif", image) no-repeat 2px 2px;
+}

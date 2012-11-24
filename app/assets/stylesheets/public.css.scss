@@ -82,7 +82,7 @@ $itemPadding: 40px;
 @import "gko/public/base";
 @import "gko/store"; 
 @import "galleria";
-
+@import "bootstrap-image-gallery";
 
 #continue-shopping-btn {
 	display: none;
@@ -249,21 +249,18 @@ label {
  STORE
 ----------------------------------------- */
 
+
+
+
 .product-info {
 	float: left;
-	color: white;
 	h1.page-title {
 		border-bottom: $borderSize solid $borderColor;
-		color: white;
 	}
 	h4 {
 		@extend .uppercase_font_style; 
 		border-bottom: 1px solid $borderColor; 
 		padding-top: $baseLineHeight; 
-		color: white;
-	}
-	input {
-		color: black;
 	}
 }
 #product-variants {
@@ -271,10 +268,7 @@ label {
 		display: inline-block;
 	} 
 } 
-h2#product-variants-title {
-	border-bottom: $borderSize solid $borderColor;
-	color: white;
-}
+
 #product-properties {
 	
 	line-height: 18px;
@@ -367,21 +361,90 @@ article.product {
  RESPONSIVE
 ----------------------------------------- */
 
-//@import "gko/responsive"; 
+@import "twitter/bootstrap/responsive";
+@import "gko/default_responsive"; 
+
+
+@media(max-width: 480px) {
+	.pagination {
+		text-align: center;
+	}
+	
+}
 
 @media(min-width: 767px) {
 	@include articleProductSize(769);
-
+	.product-info {
+		color: white;
+		h1.page-title {
+			color: white;
+		}
+		h4 {
+			color: white;
+		}
+		input {
+			color: black;
+		}
+	}
+	h2#product-variants-title {
+		border-bottom: $borderSize solid $borderColor;
+		color: white;
+	}
 }
 
-@media(max-width: 768px) {
+@media(max-width: 769px) {
 	body {
 		padding-left: 0;
 		padding-right: 0;
 	}
-		
-}
+	#content {
+		padding-top: 137px;
+		padding: 20px;
+		margin: 20px;
+	}
+	/*-----------------------------------------
+	 STORE
+	----------------------------------------- */
+	.grid > li {
+		margin: 0;
+		overflow: hidden;
+		zoom: 1;
+		.thumbnail {
+			padding: 0;
+			border: none;
+			@include border-radius(0);
+			@include box-shadow(none);
+			.image {
+				float: left;
+				width: 120px;
+				margin-right: 10px;
+			}
+			.caption {
+				overflow: hidden;
+				zoom: 1;
+			}
+			.title {
+				text-transform: uppercase;
+			    color: #000;
+				font-size: 14px;
+			    text-align: left;
+				line-height: 18px;
 
+			}
+		}
+	}	
+}
+@media(max-width: 979px) {
+	body {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	#content {
+		padding-top: 137px;
+		padding: 20px;
+		margin: 20px;
+	}	
+}
 
 @media(min-width: 980px) {
 	@include articleProductSize(980);

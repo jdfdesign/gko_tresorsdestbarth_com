@@ -1,0 +1,32 @@
+<%
+   image_geometry = local_assigns.has_key?(:image_style) ? image_style : site.preferred_image_carousel_size
+   thumb_geometry = local_assigns.has_key?(:thumb_style) ? thumb_style : site.preferred_image_thumb_size
+%>
+<section>
+<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" style="display:none;">
+	<% resource.images.each do |img| %>
+		<%= link_to img.thumbnail(image_geometry).url, :rel => "gallery", :title => "Lookbook" do %>
+			<%= image_fu(img, thumb_geometry) %>
+		<% end %>
+     <% end %>
+</div>
+
+<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1" data-slideshow="3000">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body"><div class="modal-image"></div></div>
+    <div class="modal-footer">
+        <a class="btn modal-play modal-slideshow" data-slideshow="5000">
+            <i class="icon-pause"></i>
+        </a>
+        <a class="btn modal-prev">
+            <i class="icon-arrow-left"></i>
+        </a>
+        <a class="btn modal-next">
+            <i class="icon-arrow-right"></i>
+        </a>
+    </div>
+</div>
+</section>

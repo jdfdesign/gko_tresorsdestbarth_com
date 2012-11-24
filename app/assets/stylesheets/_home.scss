@@ -81,7 +81,7 @@ body#home {
 		.pod-carousel {
 			position: relative;
 			border: 1px solid rgba(255,255,255,.8);
-			@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+		//	@include box-shadow(0 4px 16px rgba(0,0,0,.2));
 			@include border-radius(12px);
 			@include square(300px);
 			img {
@@ -132,16 +132,16 @@ body#home {
 				left: 50%;
 				margin-left: -215px;
 
-				&.blur {
-					@include transition("all 0.7s ease-in-out");
-					@include opacity(0);
-				}
+				//&.blur {
+				//	@include transition("all 0.7s ease-in-out");
+				//	@include opacity(0);
+				//}
 			}
-			&:hover {
-				img.decoration.blur {
-					@include opacity(50);
-				}	
-			}
+		//	&:hover {
+	//			img.decoration.blur {
+	//				@include opacity(50);
+	//			}	
+		//	}
 		}
 
 		.pod-title {
@@ -157,7 +157,7 @@ body#home {
 				text-transform: lowercase;
 
 				color: #FFF;
-				text-shadow:0px 0px 24px $white;
+			//	text-shadow:0px 0px 24px $white;
 				padding-right: 40px;
 				&:hover {
 					text-decoration: none;
@@ -174,7 +174,7 @@ body#home {
 		font-size: 88px;
 		line-height: 68px;
 		text-align: center;
-		text-shadow: 0px 0px 100px black;
+	//	text-shadow: 0px 0px 100px black;
 		margin: 0 20px;
 		background: transparent asset-url('apos.png', image) 0 0 no-repeat;
 		min-height: 180px;
