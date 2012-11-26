@@ -10,16 +10,11 @@ html {
 	height:100%
 }
 
-body {
-	background: #fefefe;
+body#home {
+	background-color: black;
 	padding: 0;
 	margin: 0;
 	height:100%;
-}
-
-body#home {
-
-
 	.background-image {
 		zoom: 100%;
 		background-color: transparent;
@@ -132,16 +127,16 @@ body#home {
 				left: 50%;
 				margin-left: -215px;
 
-				//&.blur {
-				//	@include transition("all 0.7s ease-in-out");
-				//	@include opacity(0);
-				//}
+				&.blur {
+					@include transition("all 0.7s ease-in-out");
+					@include opacity(0);
+				}
 			}
-		//	&:hover {
-	//			img.decoration.blur {
-	//				@include opacity(50);
-	//			}	
-		//	}
+			&:hover {
+				img.decoration.blur {
+					@include opacity(50);
+				}	
+			}
 		}
 
 		.pod-title {
@@ -150,12 +145,12 @@ body#home {
 			right: 0;
 			font-size: 300px;
 			font-weight: 300;
-			line-height: 150px;
+			line-height: 80px;
 			a {
 				font-family: $altFontFamily;
 				color:white;
 				text-transform: lowercase;
-
+				line-height: 80px;
 				color: #FFF;
 			//	text-shadow:0px 0px 24px $white;
 				padding-right: 40px;

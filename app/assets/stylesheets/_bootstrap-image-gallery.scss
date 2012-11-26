@@ -32,6 +32,7 @@
   overflow: hidden;
   cursor: pointer;
 }
+/*
 .modal-gallery .modal-image:hover:before,
 .modal-gallery .modal-image:hover:after {
   content: '\2039';
@@ -64,8 +65,9 @@
 .modal-single .modal-image:hover:after {
   display: none;
 }
+*/
 .modal-loading .modal-image {
-  background: url(../img/loading.gif) center no-repeat;
+  background: asset-url("loading.gif", image) center no-repeat;
 }
 .modal-gallery.fade .modal-image {
   -webkit-transition: width 0.15s ease, height 0.15s ease;

@@ -4,11 +4,12 @@ $altFontFamily: "voluta-script-pro", "Times New Roman", "Times", serif;
 $baseFontFamily: "futura-pt","Helvetica Neue", Helvetica, Arial, sans-serif;
 $baseFontSize: 16px;
 $baseLineHeight: 24px;
-$textColor: black;
+$textColor: white;
 $headingFontFamily: $baseFontFamily;
 $headingTextColor: $textColor;
 $headingBaseFontSize: 26px;
-$linkColor: #525049;
+$linkColor: #ccc;
+$linkColorHover: white;
 $borderColor: #E2E2E2;
 $borderSize: 1px;
 
@@ -89,7 +90,7 @@ $itemPadding: 40px;
 }
 
 body {
-	background-color: #F5F5ED;
+	background-color: #332727;
 	font-weight: 300;
 	&.noscroll {
 		overflow: hidden;
@@ -113,7 +114,18 @@ body {
 	z-index: 10000;
 }
 
-
+.well {
+	color: black;
+}
+.form-actions {
+	background-color: transparent;
+}
+legend {
+	color: white;
+}
+a {
+	outline: 0;
+}
 /*-----------------------------------------
  MIXIN
 ----------------------------------------- */
@@ -198,6 +210,11 @@ label {
 .navbar .brand a {
 	font-size: 10px;
 	font-weight:bold;
+	color: #797979;
+	&:hover {
+		color: black;
+		text-decoration: none;
+	};
 }
 .header-top {
 	position: absolute;
@@ -217,7 +234,7 @@ label {
 #facebook {
 	background: white asset-url('icon-facebook.png',image) left center no-repeat;
 	position: fixed;	
-	top: 66px;
+	top: 54px;
 	right: 24px;
 	display: block;
 	overflow: hidden;
@@ -225,7 +242,12 @@ label {
 	height: 24px;
 	z-index: 1000;
 	padding-left: 32px;
-	@include border-radius(0 0 6px 6px)
+	@include border-radius(0 0 6px 6px);
+	color: gray;
+	&:hover {
+		color: black;
+		text-decoration: none;
+	};
 }
 /*-----------------------------------------
  FOOTER
@@ -235,7 +257,6 @@ label {
 	z-index: 1030;
 	bottom: 0;
 	width: 100%;
-	background-color: white;
 }
 #footer {
 	margin-top: 0px;
@@ -243,8 +264,21 @@ label {
 	padding-top: 0px;
 	text-align: center;
 	font-size: 12px; 
+	.nav > li > a {
+		@extend .uppercase_font_style; 
+		font-size: 10px;  
+		text-shadow: none;
+		&:hover {
+			text-shadow: none;
+		};
+	}
 }
-
+/*-----------------------------------------
+ FORM
+----------------------------------------- */
+label {
+	@extend .uppercase_font_style;
+}
 /*-----------------------------------------
  STORE
 ----------------------------------------- */
@@ -357,6 +391,27 @@ article.product {
 
 }
 
+#modal-gallery {
+	background-color: transparent;
+	border: 0;
+	@include border-radius(0);
+	@include box-shadow(none);
+	.modal-header {
+		border-bottom: none;
+		display: none;
+	}
+	.modal-image {
+		padding: 0;
+		border: 1px solid $white;
+	}
+	.modal-footer {
+		padding: 0;
+		background-color: transparent;
+		border-top: 0;
+		@include border-radius(0);
+		@include box-shadow(none);
+	}
+}
 /*-----------------------------------------
  RESPONSIVE
 ----------------------------------------- */
