@@ -9,7 +9,7 @@ group :assets do
 end
 
 prod_location = 'git@github.com:jdfdesign/gko_cms3.git'
-prod_version = "= 0.5.14"
+prod_version = "= 0.5.15"
 group :production do
 	gem 'gko_core', prod_version, :git => prod_location
   gem "gko_auth", prod_version, :git => prod_location
@@ -22,7 +22,7 @@ group :production do
   gem "gko_stickers", prod_version, :git => prod_location
  gem 'gko_store', '= 0.0.48',  :git => 'git@github.com:jdfdesign/gko_store.git'
 	 #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
- gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
+  gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
 end
 #group :development do
 #  gem "gko_core", :path => File.expand_path('~/Github/gko_cms3/gko_core', __FILE__)

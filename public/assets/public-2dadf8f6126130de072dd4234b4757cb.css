@@ -2253,7 +2253,7 @@ table th[class*="span"],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("/assets/twitter/glyphicons-halflings.png");
+  background-image: url("/assets/twitter/glyphicons-halflings-ab3144065a860d198f1d7d9a4882640c.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -2274,7 +2274,7 @@ table th[class*="span"],
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"] {
-  background-image: url("/assets/twitter/glyphicons-halflings-white.png");
+  background-image: url("/assets/twitter/glyphicons-halflings-white-13553a5bf21ae3cc374006592488ec64.png");
 }
 
 /* line 48, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_cms3-4ae1dbeb364d/gko_core/vendor/assets/stylesheets/twitter/bootstrap/sprites.scss */
@@ -6505,7 +6505,7 @@ aside > section {
 
 /* line 54, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_cms3-4ae1dbeb364d/gko_core/app/assets/stylesheets/gko/public/_default.scss */
 .missing-document-preview {
-  background: transparent url(/assets/gko/icon_pdf_grey_light_x110.png) left center no-repeat;
+  background: transparent url(/assets/gko/icon_pdf_grey_light_x110-aa942955ac89ec6a8cfc236c40b42cc3.png) left center no-repeat;
   min-height: 110px;
 }
 
@@ -6872,7 +6872,7 @@ footer .nav > li > a:hover {
   position: absolute;
   top: 50%;
   left: 12px;
-  background: transparent url(/assets/gko/nav_thumbnail.png) no-repeat top left;
+  background: transparent url(/assets/gko/nav_thumbnail-f385d5a7fe3346584dc89e507787e9e3.png) no-repeat top left;
   width: 14px;
   height: 26px;
   margin-top: -13px;
@@ -6932,7 +6932,7 @@ h2#product-variants-title {
   position: absolute;
   top: 50%;
   left: 50%;
-  background: black url(/assets/gko/ajax-loader.gif) no-repeat center center;
+  background: black url(/assets/gko/ajax-loader-2515d6b9d17f4ce0408c75e0515bcb0d.gif) no-repeat center center;
   margin: -23px 0px 0px -23px;
   z-index: 100;
   -webkit-border-radius: 10;
@@ -7566,7 +7566,7 @@ label {
   padding: 0;
   width: 24px;
   height: 24px;
-  background: transparent url(/assets/en.png) center center no-repeat;
+  background: transparent url(/assets/en-08068481bbed7b3ad37dad46f460aa89.png) center center no-repeat;
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
@@ -7576,12 +7576,12 @@ label {
 
 /* line 214, ../../app/assets/stylesheets/public.css.scss */
 #locales a.fr {
-  background-image: url(/assets/fr.png);
+  background-image: url(/assets/fr-756758e1789058b2b8577c0a9fd896ea.png);
 }
 
 /* line 217, ../../app/assets/stylesheets/public.css.scss */
 #facebook {
-  background: white url(/assets/icon-facebook.png) left center no-repeat;
+  background: white url(/assets/icon-facebook-655ffe584b4badf34e7ccc7b019822e5.png) left center no-repeat;
   position: fixed;
   top: 66px;
   right: 24px;
@@ -9822,7 +9822,7 @@ body#home .headline {
   line-height: 68px;
   text-align: center;
   margin: 0 20px;
-  background: transparent url(/assets/apos.png) 0 0 no-repeat;
+  background: transparent url(/assets/apos-11600c17f0611a0767a0bb035613fe0a.png) 0 0 no-repeat;
   min-height: 180px;
 }
 /* line 181, ../../app/assets/stylesheets/_home.scss */

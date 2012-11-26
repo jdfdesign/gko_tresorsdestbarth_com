@@ -5,7 +5,7 @@
 <section>
 <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" style="display:none;">
 	<% resource.images.each do |img| %>
-		<%= link_to img.thumbnail(image_geometry).url, :rel => "gallery", :title => "Lookbook" do %>
+		<%= link_to img.thumbnail("x600").url, :rel => "gallery", :title => "Lookbook" do %>
 			<%= image_fu(img, thumb_geometry) %>
 		<% end %>
      <% end %>
