@@ -5,7 +5,7 @@
 //= require jquery.debouncedresize.js
 //= require gko/gko.galleria
 //= require jquery.jscrollpane
-
+//= require jquery-anystretch.js
 jQuery.fn.reverse = Array.prototype.reverse;
 
 var  $container
@@ -41,7 +41,7 @@ var Home = {
 		deltaHeight = headerHeight + footerHeight;
 		$viewCartMenuLink = $('a#view-cart-menu-link');
 		var agent = navigator.userAgent.toLowerCase()
-		isAppleDevice = agent.match(/(iphone|ipod|ipad)/);
+		isAppleDevice = $body.hasClass('mobile-device') || $body.hasClass('tablet-device');
 		
 		if(isAppleDevice) {
 			$('section.background-image').css('background-attachment', 'absolute');
@@ -50,12 +50,21 @@ var Home = {
 		// Preload background image before starting animations
 		$('section.background-image').each(function (i, el) {
 			imagesCount ++;
-			var bg = $(el).css('background-image'),
-				src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
-				$('<img>').attr('src', src).on('load', function() {
-		        imagesCount --;
-		        Home.onImageLoaded();
-			});
+			var bg = $(el).data('bg');
+			
+				//src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
+				$('<img>').attr('src', bg).on('load', function() {
+		        	imagesCount --;
+					console.log(">> " + isAppleDevice)
+					
+					if(isAppleDevice) {
+						$(el).backstretch($(this).attr('src'));
+					}
+					else {
+						$(el).css("background-image", "url(" + bg + ")")
+					}
+		        	Home.onImageLoaded();
+				});
 		});
 	},
 	onImageLoaded: function() {

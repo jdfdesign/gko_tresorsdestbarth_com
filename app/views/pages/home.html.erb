@@ -10,8 +10,8 @@
 @image_size = is_mobile_device? ? "480x320#" : "1024x800#"
 %>
 <% content_for :page_container do %>
-<% cache([site, I18n.locale, @store]) do %>
-	<section id="cover" class="row-fluid background-image fullscreen" style="background-image: url('<%= @images.shift.thumbnail(@image_size).url %>');">
+<% cache(["aa",site, I18n.locale, @store]) do %>
+	<section id="cover" class="row-fluid background-image fullscreen" data-bg="<%= @images.shift.thumbnail(@image_size).url %>">
 		<%= image_tag('logo.png', :id => 'logo') %>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
@@ -23,11 +23,11 @@
 		products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
 	%>
 		<% if category.body.present? %>
-		<section class="row-fluid parallax background-image fullscreen" style="background-image: url('<%= bg_url %>');">
+		<section class="row-fluid parallax background-image fullscreen" data-bg="<%= bg_url %>">
 			<h3 class='headline'><%= category.body.html_safe %></h3>
 		</section><!--section-->
 		<% end %>
-		<section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen <%= category.name %>" style="background-image: url('<%= bg2_url %>');">
+		<section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen <%= category.name %>" data-bg="<%= bg2_url %>">
 			<div class='parallax-inner fullscreen'>
 				<div class='parallax-item category active fullscreen'>
 					<div class="pod ss-left">
@@ -87,7 +87,7 @@
 		</section><!--section-->
 
 	<% end %>
-	<section id="about" class="row-fluid background-image" style="background-image: url('<%= @images.shift.thumbnail("1024x800#").url %>');">
+	<section id="about" class="row-fluid background-image" data-bg="<%= @images.shift.thumbnail("1024x800#").url %>">
 		<div class="row-fluid">
 			<div class="span12">
 				<%= render_html_text( resource.body) if resource.body.present? %>
