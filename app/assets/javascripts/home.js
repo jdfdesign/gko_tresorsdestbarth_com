@@ -55,7 +55,7 @@ var Home = {
 				//src = bg.replace(/(^url\()|(\)$|[\"\'])/g, '');
 				$('<img>').attr('src', bg).on('load', function() {
 		        	imagesCount --;
-					console.log(">> " + isAppleDevice)
+				//	console.log(">> " + isAppleDevice)
 					
 					if(isAppleDevice) {
 						$(el).backstretch($(this).attr('src'));
