@@ -150,8 +150,8 @@ var SlideShow = {
 var Util = {
 
 	availableSpace: function() {
-		headerHeight = $(".navbar:first").height();
-		footerHeight = $("#footer-container").height();
+		headerHeight = $("header.navbar").outerHeight();
+		footerHeight = $("#footer-container").outerHeight();
 		var viewportSize = Util.viewportSize(),
 			deltaHeight = headerHeight + footerHeight;
 		availableHeight = viewportSize.height - (headerHeight + footerHeight)

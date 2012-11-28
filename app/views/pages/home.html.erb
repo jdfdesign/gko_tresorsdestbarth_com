@@ -10,9 +10,10 @@
 @image_size = is_mobile_device? ? "480x320#" : "1024x800#"
 %>
 <% content_for :page_container do %>
-<% cache(["aa",site, I18n.locale, @store]) do %>
+<% cache([site, I18n.locale, @store]) do %>
 	<section id="cover" class="row-fluid background-image fullscreen" data-bg="<%= @images.shift.thumbnail(@image_size).url %>">
 		<%= image_tag('logo.png', :id => 'logo') %>
+		<div id="scrollme" class="animated bounce"><span><%= "scroll me".html_safe %></span></div>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 
 	<% 

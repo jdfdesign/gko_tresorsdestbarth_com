@@ -91,7 +91,8 @@ var Home = {
 					$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
 				});
 				$navbar.animate({'top':0}, 200, function() {
-					$facebook.animate({'top': headerHeight}, 200)
+					$facebook.animate({'top': headerHeight}, 200);
+					$("#scrollme").show();
 				});
 			});
 
@@ -216,7 +217,9 @@ var Product = {
 		var $grid = section.find('.products:first'),
 			$product = section.find('.product:first'),
 			$content = $product.find(".content:first");
-
+		
+		section.data('state', 'product');
+		
 		$content.html(response);
 		var $article = $content.find("article:first"),
 			$info = $article.find('.product-info:first'),
@@ -225,7 +228,7 @@ var Product = {
 		Product.size($article);
 		
 		$('form.cart-form').attr('data-remote', 'true');
-		section.attr('data-state', 'product');
+		
 		
 		$grid.animate({'left': -availableWidth}, 900, function(){
 			$(this).removeClass('active')
@@ -239,22 +242,21 @@ var Product = {
 
 		var $grid = section.find('.products:first'),
 			$product = section.find('.product:first');
-
-		$grid.addClass('active').animate({'left':0}, 900);
-		$product.animate({'left': availableWidth}, 900, function() {
+		
+		section.data('state', 'grid');
+		
+		$grid.addClass('active').stop().animate({'left':0}, 900);
+		$product.stop().animate({'left': availableWidth}, 900, function() {
 			$(this).removeClass('active');
-				if( typeof callback == "function") {
-					$(callback)
-				}
-			});
-		section.attr('data-state', 'grid');
+		});
+		
 	},
 	size: function(article) {
 		var $carousel = article.find('.carousel:first'),
 			$info = article.find('.product-info:first'),
 			minInfoWidth = 300,
 			infoMargin = 30,
-			maxWidth = article.width(),
+			maxWidth = article.outerWidth(),
 			maxCarouselHeight = availableHeight - 120,
 			maxCarouselWidth = maxWidth - minInfoWidth - infoMargin,
 			maxCarousel = Math.min(maxCarouselWidth, maxCarouselHeight);
@@ -433,13 +435,13 @@ var Grid = {
 	show: function(section) {
 		//console.log("// Grid.show");
 		$activeSection = section;
-
+		
 		Home.scrollToSection(section);
 
 		var $category = $activeSection.find(".category:first"),
 			$products = $activeSection.find(".products:first");
 			
-		$activeSection.attr('data-state', 'grid');
+		$activeSection.data('state', 'grid');
 		
 		$products.css('left', availableWidth).addClass('active');
 		
@@ -449,18 +451,18 @@ var Grid = {
 
 		$body.addClass("noscroll");
 	
-		$category.animate({'left': -availableWidth}, 900, function() {
+		$category.stop().animate({'left': -availableWidth}, 900, function() {
 			$(this).removeClass('active');
 		});
-		$products.animate({'left': 0}, 900);
+		$products.stop().animate({'left': 0}, 900);
 	},
 	hide: function(section) {
 		//console.log("// Grid.hide " + section.attr("id"));
 		var $category = section.find(".category:first"),
 			$products = section.find(".products:first");
 		section.attr('data-state', 'category');
-		$category.addClass('active').animate({'left':0}, 900);
-		$products.animate({'left': availableWidth}, 900, function() {
+		$category.addClass('active').stop().animate({'left':0}, 900);
+		$products.stop().animate({'left': availableWidth}, 900, function() {
 			$body.removeClass("noscroll");
 		});
 	},
@@ -575,11 +577,9 @@ var Category = {
 		//	console.log("// Category.show " + section.attr("id"));
 			var activeSectionId = $activeSection.attr('id'),
 				sectionId = section.attr('id'),
-				activeSectionState = $activeSection.attr('data-state');
-		//	console.log("// activeSection state: " + activeSectionState);
-			
-			$activeSection.attr('data-state', 'category');	
-				
+				activeSectionState = $activeSection.data('state');
+				//console.log("// activeSection state: " + activeSectionState);
+
 			if(activeSectionState == 'category') {
 				//console.log("// category: ");
 				Home.scrollToSection(section, null);
@@ -589,28 +589,31 @@ var Category = {
 				var $category = $activeSection.find(".category:first"),
 					$grid = $activeSection.find('.products:first'),
 					$product = $activeSection.find('.product:first');
-					$product.animate({'left': availableWidth}, 900, function() {
+					$product.stop().animate({'left': availableWidth}, 900, function() {
 						$(this).removeClass('active');
 					});
-					$grid.addClass('active').animate({'left':availableWidth}, 1800, function() {
+					$grid.addClass('active').stop().animate({'left':availableWidth}, 1800, function() {
 						$(this).removeClass('active');
 					});
-					$category.addClass('active').animate({'left':0}, 2700, function() {
+					$category.addClass('active').stop().animate({'left':0}, 2700, function() {
+						$body.removeClass("noscroll");
 						Home.scrollToSection(section, false);
 					});
 			}
 			else if(activeSectionState == "grid") {
 				//console.log("// grid: ");
-				var $category = section.find(".category:first"),
-					$grid = section.find('.products:first');
-					$grid.addClass('active').animate({'left':availableWidth}, 900, function() {
+				var $category = $activeSection.find(".category:first"),
+					$grid = $activeSection.find('.products:first');
+					$grid.addClass('active').stop().animate({'left':availableWidth}, 900, function() {
 						$(this).removeClass('active');
 					});
-					$category.addClass('active').animate({'left':0}, 1800, function() {
+					$category.addClass('active').stop().animate({'left':0}, 1800, function() {
+						$body.removeClass("noscroll");
 						Home.scrollToSection(section, false);
 					});
 			}
 		}
+		section.data('state', 'category');
 		$activeSection = section;
 	},
 	hide: function(section) {
