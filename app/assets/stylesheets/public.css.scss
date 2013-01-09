@@ -213,15 +213,19 @@ label {
 .nav.login-bar {
 	display: none;
 }
-.navbar .brand a {
-	font-size: 10px;
-	font-weight:bold;
-	color: #797979;
-	&:hover {
-		color: black;
-		text-decoration: none;
-	};
+.navbar .brand {
+	display: none;
+	a {
+		font-size: 10px;
+		font-weight:bold;
+		color: #797979;
+		&:hover {
+			color: black;
+			text-decoration: none;
+		};
+	}
 }
+
 .header-top {
 	position: absolute;
 	right: 12px;
