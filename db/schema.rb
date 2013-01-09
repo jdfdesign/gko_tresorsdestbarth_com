@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115125707) do
+ActiveRecord::Schema.define(:version => 20130106145252) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -98,18 +98,20 @@ ActiveRecord::Schema.define(:version => 20121115125707) do
   add_index "calculators", ["site_id"], :name => "index_calculators_on_site_id"
 
   create_table "categories", :force => true do |t|
-    t.integer "site_id"
-    t.integer "section_id"
-    t.integer "parent_id"
-    t.integer "lft",              :default => 0, :null => false
-    t.integer "rgt",              :default => 0, :null => false
-    t.string  "name"
-    t.string  "slug"
-    t.string  "path"
-    t.string  "title"
-    t.text    "body"
-    t.string  "meta_title"
-    t.text    "meta_description"
+    t.integer  "site_id"
+    t.integer  "section_id"
+    t.integer  "parent_id"
+    t.integer  "lft",              :default => 0, :null => false
+    t.integer  "rgt",              :default => 0, :null => false
+    t.string   "name"
+    t.string   "slug"
+    t.string   "path"
+    t.string   "title"
+    t.text     "body"
+    t.string   "meta_title"
+    t.text     "meta_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
@@ -514,6 +516,25 @@ ActiveRecord::Schema.define(:version => 20121115125707) do
     t.datetime "updated_at"
   end
 
+  create_table "mail_methods", :force => true do |t|
+    t.integer  "site_id",                                                       :null => false
+    t.string   "environment",            :default => "production"
+    t.boolean  "enable_mail_delivery",   :default => true
+    t.string   "mail_host",              :default => "localhost"
+    t.string   "mail_domain",            :default => "localhost"
+    t.integer  "mail_port",              :default => 25
+    t.string   "mail_auth_type",         :default => "none"
+    t.string   "smtp_username",                                                 :null => false
+    t.string   "smtp_password",                                                 :null => false
+    t.string   "secure_connection_type", :default => "None"
+    t.string   "mails_from",             :default => "no-reply@joufdesign.com"
+    t.string   "mail_bcc"
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+  end
+
+  add_index "mail_methods", ["site_id"], :name => "index_mail_methods_on_site_id"
+
   create_table "option_types", :force => true do |t|
     t.string   "name",         :limit => 100
     t.string   "presentation", :limit => 100
@@ -822,6 +843,7 @@ ActiveRecord::Schema.define(:version => 20121115125707) do
     t.boolean  "robot_index",       :default => true
     t.boolean  "robot_follow",      :default => true
     t.boolean  "restricted",        :default => false
+    t.string   "template"
   end
 
   add_index "sections", ["link_id", "link_type"], :name => "index_sections_on_link_id_and_link_type"

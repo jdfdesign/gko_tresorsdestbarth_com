@@ -1,6 +1,6 @@
 @import "grid_product";
 @import "jscrollpane";
-/*.animated {
+.animated {
 	-webkit-animation-fill-mode: both;
 	-moz-animation-fill-mode: both;
 	-ms-animation-fill-mode: both;
@@ -41,7 +41,7 @@
 	-moz-animation-name: bounce;
 	-o-animation-name: bounce;
 	animation-name: bounce;
-}*/
+}
 /*-----------------------------------------
  STRUCTURAL LAYOUT 
 ----------------------------------------- */
@@ -126,6 +126,9 @@ body#home {
 			}
 			float:left;
 			margin-right: 100px;
+			&:hover {
+				@include opacity(80);
+			};
 		}
 		a.view-all{
 			position:absolute;
@@ -242,8 +245,8 @@ body#home {
 		background-color: $white;
 		@include border-radius(8px 8px 0 0);
 		position: absolute;
-		bottom: -60px;
-		width: 100px;
+		bottom: -50px;
+		width: 60px;
 		left: 50%;
 		margin-left: -50px;
 		text-transform: uppercase;
@@ -251,9 +254,9 @@ body#home {
 		color: $black;
 		font-size: 11px;
 		height: 80px;
-		/*-webkit-animation-duration: 3s;
-	    -webkit-animation-delay: 2s;
-	    -webkit-animation-iteration-count: infinite;*/
+	//	-webkit-animation-duration: 3s;
+	   // -webkit-animation-delay: 2s;
+	   // -webkit-animation-iteration-count: infinite;
 	}
 	.back{
 		position:absolute;

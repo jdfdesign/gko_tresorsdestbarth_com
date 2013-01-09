@@ -42,8 +42,8 @@ $navbarBackground:                $white;
 $navbarBackgroundHighlight:       $white;
 
 $navbarText:                      $grayLight;
-$navbarLinkColor:                 $grayLight;
-$navbarLinkColorHover:            $black;
+$navbarLinkColor:                 $black;
+$navbarLinkColorHover:            $gray;
 $navbarLinkColorActive:           $navbarLinkColorHover;
 $navbarLinkBackgroundHover:       transparent;
 $navbarLinkBackgroundActive:      $navbarBackground;
@@ -84,6 +84,12 @@ $itemPadding: 40px;
 @import "gko/store"; 
 @import "galleria";
 @import "bootstrap-image-gallery";
+
+a:focus,
+.btn:focus {
+  outline: 0;
+}
+
 
 #continue-shopping-btn {
 	display: none;
@@ -197,7 +203,7 @@ label {
 	.header-nav { 
 		.nav > li > a {
 			@extend .uppercase_font_style; 
-			font-size: 10px;  
+			font-size: 11px;  
 		}
 	}
 }
@@ -383,7 +389,7 @@ article.product {
 	}
 	.nav > li > a {
 		padding: 0 6px;
-		font-size: 10px;
+		//font-size: 10px;
 		font-weight:normal;	
 		text-shadow: none;
 	}
@@ -420,14 +426,22 @@ article.product {
 @import "gko/default_responsive"; 
 
 
-@media(max-width: 480px) {
+@media (max-width: 480px) {
+	body {
+		background-color: $black;
+	}
+	.container-fluid#main {
+		padding-top: 120px;
+		padding-bottom: 40px;
+	}
 	.pagination {
 		text-align: center;
 	}
 	
-}
+}	
 
-@media(min-width: 767px) {
+
+@media (min-width: 767px) {
 	@include articleProductSize(769);
 	.product-info {
 		color: white;
@@ -447,7 +461,7 @@ article.product {
 	}
 }
 
-@media(max-width: 769px) {
+@media (max-width: 769px) {
 	body {
 		padding-left: 0;
 		padding-right: 0;
@@ -489,7 +503,7 @@ article.product {
 		}
 	}	
 }
-@media(max-width: 979px) {
+@media (max-width: 979px) {
 	body {
 		padding-left: 0;
 		padding-right: 0;
@@ -501,7 +515,7 @@ article.product {
 	}	
 }
 
-@media(min-width: 980px) {
+@media (min-width: 980px) {
 	@include articleProductSize(980);
 	#store-menu {
 		float:right;
