@@ -11,6 +11,7 @@ jQuery.fn.reverse = Array.prototype.reverse;
 var  $container
 	,$cover
 	,$logo
+	,$locales
 	,$navbar
 	,$activeSection
 	,imagesCount = 0
@@ -33,6 +34,7 @@ var Home = {
 	init: function() {
 		$container = $("#content");
 		$cover = $("#cover");
+		$locales = $("#locales");
 		$logo = $("#logo");
 		$navbar = $(".navbar:first");
 		$facebook = $("a#facebook");
@@ -89,13 +91,19 @@ var Home = {
 				$overlay.remove();
 				$logo.animate({'opacity': 1}, 1200, function() {
 					$headline.css({'opacity': 1, 'textShadow':'#ffffff 10 10 600'}).animate({textShadow: "0 0 50 #ffffff"}, 1000);
+					$locales.show();
 				});
 				$navbar.animate({'top':0}, 200, function() {
-					$facebook.animate({'top': headerHeight}, 200);
 					$("#scrollme").show();
+					Home.animateScrollme();
 				});
 			});
 
+		}
+	},
+	animateScrollme: function() {
+		for (var i=1 ; i<=10 ; i++) {
+			$("#scrollme").slideUp(1600).delay(300).slideDown(1000); 
 		}
 	},
 	attachEvents: function() {
@@ -173,6 +181,8 @@ var Home = {
 		});
 		// center vercally the logo
 		$logo.css('margin-top', (availableHeight - $logo.height()) / 2)
+		$locales.css('top', (availableHeight - $locales.height()) / 2)
+		$locales.css('left', (availableWidth + $logo.width()) / 2)
 		$facebook.css({'top': headerHeight});
 		
 		$('.products').each(function (i, el) {

@@ -1,0 +1,33 @@
+<!-- Header
+================================================== -->
+<% cache([site, I18n.locale, 'header']) do %>
+<header class="navbar hide-on-print">
+  <div class="navbar-inner">
+    <div class="row-fluid">
+      <div class="header-nav">
+        <!-- Be sure to leave the brand out there if you want it shown -->
+        <%= render 'site_title' %>
+		<%= content_tag(:h4, site.subtitle.html_safe, :id => "site-subtitle") if site.subtitle.present? %>
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span><%= t(:navigation_menu) %><i class="icon-chevron-down icon-white"></i></span>
+        </a>
+        <!-- Everything you want hidden at 940px or less, place within here -->
+        <div class="nav-collapse">
+          <!-- .nav, .navbar-search, .navbar-form, etc -->
+          <%= render_primary_menu %>
+        </div>
+		<a href="http://www.facebook.com/tresorsdestbarth" id="facebook" class="pull-right" target="_blank"><%= image_tag("facebook_icon.jpg", :width => 30, :height => 30)%></a>
+		  <% if site.checkout_enabled %>
+			<nav id="store-menu-container" class="pull-right">
+	     	 	<ul class='nav' id="store-menu">
+              	<li><%= link_to_cart() %></li>
+            	</ul>
+	    	</nav>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
+<% end %>

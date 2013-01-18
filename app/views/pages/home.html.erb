@@ -10,9 +10,10 @@
 @image_size = is_mobile_device? ? "480x320#" : "1024x800#"
 %>
 <% content_for :page_container do %>
-<% cache(['v2', site, I18n.locale, @store]) do %>
+<% cache(['v4', site, I18n.locale, @store]) do %>
 	<section id="cover" class="row-fluid background-image fullscreen" data-bg="<%= @images.shift.thumbnail(@image_size).url %>">
-		<%= image_tag('logo.png', :id => 'logo') %>
+		<%= image_tag('logo2.png', :id => 'logo') %>
+		<%= render 'locales_select' %>
 		<div id="scrollme" class="animatedxx bouncexx"><i class="icon-chevron-down"></i></div>
 	</section><!--section-->
 	<% @categories.each_with_index do |category, index| %> 

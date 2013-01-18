@@ -236,7 +236,7 @@ body#home {
 		@include background-size(cover);
 	}
 	#logo {
-		width: 476px;
+		width: 376px;
 		@include center-block;
 	}
 
@@ -257,6 +257,24 @@ body#home {
 	//	-webkit-animation-duration: 3s;
 	   // -webkit-animation-delay: 2s;
 	   // -webkit-animation-iteration-count: infinite;
+	}
+	
+	.nav#locales {
+		display: none;
+		position: absolute;
+		border-left: 1px solid $grayLighter;
+		padding-left: 12px;
+		li > a {
+			color: $grayLighter;
+			font-size: 12px;
+			line-height: 32px;
+			text-transform: uppercase;
+			
+		}
+		li > a:hover {
+			color: $white;
+			background-color: transparent;
+		}
 	}
 	.back{
 		position:absolute;

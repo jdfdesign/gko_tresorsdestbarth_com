@@ -1,4 +1,5 @@
-<%
+
+	<%
 if @selected_variant
   #TODO : check if selected_variant is available (@selected_variant.available?)
   images = @selected_variant.images.any? ? @selected_variant.images : @product.images
