@@ -1,7 +1,7 @@
 <% if site.frontend_translated? %>
     <nav id="locales-menu" class="locales-menu-container pull-right">
       <ul id='locales' class="nav">
-        <% site.available_locales.each do |language| %>
+        <% site.languages.published.each do |language| %>
                 <li><%= link_to(language.presentation, root_url(:locale => language.code), :class => [language.code.to_s, 'navbar-link']) %></li>
         <% end %>
       </ul>
