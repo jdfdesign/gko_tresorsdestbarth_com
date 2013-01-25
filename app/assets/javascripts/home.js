@@ -103,7 +103,7 @@ var Home = {
 	},
 	animateScrollme: function() {
 		for (var i=1 ; i<=10 ; i++) {
-			$("#scrollme").slideUp(1600).delay(300).slideDown(1000); 
+			$("#scrollme").slideUp(2200).delay(300).slideDown(1600); 
 		}
 	},
 	attachEvents: function() {

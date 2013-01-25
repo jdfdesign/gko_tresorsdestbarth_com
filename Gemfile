@@ -7,7 +7,7 @@ group :assets do
 end
 
 prod_location = 'git@github.com:jdfdesign/gko_cms3.git'
-prod_version = "= 0.6.12"
+prod_version = "= 0.6.17"
 group :production do
   gem 'gko_core', prod_version, :git => prod_location
   gem "gko_auth", prod_version, :git => prod_location

@@ -11,13 +11,13 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3.git
-  revision: 34b7583e8805f7f5532cf594f68af9462ff993ed
+  revision: 0119dbd91de33606fe1a28b58da3a27590991d1b
   specs:
-    gko_auth (0.6.12)
+    gko_auth (0.6.17)
       cancan (>= 1.6.8)
       devise (>= 2.1.2)
-    gko_categories (0.6.12)
-    gko_core (0.6.12)
+    gko_categories (0.6.17)
+    gko_core (0.6.17)
       RedCloth (= 4.2.9)
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
@@ -31,7 +31,6 @@ GIT
       dragonfly (~> 0.9.12)
       dropbox-sdk (~> 1.2.0)
       exception_notification (~> 3.0.0)
-      faker (= 1.0.0)
       gem-patching (= 0.0.3)
       globalize3 (= 0.2.0)
       gon (~> 4.0.0)
@@ -59,15 +58,15 @@ GIT
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.6.12)
+    gko_documents (0.6.17)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.6.12)
-    gko_images (0.6.12)
-    gko_inquiries (0.6.12)
+    gko_features (0.6.17)
+    gko_images (0.6.17)
+    gko_inquiries (0.6.17)
       filters_spam (~> 0.2)
-    gko_stickers (0.6.12)
-    gko_themes (0.6.12)
+    gko_stickers (0.6.17)
+    gko_themes (0.6.17)
       less-rails-bootstrap
       rubyzip (= 0.9.6.1)
 
@@ -161,7 +160,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.1.3)
+    diff-lcs (1.2.0)
     dragonfly (0.9.12)
       rack
     dropbox-sdk (1.2)
@@ -173,8 +172,6 @@ GEM
       tinder (~> 1.8)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    faker (1.0.0)
-      i18n (~> 0.4)
     faraday (0.8.4)
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
@@ -292,7 +289,7 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     simple_oauth (0.1.9)
-    spreadsheet (0.7.6)
+    spreadsheet (0.7.7)
       ruby-ole (>= 1.0)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -338,15 +335,15 @@ PLATFORMS
 DEPENDENCIES
   active_shipping!
   coffee-rails (~> 3.2.2)
-  gko_auth (= 0.6.12)!
-  gko_categories (= 0.6.12)!
-  gko_core (= 0.6.12)!
-  gko_documents (= 0.6.12)!
-  gko_features (= 0.6.12)!
-  gko_images (= 0.6.12)!
-  gko_inquiries (= 0.6.12)!
-  gko_stickers (= 0.6.12)!
+  gko_auth (= 0.6.17)!
+  gko_categories (= 0.6.17)!
+  gko_core (= 0.6.17)!
+  gko_documents (= 0.6.17)!
+  gko_features (= 0.6.17)!
+  gko_images (= 0.6.17)!
+  gko_inquiries (= 0.6.17)!
+  gko_stickers (= 0.6.17)!
   gko_store (= 0.0.51)!
-  gko_themes (= 0.6.12)!
+  gko_themes (= 0.6.17)!
   sass-rails (~> 3.2.6)
   uglifier (>= 1.0.3)

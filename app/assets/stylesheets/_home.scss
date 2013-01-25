@@ -249,14 +249,12 @@ body#home {
 		width: 60px;
 		left: 50%;
 		margin-left: -50px;
-		text-transform: uppercase;
+		//text-transform: uppercase;
 		text-align: center;
-		color: $black;
-		font-size: 11px;
-		height: 80px;
-	//	-webkit-animation-duration: 3s;
-	   // -webkit-animation-delay: 2s;
-	   // -webkit-animation-iteration-count: infinite;
+		color: white;
+		font-size: 14px;
+		height: 140px;
+		@include opacity(100);
 	}
 	
 	.nav#locales {
