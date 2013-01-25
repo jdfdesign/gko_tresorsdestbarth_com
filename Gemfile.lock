@@ -11,13 +11,13 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3.git
-  revision: ff19ddb592a330588726c920ee63cb547939c768
+  revision: 627016a177ae6d2a84a8fdaca3641eb48401fb0a
   specs:
-    gko_auth (0.6.20)
+    gko_auth (0.6.22)
       cancan (>= 1.6.8)
       devise (>= 2.1.2)
-    gko_categories (0.6.20)
-    gko_core (0.6.20)
+    gko_categories (0.6.22)
+    gko_core (0.6.22)
       RedCloth (= 4.2.9)
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
@@ -58,15 +58,15 @@ GIT
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.6.20)
+    gko_documents (0.6.22)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.6.20)
-    gko_images (0.6.20)
-    gko_inquiries (0.6.20)
+    gko_features (0.6.22)
+    gko_images (0.6.22)
+    gko_inquiries (0.6.22)
       filters_spam (~> 0.2)
-    gko_stickers (0.6.20)
-    gko_themes (0.6.20)
+    gko_stickers (0.6.22)
+    gko_themes (0.6.22)
       less-rails-bootstrap
       rubyzip (= 0.9.6.1)
 
@@ -335,15 +335,15 @@ PLATFORMS
 DEPENDENCIES
   active_shipping!
   coffee-rails (~> 3.2.2)
-  gko_auth (= 0.6.20)!
-  gko_categories (= 0.6.20)!
-  gko_core (= 0.6.20)!
-  gko_documents (= 0.6.20)!
-  gko_features (= 0.6.20)!
-  gko_images (= 0.6.20)!
-  gko_inquiries (= 0.6.20)!
-  gko_stickers (= 0.6.20)!
+  gko_auth (= 0.6.22)!
+  gko_categories (= 0.6.22)!
+  gko_core (= 0.6.22)!
+  gko_documents (= 0.6.22)!
+  gko_features (= 0.6.22)!
+  gko_images (= 0.6.22)!
+  gko_inquiries (= 0.6.22)!
+  gko_stickers (= 0.6.22)!
   gko_store (= 0.0.51)!
-  gko_themes (= 0.6.20)!
+  gko_themes (= 0.6.22)!
   sass-rails (~> 3.2.6)
   uglifier (>= 1.0.3)
