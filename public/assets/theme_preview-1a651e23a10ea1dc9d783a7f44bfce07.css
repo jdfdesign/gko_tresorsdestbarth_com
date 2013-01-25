@@ -2285,7 +2285,7 @@ table th[class*="span"],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("/assets/twitter/glyphicons-halflings.png");
+  background-image: url("/assets/twitter/glyphicons-halflings-ab3144065a860d198f1d7d9a4882640c.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -2306,7 +2306,7 @@ table th[class*="span"],
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"] {
-  background-image: url("/assets/twitter/glyphicons-halflings-white.png");
+  background-image: url("/assets/twitter/glyphicons-halflings-white-13553a5bf21ae3cc374006592488ec64.png");
 }
 
 /* line 48, ../../../../.rvm/gems/ruby-1.8.7-p358@global/bundler/gems/gko_cms3-4e4480d3ca68/gko_core/vendor/assets/stylesheets/twitter/bootstrap/sprites.scss */
