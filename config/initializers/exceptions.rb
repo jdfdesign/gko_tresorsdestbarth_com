@@ -8,7 +8,7 @@ GkoTresorsDeStBarthCom::Application.config.app_middleware.use ExceptionNotifier,
     :address => "mail.joufdesign.com",
     :domain => "joufdesign.com",
     :port => 25,
-    :mail_auth_type => 'login'
+    :mail_auth_type => 'login',
     :secure_connection_type => 'None',
     :enable_starttls_auto => false
 }
