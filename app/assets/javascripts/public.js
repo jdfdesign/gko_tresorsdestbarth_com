@@ -40,6 +40,8 @@ var Site = {
 		} else {
 			$overlay.fadeOut();
 		}
+	
+		$("#primary-menu ul").prepend("<li><a href='/'><i class='icon-home'></i></a></li>")
 
 		// Bind lookbook action
 		$("a#lookbook").attr('data-remote', 'true')

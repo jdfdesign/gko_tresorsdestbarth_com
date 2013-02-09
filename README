@@ -1,18 +1,18 @@
-cd ~/Github/gko_tresor_de_stbarth_com
+cd ~/Github/gko_tresorsdestbarth_com
 tail -f log/development.log
 
-cd ~/Github/gko_tresor_de_stbarth_com
+cd ~/Github/gko_tresorsdestbarth_com
 bundle install
 rails s
 
-cd ~/Github/gko_tresor_de_stbarth_com
+cd ~/Github/gko_tresorsdestbarth_com
 rails s
 
 RAILS_ENV=production bundle exec rake assets:precompile 
 RAILS_ENV=development bundle exec rake assets:precompile 
 bundle exec rake assets:precompile
 
-cd ~/Github/gko_tresor_de_stbarth_com
+cd ~/Github/gko_tresorsdestbarth_com
 bundle exec rake railties:install:migrations
 rake db:migrate
 

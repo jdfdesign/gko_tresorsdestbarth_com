@@ -1,9 +1,9 @@
 $contentContainerBackgroundColor: #F3F4EE;
 $altFontFamily: "voluta-script-pro", "Times New Roman", "Times", serif;
 // Typography
-$baseFontFamily: "futura-pt","Helvetica Neue", Helvetica, Arial, sans-serif;
-$baseFontSize: 16px;
-$baseLineHeight: 24px;
+$baseFontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$baseFontSize: 14px;
+$baseLineHeight: 22px;
 $textColor: white;
 $headingFontFamily: $baseFontFamily;
 $headingTextColor: $textColor;
@@ -79,7 +79,7 @@ $copyrightLinkBackgroundHover:       $footerLinkBackgroundHover;
 
 $itemPadding: 40px;
 
-@import "twitter/bootstrap/bootstrap";
+@import "twitter/awesome-bootstrap";
 @import "gko/public/base";
 @import "gko/store"; 
 @import "galleria";
