@@ -3,6 +3,7 @@
 *.cache
 *.sass-cache
 *.log
+*.log.*
 *.pid
 /log/**/*
 tmp/**/*
