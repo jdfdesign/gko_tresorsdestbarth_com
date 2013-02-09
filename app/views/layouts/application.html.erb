@@ -8,11 +8,20 @@
 <% end %>
 <%= render 'header' %>
 <% if is_mobile_device? %>
-	<%= render 'layouts/mobile' %>
+	<div class="container-fluid" id="main">
+		<div class="row-fluid">
+			<div class="span12">
+				<% if content_for?(:page_container) %>
+			        <%= yield :page_container %>
+			    <% else %>
+					<%= yield %>
+				<% end %>
+			</div>
+		</div>
+	</div>
 	<%= javascript_include_tag "mobile" %>
 	<%= yield :after_javascript_libraries %>
 <% else %>
-	
 	<div id="content" class="container-fluid">
 		<%= render "layouts/messages" %>
 		<% if content_for?(:page_container) %>

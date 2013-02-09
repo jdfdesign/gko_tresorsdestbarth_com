@@ -90,7 +90,25 @@ a:focus,
   outline: 0;
 }
 
+.background-image {
+	zoom: 100%;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: 0 center;
+	background-attachment: fixed;
+	@include background-size(cover);
+	
+}
+.fullscreen {
+	height:100%;
+	overflow:hidden;
+	min-height:100%;
+	width: 100%;
 
+	position:relative;
+	//@include box-shadow(0 4px 16px rgba(0,0,0,.2));
+	overflow: hidden;
+}
 #continue-shopping-btn {
 	display: none;
 }

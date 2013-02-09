@@ -2,6 +2,9 @@ cd ~/Github/gko_tresorsdestbarth_com
 tail -f log/development.log
 
 cd ~/Github/gko_tresorsdestbarth_com
+tail -f log/production.log
+
+cd ~/Github/gko_tresorsdestbarth_com
 bundle install
 rails s
 

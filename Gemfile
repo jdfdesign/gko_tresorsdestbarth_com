@@ -11,7 +11,7 @@ group :production do
     gem 'gko_core'
     gem "gko_auth"
     gem "gko_images"
-    gem "gko_documents"
+   gem "gko_documents"
     gem "gko_inquiries"
     gem "gko_themes"
     gem "gko_features"
@@ -34,6 +34,6 @@ end
 #  gem "gko_categories", :path => '~/Github/gko_cms3/gko_categories'
 #  gem "gko_stickers", :path => '~/Github/gko_cms3/gko_stickers'
 #  gem "gko_store", :path => '~/Github/gko/gko_store'
-#	 #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
+	 #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
 #  gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
 #end    

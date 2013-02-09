@@ -8128,22 +8128,45 @@ a:focus,
   outline: 0;
 }
 
-/* line 94, ../../app/assets/stylesheets/public.css.scss */
+/* line 93, ../../app/assets/stylesheets/public.css.scss */
+.background-image {
+  zoom: 100%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* line 102, ../../app/assets/stylesheets/public.css.scss */
+.fullscreen {
+  height: 100%;
+  overflow: hidden;
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 112, ../../app/assets/stylesheets/public.css.scss */
 #continue-shopping-btn {
   display: none;
 }
 
-/* line 98, ../../app/assets/stylesheets/public.css.scss */
+/* line 116, ../../app/assets/stylesheets/public.css.scss */
 body {
   background-color: #332727;
   font-weight: 300;
 }
-/* line 101, ../../app/assets/stylesheets/public.css.scss */
+/* line 119, ../../app/assets/stylesheets/public.css.scss */
 body.noscroll {
   overflow: hidden;
 }
 
-/* line 106, ../../app/assets/stylesheets/public.css.scss */
+/* line 124, ../../app/assets/stylesheets/public.css.scss */
 #content {
   padding-top: 60px;
   padding-bottom: 60px;
@@ -8153,7 +8176,7 @@ body.noscroll {
   margin-right: auto;
 }
 
-/* line 113, ../../app/assets/stylesheets/public.css.scss */
+/* line 131, ../../app/assets/stylesheets/public.css.scss */
 #body-overlay {
   position: fixed;
   top: 0;
@@ -8164,22 +8187,22 @@ body.noscroll {
   z-index: 10000;
 }
 
-/* line 123, ../../app/assets/stylesheets/public.css.scss */
+/* line 141, ../../app/assets/stylesheets/public.css.scss */
 .well {
   color: black;
 }
 
-/* line 126, ../../app/assets/stylesheets/public.css.scss */
+/* line 144, ../../app/assets/stylesheets/public.css.scss */
 .form-actions {
   background-color: transparent;
 }
 
-/* line 129, ../../app/assets/stylesheets/public.css.scss */
+/* line 147, ../../app/assets/stylesheets/public.css.scss */
 legend {
   color: white;
 }
 
-/* line 132, ../../app/assets/stylesheets/public.css.scss */
+/* line 150, ../../app/assets/stylesheets/public.css.scss */
 a {
   outline: 0;
 }
@@ -8190,7 +8213,7 @@ a {
 /*-----------------------------------------
  GLOBAL EFFECT
 ----------------------------------------- */
-/* line 160, ../../app/assets/stylesheets/public.css.scss */
+/* line 178, ../../app/assets/stylesheets/public.css.scss */
 a {
   -webkit-transition: "color .5s linear, background-color .5s linear";
   -moz-transition: "color .5s linear, background-color .5s linear";
@@ -8201,7 +8224,7 @@ a {
 /*-----------------------------------------
    SHARED STYLES 
 ----------------------------------------- */
-/* line 167, ../../app/assets/stylesheets/public.css.scss */
+/* line 185, ../../app/assets/stylesheets/public.css.scss */
 .uppercase_font_style, .navbar .header-nav .nav > li > a, #footer .nav > li > a, label, .product-info h4 {
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -8210,7 +8233,7 @@ a {
 /*-----------------------------------------
  TYPOGRAPHY 
 ----------------------------------------- */
-/* line 175, ../../app/assets/stylesheets/public.css.scss */
+/* line 193, ../../app/assets/stylesheets/public.css.scss */
 h1 {
   letter-spacing: 2px;
   font-size: 14px;
@@ -8218,29 +8241,29 @@ h1 {
   line-height: 22px;
 }
 
-/* line 181, ../../app/assets/stylesheets/public.css.scss */
+/* line 199, ../../app/assets/stylesheets/public.css.scss */
 h1, h2, h3, h4 {
   font-weight: normal;
   letter-spacing: 1px;
 }
 
-/* line 185, ../../app/assets/stylesheets/public.css.scss */
+/* line 203, ../../app/assets/stylesheets/public.css.scss */
 h2, h3 {
   font-size: 14px;
 }
 
-/* line 188, ../../app/assets/stylesheets/public.css.scss */
+/* line 206, ../../app/assets/stylesheets/public.css.scss */
 h4 {
   letter-spacing: 1px;
   font-size: 14px;
 }
 
-/* line 192, ../../app/assets/stylesheets/public.css.scss */
+/* line 210, ../../app/assets/stylesheets/public.css.scss */
 .navbar-inner {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 
-/* line 195, ../../app/assets/stylesheets/public.css.scss */
+/* line 213, ../../app/assets/stylesheets/public.css.scss */
 label {
   font-size: 13px;
 }
@@ -8248,40 +8271,40 @@ label {
 /*-----------------------------------------
  HEADER
 ----------------------------------------- */
-/* line 204, ../../app/assets/stylesheets/public.css.scss */
+/* line 222, ../../app/assets/stylesheets/public.css.scss */
 .navbar .header-nav .nav > li > a {
   font-size: 11px;
 }
 
-/* line 210, ../../app/assets/stylesheets/public.css.scss */
+/* line 228, ../../app/assets/stylesheets/public.css.scss */
 .navbar-inner {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
 }
 
-/* line 213, ../../app/assets/stylesheets/public.css.scss */
+/* line 231, ../../app/assets/stylesheets/public.css.scss */
 .nav.login-bar {
   display: none;
 }
 
-/* line 216, ../../app/assets/stylesheets/public.css.scss */
+/* line 234, ../../app/assets/stylesheets/public.css.scss */
 .navbar .brand {
   display: none;
 }
-/* line 218, ../../app/assets/stylesheets/public.css.scss */
+/* line 236, ../../app/assets/stylesheets/public.css.scss */
 .navbar .brand a {
   font-size: 10px;
   font-weight: bold;
   color: #797979;
 }
-/* line 222, ../../app/assets/stylesheets/public.css.scss */
+/* line 240, ../../app/assets/stylesheets/public.css.scss */
 .navbar .brand a:hover {
   color: black;
   text-decoration: none;
 }
 
-/* line 233, ../../app/assets/stylesheets/public.css.scss */
+/* line 251, ../../app/assets/stylesheets/public.css.scss */
 #facebook {
   margin-top: 6px;
   width: 30px;
@@ -8291,7 +8314,7 @@ label {
 /*-----------------------------------------
  FOOTER
 ----------------------------------------- */
-/* line 241, ../../app/assets/stylesheets/public.css.scss */
+/* line 259, ../../app/assets/stylesheets/public.css.scss */
 #footer-container {
   position: fixed;
   z-index: 1030;
@@ -8299,7 +8322,7 @@ label {
   width: 100%;
 }
 
-/* line 247, ../../app/assets/stylesheets/public.css.scss */
+/* line 265, ../../app/assets/stylesheets/public.css.scss */
 #footer {
   margin-top: 0px;
   padding-bottom: 0px;
@@ -8307,14 +8330,14 @@ label {
   text-align: center;
   font-size: 12px;
 }
-/* line 253, ../../app/assets/stylesheets/public.css.scss */
+/* line 271, ../../app/assets/stylesheets/public.css.scss */
 #footer .nav > li > a {
   font-size: 10px;
   font-weight: bold;
   text-shadow: none;
   padding: 8px;
 }
-/* line 259, ../../app/assets/stylesheets/public.css.scss */
+/* line 277, ../../app/assets/stylesheets/public.css.scss */
 #footer .nav > li > a:hover {
   text-shadow: none;
 }
@@ -8325,45 +8348,45 @@ label {
 /*-----------------------------------------
  STORE
 ----------------------------------------- */
-/* line 273, ../../app/assets/stylesheets/public.css.scss */
+/* line 291, ../../app/assets/stylesheets/public.css.scss */
 .product-info {
   float: left;
 }
-/* line 275, ../../app/assets/stylesheets/public.css.scss */
+/* line 293, ../../app/assets/stylesheets/public.css.scss */
 .product-info h1.page-title {
   border-bottom: 1px solid #e2e2e2;
 }
-/* line 278, ../../app/assets/stylesheets/public.css.scss */
+/* line 296, ../../app/assets/stylesheets/public.css.scss */
 .product-info h4 {
   border-bottom: 1px solid #e2e2e2;
   padding-top: 22px;
 }
 
-/* line 285, ../../app/assets/stylesheets/public.css.scss */
+/* line 303, ../../app/assets/stylesheets/public.css.scss */
 #product-variants label {
   display: inline-block;
 }
 
-/* line 290, ../../app/assets/stylesheets/public.css.scss */
+/* line 308, ../../app/assets/stylesheets/public.css.scss */
 #product-properties {
   line-height: 18px;
 }
-/* line 293, ../../app/assets/stylesheets/public.css.scss */
+/* line 311, ../../app/assets/stylesheets/public.css.scss */
 #product-properties tbody {
   vertical-align: top;
 }
-/* line 295, ../../app/assets/stylesheets/public.css.scss */
+/* line 313, ../../app/assets/stylesheets/public.css.scss */
 #product-properties tbody tr > td {
   min-width: 80px;
 }
 
-/* line 301, ../../app/assets/stylesheets/public.css.scss */
+/* line 319, ../../app/assets/stylesheets/public.css.scss */
 article.product {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 303, ../../app/assets/stylesheets/public.css.scss */
+/* line 321, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel {
   float: left;
   background-color: white;
@@ -8376,13 +8399,13 @@ article.product .carousel {
   border-radius: 12px;
   overflow: hidden;
 }
-/* line 310, ../../app/assets/stylesheets/public.css.scss */
+/* line 328, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel img {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
   border-radius: 12px;
 }
-/* line 314, ../../app/assets/stylesheets/public.css.scss */
+/* line 332, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel-control {
   position: absolute;
   top: auto;
@@ -8401,11 +8424,11 @@ article.product .carousel-control {
   opacity: 0.7;
   filter: alpha(opacity=70);
 }
-/* line 328, ../../app/assets/stylesheets/public.css.scss */
+/* line 346, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel-control:hover {
   color: black;
 }
-/* line 333, ../../app/assets/stylesheets/public.css.scss */
+/* line 351, ../../app/assets/stylesheets/public.css.scss */
 article.product .carousel-control.right {
   left: auto;
   right: 50%;
@@ -8413,7 +8436,7 @@ article.product .carousel-control.right {
   margin-left: 0;
 }
 
-/* line 342, ../../app/assets/stylesheets/public.css.scss */
+/* line 360, ../../app/assets/stylesheets/public.css.scss */
 .navbar {
   position: fixed;
   right: 0;
@@ -8423,12 +8446,12 @@ article.product .carousel-control.right {
   margin-bottom: 0;
 }
 
-/* line 352, ../../app/assets/stylesheets/public.css.scss */
+/* line 370, ../../app/assets/stylesheets/public.css.scss */
 .navbar-inner {
   padding-bottom: 12px;
 }
 
-/* line 355, ../../app/assets/stylesheets/public.css.scss */
+/* line 373, ../../app/assets/stylesheets/public.css.scss */
 .navbar .brand {
   float: left;
   margin: 0 0 0 0;
@@ -8436,17 +8459,17 @@ article.product .carousel-control.right {
   text-transform: uppercase;
 }
 
-/* line 361, ../../app/assets/stylesheets/public.css.scss */
+/* line 379, ../../app/assets/stylesheets/public.css.scss */
 .navbar .nav-collapse {
   clear: none;
   float: left;
   margin: 17px 0 0 24px;
 }
-/* line 365, ../../app/assets/stylesheets/public.css.scss */
+/* line 383, ../../app/assets/stylesheets/public.css.scss */
 .navbar .nav-collapse nav, .navbar .nav-collapse .nav {
   float: left;
 }
-/* line 368, ../../app/assets/stylesheets/public.css.scss */
+/* line 386, ../../app/assets/stylesheets/public.css.scss */
 .navbar .nav-collapse .nav > li > a {
   padding: 0 6px;
   font-size: 10px;
@@ -8454,16 +8477,16 @@ article.product .carousel-control.right {
   text-shadow: none;
 }
 
-/* line 375, ../../app/assets/stylesheets/public.css.scss */
+/* line 393, ../../app/assets/stylesheets/public.css.scss */
 #store-menu-container {
   margin: 17px 24px 0 0;
 }
 
-/* line 378, ../../app/assets/stylesheets/public.css.scss */
+/* line 396, ../../app/assets/stylesheets/public.css.scss */
 #store-menu {
   margin: 0;
 }
-/* line 380, ../../app/assets/stylesheets/public.css.scss */
+/* line 398, ../../app/assets/stylesheets/public.css.scss */
 #store-menu > li > a {
   font-size: 10px;
   font-weight: bold;
@@ -8471,7 +8494,7 @@ article.product .carousel-control.right {
   padding: 0;
 }
 
-/* line 388, ../../app/assets/stylesheets/public.css.scss */
+/* line 406, ../../app/assets/stylesheets/public.css.scss */
 #modal-gallery {
   background-color: transparent;
   border: 0;
@@ -8482,17 +8505,17 @@ article.product .carousel-control.right {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-/* line 393, ../../app/assets/stylesheets/public.css.scss */
+/* line 411, ../../app/assets/stylesheets/public.css.scss */
 #modal-gallery .modal-header {
   border-bottom: none;
   display: none;
 }
-/* line 397, ../../app/assets/stylesheets/public.css.scss */
+/* line 415, ../../app/assets/stylesheets/public.css.scss */
 #modal-gallery .modal-image {
   padding: 0;
   border: 1px solid white;
 }
-/* line 401, ../../app/assets/stylesheets/public.css.scss */
+/* line 419, ../../app/assets/stylesheets/public.css.scss */
 #modal-gallery .modal-footer {
   padding: 0;
   background-color: transparent;
@@ -9964,71 +9987,71 @@ article.product .carousel-control.right {
   }
 }
 @media (max-width: 480px) {
-  /* line 418, ../../app/assets/stylesheets/public.css.scss */
+  /* line 436, ../../app/assets/stylesheets/public.css.scss */
   body {
     background-color: black;
   }
 
-  /* line 421, ../../app/assets/stylesheets/public.css.scss */
+  /* line 439, ../../app/assets/stylesheets/public.css.scss */
   .container-fluid#main {
     padding-top: 120px;
     padding-bottom: 40px;
   }
 
-  /* line 425, ../../app/assets/stylesheets/public.css.scss */
+  /* line 443, ../../app/assets/stylesheets/public.css.scss */
   .pagination {
     text-align: center;
   }
 }
 @media (min-width: 767px) {
-  /* line 140, ../../app/assets/stylesheets/public.css.scss */
+  /* line 158, ../../app/assets/stylesheets/public.css.scss */
   article.product {
     width: 689px;
   }
-  /* line 142, ../../app/assets/stylesheets/public.css.scss */
+  /* line 160, ../../app/assets/stylesheets/public.css.scss */
   article.product .carousel {
     max-width: 650px;
     max-height: 650px;
     width: 359px;
     height: 359px;
   }
-  /* line 148, ../../app/assets/stylesheets/public.css.scss */
+  /* line 166, ../../app/assets/stylesheets/public.css.scss */
   article.product .product-info {
     padding-left: 24px;
     width: 300px;
   }
 
-  /* line 434, ../../app/assets/stylesheets/public.css.scss */
+  /* line 452, ../../app/assets/stylesheets/public.css.scss */
   .product-info {
     color: white;
   }
-  /* line 436, ../../app/assets/stylesheets/public.css.scss */
+  /* line 454, ../../app/assets/stylesheets/public.css.scss */
   .product-info h1.page-title {
     color: white;
   }
-  /* line 439, ../../app/assets/stylesheets/public.css.scss */
+  /* line 457, ../../app/assets/stylesheets/public.css.scss */
   .product-info h4 {
     color: white;
   }
-  /* line 442, ../../app/assets/stylesheets/public.css.scss */
+  /* line 460, ../../app/assets/stylesheets/public.css.scss */
   .product-info input {
     color: black;
   }
 
-  /* line 446, ../../app/assets/stylesheets/public.css.scss */
+  /* line 464, ../../app/assets/stylesheets/public.css.scss */
   h2#product-variants-title {
     border-bottom: 1px solid #e2e2e2;
     color: white;
   }
 }
 @media (max-width: 769px) {
-  /* line 453, ../../app/assets/stylesheets/public.css.scss */
+  /* line 471, ../../app/assets/stylesheets/public.css.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 
-  /* line 457, ../../app/assets/stylesheets/public.css.scss */
+  /* line 475, ../../app/assets/stylesheets/public.css.scss */
   #content {
     padding-top: 137px;
     padding: 20px;
@@ -10038,13 +10061,13 @@ article.product .carousel-control.right {
   /*-----------------------------------------
    STORE
   ----------------------------------------- */
-  /* line 465, ../../app/assets/stylesheets/public.css.scss */
+  /* line 483, ../../app/assets/stylesheets/public.css.scss */
   .grid > li {
     margin: 0;
     overflow: hidden;
     zoom: 1;
   }
-  /* line 469, ../../app/assets/stylesheets/public.css.scss */
+  /* line 487, ../../app/assets/stylesheets/public.css.scss */
   .grid > li .thumbnail {
     padding: 0;
     border: none;
@@ -10055,18 +10078,18 @@ article.product .carousel-control.right {
     -moz-box-shadow: none;
     box-shadow: none;
   }
-  /* line 474, ../../app/assets/stylesheets/public.css.scss */
+  /* line 492, ../../app/assets/stylesheets/public.css.scss */
   .grid > li .thumbnail .image {
     float: left;
     width: 120px;
     margin-right: 10px;
   }
-  /* line 479, ../../app/assets/stylesheets/public.css.scss */
+  /* line 497, ../../app/assets/stylesheets/public.css.scss */
   .grid > li .thumbnail .caption {
     overflow: hidden;
     zoom: 1;
   }
-  /* line 483, ../../app/assets/stylesheets/public.css.scss */
+  /* line 501, ../../app/assets/stylesheets/public.css.scss */
   .grid > li .thumbnail .title {
     text-transform: uppercase;
     color: #000;
@@ -10076,13 +10099,13 @@ article.product .carousel-control.right {
   }
 }
 @media (max-width: 979px) {
-  /* line 495, ../../app/assets/stylesheets/public.css.scss */
+  /* line 513, ../../app/assets/stylesheets/public.css.scss */
   body {
     padding-left: 0;
     padding-right: 0;
   }
 
-  /* line 499, ../../app/assets/stylesheets/public.css.scss */
+  /* line 517, ../../app/assets/stylesheets/public.css.scss */
   #content {
     padding-top: 137px;
     padding: 20px;
@@ -10090,24 +10113,24 @@ article.product .carousel-control.right {
   }
 }
 @media (min-width: 980px) {
-  /* line 140, ../../app/assets/stylesheets/public.css.scss */
+  /* line 158, ../../app/assets/stylesheets/public.css.scss */
   article.product {
     width: 900px;
   }
-  /* line 142, ../../app/assets/stylesheets/public.css.scss */
+  /* line 160, ../../app/assets/stylesheets/public.css.scss */
   article.product .carousel {
     max-width: 650px;
     max-height: 650px;
     width: 570px;
     height: 570px;
   }
-  /* line 148, ../../app/assets/stylesheets/public.css.scss */
+  /* line 166, ../../app/assets/stylesheets/public.css.scss */
   article.product .product-info {
     padding-left: 24px;
     width: 300px;
   }
 
-  /* line 510, ../../app/assets/stylesheets/public.css.scss */
+  /* line 528, ../../app/assets/stylesheets/public.css.scss */
   .headline {
     margin: 0 120px;
     font-size: 98px;
