@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/Shopify/active_shipping.git
-  revision: 2ca9ac3ea768d73881462d794bafd64ff1a02900
+  revision: 4cb4dd8db8e903946c9ecdcc6b4ed14bd1685ae5
   specs:
     active_shipping (0.9.14)
       active_utils (>= 1.0.1)
@@ -11,14 +11,14 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3.git
-  revision: d7776ad56736a1f09779ebfe222c7d877fb7e5b3
-  tag: v0.6.24.RC5
+  revision: 013407ed172cd61836f8a07bf0883f0fd88ce94f
+  tag: v0.6.24.RC12
   specs:
-    gko_auth (0.6.24.RC3)
+    gko_auth (0.6.24.RC8)
       cancan (>= 1.6.8)
       devise (>= 2.1.2)
-    gko_categories (0.6.24.RC3)
-    gko_core (0.6.24.RC3)
+    gko_categories (0.6.24.RC8)
+    gko_core (0.6.24.RC8)
       RedCloth (= 4.2.9)
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
@@ -32,6 +32,7 @@ GIT
       dragonfly (~> 0.9.13)
       dropbox-sdk (~> 1.2.0)
       exception_notification (~> 3.0.0)
+      execjs
       faker (= 1.0.0)
       gem-patching (= 0.0.3)
       globalize3 (= 0.2.0)
@@ -44,7 +45,7 @@ GIT
       letter_opener (~> 1.0.0)
       lol_dba
       mail_form (~> 1.3.0)
-      mobile-fu
+      mobile-fu (~> 1.1.1)
       mysql2 (~> 0.3.11)
       nested_set (= 1.7.0)
       rack-cache (~> 1.2)
@@ -56,20 +57,21 @@ GIT
       rubyzip (= 0.9.6.1)
       sass-rails (~> 3.2.6)
       simple_form (~> 2.0.4)
+      therubyracer
       to_xls (~> 1.5.1)
       truncate_html (= 0.5.5)
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.6.24.RC3)
+    gko_documents (0.6.24.RC8)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.6.24.RC3)
-    gko_images (0.6.24.RC3)
-    gko_inquiries (0.6.24.RC3)
+    gko_features (0.6.24.RC8)
+    gko_images (0.6.24.RC8)
+    gko_inquiries (0.6.24.RC8)
       filters_spam (~> 0.2)
-    gko_stickers (0.6.24.RC3)
-    gko_themes (0.6.24.RC3)
+    gko_stickers (0.6.24.RC8)
+    gko_themes (0.6.24.RC8)
       less-rails-bootstrap
       rubyzip (= 0.9.6.1)
 
@@ -124,7 +126,7 @@ GEM
       multi_json (~> 1.0)
     activesupport-slices (0.0.2)
     acts_as_indexed (0.7.8)
-    addressable (2.3.2)
+    addressable (2.3.3)
     arel (3.0.2)
     babosa (0.3.9)
     backup (3.0.24)
@@ -142,7 +144,7 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    codemirror-rails (3.00)
+    codemirror-rails (3.02)
       railties (~> 3.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -150,7 +152,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.4.0)
+    coffee-script-source (1.6.1)
     commonjs (0.2.6)
     cucumber (1.1.9)
       builder (>= 2.1.2)
@@ -164,7 +166,7 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.2.1)
-    dragonfly (0.9.13)
+    dragonfly (0.9.14)
       multi_json (~> 1.0)
       rack
     dropbox-sdk (1.2)
@@ -190,7 +192,7 @@ GEM
     has_scope (0.5.1)
     highline (1.6.8)
     hike (1.2.1)
-    i18n (0.6.1)
+    i18n (0.6.4)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
@@ -198,18 +200,19 @@ GEM
     jquery-rails (2.0.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
-    json (1.7.5)
+    json (1.7.7)
     launchy (2.2.0)
       addressable (~> 2.3)
-    less (2.2.2)
+    less (2.3.1)
       commonjs (~> 0.2.6)
-    less-rails (2.2.6)
+    less-rails (2.3.2)
       actionpack (>= 3.1)
-      less (~> 2.2.0)
-    less-rails-bootstrap (2.2.1)
-      less-rails (~> 2.2.0)
+      less (~> 2.3.1)
+    less-rails-bootstrap (2.3.2)
+      less-rails (~> 2.3.1)
     letter_opener (1.0.0)
       launchy (>= 2.0.4)
+    libv8 (3.11.8.13)
     lol_dba (1.4.3)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -227,7 +230,7 @@ GEM
       rails
     money (3.7.1)
       i18n (~> 0.4)
-    multi_json (1.5.0)
+    multi_json (1.6.1)
     mysql2 (0.3.11)
     nested_set (1.7.0)
       activerecord (>= 3.0.0)
@@ -236,23 +239,23 @@ GEM
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.6.5)
+    net-ssh (2.6.6)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     open4 (1.3.0)
     orm_adapter (0.4.0)
-    paper_trail (2.7.0)
+    paper_trail (2.7.1)
       activerecord (~> 3.0)
       railties (~> 3.0)
     polyglot (0.3.3)
-    rack (1.4.1)
+    rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-mobile-detect (0.4.0)
       rack
     rack-mount (0.8.3)
       rack (>= 1.0.0)
-    rack-ssl (1.3.2)
+    rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -272,8 +275,9 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (10.0.3)
-    rdoc (3.12)
+    rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.2)
     responders (0.9.3)
       railties (~> 3.1)
     rmagick (2.13.2)
@@ -281,7 +285,7 @@ GEM
       actionpack
     ruby-ole (1.2.11.6)
     rubyzip (0.9.6.1)
-    sass (3.2.5)
+    sass (3.2.6)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -289,7 +293,7 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    spreadsheet (0.7.9)
+    spreadsheet (0.8.3)
       ruby-ole (>= 1.0)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -297,16 +301,19 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     state_machine (1.1.2)
     systemu (2.5.2)
-    term-ansicolor (1.0.7)
+    term-ansicolor (1.1.1)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thor (0.14.6)
-    tilt (1.3.3)
-    to_xls (1.5.1)
+    tilt (1.3.4)
+    to_xls (1.5.2)
       spreadsheet
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
     truncate_html (0.5.5)
-    tzinfo (0.3.35)
+    tzinfo (0.3.37)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)

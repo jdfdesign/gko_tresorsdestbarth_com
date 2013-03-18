@@ -1,109 +1,122 @@
 
 <% content_for :after_javascript_libraries  do %>
-	<%= javascript_include_tag "home" %>
+  <%= javascript_include_tag "home" %>
 <% end %>
 
 <%
 @store = site.store
-@categories = @store.categories.translated
+@categories = @store.categories.roots.translated
 @images = site.home.images
 @image_size = is_mobile_device? ? "480x320#" : "1024x800#"
 %>
 <% if is_mobile_device? %>
 <section id="cover" class="row-fluid background-image fullscreen" style="background-image:url('<%= @images.shift.thumbnail(@image_size).url %>')">
-	<%= image_tag('logo2.png', :id => 'logo') %>
-	<%= render 'locales_select' %>
-	<div id="scrollme" class="animatedxx bouncexx"><i class="icon-chevron-down icon-white"></i></div>
+<%= image_tag('logo2.png', :id => 'logo') %>
+<%= render 'locales_select' %>
+<div id="scrollme"><i class="icon-chevron-down icon-white"></i></div>
 </section><!--section-->
 <% else %>
 
 <% content_for :page_container do %>
-<% cache(['v4', site, I18n.locale, @store]) do %>
-	<section id="cover" class="row-fluid background-image fullscreen" data-bg="<%= @images.shift.thumbnail(@image_size).url %>">
-		<%= image_tag('logo2.png', :id => 'logo') %>
-		<%= render 'locales_select' %>
-		<div id="scrollme" class="animatedxx bouncexx"><i class="icon-chevron-down icon-white"></i></div>
-	</section><!--section-->
-	<% @categories.each_with_index do |category, index| %> 
-	<% 
-		bg_url = @images.shift.thumbnail(@image_size).url
-		 
-		bg2_url = @images.shift.thumbnail(@image_size).url
-		product_img_url = @images.shift.thumbnail("300x300#").url
-		products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
-	%>
-		<% if category.body.present? %>
-		<section class="row-fluid parallax background-image fullscreen" data-bg="<%= bg_url %>">
-			<h3 class='headline'><%= category.body.html_safe %></h3>
-		</section><!--section-->
-		<% end %>
-		<section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen <%= category.name %>" data-bg="<%= bg2_url %>">
-			<div class='parallax-inner fullscreen'>
-				<div class='parallax-item category active fullscreen'>
-					<div class="pod ss-left">
-						<h1 class='pod-title'><%= link_to(category.title.html_safe, store_path(@store))%></h1>
-						<img src='/assets/apos2.png' class='decoration'>
-						<img src='/assets/apos2blur.png' class='decoration blur'>
-					</div>
-					<div class="pod ss-right">
-						<div class="pod-carousel">
-							<img src="<%= product_img_url %>" rel="external">
-							<%= link_to("&#8250;".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
-						</div>
-					</div><!--pod-->
-				</div>
-				<div class='parallax-item products fullscreen'>
-					<div class='bg'></div>
-					<a class='back' href="#">&#8249;</a>
-					<div class="tj_container">
-						<div class="tj_wrapper">
-						<% if products.try(:any?) %>
-							<ul class="tj_gallery grid.grid4">
-								<% products.each do |p| %>
-								<li>
-									<a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>" data-remote="true">
-										<%= image_fu(p.thumbnail, "286x286#") %>
-										<div class="tj_content">
-											<h2><%= p.title %></h2>
-											<div class="product-price">
-												<%= indivisible_number_to_currency(p.price, :unit => site.preferred_currency) %>
-											</div>
-											<%= render_record_description(p, 80, " &#8594;") %>
-									    </div>
-									</a>
-								</li>				
-								<% end %>
-							</ul>
-						<% else %>
-							<%= render "no_records_found" %>
-					  	<% end %>
-						</div>
-						
-						<div class="tj_nav">
-							
-							<a class="tj_prev" href="#">&#8249;</a>
-							<span class="tj_nav_container"></span>
-							<a class="tj_next" href="#">&#8250;</a>
-						</div>
-					</div>
-				</div>
-				<div class='parallax-item product fullscreen'>
-					<div class='bg'></div>
-					<a class='back' href="#">&#8249;</a>
-					<div class='content'></div>
-				</div>
+  <%# cache(['v4', site, I18n.locale, @store]) do %>
+  <section id="cover" class="row-fluid background-image fullscreen" data-bg="<%= @images.shift.thumbnail(@image_size).url %>">
+  <%= image_tag('logo2.png', :id => 'logo') %>
+  <%= render 'locales_select' %>
+  <div id="scrollme"><i class="icon-chevron-down icon-white"></i></div>
+  </section><!--section-->
+  <% @categories.each_with_index do |category, index| %>
+    <%
+    bg_url = @images.shift.thumbnail(@image_size).url
+    bg2_url = @images.shift.thumbnail(@image_size).url
+    product_img_url = @images.shift.thumbnail("300x300#").url
+    products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
+    %>
+    <% if category.body.present? %>
+    <section class="row-fluid parallax background-image fullscreen" data-bg="<%= bg_url %>">
+    <h3 class='headline'><%= category.body.html_safe %></h3>
+    </section><!--section-->
+  <% end %>
+  <section id="<%= category.name %>" data-state="category" class="row-fluid parallax background-image fullscreen <%= category.name %>" data-bg="<%= bg2_url %>">
+  <div class='parallax-inner fullscreen'>
+  <div class='parallax-item category active fullscreen'>
 
-			</div>
-		</section><!--section-->
+  <div class="pod ss-left">
+  <h1 class='pod-title'><%= link_to(category.title.html_safe, store_path(@store))%></h1>
+  <img src='/assets/apos2.png' class='decoration'>
+  <img src='/assets/apos2blur.png' class='decoration blur'>
 
-	<% end %>
-	<section id="about" class="row-fluid background-image" data-bg="<%= @images.shift.thumbnail("1024x800#").url %>">
-		<div class="row-fluid">
-			<div class="span12">
-				<%= render_html_text( resource.body) if resource.body.present? %>
-			</div>
-		</div><!--row-->
-	</section><!--section-->
-<% end %> 
+  </div>
+  <div class="pod ss-right">
+  <div class="pod-carousel">
+  <img src="<%= product_img_url %>" rel="external">
+  <%#= link_to("&#8250;".html_safe, store_path(@store), :class => 'view-all', :'data-remote' => true) %>
+
+  </div>
+  <ul class="nav">
+  <% category.children.each do |sub_category| %>
+    <li class='category-title'>
+    <%= link_to("##{sub_category.slug}") do %>
+      <%= raw("<i class='icon-chevron-right icon-white'></i> #{sub_category.title}") %>
+    <% end %>
+    </li>
+  <% end %>
+  </ul>
+  </div><!--pod-->
+  </div>
+  <% category.children.each do |sub_category| %>
+    <% products = @store.products.active.with_translations(I18n.locale).categorized(sub_category.id) %>
+
+    <div id="<%= sub_category.slug %>" class='parallax-item products fullscreen'>
+    <div class='bg'></div>
+    <a class='back' href="#">&#8249;</a>
+    <div class="tj_container">
+    <div class="tj_wrapper">
+    <% if products.try(:any?) %>
+    <ul class="tj_gallery grid.grid4">
+    <% products.each do |p| %>
+      <li>
+      <a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>" data-remote="true">
+      <%= image_fu(p.thumbnail, "286x286#") %>
+      <div class="tj_content">
+      <h2><%= p.title %></h2>
+      <div class="product-price">
+      <%= indivisible_number_to_currency(p.price, :unit => site.preferred_currency) %>
+      </div>
+      <%= render_record_description(p, 80, " &#8594;") %>
+      </div>
+      </a>
+      </li>
+    <% end %>
+    </ul>
+    <% else %>
+    <%= render "no_records_found" %>
+  <% end %>
+  </div>
+  <div class="tj_nav">
+  <a class="tj_prev" href="#">&#8249;</a>
+  <span class="tj_nav_container"></span>
+  <a class="tj_next" href="#">&#8250;</a>
+  </div>
+  </div>
+  </div>
 <% end %>
+
+<div class='parallax-item product fullscreen'>
+<div class='bg'></div>
+<a class='back' href="#">&#8249;</a>
+<div class='content'></div>
+</div>
+</div>
+</section><!--section-->
+
+<% end %>
+<section id="about" class="row-fluid background-image" data-bg="<%= @images.shift.thumbnail("1024x800#").url %>">
+<div class="row-fluid">
+<div class="span12">
+<%= render_html_text( resource.body) if resource.body.present? %>
+</div>
+</div><!--row-->
+</section><!--section-->
+<% end %>
+<%# end %>
 <% end %>
