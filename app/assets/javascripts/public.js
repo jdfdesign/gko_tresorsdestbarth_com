@@ -8,8 +8,9 @@
 //= require twitter.bootstrap.2.2.1/bootstrap/dropdown.js
 //= require twitter.bootstrap.2.2.1/bootstrap/tooltip.js
 //= require twitter.bootstrap.2.2.1/bootstrap/modal.js
-//= require bootstrap-image-gallery.js
 //= require load-image.js
+//= require bootstrap-image-gallery.js
+
 
 var  $body
 	,$html
