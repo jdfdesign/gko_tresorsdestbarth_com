@@ -79,7 +79,7 @@ $copyrightLinkBackgroundHover:       $footerLinkBackgroundHover;
 
 $itemPadding: 40px;
 
-@import "twitter/awesome-bootstrap";
+@import "twitter.bootstrap.2.2.1/bootstrap-awesome";
 @import "gko/public/base";
 @import "gko/store"; 
 @import "galleria";
@@ -428,7 +428,7 @@ article.product {
  RESPONSIVE
 ----------------------------------------- */
 
-@import "twitter/bootstrap/responsive";
+@import "twitter.bootstrap.2.2.1/bootstrap-responsive";
 @import "gko/default_responsive"; 
 
 

@@ -7,17 +7,16 @@ group :assets do
 end
 
 group :production do
-  git "git@github.com:jdfdesign/gko_cms3.git", :tag => "v0.6.24.RC12" do
+  git "git@github.com:jdfdesign/gko_cms3.git", :tag => "v0.6.28" do
     gem 'gko_core'
     gem "gko_auth"
     gem "gko_images"
    gem "gko_documents"
     gem "gko_inquiries"
-    gem "gko_themes"
     gem "gko_features"
    gem "gko_categories"
     gem "gko_stickers"
-    gem 'gko_store', '= 0.0.51',  :git => 'git@github.com:jdfdesign/gko_store.git'
+    gem 'gko_store', '= 0.0.52',  :git => 'git@github.com:jdfdesign/gko_store.git'
   end
 	 #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
   gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'

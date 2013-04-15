@@ -55,7 +55,7 @@
   <ul class="nav">
   <% category.children.each do |sub_category| %>
     <li class='category-title'>
-    <%= link_to("##{sub_category.slug}") do %>
+    <%= link_to("##{category.slug + '_' + sub_category.slug}") do %>
       <%= raw("<i class='icon-chevron-right icon-white'></i> #{sub_category.title}") %>
     <% end %>
     </li>
@@ -66,7 +66,7 @@
   <% category.children.each do |sub_category| %>
     <% products = @store.products.active.with_translations(I18n.locale).categorized(sub_category.id) %>
 
-    <div id="<%= sub_category.slug %>" class='parallax-item products fullscreen'>
+    <div id="<%= category.slug + '_' + sub_category.slug %>" class='parallax-item products fullscreen'>
     <div class='bg'></div>
     <a class='back' href="#">&#8249;</a>
     <div class="tj_container">
@@ -75,7 +75,7 @@
     <ul class="tj_gallery grid.grid4">
     <% products.each do |p| %>
       <li>
-      <a class="tj_gallery_inner" href="<%= url_for([p.section, p]) %>" data-remote="true">
+      <a class="tj_gallery_inner" href="<%= p.public_url %>" data-remote="true">
       <%= image_fu(p.thumbnail, "286x286#") %>
       <div class="tj_content">
       <h2><%= p.title %></h2>
