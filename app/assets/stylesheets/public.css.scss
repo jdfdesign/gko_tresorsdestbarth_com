@@ -260,7 +260,8 @@ label {
 	position:fixed;
 	z-index: 1030;
 	bottom: 0;
-	width: 100%;
+	width: 100%; 
+	background-color: #fff;
 }
 #footer {
 	margin-top: 0px;
@@ -343,6 +344,8 @@ article.product {
 		background-color: white;
 		@include border-radius(0);
 		@include opacity(70);
+		font-size: 20px;
+		line-height: 40px;
 		&:hover {
 			color: black;	
 		};
@@ -353,6 +356,9 @@ article.product {
 	 	right: 50%;
 		margin-right: -40px;
 		margin-left: 0;
+	}
+	.carousel-indicators {
+	  display: none;
 	}
 }
 

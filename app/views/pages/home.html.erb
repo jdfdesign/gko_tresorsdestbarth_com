@@ -29,7 +29,7 @@
     bg_url = @images.shift.thumbnail(@image_size).url
     bg2_url = @images.shift.thumbnail(@image_size).url
     product_img_url = @images.shift.thumbnail("300x300#").url
-    products = @store.products.active.with_translations(I18n.locale).categorized(category.id)
+    products = @store.products.active.on_hand.with_translations(I18n.locale).categorized(category.id)
     %>
     <% if category.body.present? %>
     <section class="row-fluid parallax background-image fullscreen" data-bg="<%= bg_url %>">

@@ -10,18 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504093938) do
-
-  create_table "accounts", :force => true do |t|
-    t.string   "reference",  :limit => 40
-    t.string   "nickname"
-    t.string   "status",     :limit => 40
-    t.string   "type",       :limit => 40
-    t.datetime "deleted_at"
-    t.datetime "expires_at"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130806142826) do
 
   create_table "activators", :force => true do |t|
     t.string   "description"
@@ -266,7 +255,6 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
     t.string   "title",                      :limit => 100
     t.string   "lang",                       :limit => 4
     t.string   "alt"
-    t.integer  "account_id"
     t.integer  "site_id"
     t.integer  "document_assignments_count",                :default => 0
     t.datetime "created_at",                                               :null => false
@@ -278,7 +266,6 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
     t.string   "document_ext"
   end
 
-  add_index "documents", ["account_id"], :name => "index_documents_on_account_id"
   add_index "documents", ["site_id"], :name => "index_documents_on_site_id"
 
   create_table "feature_translations", :force => true do |t|
@@ -555,7 +542,7 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
   create_table "partners", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.string   "url"
+    t.string   "link"
     t.integer  "site_id"
     t.integer  "section_id"
     t.string   "image_mime_type"
@@ -760,6 +747,7 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
     t.string   "redirect_url"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.text     "alt"
   end
 
   add_index "section_translations", ["locale"], :name => "index_section_translations_on_locale"
@@ -793,6 +781,7 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
     t.boolean  "robot_follow",      :default => true
     t.boolean  "restricted",        :default => false
     t.string   "template"
+    t.text     "alt"
   end
 
   add_index "sections", ["link_id", "link_type"], :name => "index_sections_on_link_id_and_link_type"
@@ -840,13 +829,6 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
 
   add_index "shipping_methods", ["site_id"], :name => "index_shipping_methods_on_site_id"
 
-  create_table "site_registrations", :force => true do |t|
-    t.integer "user_id"
-    t.integer "site_id"
-  end
-
-  add_index "site_registrations", ["user_id", "site_id"], :name => "index_site_registrations_on_user_id_and_site_id"
-
   create_table "site_translations", :force => true do |t|
     t.integer  "site_id"
     t.string   "locale"
@@ -861,7 +843,6 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
   add_index "site_translations", ["site_id"], :name => "index_site_translations_on_site_id"
 
   create_table "sites", :force => true do |t|
-    t.integer  "account_id"
     t.string   "host"
     t.string   "title"
     t.string   "meta_title"
@@ -890,7 +871,6 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
     t.text     "javascript"
   end
 
-  add_index "sites", ["account_id"], :name => "index_sites_on_account_id"
   add_index "sites", ["host"], :name => "index_sites_on_host", :unique => true
   add_index "sites", ["theme_id"], :name => "index_sites_on_theme_id"
 
@@ -1018,7 +998,6 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
   add_index "tokenized_permissions", ["permissable_id", "permissable_type"], :name => "index_tokenized_name_and_type"
 
   create_table "users", :force => true do |t|
-    t.integer  "account_id"
     t.string   "email",                                   :default => "", :null => false
     t.string   "encrypted_password",       :limit => 128, :default => "", :null => false
     t.string   "confirmation_token"
@@ -1051,10 +1030,11 @@ ActiveRecord::Schema.define(:version => 20130504093938) do
     t.integer  "ship_address_id"
     t.integer  "bill_address_id"
     t.datetime "reset_password_sent_at"
+    t.integer  "site_id"
   end
 
-  add_index "users", ["account_id"], :name => "index_users_on_account_id"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["site_id"], :name => "index_users_on_site_id"
 
   create_table "variant_translations", :force => true do |t|
     t.integer  "variant_id"
