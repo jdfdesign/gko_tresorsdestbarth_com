@@ -15,7 +15,7 @@ group :production do
     gem "gko_features"
     gem "gko_categories"
     gem "gko_stickers"
-    gem 'gko_store', '= 0.0.54',  :git => 'git@github.com:jdfdesign/gko_store.git'
+    gem 'gko_store', '= 0.0.56',  :git => 'git@github.com:jdfdesign/gko_store.git'
   end
   #to solve undefined method `class_inheritable_accessor' for Quantified::Attribute:Class
   gem "active_shipping", :git => 'git://github.com/Shopify/active_shipping.git'
