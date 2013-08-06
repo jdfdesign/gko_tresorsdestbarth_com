@@ -9,7 +9,12 @@
 //= require twitter.bootstrap.2.2.1/bootstrap/tooltip.js
 //= require twitter.bootstrap.2.2.1/bootstrap/modal.js
 //= require load-image.js
-//= require bootstrap-image-gallery.js
+//= require bootstrap-image-gallery.js 
+
+//= require jquery.validate/jquery.validate.min  
+//= require gko/checkout
+//= require gko/cart
+//= require gko/product
 
 
 var  $body
