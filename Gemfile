@@ -23,7 +23,6 @@ end
 #  gem "gko_auth", :path => '~/Github/gko_cms3_corestore/gko_auth'
 #  gem "gko_documents", :path => '~/Github/gko_cms3_corestore/gko_documents'
 #  gem "gko_inquiries", :path => '~/Github/gko_cms3_corestore/gko_inquiries'
-#  gem "gko_themes", :path => '~/Github/gko_cms3_corestore/gko_themes'
 #  gem "gko_features", :path => '~/Github/gko_cms3_corestore/gko_features'
 #  gem "gko_categories", :path => '~/Github/gko_cms3_corestore/gko_categories'
 #  gem "gko_stickers", :path => '~/Github/gko_cms3_corestore/gko_stickers'
