@@ -73,10 +73,10 @@
     <div class="tj_wrapper">
     <% if products.try(:any?) %>
     <ul class="tj_gallery grid.grid4">
-    <% products.each do |p| %>
+    <% products.each do |p| %> 
+    <% if p.thumbnail %>
       <li>
-      <a class="tj_gallery_inner" href="<%= p.public_url %>" data-remote="true">
-      <%= image_fu(p.thumbnail, "286x286#") %>
+      <a class="tj_gallery_inner" href="<%= p.public_url %>" data-remote="true" data-image="<%= p.thumbnail.thumbnail("286x286#").url() %>">
       <div class="tj_content">
       <h2><%= p.title %></h2>
       <div class="product-price">
@@ -86,6 +86,7 @@
       </div>
       </a>
       </li>
+      <% end %>
     <% end %>
     </ul>
     <% else %>

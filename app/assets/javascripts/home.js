@@ -92,7 +92,11 @@ var Home = {
           Home.animateScrollme();
         });
       });
-
+      
+      $('.tj_gallery_inner').each(function(i, el) {
+        var image = $(el).data('image');
+        $(el).prepend("<img src='" + image + "'/>");
+      });
     }
   },
   animateScrollme: function() {
