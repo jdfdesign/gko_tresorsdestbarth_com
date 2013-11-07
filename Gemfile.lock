@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: 0b054eb9dc566a0010b84fc4379d7761057d5991
+  revision: fcaacd23e29b45dd7f763c2ec41a562fdcb90342
   specs:
     gko_auth (0.6.42.rc13)
       cancan (~> 1.6.10)
