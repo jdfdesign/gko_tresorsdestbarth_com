@@ -64,7 +64,7 @@
   </div><!--pod-->
   </div>
   <% category.children.each do |sub_category| %>
-    <% products = @store.products.active.with_translations(I18n.locale).categorized(sub_category.id) %>
+    <% products = @store.products.active.on_hand.with_translations(I18n.locale).categorized(sub_category.id) %>
 
     <div id="<%= category.slug + '_' + sub_category.slug %>" class='parallax-item products fullscreen'>
     <div class='bg'></div>
