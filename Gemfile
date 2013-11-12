@@ -15,7 +15,7 @@ group :production do
     gem "gko_features"
     gem "gko_categories"
     gem "gko_stickers"
-    gem 'gko_store', '= 0.0.60',  :git => 'git@github.com:jdfdesign/gko_store.git'
+    gem 'gko_store', '= 0.0.61',  :git => 'git@github.com:jdfdesign/gko_store.git'
   end
 end
 #group :development do

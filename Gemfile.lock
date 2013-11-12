@@ -72,9 +72,9 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_store.git
-  revision: 6790d58a3d6a4ce833f958549b9aa688399f4c35
+  revision: 5a104a5711118b91b0f95a603bd37e401e81c3eb
   specs:
-    gko_store (0.0.60)
+    gko_store (0.0.61)
       activemerchant (= 1.21.0)
       state_machine (= 1.1.2)
 
@@ -224,7 +224,7 @@ GEM
     net-ssh (2.7.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    orm_adapter (0.4.1)
+    orm_adapter (0.5.0)
     paper_trail (2.7.2)
       activerecord (~> 3.0)
       railties (~> 3.0)
@@ -320,6 +320,6 @@ DEPENDENCIES
   gko_features!
   gko_inquiries!
   gko_stickers!
-  gko_store (= 0.0.60)!
+  gko_store (= 0.0.61)!
   sass-rails (~> 3.2.6)
   uglifier (>= 1.0.3)
