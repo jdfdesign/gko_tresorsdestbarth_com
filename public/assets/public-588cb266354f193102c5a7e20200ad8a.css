@@ -11151,7 +11151,7 @@ body#home #about h2 {
     min-height: 180px;
   }
   /* line 338, ../../app/assets/stylesheets/_home.scss */
-  body#home .headline em {
+  body#home .headline i, body#home .headline em {
     font-size: 14px;
   }
   /* line 342, ../../app/assets/stylesheets/_home.scss */
