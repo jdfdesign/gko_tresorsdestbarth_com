@@ -12,13 +12,13 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: fcaacd23e29b45dd7f763c2ec41a562fdcb90342
+  revision: 8d5cc9a522d1aa1cf2486451b438d75ee9e4be8c
   specs:
-    gko_auth (0.6.42.rc13)
+    gko_auth (0.6.42.rc14)
       cancan (~> 1.6.10)
       devise (~> 2.2.3)
-    gko_categories (0.6.42.rc13)
-    gko_core (0.6.42.rc13)
+    gko_categories (0.6.42.rc14)
+    gko_core (0.6.42.rc14)
       RedCloth (= 4.2.9)
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
@@ -62,13 +62,13 @@ GIT
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.6.42.rc13)
+    gko_documents (0.6.42.rc14)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.6.42.rc13)
-    gko_inquiries (0.6.42.rc13)
+    gko_features (0.6.42.rc14)
+    gko_inquiries (0.6.42.rc14)
       filters_spam (~> 0.2)
-    gko_stickers (0.6.42.rc13)
+    gko_stickers (0.6.42.rc14)
 
 GIT
   remote: git@github.com:jdfdesign/gko_store.git
@@ -158,7 +158,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.4)
+    diff-lcs (1.2.5)
     dragonfly (0.9.15)
       multi_json (~> 1.0)
       rack
@@ -224,7 +224,7 @@ GEM
     net-ssh (2.7.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    orm_adapter (0.4.0)
+    orm_adapter (0.4.1)
     paper_trail (2.7.2)
       activerecord (~> 3.0)
       railties (~> 3.0)
@@ -274,7 +274,7 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    spreadsheet (0.9.1)
+    spreadsheet (0.9.3)
       ruby-ole (>= 1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -290,7 +290,7 @@ GEM
       ref
     thor (0.18.1)
     tilt (1.4.1)
-    tins (0.12.0)
+    tins (0.13.1)
     to_xls (1.5.2)
       spreadsheet
     treetop (1.4.15)
