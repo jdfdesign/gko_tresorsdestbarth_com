@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: 8d5cc9a522d1aa1cf2486451b438d75ee9e4be8c
+  revision: 8f94fa529c586b0d1295c25bdf393a12a5c50424
   specs:
     gko_auth (0.6.42.rc14)
       cancan (~> 1.6.10)
@@ -274,7 +274,7 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    spreadsheet (0.9.3)
+    spreadsheet (0.9.4)
       ruby-ole (>= 1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -298,7 +298,7 @@ GEM
       polyglot (>= 0.3.1)
     truncate_html (0.5.5)
     tzinfo (0.3.38)
-    uglifier (2.3.0)
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uuid (2.3.5)
