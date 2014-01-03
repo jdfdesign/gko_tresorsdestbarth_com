@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: 8f94fa529c586b0d1295c25bdf393a12a5c50424
+  revision: 7bb9707298983cb2d68230e2327881a5ce0f3cde
   specs:
     gko_auth (0.6.42.rc14)
       cancan (~> 1.6.10)
@@ -51,7 +51,7 @@ GIT
       rack-mount (~> 0.8.3)
       rails (= 3.2.14.rc2)
       rake (~> 10.0.4)
-      rmagick (~> 2.13.1)
+      rmagick (~> 2.13.2)
       routing-filter (= 0.3.1)
       rubyzip (= 0.9.6.1)
       sass-rails (~> 3.2.6)
