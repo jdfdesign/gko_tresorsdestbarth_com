@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: 7bb9707298983cb2d68230e2327881a5ce0f3cde
+  revision: 5783d5991d3d663a0b31ada05a4d166f9faacb9e
   specs:
     gko_auth (0.6.42.rc14)
       cancan (~> 1.6.10)
@@ -28,7 +28,6 @@ GIT
       codemirror-rails (>= 2.3)
       coffee-rails (~> 3.2.2)
       country_select (~> 1.2.0)
-      cucumber (~> 1.1.4)
       dragonfly (~> 0.9.15)
       exception_notification (~> 3.0.0)
       execjs
@@ -147,18 +146,11 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     country_select (1.2.0)
-    cucumber (1.1.9)
-      builder (>= 2.1.2)
-      diff-lcs (>= 1.1.2)
-      gherkin (~> 2.9.0)
-      json (>= 1.4.6)
-      term-ansicolor (>= 1.0.6)
     devise (2.2.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.5)
     dragonfly (0.9.15)
       multi_json (~> 1.0)
       rack
@@ -170,8 +162,6 @@ GEM
       i18n (~> 0.4)
     filters_spam (0.3)
     gem-patching (0.0.3)
-    gherkin (2.9.3)
-      json (>= 1.4.6)
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -283,14 +273,11 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     state_machine (1.1.2)
     systemu (2.5.2)
-    term-ansicolor (1.2.2)
-      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     tilt (1.4.1)
-    tins (0.13.1)
     to_xls (1.5.2)
       spreadsheet
     treetop (1.4.15)
