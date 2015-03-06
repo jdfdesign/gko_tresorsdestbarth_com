@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 group :assets do
  gem 'sass-rails', '~> 3.2.6'
@@ -7,7 +7,7 @@ group :assets do
 end
 
 group :production do
-  git "git@github.com:jdfdesign/gko_cms3_corestore.git" do
+  git "git@github.com:jdfdesign/gko_cms3_corestore.git", :tag => "0.6.42.rc16" do
     gem 'gko_core'
     gem "gko_auth"
     gem "gko_documents"
@@ -15,7 +15,7 @@ group :production do
     gem "gko_features"
     gem "gko_categories"
     gem "gko_stickers"
-    gem 'gko_store', '= 0.0.61',  :git => 'git@github.com:jdfdesign/gko_store.git'
+    gem 'gko_store', '= 0.0.7',  :git => 'git@github.com:jdfdesign/gko_store.git'
   end
 end
 #group :development do
