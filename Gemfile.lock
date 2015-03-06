@@ -12,27 +12,36 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: fcaacd23e29b45dd7f763c2ec41a562fdcb90342
+<<<<<<< HEAD
+  revision: f13ba7424597ee3aa1f13a117dd6c8e8ce97f7e8
   specs:
-    gko_auth (0.6.42.rc13)
+    gko_auth (0.6.42.rc15)
       cancan (~> 1.6.10)
       devise (~> 2.2.3)
-    gko_categories (0.6.42.rc13)
-    gko_core (0.6.42.rc13)
+    gko_categories (0.6.42.rc15)
+    gko_core (0.6.42.rc15)
+=======
+  revision: 5783d5991d3d663a0b31ada05a4d166f9faacb9e
+  specs:
+    gko_auth (0.6.42.rc14)
+      cancan (~> 1.6.10)
+      devise (~> 2.2.3)
+    gko_categories (0.6.42.rc14)
+    gko_core (0.6.42.rc14)
       RedCloth (= 4.2.9)
+>>>>>>> origin/master
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
       babosa (~> 0.3.8)
       capistrano (~> 2.14)
-      carrierwave
+      carrierwave (~> 0.9.0)
       codemirror-rails (>= 2.3)
       coffee-rails (~> 3.2.2)
       country_select (~> 1.2.0)
-      cucumber (~> 1.1.4)
       dragonfly (~> 0.9.15)
       exception_notification (~> 3.0.0)
       execjs
-      faker (= 1.0.0)
+      faker (~> 1.2.0)
       gem-patching (= 0.0.3)
       globalize3 (= 0.2.0)
       gon (~> 4.0.0)
@@ -42,46 +51,60 @@ GIT
       jquery-rails (= 2.0.3)
       json (= 1.8.0)
       letter_opener (~> 1.1.1)
-      lol_dba
       mail_form (~> 1.3.0)
       mobile-fu (~> 1.1.1)
-      mysql2 (= 0.3.13)
+      mysql2 (~> 0.3.14)
       nested_set (~> 1.7.1)
       rack-cache (~> 1.2)
       rack-mount (~> 0.8.3)
       rails (= 3.2.14.rc2)
       rake (~> 10.0.4)
-      rmagick (~> 2.13.1)
+<<<<<<< HEAD
+      rmagick (= 2.13.2)
+=======
+      rmagick (~> 2.13.2)
+>>>>>>> origin/master
       routing-filter (= 0.3.1)
       rubyzip (= 0.9.6.1)
       sass-rails (~> 3.2.6)
       simple_form (~> 2.1.0)
-      therubyracer
-      to_xls (~> 1.5.1)
       truncate_html (= 0.5.5)
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.6.42.rc13)
+<<<<<<< HEAD
+    gko_documents (0.6.42.rc15)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.6.42.rc13)
-    gko_inquiries (0.6.42.rc13)
+    gko_features (0.6.42.rc15)
+    gko_inquiries (0.6.42.rc15)
       filters_spam (~> 0.2)
-    gko_stickers (0.6.42.rc13)
+    gko_stickers (0.6.42.rc15)
 
 GIT
   remote: git@github.com:jdfdesign/gko_store.git
-  revision: 6790d58a3d6a4ce833f958549b9aa688399f4c35
+  revision: 934cd837d94c92bf4f954d96f7c61539459efdd0
+=======
+    gko_documents (0.6.42.rc14)
+      dragonfly (~> 0.9.8)
+      rack-cache (>= 0.5.3)
+    gko_features (0.6.42.rc14)
+    gko_inquiries (0.6.42.rc14)
+      filters_spam (~> 0.2)
+    gko_stickers (0.6.42.rc14)
+
+GIT
+  remote: git@github.com:jdfdesign/gko_store.git
+  revision: 5a104a5711118b91b0f95a603bd37e401e81c3eb
+>>>>>>> origin/master
   specs:
-    gko_store (0.0.60)
+    gko_store (0.0.61)
       activemerchant (= 1.21.0)
       state_machine (= 1.1.2)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.9)
     actionmailer (3.2.14.rc2)
       actionpack (= 3.2.14.rc2)
       mail (~> 2.5.4)
@@ -121,10 +144,16 @@ GEM
       multi_json (~> 1.0)
     activesupport-slices (0.0.2)
     acts_as_indexed (0.7.8)
+<<<<<<< HEAD
+    addressable (2.3.7)
+=======
     addressable (2.3.5)
-    arel (3.0.2)
+>>>>>>> origin/master
+    arel (3.0.3)
     babosa (0.3.11)
-    bcrypt-ruby (3.1.2)
+    bcrypt (3.1.10)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
     builder (3.0.4)
     cancan (1.6.10)
     capistrano (2.15.5)
@@ -137,7 +166,7 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
-    codemirror-rails (3.16)
+    codemirror-rails (5.0)
       railties (>= 3.0, < 5)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -147,18 +176,11 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     country_select (1.2.0)
-    cucumber (1.1.9)
-      builder (>= 2.1.2)
-      diff-lcs (>= 1.1.2)
-      gherkin (~> 2.9.0)
-      json (>= 1.4.6)
-      term-ansicolor (>= 1.0.6)
-    devise (2.2.7)
+    devise (2.2.8)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.4)
     dragonfly (0.9.15)
       multi_json (~> 1.0)
       rack
@@ -166,12 +188,10 @@ GEM
     exception_notification (3.0.1)
       actionmailer (>= 3.0.4)
     execjs (2.0.2)
-    faker (1.0.0)
-      i18n (~> 0.4)
-    filters_spam (0.3)
+    faker (1.2.0)
+      i18n (~> 0.5)
+    filters_spam (0.5)
     gem-patching (0.0.3)
-    gherkin (2.9.3)
-      json (>= 1.4.6)
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -182,7 +202,7 @@ GEM
     has_scope (0.5.1)
     highline (1.6.8)
     hike (1.2.3)
-    i18n (0.6.5)
+    i18n (0.6.9)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
@@ -191,44 +211,43 @@ GEM
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.8.0)
-    launchy (2.3.0)
+<<<<<<< HEAD
+    launchy (2.4.3)
+=======
+    launchy (2.4.2)
+>>>>>>> origin/master
       addressable (~> 2.3)
     letter_opener (1.1.2)
       launchy (~> 2.2)
-    libv8 (3.16.14.3)
-    lol_dba (1.6.0)
-      actionpack (>= 3.0)
-      activerecord (>= 3.0)
-      railties (>= 3.0)
-    macaddr (1.6.1)
-      systemu (~> 2.5.0)
+    macaddr (1.7.1)
+      systemu (~> 2.6.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mail_form (1.3.0)
-    mime-types (1.25)
+    mime-types (1.25.1)
     mobile-fu (1.1.1)
       rack-mobile-detect
       rails
     money (3.7.1)
       i18n (~> 0.4)
     multi_json (1.8.2)
-    mysql2 (0.3.13)
+    mysql2 (0.3.18)
     nested_set (1.7.1)
       activerecord (>= 3.0.0)
       railties (>= 3.0.0)
-    net-scp (1.1.2)
+    net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
+    net-ssh (2.9.2)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    orm_adapter (0.4.0)
+    orm_adapter (0.5.0)
     paper_trail (2.7.2)
       activerecord (~> 3.0)
       railties (~> 3.0)
-    polyglot (0.3.3)
+    polyglot (0.3.5)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -258,54 +277,66 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    ref (1.0.5)
     responders (0.9.3)
       railties (~> 3.1)
     rmagick (2.13.2)
     routing-filter (0.3.1)
       actionpack
-    ruby-ole (1.2.11.7)
     rubyzip (0.9.6.1)
-    sass (3.2.12)
+    sass (3.2.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    simple_form (2.1.0)
+<<<<<<< HEAD
+    simple_form (2.1.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    spreadsheet (0.9.1)
+=======
+    simple_form (2.1.1)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
+    spreadsheet (0.9.6)
       ruby-ole (>= 1.0)
+>>>>>>> origin/master
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     state_machine (1.1.2)
+<<<<<<< HEAD
+    systemu (2.6.4)
+    thor (0.18.1)
+    tilt (1.4.1)
+=======
     systemu (2.5.2)
-    term-ansicolor (1.2.2)
-      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     tilt (1.4.1)
-    tins (0.12.0)
     to_xls (1.5.2)
       spreadsheet
+>>>>>>> origin/master
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     truncate_html (0.5.5)
-    tzinfo (0.3.38)
+<<<<<<< HEAD
+    tzinfo (0.3.43)
     uglifier (2.3.0)
+=======
+    tzinfo (0.3.38)
+    uglifier (2.4.0)
+>>>>>>> origin/master
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uuid (2.3.5)
       macaddr (~> 1.0)
     warden (1.2.3)
       rack (>= 1.0)
-    will_paginate (3.0.5)
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -320,6 +351,6 @@ DEPENDENCIES
   gko_features!
   gko_inquiries!
   gko_stickers!
-  gko_store (= 0.0.60)!
+  gko_store (= 0.0.61)!
   sass-rails (~> 3.2.6)
   uglifier (>= 1.0.3)
