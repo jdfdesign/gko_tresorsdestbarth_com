@@ -12,14 +12,14 @@ GIT
 
 GIT
   remote: git@github.com:jdfdesign/gko_cms3_corestore.git
-  revision: ce91e0ab5ad39eaaee53f1811180fb8e6f9dc743
-  tag: 0.6.42.rc16
+  revision: 65c55d4e29b75f733f09df6bbecfc71d53de4980
+  tag: v0.6.42.rc17
   specs:
-    gko_auth (0.6.42.rc16)
+    gko_auth (0.6.42.rc17)
       cancan (~> 1.6.10)
       devise (~> 2.2.3)
-    gko_categories (0.6.42.rc16)
-    gko_core (0.6.42.rc16)
+    gko_categories (0.6.42.rc17)
+    gko_core (0.6.42.rc17)
       activesupport-slices (= 0.0.2)
       acts_as_indexed (~> 0.7.7)
       babosa (~> 0.3.8)
@@ -30,7 +30,7 @@ GIT
       country_select (~> 1.2.0)
       dragonfly (~> 0.9.15)
       exception_notification (~> 3.0.0)
-      execjs
+      execjs (= 2.0.2)
       faker (~> 1.2.0)
       gem-patching (= 0.0.3)
       globalize3 (= 0.2.0)
@@ -59,19 +59,20 @@ GIT
       uglifier (>= 1.0.3)
       uuid (= 2.3.5)
       will_paginate (~> 3.0.2)
-    gko_documents (0.6.42.rc16)
+    gko_documents (0.6.42.rc17)
       dragonfly (~> 0.9.8)
       rack-cache (>= 0.5.3)
-    gko_features (0.6.42.rc16)
-    gko_inquiries (0.6.42.rc16)
+    gko_features (0.6.42.rc17)
+    gko_inquiries (0.6.42.rc17)
       filters_spam (~> 0.2)
-    gko_stickers (0.6.42.rc16)
+    gko_stickers (0.6.42.rc17)
 
 GIT
   remote: git@github.com:jdfdesign/gko_store.git
-  revision: cb56238d3130a6fab2cb061307e38aab035c3448
+  revision: 06da0355e935338160703298bdacb28738aa9821
   specs:
     gko_store (0.0.7)
+      active_utils (= 1.0.2)
       activemerchant (= 1.21.0)
       state_machine (= 1.1.2)
 
@@ -91,8 +92,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    active_utils (3.0.0)
-      activesupport (>= 3.2)
+    active_utils (1.0.2)
+      activesupport (>= 2.3.11)
       i18n
     activemerchant (1.21.0)
       active_utils (>= 1.0.2)
@@ -156,7 +157,7 @@ GEM
     erubis (2.7.0)
     exception_notification (3.0.1)
       actionmailer (>= 3.0.4)
-    execjs (2.4.0)
+    execjs (2.0.2)
     faker (1.2.0)
       i18n (~> 0.5)
     filters_spam (0.5)
